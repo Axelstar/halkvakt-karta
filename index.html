@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Halkvakt — Sveriges väglag just nu</title>
+<meta name="description" content="Live-karta över halka, väglag, olyckor och fartkameror på svenska vägar. Data direkt från Trafikverket, uppdaterad var 30:e minut.">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
+<style>
+:root{
+  --natt:#10151D; --natt2:#1A2230; --snow:#F3F6F9; --dis:#8C99A8;
+  --amber:#FFB01F; --rod:#C4322E; --gul:#FCD34D; --is:#7FD1E8; --gron:#3E8E5A;
+  --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{font:15px/1.45 system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--snow);background:var(--natt)}
+#map{position:fixed;inset:0}
+a{color:var(--is)}
+
+/* ---- Top bar: sign + VMS ticker ---- */
+header{position:fixed;top:0;left:0;right:0;z-index:10;display:flex;gap:10px;align-items:stretch;
+  padding:calc(10px + env(safe-area-inset-top)) 12px 10px;pointer-events:none}
+.sign{pointer-events:auto;display:flex;align-items:center;gap:9px;background:var(--gul);
+  border:3px solid var(--rod);border-radius:8px;padding:6px 12px 6px 8px;color:#1B1B1B;
+  box-shadow:0 4px 18px rgba(0,0,0,.45)}
+.sign svg{display:block}
+.sign b{font-family:'Saira Condensed',sans-serif;font-weight:800;font-size:21px;letter-spacing:.04em}
+.vms{pointer-events:auto;flex:1;min-width:0;display:flex;align-items:center;background:#0B0E13;
+  border:1px solid #2A3547;border-radius:8px;padding:0 12px;overflow:hidden;
+  box-shadow:inset 0 0 24px rgba(255,176,31,.06),0 4px 18px rgba(0,0,0,.45)}
+.vms span{font-family:var(--mono);font-size:12.5px;letter-spacing:.09em;color:var(--amber);
+  white-space:nowrap;text-transform:uppercase;text-shadow:0 0 7px rgba(255,176,31,.55)}
+@media(max-width:640px){
+  header{flex-wrap:wrap}
+  .vms{order:2;width:100%;padding:6px 10px}
+}
+
+/* ---- Layer chips (double as legend) ---- */
+nav{position:fixed;z-index:10;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));
+  display:flex;gap:8px;flex-wrap:wrap;pointer-events:none}
+.chip{pointer-events:auto;display:flex;align-items:center;gap:7px;border:1px solid #2A3547;
+  background:rgba(16,21,29,.92);backdrop-filter:blur(6px);color:var(--snow);border-radius:999px;
+  padding:8px 13px;font-size:13.5px;font-weight:600;cursor:pointer;transition:opacity .15s}
+.chip .dot{width:10px;height:10px;border-radius:50%}
+.chip[aria-pressed=false]{opacity:.42}
+.chip:focus-visible{outline:2px solid var(--is);outline-offset:2px}
+
+/* ---- Waitlist card ---- */
+.cta{pointer-events:auto;margin-left:auto;background:var(--natt2);border:1px solid #2A3547;
+  border-radius:12px;padding:12px 14px;max-width:330px;box-shadow:0 8px 28px rgba(0,0,0,.5)}
+.cta h2{font-family:'Saira Condensed',sans-serif;font-weight:800;font-size:19px;letter-spacing:.03em;
+  text-transform:uppercase;color:var(--gul)}
+.cta p{font-size:13px;color:var(--dis);margin:3px 0 9px}
+.cta form{display:flex;gap:7px}
+.cta input{flex:1;min-width:0;background:#0B0E13;border:1px solid #2A3547;border-radius:7px;
+  color:var(--snow);padding:9px 10px;font-size:14px}
+.cta input:focus-visible{outline:2px solid var(--is)}
+.cta button{background:var(--amber);color:#1B1B1B;border:0;border-radius:7px;padding:9px 13px;
+  font-weight:700;font-size:14px;cursor:pointer}
+.cta button:disabled{opacity:.55;cursor:default}
+.cta .ok{color:var(--is);font-size:13.5px;font-weight:600}
+@media(max-width:640px){.cta{max-width:none;width:100%}}
+
+/* ---- Popups & footer ---- */
+.maplibregl-popup-content{background:var(--natt2);color:var(--snow);border-radius:10px;
+  border:1px solid #2A3547;font:13px/1.5 system-ui;padding:11px 13px;max-width:270px}
+.maplibregl-popup-tip{border-top-color:var(--natt2)!important;border-bottom-color:var(--natt2)!important}
+.pop h3{font-family:'Saira Condensed',sans-serif;font-size:16px;letter-spacing:.03em;text-transform:uppercase;margin-bottom:3px}
+.pop .k{color:var(--dis)}
+footer{position:fixed;right:8px;bottom:2px;z-index:9;font-size:10.5px;color:#5E6C7E}
+footer a{color:#5E6C7E}
+.maplibregl-ctrl-bottom-left{bottom:54px}
+@media(prefers-reduced-motion:no-preference){
+  .vms span{animation:vmsIn .6s ease-out}
+  @keyframes vmsIn{from{opacity:0}to{opacity:1}}
+}
+</style>
+</head>
+<body>
+<div id="map" role="application" aria-label="Karta över svenska väglag"></div>
+
+<header>
+  <div class="sign" title="Halkvakt">
+    <!-- Varningsmärke: slirande bil -->
+    <svg width="34" height="30" viewBox="0 0 40 35" aria-hidden="true">
+      <path d="M20 2 L38 32 H2 Z" fill="#FCD34D" stroke="#C4322E" stroke-width="3.4" stroke-linejoin="round"/>
+      <g transform="translate(11.4,17.5) scale(.72)">
+        <path d="M2 8 Q6 4 12 5 L15 2 Q17 1 18 3 L20 6 Q24 7 23 10 L1 11 Q0 9 2 8Z" fill="#1B1B1B"/>
+        <circle cx="6" cy="11.5" r="2.3" fill="#1B1B1B"/><circle cx="18" cy="11.5" r="2.3" fill="#1B1B1B"/>
+        <path d="M3 16 q3 -2 6 0 t6 0 t6 0" fill="none" stroke="#1B1B1B" stroke-width="1.7" stroke-linecap="round"/>
+      </g>
+    </svg>
+    <b>HALKVAKT</b>
+  </div>
+  <div class="vms" role="status"><span id="ticker">LÄSER VÄGLAGET&nbsp;…</span></div>
+  <div class="cta" id="cta">
+    <h2>Appen kommer i november</h2>
+    <p>Halkvakt varnar dig i bilen — via högtalarna, medan du kör med Google&nbsp;Maps. Ställ dig i kön så får du testa först.</p>
+    <form id="wl" novalidate>
+      <input id="email" type="email" required placeholder="din@epost.se" aria-label="E-postadress" autocomplete="email">
+      <button type="submit">Ställ mig i kön</button>
+    </form>
+  </div>
+</header>
+
+<nav aria-label="Kartlager">
+  <button class="chip" data-layer="vaglag" aria-pressed="true"><span class="dot" style="background:var(--amber)"></span>Väglag</button>
+  <button class="chip" data-layer="vader" aria-pressed="true"><span class="dot" style="background:var(--is)"></span>Vägväder</button>
+  <button class="chip" data-layer="olyckor" aria-pressed="true"><span class="dot" style="background:var(--rod)"></span>Olyckor</button>
+  <button class="chip" data-layer="kameror" aria-pressed="false"><span class="dot" style="background:#8C99A8"></span>Fartkameror</button>
+</nav>
+
+<footer>Data: <a href="https://www.trafikverket.se" rel="noopener">Trafikverket</a> (CC0) ·
+  Karta: <a href="https://openfreemap.org" rel="noopener">OpenFreeMap</a> © OpenStreetMap</footer>
+
+<script>
+const $ = s => document.querySelector(s);
+const fmtTid = iso => new Date(iso).toLocaleTimeString("sv-SE",{hour:"2-digit",minute:"2-digit"});
+
+const map = new maplibregl.Map({
+  container:"map",
+  style:"https://tiles.openfreemap.org/styles/positron",
+  center:[16.3,62.6], zoom:4.4, minZoom:3.6, attributionControl:false
+});
+map.addControl(new maplibregl.NavigationControl({showCompass:false}),"bottom-left");
+map.addControl(new maplibregl.GeolocateControl({trackUserLocation:false}),"bottom-left");
+
+const first = l => (map.getStyle().layers.find(x=>x.type==="symbol")||{}).id;
+
+map.on("load", async () => {
+  for (const name of ["vaglag","vader","olyckor","kameror","meta"]) {
+    try {
+      const r = await fetch(`data/${name}.${name==="meta"?"json":"geojson"}`,{cache:"no-cache"});
+      if (!r.ok) throw 0;
+      window[name] = await r.json();
+    } catch { window[name] = name==="meta" ? null : {type:"FeatureCollection",features:[]}; }
+  }
+
+  map.addSource("vaglag",{type:"geojson",data:vaglag});
+  map.addLayer({id:"vaglag",type:"line",source:"vaglag",
+    paint:{"line-width":["case",[">",["get","code"],1],4,1.6],
+           "line-color":["step",["get","code"],"#B7C2CC",2,"#FFB01F",3,"#C4322E",4,"#8E1F8E"],
+           "line-opacity":["case",[">",["get","code"],1],.95,.5]}}, first());
+
+  map.addSource("vader",{type:"geojson",data:vader});
+  map.addLayer({id:"vader",type:"circle",source:"vader",
+    paint:{"circle-radius":["interpolate",["linear"],["zoom"],4,2.6,9,6],
+           "circle-color":["case",
+             ["==",["typeof",["get","yta"]],"number"],
+             ["step",["get","yta"],"#7FD1E8",0.01,"#FFB01F",3.01,"#5A6B7A"],
+             "#3A4656"],
+           "circle-stroke-width":1,"circle-stroke-color":"#10151D","circle-opacity":.92}});
+
+  map.addSource("kameror",{type:"geojson",data:kameror});
+  map.addLayer({id:"kameror",type:"circle",source:"kameror",layout:{visibility:"none"},
+    paint:{"circle-radius":["interpolate",["linear"],["zoom"],4,1.6,10,4.5],
+           "circle-color":"#8C99A8","circle-opacity":.8}});
+
+  map.addSource("olyckor",{type:"geojson",data:olyckor});
+  map.addLayer({id:"olyckor",type:"circle",source:"olyckor",
+    paint:{"circle-radius":["interpolate",["linear"],["zoom"],4,5,9,9],
+           "circle-color":"#C4322E","circle-stroke-width":2,"circle-stroke-color":"#F3F6F9"}});
+
+  // VMS ticker — real numbers, road-sign voice
+  if (meta) {
+    const bitar = [];
+    bitar.push(meta.vaglag_ej_normalt>0 ? `⚠ ${meta.vaglag_ej_normalt} STRÄCKOR MED BESVÄRLIGT VÄGLAG` : "VÄGLAG: NORMALT I HELA LANDET");
+    if (meta.kalla_stationer>0) bitar.push(`${meta.kalla_stationer} STATIONER ≤ 0°C`);
+    bitar.push(`${meta.olyckor} PÅGÅENDE HÄNDELSER`);
+    bitar.push(`${meta.stationer} MÄTSTATIONER`);
+    bitar.push(`UPPDATERAD ${fmtTid(meta.generated_at)}`);
+    $("#ticker").textContent = bitar.join("  ·  ");
+  } else {
+    $("#ticker").textContent = "DATAN LADDAS INOM KORT — KARTAN ÄR NY";
+  }
+
+  // Popups
+  const pop = (e, html) => new maplibregl.Popup({closeButton:false})
+    .setLngLat(e.lngLat).setHTML(`<div class="pop">${html}</div>`).addTo(map);
+  map.on("click","vader", e => { const p=e.features[0].properties;
+    pop(e, `<h3>${p.name}</h3>
+      <div><span class="k">Vägbana:</span> <b>${p.yta==null?"–":Number(p.yta).toFixed(1)+" °C"}</b></div>
+      <div><span class="k">Luft:</span> ${p.luft==null?"–":Number(p.luft).toFixed(1)+" °C"}</div>
+      <div><span class="k">Nederbörd:</span> ${p.nbd==="no"?"ingen":p.nbd??"–"}</div>
+      <div class="k">kl ${fmtTid(p.t)}</div>`); });
+  map.on("click","vaglag", e => { const p=e.features[0].properties;
+    pop(e, `<h3>${p.road??"Vägsträcka"}</h3><div><b>${p.text}</b></div>
+      <div class="k">${JSON.parse(p.info||"[]").join(", ")}</div>`); });
+  map.on("click","olyckor", e => { const p=e.features[0].properties;
+    pop(e, `<h3>${p.typ}${p.road?" · "+p.road:""}</h3><div>${p.msg}</div>
+      <div class="k">${p.allvar??""}</div>`); });
+  map.on("click","kameror", e => { const p=e.features[0].properties;
+    pop(e, `<h3>Fartkamera</h3><div>${p.name}</div><div class="k">${p.road??""}</div>`); });
+  for (const l of ["vader","vaglag","olyckor","kameror"]) {
+    map.on("mouseenter", l, ()=>map.getCanvas().style.cursor="pointer");
+    map.on("mouseleave", l, ()=>map.getCanvas().style.cursor="");
+  }
+});
+
+// Layer chips
+document.querySelectorAll(".chip").forEach(c => c.addEventListener("click", () => {
+  const on = c.getAttribute("aria-pressed")!=="true";
+  c.setAttribute("aria-pressed", String(on));
+  map.setLayoutProperty(c.dataset.layer, "visibility", on?"visible":"none");
+}));
+
+// Waitlist -> Supabase (config published separately; form waits politely until then)
+let cfg = null;
+fetch("data/config.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(c=>cfg=c).catch(()=>{});
+$("#wl").addEventListener("submit", async e => {
+  e.preventDefault();
+  const email = $("#email").value.trim();
+  if (!/.+@.+\..+/.test(email)) { $("#email").focus(); return; }
+  const btn = $("#wl button"); btn.disabled = true; btn.textContent = "Skickar…";
+  try {
+    if (!cfg) throw new Error("cfg");
+    const r = await fetch(`${cfg.supabase_url}/rest/v1/waitlist`, {
+      method:"POST",
+      headers:{apikey:cfg.anon_key, Authorization:`Bearer ${cfg.anon_key}`,
+               "Content-Type":"application/json", Prefer:"return=minimal"},
+      body: JSON.stringify({email, source:"karta"})
+    });
+    if (!r.ok && r.status !== 409) throw new Error(String(r.status));
+    $("#wl").outerHTML = `<div class="ok">Du står i kön. Vi hörs när det är dags. ✓</div>`;
+  } catch {
+    btn.disabled = false; btn.textContent = "Ställ mig i kön";
+    alert("Det gick inte att spara just nu — prova igen om en stund.");
+  }
+});
+</script>
+</body>
+</html>
