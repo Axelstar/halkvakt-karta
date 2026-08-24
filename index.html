@@ -171,6 +171,8 @@ map.on("load", async () => {
     bitar.push(meta.vaglag_ej_normalt>0 ? `⚠ ${meta.vaglag_ej_normalt} STRÄCKOR MED BESVÄRLIGT VÄGLAG` : "VÄGLAG: NORMALT I HELA LANDET");
     if (meta.kalla_stationer>0) bitar.push(`${meta.kalla_stationer} STATIONER ≤ 0°C`);
     bitar.push(`${meta.olyckor} PÅGÅENDE HÄNDELSER`);
+    if (meta.vilt_dygn>0) bitar.push(`${meta.vilt_dygn} VILTOLYCKOR SENASTE DYGNET${meta.vilt_vanligast?` — MEST ${meta.vilt_vanligast.toUpperCase()}`:""}`);
+    else if (meta.vilt_vecka>0) bitar.push(`${meta.vilt_vecka} VILTOLYCKOR SENASTE VECKAN`);
     bitar.push(`${meta.stationer} MÄTSTATIONER`);
     bitar.push(`UPPDATERAD ${fmtTid(meta.generated_at)}`);
     $("#ticker").textContent = bitar.join("  ·  ");
