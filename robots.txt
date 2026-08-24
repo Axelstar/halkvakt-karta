@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://axelstar.github.io/halkvakt-karta/sitemap.xml
