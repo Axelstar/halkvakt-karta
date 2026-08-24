@@ -168,6 +168,10 @@ map.on("load", async () => {
   // VMS ticker — real numbers, road-sign voice
   if (meta) {
     const bitar = [];
+    if (meta.smhi_vinter && meta.smhi_vinter.length>0) {
+      const v = meta.smhi_vinter[0];
+      bitar.push(`⚠ SMHI: ${(v.niva||"").toUpperCase()} VARNING — ${(v.event||"").toUpperCase()}${v.omrade?", "+v.omrade.toUpperCase():""}`);
+    }
     bitar.push(meta.vaglag_ej_normalt>0 ? `⚠ ${meta.vaglag_ej_normalt} STRÄCKOR MED BESVÄRLIGT VÄGLAG` : "VÄGLAG: NORMALT I HELA LANDET");
     if (meta.kalla_stationer>0) bitar.push(`${meta.kalla_stationer} STATIONER ≤ 0°C`);
     bitar.push(`${meta.olyckor} PÅGÅENDE HÄNDELSER`);
