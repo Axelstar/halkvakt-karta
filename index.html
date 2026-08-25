@@ -668,17 +668,18 @@ requestAnimationFrame(() => {
     <div class="hv-pan" data-i="3"><video muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/64/64-360.mp4"></video><div class="lab"><span class="e">📷</span><b>KAMEROR</b></div></div>
   </div>
   <div class="hv-fin">
+    <div class="hv-logo"><span class="glyph"></span><span class="wm disp">HALKVAKT</span></div>
     <div class="stores">
       <a class="store gul" href="#" onclick="return false"><span class="g">▶</span><span><small>Släpps i vinter</small><b>Google Play</b></span></a>
       <a class="store" href="#" onclick="return false"><span class="g"></span><span><small>Släpps i vinter</small><b>App Store</b></span></a>
     </div>
-    <p class="hv-live"><span class="dot"></span><span id="livetxt">Livedata från Trafikverket laddas …</span></p>
   </div>
+  <div class="hv-tick"><div class="inner" id="tickinner"><span class="dot"></span><span id="livetxt">Livedata från Trafikverket laddas …</span></div></div>
  </div>
 </div>
 <style>
 html,body{overflow-x:clip !important}
-.hv-recap{position:relative;height:240vh}
+.hv-recap{position:relative;height:300vh}
 .hv-recap .hv-stage{position:sticky;top:0;height:100vh;height:100dvh;display:flex;flex-direction:column;
   justify-content:center;padding:70px 10px 16px;overflow:clip}
 .hv-rk{font:700 13px/1 "Avenir Next Condensed",system-ui;letter-spacing:.22em;color:#FFC400;text-align:center;
@@ -694,10 +695,16 @@ html,body{overflow-x:clip !important}
 .hv-pan .lab b{font-size:13.5px;letter-spacing:.05em;color:#F3F6F9}
 .hv-pan.lit{filter:brightness(1) saturate(1)}
 .hv-pan.lit .lab{opacity:1}
-.hv-stage.dim .hv-pan{filter:brightness(.22) saturate(.6)}
-.hv-stage.dim .hv-pan .lab{opacity:.25}
+.hv-recap .hv-stage{transition:background .6s}
+.hv-stage.black{background:#000}
+.hv-pan{transition:filter .55s,opacity .6s}
+.hv-stage.black .hv-pan{opacity:0}
+.hv-stage.black .hv-rk{opacity:0}
+.hv-logo{display:flex;align-items:center;gap:13px;margin-bottom:6px}
+.hv-logo .glyph{width:44px;height:44px;border-radius:12px;background:#FFC400;box-shadow:0 0 34px rgba(255,196,0,.5)}
+.hv-logo .wm{font-size:30px;font-weight:800;letter-spacing:.06em;color:#F3F6F9}
 .hv-fin{position:absolute;left:0;right:0;top:50%;transform:translateY(calc(-50% + 44px));
-  display:flex;flex-direction:column;align-items:center;gap:12px;padding:0 18px;
+  display:flex;flex-direction:column;align-items:center;gap:16px;padding:0 18px;
   opacity:0;transition:opacity .5s,transform .5s;z-index:5;pointer-events:none}
 .hv-fin.in{opacity:1;transform:translateY(-50%);pointer-events:auto}
 .stores{display:flex;gap:11px;flex-wrap:wrap;justify-content:center;width:100%;max-width:520px}
@@ -708,16 +715,19 @@ html,body{overflow-x:clip !important}
 .store small{display:block;font-size:10px;letter-spacing:.08em;color:#B9C6D2;text-transform:uppercase}
 .store b{font-size:17px}
 .store.gul{background:#FFC400;border-color:#FFC400;color:#0B1620}.store.gul small{color:#5C520F}
-.hv-live{display:flex;align-items:center;gap:9px;font:12px ui-monospace,monospace;color:#C6D2DD;text-align:center;
-  background:rgba(6,9,13,.72);border-radius:99px;padding:8px 14px;backdrop-filter:blur(4px)}
-.hv-live .dot{width:8px;height:8px;border-radius:50%;background:#3ADB76;box-shadow:0 0 10px #3ADB76;animation:hvPuls 2s infinite;flex:none}
+.hv-tick{position:absolute;left:0;right:0;bottom:5vh;overflow:hidden;opacity:0;transition:opacity .6s;pointer-events:none}
+.hv-fin.in ~ .hv-tick, .hv-stage.black .hv-tick{opacity:1}
+.hv-tick .inner{display:inline-flex;align-items:center;gap:9px;white-space:nowrap;
+  font:12px ui-monospace,monospace;color:#54677A;animation:hvTick 32s linear infinite;padding-left:100vw}
+.hv-tick .dot{width:8px;height:8px;border-radius:50%;background:#3ADB76;box-shadow:0 0 10px #3ADB76;animation:hvPuls 2s infinite;flex:none}
+@keyframes hvTick{to{transform:translateX(-100%)}}
 @keyframes hvPuls{50%{opacity:.35}}
 </style>
 <script>
 (function(){
   const wrap=document.querySelector('.hv-recap'),stage=wrap.querySelector('.hv-stage'),
         pans=[...wrap.querySelectorAll('.hv-pan')],fin=wrap.querySelector('.hv-fin');
-  const steps=[.12,.27,.42,.57], finAt=.74;
+  const steps=[.10,.23,.36,.49], finAt=.70;
   new IntersectionObserver((es,o)=>{es.forEach(e=>{if(!e.isIntersecting)return;o.disconnect();
     pans.forEach(p=>{const v=p.querySelector('video');v.src=v.dataset.src;v.load();
       v.play().catch(()=>{});});})},{rootMargin:'150% 0px'}).observe(wrap);
@@ -727,7 +737,7 @@ html,body{overflow-x:clip !important}
     wrap.classList.toggle('go',p>.02);
     pans.forEach((el,i)=>el.classList.toggle('lit',p>=steps[i]));
     fin.classList.toggle('in',p>=finAt);
-    stage.classList.toggle('dim',p>=finAt);
+    stage.classList.toggle('black',p>=finAt);
   }
   addEventListener('scroll',tick,{passive:true});addEventListener('resize',tick);tick();
 })();
