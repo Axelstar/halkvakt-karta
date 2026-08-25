@@ -22,35 +22,12 @@
   .hv-applabel{margin-top:24px;font:600 12px/1 var(--sw-font-body);letter-spacing:.14em;
     text-transform:uppercase;color:#FFC400;display:flex;align-items:center;gap:8px}
   .hv-applabel::before{content:"📱";font-size:15px}
-  /* — Telefonen i finalen — */
-  .hv-phwrap{position:relative;margin-top:30px;width:150px}
-  .hv-glow{position:absolute;inset:-34px;background:radial-gradient(closest-side,rgba(255,196,0,.22),transparent 70%);
-    border-radius:50%;animation:hvPulse 3.6s ease-in-out infinite}
-  @keyframes hvPulse{50%{opacity:.55}}
-  .hv-ph{position:relative;width:150px;aspect-ratio:9/19;border-radius:26px;padding:6px;
-    background:linear-gradient(150deg,#4A5158,#23272C 30%,#0D0F12 70%,#3A4046);
-    box-shadow:14px 22px 44px rgba(0,0,0,.5),inset 0 0 0 1.5px rgba(255,255,255,.18);
-    animation:hvFloat 5s ease-in-out infinite}
-  @keyframes hvFloat{50%{transform:translateY(-7px)}}
-  .hv-scr{position:relative;width:100%;height:100%;border-radius:20px;overflow:hidden;background:linear-gradient(#141C2A,#0B1220)}
-  .hv-isl{position:absolute;top:6px;left:50%;transform:translateX(-50%);width:34%;height:11px;background:#000;border-radius:99px}
-  .hv-road{position:absolute;left:34%;right:34%;top:-6%;bottom:-6%;background:#2E3A4C;transform:rotate(4deg)}
-  .hv-road::before{content:"";position:absolute;left:calc(50% - 1.5px);top:0;bottom:0;width:3px;
-    background:repeating-linear-gradient(rgba(244,248,251,.9) 0 13px,transparent 13px 28px)}
-  .hv-wc{position:absolute;left:6px;right:6px;bottom:8px;background:#0B1620;border:1px solid #26313C;
-    border-radius:10px;padding:7px 8px;box-shadow:0 8px 18px rgba(0,0,0,.5)}
-  .hv-wc b{display:block;font:700 7px ui-monospace,monospace;color:#FFC400;letter-spacing:.07em;margin-bottom:2px}
-  .hv-wc p{margin:0;font-size:8.8px;line-height:1.35;color:#F3F6F9}
-
   /* — Badges i toppraden: alltid synliga — */
   .hv-topbadges{display:flex;gap:8px;align-items:center;pointer-events:auto}
 
   /* Skarpt läge: motorns ljusa defaults övertrumfas för mörkt tema */
   .sw-btn--primary{background:#FFC400!important;color:#0B1620!important;font-weight:700!important}
   .sw-route__label{background:rgba(11,22,32,.88)!important;border-color:rgba(255,255,255,.16)!important}
-  /* Telefonen: till höger om finaltexten i stället för under den */
-  .hv-phwrap{position:absolute;left:calc(100% + 56px);top:50%;transform:translateY(-50%);margin:0}
-  @media(max-width:1080px){.hv-phwrap{display:none}}
   .hv-topbadges .hv-badge{padding:9px 16px;border-radius:11px;margin:0;
     background:rgba(15,27,38,.72);backdrop-filter:blur(8px)}
   .hv-topbadges .hv-badge .ic{font-size:15px}
@@ -631,12 +608,6 @@ requestAnimationFrame(() => {
   const lbl = document.createElement('div'); lbl.className = 'hv-applabel';
   lbl.textContent = 'En app i din telefon \u2014 inte en sajt';
   first.appendChild(lbl);
-  const ph = document.createElement('div'); ph.className = 'hv-phwrap';
-  ph.innerHTML = '<div class="hv-glow"></div><div class="hv-ph"><div class="hv-scr">' +
-    '<div class="hv-isl"></div><div class="hv-road"></div>' +
-    '<div class="hv-wc"><b>\u26a0 HALKVAKT \u00b7 NU</b><p>\ud83d\udd0a \u00bbIsrisk fram\u00f6ver \u2014 v\u00e4gbanan n\u00e4ra noll grader.\u00bb</p></div>' +
-    '</div></div>';
-  last.appendChild(ph);
 
 });
 </script>
