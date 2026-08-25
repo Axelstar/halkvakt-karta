@@ -1,1 +1,1 @@
-{"schema":1,"generated_at":"2026-08-25T20:30:32.856Z","segments":[],"weather":[{"id":"2346","lon":15.1236,"lat":63.43446,"yta":-16.6,"fukt":true}],"deviations":[{"id":"SE_STA_TRISSID_1_24178419","lon":17.4525642182842,"lat":59.8037469494508,"typ":"Olycka","road":"Väg 55"}],"smhi":[]}
+{"schema":1,"generated_at":"2026-08-25T20:40:33.013Z","segments":[],"weather":[],"deviations":[{"id":"SE_STA_TRISSID_1_24178419","lon":17.4525642182842,"lat":59.8037469494508,"typ":"Olycka","road":"Väg 55"}],"smhi":[]}
