@@ -49,7 +49,7 @@
   .top-a3 .hv-topbadges .hv-badge--cta{border-color:#A6A6A6}
   a.hv-badge{cursor:pointer}
   a.hv-badge:hover{border-color:#FFC400}
-  @media(max-width:600px){.hv-topbadges .hv-badge--soon{display:none}}
+  @media(max-width:600px){.hv-badge--cta{display:none}}
   
   /* ===== TOPP-VARIANTER (växla med 1–4 eller väljaren nere till höger) ===== */
   .hv-topbadges .hv-badge--soon{opacity:1;border-style:solid}
@@ -579,7 +579,7 @@ if (typeof window !== 'undefined') window.mountScrollWorld = mountScrollWorld;
 <script>
 mountScrollWorld(document.getElementById('world'), {
   brand: { name: 'HALKVAKT', href: '#top' },
-  cta:   { label: 'Betakön', href: '#anmalan' },
+  cta:   { label: 'Ladda ner', href: '#ladda' },
   hint:  'scrolla för att köra',
   diveScroll: 1.6, connScroll: 0.9,
   nav: true, atmosphere: true,
@@ -614,9 +614,9 @@ mountScrollWorld(document.getElementById('world'), {
       accent:'#FFC400',
       eyebrow:'DINA LJUS NÅR 60 METER.',
       title:'Halkvakt ser hela vägen hem.',
-      body:'Gratis app för Android — beta i oktober, precis när första halkan kommer. iPhone därefter. Vaknar själv när du börjar köra.',
+      body:'Gratis för både Android och iPhone — släpps i vinter, lagom före första halkan. Vaknar själv när du börjar köra.',
       tags:[],
-      cta:{ primary:{ label:'Ställ dig i betakön', href:'#anmalan' },
+      cta:{ primary:{ label:'Ladda ner gratis', href:'#ladda' },
             secondary:{ label:'Livekartan →', href:'https://axelstar.github.io/halkvakt-karta/karta.html' } } },
   ],
   connectors: [null, null, null],
@@ -624,12 +624,12 @@ mountScrollWorld(document.getElementById('world'), {
 
 /* — App-tydlighet: badges i toppraden (alltid synliga) + telefon i finalen — */
 requestAnimationFrame(() => {
-  const WAITLIST = '#anmalan';
+  const WAITLIST = '#ladda';
   const badges = compact => {
     const d = document.createElement('div');
     d.className = compact ? 'hv-topbadges' : 'hv-badges';
     d.innerHTML =
-      '<a class="hv-badge" href="' + WAITLIST + '" title="Beta i oktober \u2014 st\u00e4ll dig i k\u00f6n">' +
+      '<a class="hv-badge" href="' + WAITLIST + '" title="Sl\u00e4pps i vinter">' +
         '<span class="ic">\u25b6</span><b>Google Play</b></a>' +
       '<a class="hv-badge hv-badge--soon" href="' + WAITLIST + '" title="Kommer efter Android">' +
         '<span class="ic">\uf8ff</span><b>App Store</b></a>';
@@ -643,7 +643,7 @@ requestAnimationFrame(() => {
     if (cta && cta.tagName === 'A') {
       cta.classList.remove('sw-cta');
       cta.className = 'hv-badge hv-badge--cta';
-      cta.innerHTML = '<span class="ic">\u2744</span><b>Betak\u00f6n</b>';
+      cta.innerHTML = '<span class="ic">\u2744</span><b>I vinter</b>';
       bar.appendChild(cta);
     }
   }
@@ -657,26 +657,105 @@ requestAnimationFrame(() => {
 });
 </script>
 
-<section id="anmalan" class="hv-after">
-  <h2 class="disp">Ställ dig i betakön</h2>
-  <p>Android-betan öppnar i oktober — lagom före första halkan. Vi mejlar när det är dags.
-  Inget spam, bara det mejlet.</p>
-  <div class="hv-appline">📱 Gratis app · vaknar själv när du kör · 0 spårning</div>
-  <div class="hv-storeb"><span class="sb"><span>▶</span> Google Play <em>beta i oktober</em></span><span class="sb"><span></span> App Store <em>därefter</em></span></div>
-  <form id="wl"><input id="email" type="email" placeholder="din@mejl.se" required autocomplete="email">
-  <button type="submit">Ställ mig i kön</button></form>
-  <p class="hv-small">Vill du hjälpa till mer? Läs <a href="beta.html">testarguiden</a> — 5 minuter.</p>
-</section>
+<div class="hv-recap" id="ladda">
+ <div class="hv-stage">
+  <p class="hv-rk disp">RÖSTEN VARNAR FÖR</p>
+  <div class="hv-rows">
+    <div class="hv-row"><span class="e">❄️</span><span class="t"><b>Halka</b><i>844 stationer känner vägbanan</i></span></div>
+    <div class="hv-row"><span class="e">🦌</span><span class="t"><b>Vilt</b><i>Polisens rapporter, län för län</i></span></div>
+    <div class="hv-row"><span class="e">🚨</span><span class="t"><b>Olyckor</b><i>Minutfärskt från Trafikverket</i></span></div>
+    <div class="hv-row"><span class="e">📷</span><span class="t"><b>Fartkameror</b><i>Alla 2 771, alltid i god tid</i></span></div>
+  </div>
+  <div class="hv-fin">
+    <div class="stores">
+      <a class="store gul" href="#" onclick="return false"><span class="g">▶</span><span><small>Släpps i vinter</small><b>Google Play</b></span></a>
+      <a class="store" href="#" onclick="return false"><span class="g"></span><span><small>Släpps i vinter</small><b>App Store</b></span></a>
+    </div>
+    <p class="hv-live"><span class="dot"></span><span id="livetxt">Livedata från Trafikverket laddas …</span></p>
+  </div>
+ </div>
+</div>
+<style>
+.hv-recap{position:relative;z-index:45;background:#06090D;height:380vh}
+.hv-recap .hv-stage{position:sticky;top:0;height:100vh;height:100dvh;display:flex;flex-direction:column;
+  justify-content:center;max-width:560px;margin:0 auto;padding:80px 22px 30px}
+.hv-rk{font:700 13px/1 "Avenir Next Condensed",system-ui;letter-spacing:.22em;color:#FFC400;margin-bottom:26px;opacity:0;transform:translateY(20px);transition:.5s}
+.hv-recap.go .hv-rk{opacity:1;transform:none}
+.hv-rows{display:flex;flex-direction:column;gap:14px}
+.hv-row{display:flex;align-items:center;gap:16px;background:#0F1B26;border:1px solid #1E2833;border-radius:16px;
+  padding:14px 18px;opacity:0;transform:translateY(34px);transition:opacity .45s,transform .45s}
+.hv-row.in{opacity:1;transform:none}
+.hv-row .e{width:46px;height:46px;border-radius:50%;background:#FFC400;display:flex;align-items:center;justify-content:center;font-size:22px;flex:none}
+.hv-row .t b{display:block;font-size:18px}
+.hv-row .t i{font-style:normal;font-size:13px;color:#8FA1B3}
+.hv-fin{margin-top:30px;opacity:0;transform:translateY(34px);transition:opacity .5s,transform .5s}
+.hv-fin.in{opacity:1;transform:none}
+.stores{display:flex;gap:12px;flex-wrap:wrap}
+.store{flex:1;min-width:190px;display:flex;align-items:center;gap:12px;background:#000;border:1.5px solid rgba(255,255,255,.30);
+  border-radius:14px;padding:13px 18px;text-decoration:none;color:#fff}
+.store .g{font-size:22px}
+.store small{display:block;font-size:10px;letter-spacing:.08em;color:#B9C6D2;text-transform:uppercase}
+.store b{font-size:17px}
+.store.gul{background:#FFC400;border-color:#FFC400;color:#0B1620}.store.gul small{color:#5C520F}
+.hv-live{display:flex;align-items:center;gap:9px;margin-top:16px;font:12.5px ui-monospace,monospace;color:#8FA1B3}
+.hv-live .dot{width:8px;height:8px;border-radius:50%;background:#3ADB76;box-shadow:0 0 10px #3ADB76;animation:hvPuls 2s infinite;flex:none}
+@keyframes hvPuls{50%{opacity:.35}}
+</style>
+<script>
+(function(){
+  const wrap=document.querySelector('.hv-recap'),rows=[...wrap.querySelectorAll('.hv-row')],
+        fin=wrap.querySelector('.hv-fin');
+  const steps=[.14,.32,.50,.68], finAt=.84;
+  function tick(){
+    const r=wrap.getBoundingClientRect(),
+          p=Math.min(1,Math.max(0,-r.top/(r.height-innerHeight)));
+    wrap.classList.toggle('go',p>.02);
+    rows.forEach((el,i)=>el.classList.toggle('in',p>=steps[i]));
+    fin.classList.toggle('in',p>=finAt);
+  }
+  addEventListener('scroll',tick,{passive:true});addEventListener('resize',tick);tick();
+})();
+fetch('data/meta.json?t='+Date.now(),{cache:'no-cache'}).then(r=>r.json()).then(m=>{
+  const kl=new Date(m.generated_at).toLocaleTimeString('sv-SE',{hour:'2-digit',minute:'2-digit'});
+  document.getElementById('livetxt').textContent=
+    `PÅ VÄGARNA NU · ${m.olyckor??0} olyckor · ${m.vilt_vecka??0} viltolyckor i veckan`+
+    `${m.vilt_vanligast?` (${m.vilt_vanligast})`:''} · ${m.vaglag_ej_normalt??0} halksträckor · kl ${kl}`;
+}).catch(()=>{});
+</script>
+
 <section class="hv-after hv-faq">
   <h2 class="disp">Vanliga frågor</h2>
   <details><summary>Är det halt på vägarna just nu?</summary><p><a href="karta.html">Livekartan</a> visar väglag, vägbanetemperaturer och olyckor i hela Sverige, direkt från Trafikverkets mätstationer.</p></details>
   <details><summary>Vad är Halkvakt?</summary><p>En app som varnar dig med rösten om halka, viltolyckor, trafikolyckor och fartkameror på vägen framför dig. Den vaknar själv när du börjar köra.</p></details>
   <details><summary>Vad kostar det?</summary><p>Appen är gratis.</p></details>
   <details><summary>Sparar ni min position?</summary><p>Nej. All matchning sker inne i telefonen mot en nedladdad datafil. Positionen lämnar aldrig enheten. Det är inte ett löfte i finstil — det är hur appen är byggd.</p></details>
-  <details><summary>Finns det till iPhone?</summary><p>På väg — motorn är redan byggd och testad. Android får betan först.</p></details>
+  <details><summary>Finns det till iPhone?</summary><p>Ja — appen släpps till både iPhone och Android i vinter.</p></details>
 </section>
+<section class="hv-after" style="padding-top:20px;padding-bottom:30px">
+  <form id="wl2" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+    <span style="color:#8FA1B3;font-size:14px;flex:1 1 100%">Vill du ha ett mejl på släppdagen?</span>
+    <input id="email2" type="email" placeholder="din@mejl.se" required autocomplete="email"
+      style="flex:1;min-width:200px;background:#0F1B26;border:1.5px solid #2A3742;border-radius:10px;padding:11px 14px;color:#F3F6F9;font-size:15px">
+    <button type="submit" style="background:transparent;border:1.5px solid #FFC400;color:#FFC400;border-radius:10px;padding:11px 18px;font-weight:700;cursor:pointer">Meddela mig</button>
+  </form>
+</section>
+<script>
+document.getElementById("wl2").addEventListener("submit",async e=>{
+  e.preventDefault();const em=document.getElementById("email2").value.trim();
+  if(!/.+@.+\..+/.test(em))return;
+  const b=document.querySelector("#wl2 button");b.disabled=true;b.textContent="Sparar…";
+  try{if(!cfg)throw 0;
+    const r=await fetch(`${cfg.supabase_url}/rest/v1/waitlist`,{method:"POST",
+      headers:{apikey:cfg.anon_key,Authorization:`Bearer ${cfg.anon_key}`,
+      "Content-Type":"application/json",Prefer:"return=minimal"},
+      body:JSON.stringify({email:em,source:"release"})});
+    if(!r.ok&&r.status!==409)throw 0;
+    document.getElementById("wl2").innerHTML='<span style="color:#3ADB76">Du får ett mejl på släppdagen. ✓</span>';
+  }catch{b.disabled=false;b.textContent="Meddela mig";}
+});
+</script>
 <footer class="hv-after hv-foot">
-  <a href="karta.html">Livekartan</a> · <a href="beta.html">Testarguiden</a> · <a href="om.html">Mer om appen &amp; hör rösten</a>
+  <a href="karta.html">Livekartan</a> · <a href="om.html">Mer om appen &amp; hör rösten</a>
   <span>Öppna data från Trafikverket · Gratis · 0 spårning</span>
 </footer>
 <style>
@@ -700,21 +779,6 @@ requestAnimationFrame(() => {
 </style>
 <script>
 let cfg=null;fetch(`data/config.json?t=${Date.now()}`,{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(c=>cfg=c).catch(()=>{});
-document.getElementById("wl").addEventListener("submit",async e=>{
-  e.preventDefault();
-  const em=document.getElementById("email").value.trim();
-  if(!/.+@.+\..+/.test(em)){document.getElementById("email").focus();return;}
-  const b=document.querySelector("#wl button");b.disabled=true;b.textContent="Skickar…";
-  try{
-    if(!cfg)throw 0;
-    const r=await fetch(`${cfg.supabase_url}/rest/v1/waitlist`,{method:"POST",
-      headers:{apikey:cfg.anon_key,Authorization:`Bearer ${cfg.anon_key}`,
-      "Content-Type":"application/json",Prefer:"return=minimal"},
-      body:JSON.stringify({email:em,source:"varlden"})});
-    if(!r.ok&&r.status!==409)throw 0;
-    document.getElementById("wl").outerHTML='<div class="ok">Du står i kön. Vi hörs när det är dags. ✓</div>';
-  }catch{b.disabled=false;b.textContent="Ställ mig i kön";alert("Gick inte att spara just nu — prova igen strax.");}
-});
 </script>
 </body>
 </html>
