@@ -657,6 +657,7 @@ requestAnimationFrame(() => {
 });
 </script>
 
+<div class="hv-belt">
 <div class="hv-recap" id="ladda">
  <div class="hv-stage">
   <p class="hv-rk disp">RÖSTEN VARNAR FÖR</p>
@@ -676,7 +677,7 @@ requestAnimationFrame(() => {
  </div>
 </div>
 <style>
-.hv-recap{position:relative;z-index:45;background:#06090D;height:380vh}
+.hv-recap{position:relative;height:380vh}
 .hv-recap .hv-stage{position:sticky;top:0;height:100vh;height:100dvh;display:flex;flex-direction:column;
   justify-content:center;max-width:560px;margin:0 auto;padding:80px 22px 30px}
 .hv-rk{font:700 13px/1 "Avenir Next Condensed",system-ui;letter-spacing:.22em;color:#FFC400;margin-bottom:26px;opacity:0;transform:translateY(20px);transition:.5s}
@@ -758,9 +759,10 @@ document.getElementById("wl2").addEventListener("submit",async e=>{
   <a href="karta.html">Livekartan</a> · <a href="om.html">Mer om appen &amp; hör rösten</a>
   <span>Öppna data från Trafikverket · Gratis · 0 spårning</span>
 </footer>
+</div><!-- /hv-belt -->
 <style>
-.hv-after{max-width:640px;margin:0 auto;padding:64px 22px;color:#F3F6F9;position:relative;z-index:45;background:#0B1620}
-.hv-after::before{content:"";position:absolute;inset:0 -100vw;background:#0B1620;z-index:-1}
+.hv-belt{position:relative;z-index:45;background:#06090D}
+.hv-after{max-width:640px;margin:0 auto;padding:64px 22px;color:#F3F6F9}
 .hv-after h2{font-family:"Avenir Next Condensed","Arial Narrow",system-ui;font-size:34px;margin:0 0 12px;letter-spacing:.01em}
 .hv-after p{color:#B9C6D2;line-height:1.6;margin:0 0 18px}
 #wl{display:flex;gap:10px;flex-wrap:wrap}
