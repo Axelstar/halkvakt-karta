@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[13.162514119,57.695745658]},"properties":{"typ":"Olycka","msg":"Viltolycka personbil. Räddningstjänst på väg.","allvar":"Liten påverkan","road":"Väg 1700","start":"2026-08-25T03:17:11.000Z"}}]}
