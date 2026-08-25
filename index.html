@@ -203,7 +203,7 @@ footer{padding:32px 0;color:var(--dim);font-size:14px}
 const $ = s => document.querySelector(s);
 const fmtTid = t => { try { const d=new Date(t);
   return d.toLocaleTimeString("sv-SE",{hour:"2-digit",minute:"2-digit"}); } catch { return ""; } };
-fetch("data/meta.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(meta=>{
+fetch(`data/meta.json?t=${Date.now()}`,{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(meta=>{
   if(!meta) return;
   const bitar=[];
   if (meta.smhi_vinter && meta.smhi_vinter.length>0) {
@@ -242,7 +242,7 @@ document.getElementById("demo").addEventListener("click",()=>{
   }catch(e){}
 });
 let cfg=null;
-fetch("data/config.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(c=>cfg=c).catch(()=>{});
+fetch(`data/config.json?t=${Date.now()}`,{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(c=>cfg=c).catch(()=>{});
 $("#wl").addEventListener("submit", async e => {
   e.preventDefault();
   const email=$("#email").value.trim();

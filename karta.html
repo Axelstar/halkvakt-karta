@@ -136,7 +136,7 @@ const first = l => (map.getStyle().layers.find(x=>x.type==="symbol")||{}).id;
 map.on("load", async () => {
   for (const name of ["vaglag","vader","olyckor","kameror","meta"]) {
     try {
-      const r = await fetch(`data/${name}.${name==="meta"?"json":"geojson"}`,{cache:"no-cache"});
+      const r = await fetch(`data/${name}.${name==="meta"?"json":"geojson"}?t=${Date.now()}`,{cache:"no-cache"});
       if (!r.ok) throw 0;
       window[name] = await r.json();
     } catch { window[name] = name==="meta" ? null : {type:"FeatureCollection",features:[]}; }
@@ -219,7 +219,7 @@ document.querySelectorAll(".chip").forEach(c => c.addEventListener("click", () =
 
 // Waitlist -> Supabase (config published separately; form waits politely until then)
 let cfg = null;
-fetch("data/config.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(c=>cfg=c).catch(()=>{});
+fetch(`data/config.json?t=${Date.now()}`,{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(c=>cfg=c).catch(()=>{});
 $("#wl").addEventListener("submit", async e => {
   e.preventDefault();
   const email = $("#email").value.trim();
