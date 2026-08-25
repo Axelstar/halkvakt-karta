@@ -661,7 +661,8 @@ requestAnimationFrame(() => {
   <span>Öppna data från Trafikverket · Gratis · 0 spårning</span>
 </footer>
 <style>
-.hv-after{max-width:640px;margin:0 auto;padding:64px 22px;color:#F3F6F9;position:relative;z-index:2}
+.hv-after{max-width:640px;margin:0 auto;padding:64px 22px;color:#F3F6F9;position:relative;z-index:45;background:#0B1620}
+.hv-after::before{content:"";position:absolute;inset:0 -100vw;background:#0B1620;z-index:-1}
 .hv-after h2{font-family:"Avenir Next Condensed","Arial Narrow",system-ui;font-size:34px;margin:0 0 12px;letter-spacing:.01em}
 .hv-after p{color:#B9C6D2;line-height:1.6;margin:0 0 18px}
 #wl{display:flex;gap:10px;flex-wrap:wrap}
