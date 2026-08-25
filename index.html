@@ -11,6 +11,11 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://axelstar.github.io/halkvakt-karta/">
 <meta property="og:locale" content="sv_SE">
+<meta property="og:image" content="https://axelstar.github.io/halkvakt-karta/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="favicon.png">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"MobileApplication","name":"Halkvakt",
  "operatingSystem":"Android","applicationCategory":"DriverAssistanceApplication",
@@ -76,6 +81,10 @@ footer{padding:32px 0;color:var(--dim);font-size:14px}
   Positionen lämnar aldrig telefonen.</p>
   <a class="cta" href="#beta">Ställ dig i betakön</a>
   <a class="cta alt" href="karta.html">Öppna livekartan →</a>
+  <div style="margin-top:22px">
+    <button id="demo" type="button" style="background:transparent;border:2px solid var(--gul);color:var(--gul);border-radius:8px;padding:12px 20px;font-size:16px;font-weight:700;cursor:pointer">🔊 Hör hur rösten låter</button>
+    <span id="demotxt" style="display:block;margin-top:10px;color:var(--dim);font-family:ui-monospace,monospace;font-size:14px;min-height:20px"></span>
+  </div>
   <p style="margin-top:18px">
     <span class="pill">Gratis</span><span class="pill">Android-beta i oktober</span><span class="pill">iPhone på väg</span>
   </p>
@@ -149,7 +158,29 @@ fetch("data/meta.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(meta
   else if (meta.vilt_vecka>0) bitar.push(`${meta.vilt_vecka} VILTOLYCKOR SENASTE VECKAN`);
   bitar.push(`UPPDATERAD ${fmtTid(meta.generated_at)}`);
   $("#ticker").textContent = bitar.join("  ·  ");
+  if (meta.waitlist_count >= 25) {
+    const p=document.createElement("span"); p.className="pill";
+    p.textContent=`🔥 ${meta.waitlist_count} i betakön`;
+    document.querySelector(".hero .pill").parentNode.appendChild(p);
+  }
 }).catch(()=>{});
+const fraser=[
+  "Varning: halka rapporterad på vägen framför dig.",
+  "Viltrisk — vanlig olycksplats för älg den här tiden.",
+  "Fartkamera om 500 meter. Gränsen är 80.",
+  "Isrisk framöver — vägbanan nära noll grader."];
+let fi=0;
+document.getElementById("demo").addEventListener("click",()=>{
+  const t=fraser[fi++ % fraser.length];
+  document.getElementById("demotxt").textContent="» "+t+" «";
+  try{
+    speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(t); u.lang="sv-SE"; u.rate=1.0;
+    const v=speechSynthesis.getVoices().find(v=>v.lang&&v.lang.startsWith("sv"));
+    if(v) u.voice=v;
+    speechSynthesis.speak(u);
+  }catch(e){}
+});
 let cfg=null;
 fetch("data/config.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(c=>cfg=c).catch(()=>{});
 $("#wl").addEventListener("submit", async e => {
