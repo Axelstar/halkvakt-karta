@@ -89,6 +89,7 @@
     .hv-topbadges .hv-badge b{font-size:11.5px}
     .hv-applabel{display:none}
   }
+  .sw-copy:not(.is-live) .sw-copy__cta{pointer-events:none}
 </style>
 </head>
 <body class="top-a1">
@@ -348,7 +349,7 @@ function mountScrollWorld(container, config) {
       else if (i === N - 1) cop = before ? 0 : smooth(pr / 0.4);       // holds CTA at the end
       else cop = (before || after) ? 0 : smooth(1 - Math.abs(pr - 0.5) / 0.5);
       const c = copies[i];
-      c.style.opacity = cop; c.style.pointerEvents = cop > 0.5 ? '' : 'none';
+      c.style.opacity = cop; c.classList.toggle('is-live', cop > 0.5);
       c.style.transform = reduce ? 'none' : `translateY(${(0.5 - pr) * 4}vh)`;
       c.style.pointerEvents = cop > 0.5 ? 'auto' : 'none';
     }
