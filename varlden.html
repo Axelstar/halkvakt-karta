@@ -29,6 +29,8 @@
   .sw-btn--primary{background:#FFC400!important;color:#0B1620!important;font-weight:700!important}
   .sw-route__label{background:rgba(11,22,32,.88)!important;border-color:rgba(255,255,255,.16)!important}
 
+  /* Pekskärm: göm mushjuls-hinten (krockade med taggarna; man sveper ändå) */
+  @media(hover:none) and (pointer:coarse){.sw-hint{display:none!important}}
   /* Mobil: tre pills ska rymmas på 390 px */
   @media(max-width:600px){
     .sw-topbar{padding-left:14px!important;padding-right:14px!important;gap:10px!important}
