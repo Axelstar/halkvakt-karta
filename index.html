@@ -334,6 +334,9 @@ function mountScrollWorld(container, config) {
         // painted — on iOS a seeked-but-never-played muted video stays blank, so
         // hiding the still on metadata alone would flash an empty scene.
         v.addEventListener('seeked', () => { s.el.classList.add('has-clip'); }, { once: true });
+        const reveal = () => s.el.classList.add('has-clip');
+        v.addEventListener('canplaythrough', reveal, { once: true });
+        v.addEventListener('timeupdate', reveal, { once: true });
         v.addEventListener('loadeddata', () => { try { v.pause(); } catch (e) {} if (userReady) primeVideo(v); });
         s.el.appendChild(v); s.video = v; s.hasClip = true;
       }).catch(() => { s.loading = false; });
@@ -425,6 +428,10 @@ function mountScrollWorld(container, config) {
   }
   window.addEventListener('pointerdown', onFirstGesture, { once: true, passive: true });
   window.addEventListener('touchstart', onFirstGesture, { once: true, passive: true });
+  // Ivrig hämtning: alla klipp börjar laddas direkt (staggrat) — 4G ska inte förlora mot tummen.
+  setTimeout(() => { let d = 0; SEGMENTS.forEach(seg => {
+    if (seg.clip) { setTimeout(() => loadClip(seg), d); d += 300; } }); }, 400);
+  window.__swSegs = SEGMENTS; // läses av ?vdebug-överlägget
 
   // Particles are a per-frame cost we can't afford alongside video scrubbing on a phone.
   seedParticles(particles, reduce || coarse);
@@ -594,7 +601,7 @@ mountScrollWorld(document.getElementById('world'), {
   nav: true, atmosphere: true,
   sections: [
     { id:'gryning', label:'Gryningen', linger:.35,
-      still:'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2216%22 height=%229%22><defs><linearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%220%22 y2=%221%22><stop offset=%220%22 stop-color=%22%233A4656%22/><stop offset=%221%22 stop-color=%22%231A2230%22/></linearGradient></defs><rect width=%2216%22 height=%229%22 fill=%22url(%23g)%22/></svg>', clip:'https://assets.mixkit.co/videos/24946/24946-720.mp4',
+      still:'stills/still-24946.jpg', clip:'https://assets.mixkit.co/videos/24946/24946-720.mp4',
       clipMobile:'https://assets.mixkit.co/videos/24946/24946-360.mp4', clipMobile:'https://assets.mixkit.co/videos/24946/24946-360.mp4',
       accent:'#7EC8E3',
       eyebrow:'KL 06:50 · MINUS TVÅ GRADER',
@@ -602,7 +609,7 @@ mountScrollWorld(document.getElementById('world'), {
       body:'Halkvakt är appen som sitter bredvid dig och vet vad vägen döljer — byggd på Trafikverkets livedata. Gratis, och helt privat.',
       tags:['844 mätstationer','Data var 30:e minut','0 spårning'] },
     { id:'skogen', label:'Skogen', scroll:1.9, linger:.45,
-      still:'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2216%22 height=%229%22><defs><linearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%220%22 y2=%221%22><stop offset=%220%22 stop-color=%22%23DCE6EA%22/><stop offset=%221%22 stop-color=%22%235E7488%22/></linearGradient></defs><rect width=%2216%22 height=%229%22 fill=%22url(%23g)%22/></svg>', clip:'https://assets.mixkit.co/videos/3317/3317-720.mp4',
+      still:'stills/still-3317.jpg', clip:'https://assets.mixkit.co/videos/3317/3317-720.mp4',
       clipMobile:'https://assets.mixkit.co/videos/3317/3317-360.mp4', clipMobile:'https://assets.mixkit.co/videos/3317/3317-360.mp4',
       accent:'#7EC8E3',
       eyebrow:'⚠ RÖSTEN SÄGER · VILT',
@@ -610,7 +617,7 @@ mountScrollWorld(document.getElementById('world'), {
       body:'Polisens viltrapporter och Trafikverkets olyckslägen läses upp i god tid — du behöver aldrig titta på skärmen.',
       tags:['Vilt','Olyckor','Vägarbeten'] },
     { id:'snofallet', label:'Snöfallet', linger:.4,
-      still:'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2216%22 height=%229%22><defs><linearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%220%22 y2=%221%22><stop offset=%220%22 stop-color=%22%23C9D4DC%22/><stop offset=%221%22 stop-color=%22%2371828F%22/></linearGradient></defs><rect width=%2216%22 height=%229%22 fill=%22url(%23g)%22/></svg>', clip:'https://assets.mixkit.co/videos/36024/36024-720.mp4',
+      still:'stills/still-36024.jpg', clip:'https://assets.mixkit.co/videos/36024/36024-720.mp4',
       clipMobile:'https://assets.mixkit.co/videos/36024/36024-360.mp4', clipMobile:'https://assets.mixkit.co/videos/36024/36024-360.mp4',
       accent:'#FFC400',
       eyebrow:'⚠ RÖSTEN SÄGER · HALKA',
@@ -618,7 +625,7 @@ mountScrollWorld(document.getElementById('world'), {
       body:'Vägväderstationerna mäter yttemperatur och friktion. När det fryser på din väg vet Halkvakt det före dig.',
       tags:['Yttemperatur','Friktion','Frysvarning'] },
     { id:'natten', label:'Natten', scroll:1.8,
-      still:'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2216%22 height=%229%22><defs><linearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%220%22 y2=%221%22><stop offset=%220%22 stop-color=%22%230A0E14%22/><stop offset=%221%22 stop-color=%22%2303060A%22/></linearGradient></defs><rect width=%2216%22 height=%229%22 fill=%22url(%23g)%22/></svg>', clip:'https://assets.mixkit.co/videos/26253/26253-720.mp4',
+      still:'stills/still-26253.jpg', clip:'https://assets.mixkit.co/videos/26253/26253-720.mp4',
       clipMobile:'https://assets.mixkit.co/videos/26253/26253-360.mp4', clipMobile:'https://assets.mixkit.co/videos/26253/26253-360.mp4',
       accent:'#FFC400',
       eyebrow:'DINA LJUS NÅR 60 METER.',
@@ -743,5 +750,16 @@ html,body{overflow-x:clip !important}
 .hv-storeb .sb{display:flex;align-items:baseline;gap:8px;background:#000;border:1.5px solid rgba(255,255,255,.28);border-radius:11px;padding:10px 16px;font-weight:700;color:#fff}
 .hv-storeb .sb em{font-style:normal;font-weight:400;font-size:12px;color:#8FA1B3}
 </style>
+<script>
+if (new URLSearchParams(location.search).has('vdebug')) {
+  const d=document.createElement('div');
+  d.style.cssText='position:fixed;left:8px;bottom:8px;z-index:9999;background:rgba(0,0,0,.82);color:#3ADB76;font:11px ui-monospace,monospace;padding:8px 10px;border-radius:8px;white-space:pre;pointer-events:none';
+  document.body.appendChild(d);
+  setInterval(()=>{ const S=window.__swSegs||[];
+    d.textContent='L=laddar R=meta P=målad\n'+S.filter(x=>x.clip).map(x=>
+      `${x.kind[0]}${x.si??''} ${x.loading?'L':'·'}${x.ready?'R':'·'}${x.el&&x.el.classList.contains('has-clip')?'P':'·'} rs=${x.video?x.video.readyState:'-'}${x.video&&x.video.error?' ERR':''}`
+    ).join('\n') || 'motorn ej uppe'; }, 600);
+}
+</script>
 </body>
 </html>
