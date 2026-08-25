@@ -660,13 +660,6 @@ requestAnimationFrame(() => {
 <div class="hv-belt">
 <div class="hv-recap" id="ladda">
  <div class="hv-stage">
-  <p class="hv-rk disp">RÖSTEN VARNAR FÖR</p>
-  <div class="hv-panels">
-    <div class="hv-pan" data-i="0"><video muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/3316/3316-360.mp4"></video><div class="lab"><span class="e">❄️</span><b>HALKA</b></div></div>
-    <div class="hv-pan" data-i="1"><video muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/10076/10076-360.mp4"></video><div class="lab"><span class="e">🦌</span><b>VILT</b></div></div>
-    <div class="hv-pan" data-i="2"><video muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/17376/17376-360.mp4"></video><div class="lab"><span class="e">🚨</span><b>OLYCKOR</b></div></div>
-    <div class="hv-pan" data-i="3"><video muted loop playsinline preload="none" data-src="https://assets.mixkit.co/videos/64/64-360.mp4"></video><div class="lab"><span class="e">📷</span><b>KAMEROR</b></div></div>
-  </div>
   <div class="hv-fin">
     <div class="hv-logo"><span class="glyph"></span><span class="wm disp">HALKVAKT</span></div>
     <div class="stores">
@@ -679,30 +672,9 @@ requestAnimationFrame(() => {
 </div>
 <style>
 html,body{overflow-x:clip !important}
-.hv-recap{position:relative;height:300vh}
+.hv-recap{position:relative;height:160vh}
 .hv-recap .hv-stage{position:sticky;top:0;height:100vh;height:100dvh;display:flex;flex-direction:column;
   justify-content:center;padding:70px 10px 16px;overflow:clip}
-.hv-rk{font:700 13px/1 "Avenir Next Condensed",system-ui;letter-spacing:.22em;color:#FFC400;text-align:center;
-  margin-bottom:14px;opacity:0;transform:translateY(18px);transition:.45s}
-.hv-recap.go .hv-rk{opacity:1;transform:none}
-.hv-panels{display:flex;height:72vh;height:72dvh;max-height:660px;max-width:1100px;width:100%;margin:0 auto}
-.hv-pan{flex:1;position:relative;overflow:hidden;filter:brightness(.16) saturate(.5);
-  transition:filter .55s;transform:skewX(-2deg) scaleX(1.07);margin:0 -5px}
-.hv-pan video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:skewX(2deg) scale(1.16)}
-.hv-pan .lab{position:absolute;left:0;right:0;bottom:0;padding:16px 6px;text-align:center;
-  background:linear-gradient(transparent,rgba(0,0,0,.85));transform:skewX(2deg);opacity:0;transition:.45s}
-.hv-pan .lab .e{font-size:26px;display:block}
-.hv-pan .lab b{font-size:13.5px;letter-spacing:.05em;color:#F3F6F9}
-.hv-pan.lit{filter:brightness(1) saturate(1)}
-.hv-pan.lit .lab{opacity:1}
-.hv-recap .hv-stage{transition:background .6s}
-.hv-stage.black{background:#000}
-.hv-pan{transition:filter .55s,opacity .6s}
-.hv-stage.black .hv-pan{opacity:0}
-.hv-stage.black .hv-rk{opacity:0}
-.hv-logo{display:flex;align-items:center;gap:13px;margin-bottom:6px}
-.hv-logo .glyph{width:44px;height:44px;border-radius:12px;background:#FFC400;box-shadow:0 0 34px rgba(255,196,0,.5)}
-.hv-logo .wm{font-size:30px;font-weight:800;letter-spacing:.06em;color:#F3F6F9}
 .hv-fin{position:absolute;left:0;right:0;top:50%;transform:translateY(calc(-50% + 44px));
   display:flex;flex-direction:column;align-items:center;gap:16px;padding:0 18px;
   opacity:0;transition:opacity .5s,transform .5s;z-index:5;pointer-events:none}
@@ -727,16 +699,12 @@ html,body{overflow-x:clip !important}
 <script>
 (function(){
   const wrap=document.querySelector('.hv-recap'),stage=wrap.querySelector('.hv-stage'),
-        pans=[...wrap.querySelectorAll('.hv-pan')],fin=wrap.querySelector('.hv-fin');
-  const steps=[.10,.23,.36,.49], finAt=.70;
-  new IntersectionObserver((es,o)=>{es.forEach(e=>{if(!e.isIntersecting)return;o.disconnect();
-    pans.forEach(p=>{const v=p.querySelector('video');v.src=v.dataset.src;v.load();
-      v.play().catch(()=>{});});})},{rootMargin:'150% 0px'}).observe(wrap);
+        fin=wrap.querySelector('.hv-fin');
+
+  const finAt=.30;
   function tick(){
     const r=wrap.getBoundingClientRect(),
           p=Math.min(1,Math.max(0,-r.top/(r.height-innerHeight)));
-    wrap.classList.toggle('go',p>.02);
-    pans.forEach((el,i)=>el.classList.toggle('lit',p>=steps[i]));
     fin.classList.toggle('in',p>=finAt);
     stage.classList.toggle('black',p>=finAt);
   }
@@ -749,41 +717,6 @@ fetch('data/meta.json?t='+Date.now(),{cache:'no-cache'}).then(r=>r.json()).then(
     `${m.vilt_vanligast?` (${m.vilt_vanligast})`:''} · ${m.vaglag_ej_normalt??0} halksträckor · kl ${kl}`;
 }).catch(()=>{});
 </script>
-<section class="hv-after hv-faq">
-  <h2 class="disp">Vanliga frågor</h2>
-  <details><summary>Är det halt på vägarna just nu?</summary><p><a href="karta.html">Livekartan</a> visar väglag, vägbanetemperaturer och olyckor i hela Sverige, direkt från Trafikverkets mätstationer.</p></details>
-  <details><summary>Vad är Halkvakt?</summary><p>En app som varnar dig med rösten om halka, viltolyckor, trafikolyckor och fartkameror på vägen framför dig. Den vaknar själv när du börjar köra.</p></details>
-  <details><summary>Vad kostar det?</summary><p>Appen är gratis.</p></details>
-  <details><summary>Sparar ni min position?</summary><p>Nej. All matchning sker inne i telefonen mot en nedladdad datafil. Positionen lämnar aldrig enheten. Det är inte ett löfte i finstil — det är hur appen är byggd.</p></details>
-  <details><summary>Finns det till iPhone?</summary><p>Ja — appen släpps till både iPhone och Android i vinter.</p></details>
-</section>
-<section class="hv-after" style="padding-top:20px;padding-bottom:30px">
-  <form id="wl2" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
-    <span style="color:#8FA1B3;font-size:14px;flex:1 1 100%">Vill du ha ett mejl på släppdagen?</span>
-    <input id="email2" type="email" placeholder="din@mejl.se" required autocomplete="email"
-      style="flex:1;min-width:200px;background:#0F1B26;border:1.5px solid #2A3742;border-radius:10px;padding:11px 14px;color:#F3F6F9;font-size:15px">
-    <button type="submit" style="background:transparent;border:1.5px solid #FFC400;color:#FFC400;border-radius:10px;padding:11px 18px;font-weight:700;cursor:pointer">Meddela mig</button>
-  </form>
-</section>
-<script>
-document.getElementById("wl2").addEventListener("submit",async e=>{
-  e.preventDefault();const em=document.getElementById("email2").value.trim();
-  if(!/.+@.+\..+/.test(em))return;
-  const b=document.querySelector("#wl2 button");b.disabled=true;b.textContent="Sparar…";
-  try{if(!cfg)throw 0;
-    const r=await fetch(`${cfg.supabase_url}/rest/v1/waitlist`,{method:"POST",
-      headers:{apikey:cfg.anon_key,Authorization:`Bearer ${cfg.anon_key}`,
-      "Content-Type":"application/json",Prefer:"return=minimal"},
-      body:JSON.stringify({email:em,source:"release"})});
-    if(!r.ok&&r.status!==409)throw 0;
-    document.getElementById("wl2").innerHTML='<span style="color:#3ADB76">Du får ett mejl på släppdagen. ✓</span>';
-  }catch{b.disabled=false;b.textContent="Meddela mig";}
-});
-</script>
-<footer class="hv-after hv-foot">
-  <a href="karta.html">Livekartan</a> · <a href="om.html">Mer om appen &amp; hör rösten</a>
-  <span>Öppna data från Trafikverket · Gratis · 0 spårning</span>
-</footer>
 </div><!-- /hv-belt -->
 <style>
 html,body{overflow-x:clip !important}
@@ -791,22 +724,11 @@ html,body{overflow-x:clip !important}
 .hv-after{max-width:640px;margin:0 auto;padding:64px 22px;color:#F3F6F9}
 .hv-after h2{font-family:"Avenir Next Condensed","Arial Narrow",system-ui;font-size:34px;margin:0 0 12px;letter-spacing:.01em}
 .hv-after p{color:#B9C6D2;line-height:1.6;margin:0 0 18px}
-#wl{display:flex;gap:10px;flex-wrap:wrap}
-#wl input{flex:1;min-width:220px;background:#0F1B26;border:1.5px solid #2A3742;border-radius:12px;padding:14px 16px;color:#F3F6F9;font-size:16px}
-#wl button{background:#FFC400;color:#0B1620;border:0;border-radius:12px;padding:14px 24px;font-weight:800;font-size:16px;cursor:pointer}
 .hv-small{font-size:14px;color:#8FA1B3}.hv-after a{color:#7EC8E3}
-.hv-faq details{border-bottom:1px solid #1E2833;padding:13px 0}
-.hv-faq summary{cursor:pointer;font-weight:600;color:#F3F6F9}
-.hv-faq details p{margin:10px 0 4px}
-.hv-foot{display:flex;flex-wrap:wrap;gap:8px 14px;justify-content:space-between;color:#54677A;font-size:14px;border-top:1px solid #1E2833}
 .hv-appline{color:#FFC400;font-weight:600;font-size:14px;letter-spacing:.06em;text-transform:uppercase;margin:2px 0 12px}
 .hv-storeb{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 20px}
 .hv-storeb .sb{display:flex;align-items:baseline;gap:8px;background:#000;border:1.5px solid rgba(255,255,255,.28);border-radius:11px;padding:10px 16px;font-weight:700;color:#fff}
 .hv-storeb .sb em{font-style:normal;font-weight:400;font-size:12px;color:#8FA1B3}
-.ok{background:#123B26;border:1px solid #157A46;border-radius:12px;padding:16px;color:#D9F2E4}
 </style>
-<script>
-let cfg=null;fetch(`data/config.json?t=${Date.now()}`,{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(c=>cfg=c).catch(()=>{});
-</script>
 </body>
 </html>
