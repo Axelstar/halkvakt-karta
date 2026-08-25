@@ -78,6 +78,17 @@
   .top-a4 .sw-nav__item{color:#E6EDF3!important}
   .top-a4 .sw-cta{background:rgba(0,0,0,.55)!important;color:#fff!important;border:1.5px solid rgba(255,255,255,.35)!important}
 
+
+  .hv-topbadges .hv-badge b{white-space:nowrap}
+  @media(max-width:620px){
+    .sw-topbar{padding:10px 12px!important;gap:8px!important}
+    .sw-brand__name{font-size:.92rem!important}
+    .hv-topbadges{gap:6px}
+    .hv-topbadges .hv-badge{padding:7px 10px;border-radius:9px}
+    .hv-topbadges .hv-badge .ic{font-size:13px}
+    .hv-topbadges .hv-badge b{font-size:11.5px}
+    .hv-applabel{display:none}
+  }
 </style>
 </head>
 <body class="top-a1">
@@ -544,28 +555,28 @@ mountScrollWorld(document.getElementById('world'), {
   nav: true, atmosphere: true,
   sections: [
     { id:'gryning', label:'Gryningen', linger:.35,
-      still:'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2216%22 height=%229%22><defs><linearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%220%22 y2=%221%22><stop offset=%220%22 stop-color=%22%233A4656%22/><stop offset=%221%22 stop-color=%22%231A2230%22/></linearGradient></defs><rect width=%2216%22 height=%229%22 fill=%22url(%23g)%22/></svg>', clip:'https://assets.mixkit.co/videos/24946/24946-720.mp4',
+      still:'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2216%22 height=%229%22><defs><linearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%220%22 y2=%221%22><stop offset=%220%22 stop-color=%22%233A4656%22/><stop offset=%221%22 stop-color=%22%231A2230%22/></linearGradient></defs><rect width=%2216%22 height=%229%22 fill=%22url(%23g)%22/></svg>', clip:'https://assets.mixkit.co/videos/24946/24946-720.mp4', clipMobile:'https://assets.mixkit.co/videos/24946/24946-360.mp4',
       accent:'#7EC8E3',
       eyebrow:'KL 06:50 · MINUS TVÅ GRADER',
       title:'Vägen ser torr ut. Den är det inte.',
       body:'Halkvakt är appen som sitter bredvid dig och vet vad vägen döljer — byggd på Trafikverkets livedata. Gratis, och helt privat.',
       tags:['844 mätstationer','Data var 30:e minut','0 spårning'] },
     { id:'skogen', label:'Skogen', scroll:1.9, linger:.45,
-      still:'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2216%22 height=%229%22><defs><linearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%220%22 y2=%221%22><stop offset=%220%22 stop-color=%22%23DCE6EA%22/><stop offset=%221%22 stop-color=%22%235E7488%22/></linearGradient></defs><rect width=%2216%22 height=%229%22 fill=%22url(%23g)%22/></svg>', clip:'https://assets.mixkit.co/videos/3317/3317-720.mp4',
+      still:'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2216%22 height=%229%22><defs><linearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%220%22 y2=%221%22><stop offset=%220%22 stop-color=%22%23DCE6EA%22/><stop offset=%221%22 stop-color=%22%235E7488%22/></linearGradient></defs><rect width=%2216%22 height=%229%22 fill=%22url(%23g)%22/></svg>', clip:'https://assets.mixkit.co/videos/3317/3317-720.mp4', clipMobile:'https://assets.mixkit.co/videos/3317/3317-360.mp4',
       accent:'#7EC8E3',
       eyebrow:'⚠ RÖSTEN SÄGER · VILT',
       title:'»Viltolycka rapporterad på vägen framför dig.»',
       body:'Polisens viltrapporter och Trafikverkets olyckslägen läses upp i god tid — du behöver aldrig titta på skärmen.',
       tags:['Vilt','Olyckor','Vägarbeten'] },
     { id:'snofallet', label:'Snöfallet', linger:.4,
-      still:'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2216%22 height=%229%22><defs><linearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%220%22 y2=%221%22><stop offset=%220%22 stop-color=%22%23C9D4DC%22/><stop offset=%221%22 stop-color=%22%2371828F%22/></linearGradient></defs><rect width=%2216%22 height=%229%22 fill=%22url(%23g)%22/></svg>', clip:'https://assets.mixkit.co/videos/36024/36024-720.mp4',
+      still:'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2216%22 height=%229%22><defs><linearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%220%22 y2=%221%22><stop offset=%220%22 stop-color=%22%23C9D4DC%22/><stop offset=%221%22 stop-color=%22%2371828F%22/></linearGradient></defs><rect width=%2216%22 height=%229%22 fill=%22url(%23g)%22/></svg>', clip:'https://assets.mixkit.co/videos/36024/36024-720.mp4', clipMobile:'https://assets.mixkit.co/videos/36024/36024-360.mp4',
       accent:'#FFC400',
       eyebrow:'⚠ RÖSTEN SÄGER · HALKA',
       title:'»Isrisk framöver — vägbanan nära noll grader.»',
       body:'Vägväderstationerna mäter yttemperatur och friktion. När det fryser på din väg vet Halkvakt det före dig.',
       tags:['Yttemperatur','Friktion','Frysvarning'] },
     { id:'natten', label:'Natten', scroll:1.8,
-      still:'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2216%22 height=%229%22><defs><linearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%220%22 y2=%221%22><stop offset=%220%22 stop-color=%22%230A0E14%22/><stop offset=%221%22 stop-color=%22%2303060A%22/></linearGradient></defs><rect width=%2216%22 height=%229%22 fill=%22url(%23g)%22/></svg>', clip:'https://assets.mixkit.co/videos/26253/26253-720.mp4',
+      still:'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2216%22 height=%229%22><defs><linearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%220%22 y2=%221%22><stop offset=%220%22 stop-color=%22%230A0E14%22/><stop offset=%221%22 stop-color=%22%2303060A%22/></linearGradient></defs><rect width=%2216%22 height=%229%22 fill=%22url(%23g)%22/></svg>', clip:'https://assets.mixkit.co/videos/26253/26253-720.mp4', clipMobile:'https://assets.mixkit.co/videos/26253/26253-360.mp4',
       accent:'#FFC400',
       eyebrow:'DINA LJUS NÅR 60 METER.',
       title:'Halkvakt ser hela vägen hem.',
