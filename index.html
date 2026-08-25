@@ -718,7 +718,8 @@ html,body{overflow-x:clip !important}
 .hv-tick{position:absolute;left:0;right:0;bottom:5vh;overflow:hidden;opacity:0;transition:opacity .6s;pointer-events:none}
 .hv-fin.in ~ .hv-tick, .hv-stage.black .hv-tick{opacity:1}
 .hv-tick .inner{display:inline-flex;align-items:center;gap:9px;white-space:nowrap;
-  font:12px ui-monospace,monospace;color:#54677A;animation:hvTick 32s linear infinite;padding-left:100vw}
+  font:12px ui-monospace,monospace;color:#54677A;padding-left:100vw}
+.hv-stage.black .hv-tick .inner{animation:hvTick 26s linear infinite}
 .hv-tick .dot{width:8px;height:8px;border-radius:50%;background:#3ADB76;box-shadow:0 0 10px #3ADB76;animation:hvPuls 2s infinite;flex:none}
 @keyframes hvTick{to{transform:translateX(-100%)}}
 @keyframes hvPuls{50%{opacity:.35}}
