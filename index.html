@@ -41,7 +41,15 @@ a{color:var(--gul)}
 header{padding:18px 0;border-bottom:2px solid var(--panel)}
 .brand{font-family:ui-monospace,monospace;font-weight:700;color:var(--gul);font-size:20px;letter-spacing:.5px}
 .vms{background:#000;border:2px solid #333;border-radius:6px;margin:16px 0 0;padding:8px 12px;
-     font-family:ui-monospace,monospace;font-size:13px;color:#FFB300;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+     font-family:ui-monospace,monospace;font-size:13px;color:#FFB300;white-space:nowrap;overflow:hidden}
+.vms span{display:inline-block}
+.vms.scroll span{animation:vmsScroll 26s linear infinite;padding-left:100%}
+@keyframes vmsScroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+@media (max-width:520px){
+  .cta{display:block;text-align:center;margin:0 0 10px}
+  .cta.alt{margin-left:0}
+  .hero{padding:36px 0 26px}
+}
 .hero{padding:56px 0 40px}
 h1{font-size:clamp(28px,5vw,44px);line-height:1.15;font-family:ui-monospace,monospace}
 h1 em{color:var(--gul);font-style:normal}
@@ -157,7 +165,8 @@ fetch("data/meta.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(meta
   if (meta.vilt_dygn>0) bitar.push(`${meta.vilt_dygn} VILTOLYCKOR SENASTE DYGNET`);
   else if (meta.vilt_vecka>0) bitar.push(`${meta.vilt_vecka} VILTOLYCKOR SENASTE VECKAN`);
   bitar.push(`UPPDATERAD ${fmtTid(meta.generated_at)}`);
-  $("#ticker").textContent = bitar.join("  ·  ");
+  $("#ticker").textContent = bitar.join("  ·  ") + "  ·  ";
+  const tk=$("#ticker"); requestAnimationFrame(()=>{ if(tk.scrollWidth>tk.parentElement.clientWidth) tk.parentElement.classList.add("scroll"); });
   if (meta.waitlist_count >= 25) {
     const p=document.createElement("span"); p.className="pill";
     p.textContent=`🔥 ${meta.waitlist_count} i betakön`;

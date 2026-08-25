@@ -32,7 +32,7 @@ header{position:fixed;top:0;left:0;right:0;z-index:10;display:flex;gap:10px;alig
 .vms{pointer-events:auto;flex:1;min-width:0;display:flex;align-items:center;background:#0B0E13;
   border:1px solid #2A3547;border-radius:8px;padding:0 12px;overflow:hidden;
   box-shadow:inset 0 0 24px rgba(255,176,31,.06),0 4px 18px rgba(0,0,0,.45)}
-.vms span{font-family:var(--mono);font-size:12.5px;letter-spacing:.09em;color:var(--amber);
+.vms span{display:inline-block;padding-left:0;font-family:var(--mono);font-size:12.5px;letter-spacing:.09em;color:var(--amber);
   white-space:nowrap;text-transform:uppercase;text-shadow:0 0 7px rgba(255,176,31,.55)}
 @media(max-width:640px){
   header{flex-wrap:wrap}
@@ -76,6 +76,8 @@ footer a{color:#5E6C7E}
 .maplibregl-ctrl-bottom-left{bottom:54px}
 @media(prefers-reduced-motion:no-preference){
   .vms span{animation:vmsIn .6s ease-out}
+  .vms.scroll span{animation:vmsScroll 26s linear infinite;padding-left:100%}
+  @keyframes vmsScroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
   @keyframes vmsIn{from{opacity:0}to{opacity:1}}
 }
 </style>
@@ -99,7 +101,7 @@ footer a{color:#5E6C7E}
   <div class="vms" role="status"><span id="ticker">LÄSER VÄGLAGET&nbsp;…</span></div>
   <div class="cta" id="cta">
     <h2>Beta för Android i oktober</h2>
-    <p>Halkvakt varnar dig i bilen — via högtalarna — för halka, vilt, olyckor och fartkameror. Ställ dig i kön så får du testa först.</p>
+    <p>Halkvakt varnar dig i bilen — via högtalarna — för halka, vilt, olyckor och fartkameror. Ställ dig i kön så får du testa först. <a href="./" style="color:#FFC400;white-space:nowrap">Om appen →</a></p>
     <form id="wl" novalidate>
       <input id="email" type="email" required placeholder="din@epost.se" aria-label="E-postadress" autocomplete="email">
       <button type="submit">Ställ mig i kön</button>
@@ -179,7 +181,8 @@ map.on("load", async () => {
     else if (meta.vilt_vecka>0) bitar.push(`${meta.vilt_vecka} VILTOLYCKOR SENASTE VECKAN`);
     bitar.push(`${meta.stationer} MÄTSTATIONER`);
     bitar.push(`UPPDATERAD ${fmtTid(meta.generated_at)}`);
-    $("#ticker").textContent = bitar.join("  ·  ");
+    $("#ticker").textContent = bitar.join("  ·  ") + "  ·  ";
+    const tk=$("#ticker"); requestAnimationFrame(()=>{ if(tk.scrollWidth>tk.parentElement.clientWidth) tk.parentElement.classList.add("scroll"); });
   } else {
     $("#ticker").textContent = "DATAN LADDAS INOM KORT — KARTAN ÄR NY";
   }
@@ -238,6 +241,5 @@ $("#wl").addEventListener("submit", async e => {
   }
 });
 </script>
-<div style="position:fixed;left:12px;bottom:64px;z-index:9"><a href="./" style="background:#14344A;color:#F3F6F9;text-decoration:none;padding:8px 14px;border-radius:8px;font:700 13px ui-monospace,monospace">← OM APPEN</a></div>
 </body>
 </html>
