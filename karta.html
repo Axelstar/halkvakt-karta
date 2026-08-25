@@ -92,15 +92,6 @@ footer a{color:#5E6C7E}
 
 <header>
   <div class="sign" title="Halkvakt">
-    <!-- Varningsmärke: slirande bil -->
-    <svg width="34" height="30" viewBox="0 0 40 35" aria-hidden="true">
-      <path d="M20 2 L38 32 H2 Z" fill="#FCD34D" stroke="#C4322E" stroke-width="3.4" stroke-linejoin="round"/>
-      <g transform="translate(11.4,17.5) scale(.72)">
-        <path d="M2 8 Q6 4 12 5 L15 2 Q17 1 18 3 L20 6 Q24 7 23 10 L1 11 Q0 9 2 8Z" fill="#1B1B1B"/>
-        <circle cx="6" cy="11.5" r="2.3" fill="#1B1B1B"/><circle cx="18" cy="11.5" r="2.3" fill="#1B1B1B"/>
-        <path d="M3 16 q3 -2 6 0 t6 0 t6 0" fill="none" stroke="#1B1B1B" stroke-width="1.7" stroke-linecap="round"/>
-      </g>
-    </svg>
     <img src="logo.svg" alt="" style="height:22px;vertical-align:-5px;margin-right:2px"><b>HALKVAKT</b>
   </div>
   <div class="vms" role="status"><span id="ticker">LÄSER VÄGLAGET&nbsp;…</span></div>
@@ -109,7 +100,7 @@ footer a{color:#5E6C7E}
     <p>Halkvakt varnar dig i bilen — via högtalarna — för halka, vilt, olyckor och fartkameror. Släpps i vinter till både Android och iPhone. <a href="./#ladda" style="color:#FFC400;white-space:nowrap">Ladda ner →</a></p>
     <form id="wl" novalidate>
       <input id="email" type="email" required placeholder="din@epost.se" aria-label="E-postadress" autocomplete="email">
-      <button type="submit">Ställ mig i kön</button>
+      <button type="submit">Meddela mig</button>
     </form>
   </div>
 </header>
@@ -239,9 +230,9 @@ $("#wl").addEventListener("submit", async e => {
       body: JSON.stringify({email, source:"karta"})
     });
     if (!r.ok && r.status !== 409) throw new Error(String(r.status));
-    $("#wl").outerHTML = `<div class="ok">Du står i kön. Vi hörs när det är dags. ✓</div>`;
+    $("#wl").outerHTML = `<div class="ok">Du får ett mejl på släppdagen. ✓</div>`;
   } catch {
-    btn.disabled = false; btn.textContent = "Ställ mig i kön";
+    btn.disabled = false; btn.textContent = "Meddela mig";
     alert("Det gick inte att spara just nu — prova igen om en stund.");
   }
 });
