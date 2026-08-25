@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[18.077808974,59.296363049]},"properties":{"typ":"Trafikmeddelande","msg":"Varning för köer i Södra länken. Om möjligt, välj annan väg.","allvar":"Stor påverkan","road":"Väg 75","start":"2026-08-25T04:46:26.000Z"}}]}

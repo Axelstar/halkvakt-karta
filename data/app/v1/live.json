@@ -1,1 +1,1 @@
-{"schema":1,"generated_at":"2026-08-25T04:52:08.011Z","segments":[],"weather":[{"id":"2346","lon":15.1236,"lat":63.43446,"yta":-13.7,"fukt":true},{"id":"2135","lon":16.53741,"lat":60.57883,"yta":-3.4,"fukt":true}],"deviations":[],"smhi":[]}
+{"schema":1,"generated_at":"2026-08-25T05:46:07.094Z","segments":[],"weather":[],"deviations":[{"id":"SE_STA_TRISSID_1_24175059","lon":18.0778089736276,"lat":59.2963630488,"typ":"Trafikmeddelande","road":"Väg 75"}],"smhi":[]}
