@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Halkvakt — rösten som varnar för halka, vilt och olyckor på vägen</title>
+<meta name="description" content="Halkvakt varnar dig med rösten om halka, viltolyckor, olyckor och fartkameror på vägen framför dig — byggd på Trafikverkets livedata. Gratis, positionen lämnar aldrig telefonen. Beta för Android i oktober.">
+<link rel="canonical" href="https://axelstar.github.io/halkvakt-karta/">
+<meta property="og:title" content="Halkvakt — rösten som varnar för halka på vägen">
+<meta property="og:description" content="Röstvarningar för halka, vilt, olyckor och fartkameror — livedata från Trafikverket. Ställ dig i betakön.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://axelstar.github.io/halkvakt-karta/">
+<meta property="og:locale" content="sv_SE">
+<meta property="og:image" content="https://axelstar.github.io/halkvakt-karta/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="favicon.png">
+{"@context":"https://schema.org","@type":"MobileApplication","name":"Halkvakt",
+ "operatingSystem":"Android","applicationCategory":"DriverAssistanceApplication",
+ "description":"Röstvarningar för halka, viltolyckor, trafikolyckor och fartkameror på svenska vägar, byggda på Trafikverkets öppna livedata.",
+ "offers":{"@type":"Offer","price":"0","priceCurrency":"SEK"},
+ "countriesSupported":"SE"}
+</script>
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+ {"@type":"Question","name":"Är det halt på vägarna just nu?","acceptedAnswer":{"@type":"Answer","text":"Halkvakts livekarta visar väglag, vägbanetemperaturer och pågående olyckor i hela Sverige just nu, direkt från Trafikverkets mätstationer. Siffrorna på den här sidan uppdateras var 30:e minut."}},
+ {"@type":"Question","name":"Vad är Halkvakt?","acceptedAnswer":{"@type":"Answer","text":"En app som varnar dig med rösten — som en passagerare — om halka, viltolyckor, trafikolyckor och fartkameror på vägen framför dig. Du startar den inte ens själv: den vaknar när du börjar köra."}},
+ {"@type":"Question","name":"Vad kostar Halkvakt?","acceptedAnswer":{"@type":"Answer","text":"Appen är gratis."}},
+ {"@type":"Question","name":"Sparar Halkvakt min position?","acceptedAnswer":{"@type":"Answer","text":"Nej. All matchning mot faror sker inne i telefonen mot en nedladdad datafil. Positionen lämnar aldrig enheten och skickas aldrig till någon server."}},
+ {"@type":"Question","name":"Finns Halkvakt till iPhone?","acceptedAnswer":{"@type":"Answer","text":"iPhone-versionen är på väg — motorn är redan byggd och testad. Android får betan först, i oktober. Ställ dig i kön så hör vi av oss."}}
+]}
+</script>
+<style>
+:root{--bg:#0E1B25;--panel:#14344A;--fg:#F3F6F9;--dim:#9FB3C8;--gul:#FFC400;--gron:#1E7A46}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,sans-serif}
+a{color:var(--gul)}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px}
+header{padding:18px 0;border-bottom:2px solid var(--panel)}
+.brand{font-family:ui-monospace,monospace;font-weight:700;color:var(--gul);font-size:20px;letter-spacing:.5px}
+.vms{background:#000;border:2px solid #333;border-radius:6px;margin:16px 0 0;padding:8px 12px;
+     font-family:ui-monospace,monospace;font-size:13px;color:#FFB300;white-space:nowrap;overflow:hidden}
+.vms span{display:inline-block}
+.vms.scroll span{animation:vmsScroll 26s linear infinite;padding-left:100%}
+@keyframes vmsScroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+@media (max-width:520px){
+  .cta{display:block;text-align:center;margin:0 0 10px}
+  .cta.alt{margin-left:0}
+  .hero{padding:36px 0 26px}
+}
+.hero{padding:56px 0 40px}
+h1{font-size:clamp(28px,5vw,44px);line-height:1.15;font-family:ui-monospace,monospace}
+h1 em{color:var(--gul);font-style:normal}
+.lead{color:var(--dim);font-size:18px;margin:18px 0 26px;max-width:620px}
+.cta{display:inline-block;background:var(--gron);color:#fff;text-decoration:none;font-weight:700;
+     padding:14px 26px;border-radius:8px;font-size:17px}
+.cta.alt{background:transparent;border:2px solid var(--panel);color:var(--fg);margin-left:10px}
+section{padding:36px 0;border-top:1px solid var(--panel)}
+h2{font-family:ui-monospace,monospace;color:var(--gul);font-size:22px;margin-bottom:18px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.card{background:var(--panel);border-radius:10px;padding:18px}
+.card b{display:block;margin-bottom:6px;font-family:ui-monospace,monospace}
+.card span{color:var(--dim);font-size:15px}
+form{display:flex;gap:10px;flex-wrap:wrap;max-width:520px}
+input[type=email]{flex:1;min-width:220px;padding:13px;border-radius:8px;border:2px solid var(--panel);
+                  background:#0A141C;color:var(--fg);font-size:16px}
+button{background:var(--gron);color:#fff;border:0;border-radius:8px;padding:13px 22px;font-size:16px;font-weight:700;cursor:pointer}
+.ok{background:var(--gron);border-radius:8px;padding:14px 18px;display:inline-block}
+details{background:var(--panel);border-radius:10px;padding:14px 18px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:700}
+details p{margin-top:8px;color:var(--dim)}
+footer{padding:32px 0;color:var(--dim);font-size:14px}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center}
+@media (max-width:760px){.hero-grid{grid-template-columns:1fr}.phonewrap{margin-top:26px}}
+.phonewrap{display:flex;justify-content:center}
+.phone{width:min(250px,72vw);aspect-ratio:9/18.5;border-radius:34px;border:9px solid #000;
+       background:#000;box-shadow:0 24px 60px rgba(0,0,0,.55);overflow:hidden}
+.pscreen{position:relative;width:100%;height:100%;border-radius:24px;overflow:hidden;
+         background:linear-gradient(#E8EDF2,#DCE4EB)}
+.proad{position:absolute;left:34%;right:34%;top:-5%;bottom:-5%;background:#8C99A8;
+       transform:rotate(4deg)}
+.proad::before{content:"";position:absolute;left:calc(50% - 2px);top:0;bottom:0;width:4px;
+       background:repeating-linear-gradient(#F3F6F9 0 26px,transparent 26px 54px)}
+.pflake{position:absolute;top:16%;left:50%;transform:translateX(-50%);font-size:26px;
+        color:#4AA3D8;text-shadow:0 0 12px rgba(74,163,216,.8);animation:pflake 7s ease-in-out infinite}
+.pdot{position:absolute;bottom:23%;left:50%;width:16px;height:16px;margin-left:-8px;border-radius:50%;
+      background:#1E7A46;border:3px solid #fff;box-shadow:0 0 0 0 rgba(30,122,70,.5);
+      animation:ppulse 1.6s ease-out infinite}
+@keyframes ppulse{to{box-shadow:0 0 0 16px rgba(30,122,70,0)}}
+.pwarn{position:absolute;left:8px;right:8px;bottom:10px;background:#0E1B25;border-radius:14px;
+       padding:10px 12px;transform:translateY(140%);animation:pwarn 7s ease-in-out infinite;
+       box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.pwhead{font:700 10px ui-monospace,monospace;color:#FFC400;letter-spacing:.06em;margin-bottom:4px}
+.pwtext{font-size:12.5px;line-height:1.45;color:#F3F6F9}
+@keyframes pwarn{0%,14%{transform:translateY(140%)}22%,80%{transform:translateY(0)}88%,100%{transform:translateY(140%)}}
+@keyframes pflake{0%,15%{opacity:0}25%,85%{opacity:1}95%,100%{opacity:0}}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;
+       padding:18px 0 8px;border-top:1px solid var(--panel)}
+.stats div{text-align:center}
+.stats b{display:block;font:700 26px ui-monospace,monospace;color:var(--gul)}
+.stats span{color:var(--dim);font-size:13px}
+.pill{display:inline-block;background:var(--panel);border-radius:99px;padding:4px 12px;font-size:13px;color:var(--dim);margin-right:8px}
+</style>
+<link rel="canonical" href="https://axelstar.github.io/halkvakt-karta/om.html">
+</head>
+<body>
+<header><div class="wrap">
+  <span class="brand">⚠ HALKVAKT</span>
+  <div class="vms" role="status"><span id="ticker">LÄSER VÄGLAGET&nbsp;…</span></div>
+</div></header>
+
+<div class="wrap">
+<div class="hero hero-grid">
+<div>
+  <h1>Rösten som säger <em>»halka framför dig«</em> innan du är där.</h1>
+  <p class="lead">Halkvakt varnar dig som en passagerare — om halka, viltolyckor, trafikolyckor och
+  fartkameror på vägen framför dig. Byggd på Trafikverkets livedata. Vaknar själv när du börjar köra.
+  Positionen lämnar aldrig telefonen.</p>
+  <a class="cta" href="#beta">Ställ dig i betakön</a>
+  <a class="cta alt" href="karta.html">Öppna livekartan →</a>
+  <div style="margin-top:22px">
+    <button id="demo" type="button" style="background:transparent;border:2px solid var(--gul);color:var(--gul);border-radius:8px;padding:12px 20px;font-size:16px;font-weight:700;cursor:pointer">🔊 Hör hur rösten låter</button>
+    <span id="demotxt" style="display:block;margin-top:10px;color:var(--dim);font-family:ui-monospace,monospace;font-size:14px;min-height:20px"></span>
+  </div>
+  <p style="margin-top:18px">
+    <span class="pill">Gratis</span><span class="pill">Android-beta i oktober</span><span class="pill">iPhone på väg</span>
+  </p>
+</div>
+<div class="phonewrap" aria-hidden="true">
+  <div class="phone">
+    <div class="pscreen">
+      <div class="proad"></div>
+      <div class="pflake">❄</div>
+      <div class="pdot"></div>
+      <div class="pwarn">
+        <div class="pwhead">⚠ HALKVAKT · nu</div>
+        <div class="pwtext">🔊 »Varning: halka rapporterad på vägen framför dig.«</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="stats">
+  <div><b>844</b><span>mätstationer</span></div>
+  <div><b>30 min</b><span>uppdateringstakt</span></div>
+  <div><b>0 kr</b><span>helt gratis</span></div>
+  <div><b>0</b><span>spårning — positionen stannar i telefonen</span></div>
+</div>
+
+<section>
+  <h2>// SÅ FUNKAR DET</h2>
+  <div class="steps">
+    <div class="card"><b>1. Sätt dig i bilen</b><span>Appen känner att du börjat köra — via rörelse eller bilens
+      Bluetooth — och startar vakten själv. Noll knapptryck.</span></div>
+    <div class="card"><b>2. Kör som vanligt</b><span>Telefonen ligger i fickan. Vakten jämför din väg med
+      Trafikverkets halk-, olycks- och kameradata — helt inne i telefonen.</span></div>
+    <div class="card"><b>3. Rösten varnar</b><span>»Varning: halka rapporterad på vägen framför dig.«
+      Genom bilens högtalare, musiken duckar. Tystnad är det normala.</span></div>
+  </div>
+</section>
+
+<section id="beta">
+  <h2>// BETAKÖN</h2>
+  <p class="lead" style="margin-top:0">Android-betan öppnar i oktober — lagom före första halkan.
+  Ställ dig i kön så mejlar vi när det är dags. Inget spam, bara det mejlet.</p>
+  <form id="wl">
+    <input id="email" type="email" placeholder="din@mejl.se" required autocomplete="email">
+    <button type="submit">Ställ mig i kön</button>
+  </form>
+  <p style="margin-top:14px;color:var(--dim);font-size:14px">Vill du hjälpa till mer? Läs
+  <a href="beta.html">testarguiden</a> — 5 minuter, allt du behöver veta.</p>
+</section>
+
+<section>
+  <h2>// VANLIGA FRÅGOR</h2>
+  <details><summary>Är det halt på vägarna just nu?</summary>
+    <p><a href="karta.html">Livekartan</a> visar väglag, vägbanetemperaturer och pågående olyckor i hela
+    Sverige just nu, direkt från Trafikverkets mätstationer. Siffrorna högst upp på den här sidan
+    uppdateras var 30:e minut.</p></details>
+  <details><summary>Vad är Halkvakt?</summary>
+    <p>En app som varnar dig med rösten om halka, viltolyckor, trafikolyckor och fartkameror på vägen
+    framför dig. Du startar den inte ens själv: den vaknar när du börjar köra.</p></details>
+  <details><summary>Vad kostar det?</summary><p>Appen är gratis.</p></details>
+  <details><summary>Sparar ni min position?</summary>
+    <p>Nej. All matchning sker inne i telefonen mot en nedladdad datafil. Positionen lämnar aldrig
+    enheten och skickas aldrig till någon server. Det är inte ett löfte i finstil — det är hur
+    appen är byggd.</p></details>
+  <details><summary>Finns det till iPhone?</summary>
+    <p>iPhone-versionen är på väg — varningsmotorn är redan byggd och testad. Android får betan
+    först. Ställ dig i kön ovan så hör vi av oss.</p></details>
+</section>
+
+<footer>
+  Halkvakt · Data: <a href="https://www.trafikverket.se" rel="noopener">Trafikverket</a>,
+  <a href="https://polisen.se" rel="noopener">Polisen</a>, <a href="https://www.smhi.se" rel="noopener">SMHI</a>
+  · <a href="karta.html">Livekarta</a> · <a href="beta.html">Testarguide</a>
+</footer>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+const fmtTid = t => { try { const d=new Date(t);
+  return d.toLocaleTimeString("sv-SE",{hour:"2-digit",minute:"2-digit"}); } catch { return ""; } };
+fetch(`data/meta.json?t=${Date.now()}`,{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(meta=>{
+  if(!meta) return;
+  const bitar=[];
+  if (meta.smhi_vinter && meta.smhi_vinter.length>0) {
+    const v=meta.smhi_vinter[0];
+    bitar.push(`⚠ SMHI: ${(v.niva||"").toUpperCase()} VARNING — ${(v.event||"").toUpperCase()}`);
+  }
+  bitar.push(meta.vaglag_ej_normalt>0 ? `⚠ ${meta.vaglag_ej_normalt} STRÄCKOR MED BESVÄRLIGT VÄGLAG` : "VÄGLAG: NORMALT I HELA LANDET");
+  if (meta.kalla_stationer>0) bitar.push(`${meta.kalla_stationer} STATIONER ≤ 0°C`);
+  bitar.push(`${meta.olyckor} PÅGÅENDE HÄNDELSER`);
+  if (meta.vilt_dygn>0) bitar.push(`${meta.vilt_dygn} VILTOLYCKOR SENASTE DYGNET`);
+  else if (meta.vilt_vecka>0) bitar.push(`${meta.vilt_vecka} VILTOLYCKOR SENASTE VECKAN`);
+  bitar.push(`UPPDATERAD ${fmtTid(meta.generated_at)}`);
+  $("#ticker").textContent = bitar.join("  ·  ") + "  ·  ";
+  const tk=$("#ticker"); requestAnimationFrame(()=>{ if(tk.scrollWidth>tk.parentElement.clientWidth) tk.parentElement.classList.add("scroll"); });
+  if (meta.waitlist_count >= 25) {
+    const p=document.createElement("span"); p.className="pill";
+    p.textContent=`🔥 ${meta.waitlist_count} i betakön`;
+    document.querySelector(".hero .pill").parentNode.appendChild(p);
+  }
+}).catch(()=>{});
+const fraser=[
+  "Varning: halka rapporterad på vägen framför dig.",
+  "Viltrisk — vanlig olycksplats för älg den här tiden.",
+  "Fartkamera om 500 meter. Gränsen är 80.",
+  "Isrisk framöver — vägbanan nära noll grader."];
+let fi=0;
+document.getElementById("demo").addEventListener("click",()=>{
+  const t=fraser[fi++ % fraser.length];
+  document.getElementById("demotxt").textContent="» "+t+" «";
+  try{
+    speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(t); u.lang="sv-SE"; u.rate=1.0;
+    const v=speechSynthesis.getVoices().find(v=>v.lang&&v.lang.startsWith("sv"));
+    if(v) u.voice=v;
+    speechSynthesis.speak(u);
+  }catch(e){}
+});
+let cfg=null;
+fetch(`data/config.json?t=${Date.now()}`,{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(c=>cfg=c).catch(()=>{});
+$("#wl").addEventListener("submit", async e => {
+  e.preventDefault();
+  const email=$("#email").value.trim();
+  if(!/.+@.+\..+/.test(email)){$("#email").focus();return;}
+  const btn=$("#wl button"); btn.disabled=true; btn.textContent="Skickar…";
+  try{
+    if(!cfg) throw new Error("cfg");
+    const r=await fetch(`${cfg.supabase_url}/rest/v1/waitlist`,{
+      method:"POST",
+      headers:{apikey:cfg.anon_key,Authorization:`Bearer ${cfg.anon_key}`,
+               "Content-Type":"application/json",Prefer:"return=minimal"},
+      body:JSON.stringify({email,source:"landing"})});
+    if(!r.ok && r.status!==409) throw new Error(String(r.status));
+    $("#wl").outerHTML=`<div class="ok">Du står i kön. Vi hörs när det är dags. ✓</div>`;
+  }catch{
+    btn.disabled=false; btn.textContent="Ställ mig i kön";
+    alert("Det gick inte att spara just nu — prova igen om en stund.");
+  }
+});
+</script>
+</body>
+</html>
