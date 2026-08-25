@@ -1,1 +1,1 @@
-{"schema":1,"generated_at":"2026-08-25T04:02:06.234Z","segments":[],"weather":[{"id":"2346","lon":15.1236,"lat":63.43446,"yta":-5.6,"fukt":true}],"deviations":[{"id":"SE_STA_TRISSID_1_19581634","lon":13.1625141190174,"lat":57.6957456584571,"typ":"Olycka","road":"Väg 1700"}],"smhi":[]}
+{"schema":1,"generated_at":"2026-08-25T04:52:08.011Z","segments":[],"weather":[{"id":"2346","lon":15.1236,"lat":63.43446,"yta":-13.7,"fukt":true},{"id":"2135","lon":16.53741,"lat":60.57883,"yta":-3.4,"fukt":true}],"deviations":[],"smhi":[]}
