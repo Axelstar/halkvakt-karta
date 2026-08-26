@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[17.607650867,63.001190525]},"properties":{"typ":"Olycka","msg":"Singelolycka personbil i höjd med Sel. Räddningstjänst påväg.","allvar":null,"road":"Väg 774","start":"2026-08-26T02:35:45.000Z"}}]}
