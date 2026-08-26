@@ -1,1 +1,1 @@
-{"schema":1,"generated_at":"2026-08-26T10:47:42.490Z","segments":[],"weather":[],"deviations":[{"id":"SE_STA_TRISSID_1_7959842","lon":15.1160245128096,"lat":65.7619083916534,"typ":"Olycka","road":"E12"},{"id":"SE_STA_TRISSID_1_12919252","lon":13.4148308147514,"lat":55.7307990034131,"typ":"Olycka","road":"Väg 958"}],"smhi":[]}
+{"schema":1,"generated_at":"2026-08-26T11:31:37.387Z","segments":[],"weather":[],"deviations":[{"id":"SE_STA_TRISSID_1_7959842","lon":15.1160245128096,"lat":65.7619083916534,"typ":"Olycka","road":"E12"}],"smhi":[]}
