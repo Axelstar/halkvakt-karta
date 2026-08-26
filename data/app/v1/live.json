@@ -1,1 +1,1 @@
-{"schema":1,"generated_at":"2026-08-26T03:54:52.127Z","segments":[],"weather":[],"deviations":[{"id":"SE_STA_TRISSID_1_12917352","lon":13.7608055390946,"lat":56.5541576633772,"typ":"Olycka","road":"Väg 577"}],"smhi":[]}
+{"schema":1,"generated_at":"2026-08-26T04:41:08.827Z","segments":[],"weather":[],"deviations":[{"id":"SE_STA_TRISSID_1_12917352","lon":13.7608055390946,"lat":56.5541576633772,"typ":"Olycka","road":"Väg 577"},{"id":"SE_STA_TRISSID_1_12917392","lon":12.660432337371,"lat":56.1051591382513,"typ":"Olycka","road":"Väg 111"}],"smhi":[]}
