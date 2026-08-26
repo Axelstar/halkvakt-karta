@@ -321,7 +321,11 @@ function mountScrollWorld(container, config) {
     if (reduce || s.loading || !s.clip) return;
     s.loading = true;
     // Serve the lighter mobile encode on phones when one was provided.
-    const url = (isMobile() && s.clipM) ? s.clipM : s.clip;
+    // Mobil = samma 720p som desktop. 360-varianten bara vid datasparläge/segt nät
+    // (iOS saknar navigator.connection ⇒ iPhone får alltid full kvalitet).
+    const c = navigator.connection;
+    const slowNet = !!(c && (c.saveData || /(slow-2g|2g|3g)/.test(c.effectiveType || '')));
+    const url = (isMobile() && s.clipM && slowNet) ? s.clipM : s.clip;
     fetch(url).then(r => r.ok ? r.blob() : Promise.reject(new Error('404')))
       .then(blob => {
         const v = document.createElement('video');
