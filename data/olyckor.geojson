@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[13.785570326,60.05161027]},"properties":{"typ":"Olycka","msg":"Viltolycka. Räddningstjänst på väg.","allvar":"Stor påverkan","road":"Väg 246","start":"2026-08-29T20:27:22.000Z"}}]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[13.785570326,60.05161027]},"properties":{"typ":"Olycka","msg":"Viltolycka. Räddningstjänst på plats.","allvar":"Mycket stor påverkan","road":"Väg 246","start":"2026-08-29T20:27:22.000Z"}}]}
