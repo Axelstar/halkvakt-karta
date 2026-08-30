@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[16.323255934,56.76830958]},"properties":{"typ":"Olycka","msg":"Vägen avstängd. Singelolycka med personbil norr om Lindsdal.","allvar":"Mycket stor påverkan","road":"E22","start":"2026-08-30T21:45:03.000Z"}}]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[17.874890671,59.254250472]},"properties":{"typ":"Olycka","msg":"Vänster och mittkörfält","allvar":"Liten påverkan","road":"E4","start":"2026-08-30T22:16:01.000Z"}}]}
