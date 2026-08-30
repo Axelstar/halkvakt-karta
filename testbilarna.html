@@ -1,0 +1,60 @@
+<!doctype html><html lang="sv"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Halkvakt — testbilarna</title><style>
+body{background:#06090D;color:#E8EDF2;font:16px/1.55 -apple-system,system-ui,sans-serif;margin:auto;padding:20px;max-width:720px}
+h1{font-size:15px;letter-spacing:3.5px;font-weight:900;margin:0 0 4px}h1 .tri{color:#FFC400}
+h2{font-size:24px;margin:0 0 6px}
+.sub{color:#8A97A3;margin-bottom:18px}
+.tal{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+.tot{flex:1;min-width:150px;background:#0E1B25;border:1px solid #26313C;border-radius:14px;padding:12px 16px}
+.tot b{display:block;color:#FFC400;font-size:26px}
+.tot span{color:#8A97A3;font-size:13px}
+.kort{background:#0E1B25;border:1px solid #26313C;border-radius:14px;padding:14px 18px;margin-bottom:12px}
+.kort.tyst{opacity:.85}
+.rad{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.rutt{font-weight:800;font-size:17px}
+.pill{font-size:11px;font-weight:800;letter-spacing:1px;background:#06090D;border:1px solid #26313C;border-radius:99px;padding:4px 12px;color:#2FBF71}
+.sagt{margin-top:10px;font-size:12px;letter-spacing:1.5px;font-weight:800;color:#FFC400;text-transform:uppercase}
+ul{margin:6px 0 2px;padding-left:8px;list-style:none}li{margin:6px 0}
+.chips{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap}
+.chip{font-size:12px;background:#06090D;border:1px solid #26313C;border-radius:99px;padding:3px 10px;color:#8A97A3}
+.dim{color:#5C6873;font-size:13px}
+.fot{margin-top:20px;color:#5C6873;font-size:12px}
+a{color:#8A97A3}</style></head><body>
+<h1><span class="tri">&#9888;</span> HALKVAKT</h1>
+<h2>Vad har testbilarna hört?</h2>
+<div class="sub">Tjugo låtsasbilar kör Sveriges vägar dygnet runt — genom exakt samma
+varningsmotor som sitter i appen, med färsk riktig vägdata. Här är vad rösten
+sagt i dem det senaste dygnet.</div>
+<div id="app"><div class="dim">Hämtar färska siffror …</div></div>
+<div class="fot">Sidan hämtar färska siffror varje gång du laddar om den.
+Kameravarningar dominerar på sommaren — halka, frysrisk och vilt fyller på när vintern kommer.
+&nbsp;·&nbsp;<a href="index.html">Till livekartan</a></div>
+<script>
+const IKON = { camera:"\uD83D\uDCF7", slippery:"\uD83E\uDDCA", accident:"\u26A0\uFE0F", freeze:"\u2744\uFE0F", wildlife:"\uD83E\uDD8C" };
+const esc = s => s.replace(/[<>&]/g, c => ({"<":"&lt;",">":"&gt;","&":"&amp;"}[c]));
+const svTid = iso => new Intl.DateTimeFormat("sv-SE",{timeZone:"Europe/Stockholm",weekday:"short",hour:"2-digit",minute:"2-digit"}).format(new Date(iso));
+fetch("https://xmpfztykhyvhmrzsnjrc.supabase.co/functions/v1/skuggrapport")
+ .then(r => r.json())
+ .then(d => {
+   let h = `<div class="tal">
+     <div class="tot"><b>${d.provkorningar}</b><span>provkörningar<br>senaste dygnet</span></div>
+     <div class="tot"><b>${d.rostvarningar}</b><span>röstvarningar<br>uttalade</span></div>
+     <div class="tot"><b>${d.bevakas.toLocaleString("sv-SE")}</b><span>punkter bevakas just nu<br>(faror + fartkameror i landet)</span></div>
+   </div>`;
+   for (const t of d.pratare) {
+     h += `<div class="kort"><div class="rad"><span class="rutt">\uD83D\uDE97 ${esc(t.rutt)}</span>
+       <span class="pill">${t.varningar} varning${t.varningar===1?"":"ar"}</span></div>
+       <div class="dim">Provkörd ${t.korningar} gång${t.korningar===1?"":"er"} senaste dygnet · senast ${svTid(t.senast)}</div>
+       <div class="sagt">Rösten har sagt:</div>
+       <ul>${t.sagt.map(l=>`<li>${IKON[l.kind]||"\uD83D\uDD14"} <i>"${esc(l.text)}"</i>${l.n>1?` <span class="dim">(${l.n} gånger)</span>`:""}</li>`).join("")}</ul></div>`;
+   }
+   if (!d.pratare.length) h += `<div class="kort"><div class="dim">Ingen bil har behövt varna det senaste dygnet.</div></div>`;
+   if (d.tysta.length) h += `<div class="kort tyst"><div class="rad"><span class="rutt">\uD83D\uDE34 Tysta vägar just nu — ${d.tysta.length} rutter</span></div>
+     <div class="dim">Inga faror längs dem i dag. Det är precis så här det ska se ut i augusti —
+     när första frostnatten kommer vaknar de.</div>
+     <div class="chips">${d.tysta.map(r=>`<span class="chip">${esc(r)}</span>`).join("")}</div></div>`;
+   document.getElementById("app").innerHTML = h;
+ })
+ .catch(e => document.getElementById("app").innerHTML = `<div class="kort"><div class="dim">Kunde inte hämta siffrorna just nu (${esc(String(e))}). Prova ladda om.</div></div>`);
+</script></body></html>
