@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[17.941440389,59.388835537]},"properties":{"typ":"Olycka","msg":"Flera fordon står i vänster körfält. ","allvar":"Mycket stor påverkan","road":"E18","start":"2026-08-30T04:30:37.000Z"}}]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[18.155336266,59.154563674]},"properties":{"typ":"Olycka","msg":"Personbil till höger vid påfarten.","allvar":"Liten påverkan","road":"Väg 73","start":"2026-08-30T05:08:54.000Z"}}]}
