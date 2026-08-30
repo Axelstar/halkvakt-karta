@@ -1,1 +1,1 @@
-{"schema":1,"generated_at":"2026-08-30T21:37:15.205Z","segments":[],"weather":[{"id":"2346","lon":15.1236,"lat":63.43446,"yta":-38.5,"fukt":true}],"deviations":[],"smhi":[],"wildlife":[]}
+{"schema":1,"generated_at":"2026-08-30T22:07:26.166Z","segments":[],"weather":[{"id":"2346","lon":15.1236,"lat":63.43446,"yta":-38.5,"fukt":true}],"deviations":[{"id":"SE_STA_TRISSID_1_12930812","lon":16.3232559338863,"lat":56.7683095796912,"typ":"Olycka","road":"E22"}],"smhi":[],"wildlife":[]}
