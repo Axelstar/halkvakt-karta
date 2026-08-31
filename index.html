@@ -6,7 +6,7 @@
 <title>Halkvakt — rösten som varnar för halka innan du är där</title>
 <link rel="icon" type="image/png" href="favicon.png">
 <meta property="og:title" content="Halkvakt — rösten som känner vägen">
-<meta property="og:description" content="Röstvarningar för halka, vilt, olyckor och fartkameror. Livedata från Trafikverket. Släpps i vinter — gratis.">
+<meta property="og:description" content="Röstvarningar för halka, vilt, olyckor och fartkameror. Livedata från Trafikverket.">
 <meta property="og:image" content="https://axelstar.github.io/halkvakt-karta/og.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta property="og:url" content="https://axelstar.github.io/halkvakt-karta/">
@@ -610,7 +610,7 @@ mountScrollWorld(document.getElementById('world'), {
       accent:'#7EC8E3',
       eyebrow:'KL 06:50 · MINUS TVÅ GRADER',
       title:'Vägen ser torr ut. Den är det inte.',
-      body:'Halkvakt är appen som sitter bredvid dig och vet vad vägen döljer — byggd på Trafikverkets livedata. Gratis, och helt privat.',
+      body:'Halkvakt är appen som sitter bredvid dig och vet vad vägen döljer — byggd på Trafikverkets livedata. Helt privat — positionen lämnar aldrig telefonen.',
       tags:['844 mätstationer','Data var 30:e minut','0 spårning'] },
     { id:'skogen', label:'Skogen', scroll:1.9, linger:.45,
       still:'stills/still-3317.jpg', clip:'https://assets.mixkit.co/videos/3317/3317-720.mp4',
@@ -634,9 +634,9 @@ mountScrollWorld(document.getElementById('world'), {
       accent:'#FFC400',
       eyebrow:'DINA LJUS NÅR 60 METER.',
       title:'Halkvakt ser hela vägen hem.',
-      body:'Gratis för både Android och iPhone — släpps i vinter, lagom före första halkan. Vaknar själv när du börjar köra.',
+      body:'För både Android och iPhone. Ett tryck när du sätter dig i bilen — sen sköter rösten resten.',
       tags:[],
-      cta:{ primary:{ label:'Ladda ner gratis', href:'#ladda' },
+      cta:{ primary:{ label:'Ladda ner', href:'#ladda' },
             secondary:{ label:'Livekartan →', href:'https://axelstar.github.io/halkvakt-karta/karta.html' } } },
   ],
   connectors: [null, null, null],
@@ -683,8 +683,8 @@ requestAnimationFrame(() => {
   <div class="hv-fin">
     <div class="hv-logo"><span class="glyph"></span><span class="wm disp">HALKVAKT</span></div>
     <div class="stores">
-      <a class="store gul" href="#" onclick="return false"><span class="g">▶</span><span><small>Släpps i vinter</small><b>Google Play</b></span></a>
-      <a class="store" href="#" onclick="return false"><span class="g"></span><span><small>Släpps i vinter</small><b>App Store</b></span></a>
+      <a class="store gul" href="#" onclick="return false"><span class="g">▶</span><span><small>Kommer snart</small><b>Google Play</b></span></a>
+      <a class="store" href="#" onclick="return false"><span class="g"></span><span><small>Kommer snart</small><b>App Store</b></span></a>
     </div>
   </div>
   <div class="hv-tick"><div class="inner" id="tickinner"><span class="dot"></span><span id="livetxt">Livedata från Trafikverket laddas …</span></div></div>
