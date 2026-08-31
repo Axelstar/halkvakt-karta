@@ -4,6 +4,7 @@
 body{background:#06090D;color:#E8EDF2;font:16px/1.55 -apple-system,system-ui,sans-serif;margin:auto;padding:20px;max-width:720px}
 h1{font-size:15px;letter-spacing:3.5px;font-weight:900;margin:0 0 4px}h1 .tri{color:#FFC400}
 h2{font-size:24px;margin:0 0 6px}
+.land{display:flex;gap:8px;margin:10px 0 16px}.land button{background:#0E1B25;color:#8FA3B5;border:1px solid #1E2F3B;border-radius:999px;padding:8px 14px;font:inherit;font-size:14px;cursor:pointer}.land button.on{background:#FFC400;color:#06090D;border-color:#FFC400;font-weight:700}
 .sub{color:#8A97A3;margin-bottom:18px}
 .tal{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
 .tot{flex:1;min-width:150px;background:#0E1B25;border:1px solid #26313C;border-radius:14px;padding:12px 16px}
@@ -23,6 +24,10 @@ ul{margin:6px 0 2px;padding-left:8px;list-style:none}li{margin:6px 0}
 a{color:#8A97A3}</style></head><body>
 <h1><span class="tri">&#9888;</span> HALKVAKT</h1>
 <h2>Vad har testbilarna hört?</h2>
+<div class="land" id="land">
+  <button data-land="se" class="on">🇸🇪 Sverige</button>
+  <button data-land="fi">🇫🇮 Finland</button>
+</div>
 <div class="sub">Tjugo låtsasbilar kör Sveriges vägar dygnet runt — genom exakt samma
 varningsmotor som sitter i appen, med färsk riktig vägdata. Här är vad rösten
 sagt i dem det senaste dygnet.</div>
@@ -34,7 +39,14 @@ Kameravarningar dominerar på sommaren — halka, frysrisk och vilt fyller på n
 const IKON = { camera:"\uD83D\uDCF7", slippery:"\uD83E\uDDCA", accident:"\u26A0\uFE0F", freeze:"\u2744\uFE0F", wildlife:"\uD83E\uDD8C" };
 const esc = s => s.replace(/[<>&]/g, c => ({"<":"&lt;",">":"&gt;","&":"&amp;"}[c]));
 const svTid = iso => new Intl.DateTimeFormat("sv-SE",{timeZone:"Europe/Stockholm",weekday:"short",hour:"2-digit",minute:"2-digit"}).format(new Date(iso));
-fetch("https://xmpfztykhyvhmrzsnjrc.supabase.co/functions/v1/skuggrapport")
+const landAv = () => document.querySelector("#land .on").dataset.land;
+document.querySelectorAll("#land button").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll("#land button").forEach(x => x.classList.toggle("on", x === b));
+  document.getElementById("app").innerHTML = "<div class=\"kort\"><div class=\"dim\">Hämtar…</div></div>";
+  ladda();
+}));
+function ladda() {
+fetch("https://xmpfztykhyvhmrzsnjrc.supabase.co/functions/v1/skuggrapport?land=" + landAv())
  .then(r => r.json())
  .then(d => {
    let h = `<div class="tal">
@@ -57,4 +69,6 @@ fetch("https://xmpfztykhyvhmrzsnjrc.supabase.co/functions/v1/skuggrapport")
    document.getElementById("app").innerHTML = h;
  })
  .catch(e => document.getElementById("app").innerHTML = `<div class="kort"><div class="dim">Kunde inte hämta siffrorna just nu (${esc(String(e))}). Prova ladda om.</div></div>`);
+}
+ladda();
 </script></body></html>
