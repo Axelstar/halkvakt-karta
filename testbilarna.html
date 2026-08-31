@@ -28,7 +28,7 @@ a{color:#8A97A3}</style></head><body>
   <button data-land="se" class="on">🇸🇪 Sverige</button>
   <button data-land="fi">🇫🇮 Finland</button>
 </div>
-<div class="sub">Tjugo låtsasbilar kör Sveriges vägar dygnet runt — genom exakt samma
+<div class="sub" id="ingress">Tjugo låtsasbilar kör Sveriges vägar dygnet runt — genom exakt samma
 varningsmotor som sitter i appen, med färsk riktig vägdata. Här är vad rösten
 sagt i dem det senaste dygnet.</div>
 <div id="app"><div class="dim">Hämtar färska siffror …</div></div>
@@ -43,6 +43,9 @@ const landAv = () => document.querySelector("#land .on").dataset.land;
 document.querySelectorAll("#land button").forEach(b => b.addEventListener("click", () => {
   document.querySelectorAll("#land button").forEach(x => x.classList.toggle("on", x === b));
   document.getElementById("app").innerHTML = "<div class=\"kort\"><div class=\"dim\">Hämtar…</div></div>";
+  document.getElementById("ingress").textContent = landAv() === "fi"
+    ? "Tjugo låtsasbilar kör Finlands vägar dygnet runt — samma varningsmotor som i appen, med Fintraffics riktiga vägdata. Ingen finsk användare finns än; det här är facit som samlas inför den dagen."
+    : "Tjugo låtsasbilar kör Sveriges vägar dygnet runt — genom exakt samma varningsmotor som sitter i appen, med färsk riktig vägdata. Här är vad rösten sagt i dem det senaste dygnet.";
   ladda();
 }));
 function ladda() {
