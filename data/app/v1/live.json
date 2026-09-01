@@ -1,1 +1,1 @@
-{"schema":1,"generated_at":"2026-09-01T17:11:46.903Z","segments":[],"weather":[],"deviations":[],"smhi":[],"wildlife":[{"id":"651120","lon":20.399197,"lat":66.830922,"art":null}],"bridges":[]}
+{"schema":1,"generated_at":"2026-09-01T17:37:19.971Z","segments":[],"weather":[],"deviations":[{"id":"SE_STA_TRISSID_1_19611174","lon":12.3783357603625,"lat":57.6091713518004,"typ":"Olycka","road":"Väg 503","sev":2,"slut":"20:00"}],"smhi":[],"wildlife":[{"id":"651120","lon":20.399197,"lat":66.830922,"art":null}],"bridges":[]}
