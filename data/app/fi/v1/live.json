@@ -1,1 +1,1 @@
-{"schema":1,"generated_at":"2026-09-10T06:24:56.623Z","segments":[],"weather":[{"id":"FI:19935","lon":25.831997,"lat":66.563936,"yta":0,"fukt":false},{"id":"FI:14063","lon":24.933029,"lat":67.200394,"yta":2.9,"fukt":false},{"id":"FI:14011","lon":24.048842,"lat":67.003245,"yta":2.7,"fukt":false}],"deviations":[],"smhi":[],"wildlife":[]}
+{"schema":1,"generated_at":"2026-09-10T07:25:04.253Z","segments":[],"weather":[{"id":"FI:19935","lon":25.831997,"lat":66.563936,"yta":0,"fukt":false}],"deviations":[],"smhi":[],"wildlife":[]}
