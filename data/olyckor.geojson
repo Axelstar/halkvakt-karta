@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[16.917120332,59.967633481]},"properties":{"land":"SE","typ":"Olycka","msg":"","allvar":null,"road":"Väg 623","start":"2026-09-10T22:24:46.000Z"}}]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[16.903747449,59.965626547]},"properties":{"land":"SE","typ":"Olycka","msg":"Singelolycka, räddningstjänst på plats. ","allvar":"Liten påverkan","road":"Väg 623","start":"2026-09-10T22:24:46.000Z"}}]}
