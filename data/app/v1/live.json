@@ -1,1 +1,1 @@
-{"schema":1,"generated_at":"2026-09-13T21:10:00.259Z","segments":[],"weather":[],"deviations":[],"smhi":[],"wildlife":[{"id":"652761","lon":15.006573,"lat":59.535036,"art":"älg"}],"bridges":[]}
+{"schema":1,"generated_at":"2026-09-13T21:20:02.279Z","segments":[],"weather":[],"deviations":[{"id":"SE_STA_TRISSID_1_12971052","lon":14.9668195887687,"lat":56.1942147449313,"typ":"Olycka","road":"E22","sev":2,"slut":"00:30"}],"smhi":[],"wildlife":[{"id":"652761","lon":15.006573,"lat":59.535036,"art":"älg"}],"bridges":[]}
