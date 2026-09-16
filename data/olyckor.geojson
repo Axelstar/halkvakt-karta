@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[15.782930903,57.387771049]},"properties":{"land":"SE","typ":"Olycka","msg":"Vägen avstängd. Singelolycka personbil väster om Målilla.","allvar":"Stor påverkan","road":"Väg 23","start":"2026-09-16T21:45:34.000Z"}}]}
