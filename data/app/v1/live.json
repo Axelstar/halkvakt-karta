@@ -1,1 +1,1 @@
-{"schema":1,"generated_at":"2026-09-21T21:30:03.432Z","segments":[],"rain_segments":[],"weather":[],"deviations":[],"smhi":[],"wildlife":[],"bridges":[]}
+{"schema":1,"generated_at":"2026-09-21T21:40:00.385Z","segments":[],"rain_segments":[],"weather":[{"id":"2437","lon":19.96772,"lat":64.61368,"yta":2.9,"fukt":false,"regn_h":8.4,"lutning15":0.2,"lutning30":0.3,"lutning60":0.6}],"deviations":[],"smhi":[],"wildlife":[],"bridges":[]}
