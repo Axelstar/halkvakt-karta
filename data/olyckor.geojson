@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[25.305598,63.706388]},"properties":{"land":"FI","typ":"Olycka","msg":"Tie 58, Haapajärvi. Liikennetiedote.  · Onnettomuus · Ajokaista suljettu liikenteeltä","allvar":null,"road":null,"start":"2026-09-21T23:21:00.000Z"}}]}
