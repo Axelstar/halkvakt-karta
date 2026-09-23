@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Integritetspolicy — Halkvakt</title>
-<meta name="description" content="Halkvakts integritetspolicy: din position lämnar aldrig telefonen, inga konton, ingen spårning, ingen försäljning av data.">
+<meta name="description" content="Halkvakts integritetspolicy: ingen position lämnar telefonen av sig själv, inga konton, ingen spårning, ingen försäljning av data.">
 <link rel="canonical" href="https://axelstar.github.io/halkvakt-karta/integritet.html">
 <link rel="icon" type="image/png" href="favicon.png">
 <style>
@@ -28,38 +28,43 @@ li{margin-bottom:7px}
 <div class="wrap">
 <header><img src="logo.svg" alt=""><b>HALKVAKT</b></header>
 <h1>Integritetspolicy</h1>
-<div class="datum">GÄLLER FRÅN 2026-08-26</div>
+<div class="datum">GÄLLER FRÅN 2026-09-23 · FÖREGÅENDE VERSION 2026-08-26</div>
 
-<div class="lofte"><b>Kärnlöftet:</b> din position lämnar aldrig telefonen. All matchning mellan var du är och vad som finns på vägen sker lokalt i appen.</div>
+<div class="lofte"><b>Kärnlöftet:</b> ingen position lämnar telefonen av sig själv. All jämförelse mellan var du är och vad som finns på vägen sker i appen. Det enda som någonsin skickas är betatestets facitsvar, och bara om du själv slår på det och trycker.</div>
 
 <h2>// Vad vi samlar in</h2>
-<p><b style="color:#F3F6F9">Ingenting.</b> Halkvakt har inga konton, ingen inloggning, ingen annonsering, inga analys- eller spårningsverktyg från tredje part, och skickar aldrig din position, dina resor eller något annat om dig till oss eller någon annan.</p>
-
-<h2>// Hur appen ändå fungerar</h2>
+<p><b style="color:#F3F6F9">Normalt ingenting.</b> Halkvakt har inga konton, ingen inloggning, ingen annonsering och inga analys- eller spårningsverktyg från tredje part. Appen skickar aldrig din position, dina resor eller något annat om dig av sig själv.</p>
+<p><b style="color:#F3F6F9">Undantaget: betatestets facitsvar.</b> Slår du på <i>Betatest</i> i inställningarna kan du svara <i>Stämde</i> eller <i>Stämde inte</i> på en varning. Varje svar kräver ett tryck. Då skickas:</p>
 <ul>
-  <li>Appen <b>hämtar</b> ett paket med aktuella vägfaror (halka, olyckor, vilt, frysrisk, fartkameror) från vår server. Hämtningen är anonym — inget om dig eller din plats skickas med.</li>
-  <li>Jämförelsen mellan din position och farorna görs helt <b>i din telefon</b>. Resultatet läses upp med telefonens egen röst.</li>
-  <li>Varningshistoriken du ser i appen sparas <b>endast lokalt</b> på din enhet och försvinner om du avinstallerar appen.</li>
+  <li>varningens id, till exempel en viss mätstation eller vägsträcka, och klockslaget då rösten talade. <b>Det säger ungefär var du var och när.</b></li>
+  <li>ditt svar, om appen är för Android eller iPhone, och appens version.</li>
+</ul>
+<p>Inget annat följer med: ingen exakt position, ingen resa, inget konto, inget enhets-id och ingen IP-adress sparas med svaret. Svaren kan därför inte kopplas till dig, och vi kan inte heller plocka fram just dina. De används bara för att ta reda på om varningarna stämmer och göra dem bättre. De säljs aldrig och delas inte med någon. Brytaren är av tills du slår på den.</p>
+
+<h2>// Hur appen fungerar</h2>
+<ul>
+  <li>Appen <b>hämtar</b> ett paket med aktuella vägfaror (halka, frysrisk, olyckor, djur på vägen, fartkameror). Hämtningen är anonym: inget om dig eller din plats skickas med.</li>
+  <li>Jämförelsen mellan din position och farorna görs helt <b>i din telefon</b>. Varningen läses upp med telefonens egen röst.</li>
+  <li>Varningshistoriken och dina facitsvar sparas <b>i telefonen</b> och försvinner om du avinstallerar appen.</li>
 </ul>
 
 <h2>// Behörigheter appen ber om</h2>
 <ul>
-  <li><b>Plats (även i bakgrunden):</b> för att veta vad som finns på vägen framför dig medan du kör med släckt skärm. Används enbart lokalt.</li>
-  <li><b>Fysisk aktivitet:</b> så att vakten kan starta sig själv när du börjar köra.</li>
-  <li><b>Bluetooth:</b> för att känna igen bilens ljudsystem och tala i rätt högtalare.</li>
-  <li><b>Notiser:</b> för förgrundstjänstens statusnotis och varningar.</li>
+  <li><b>Plats, även i bakgrunden:</b> för att veta vad som finns på vägen framför dig medan du kör med släckt skärm. Används bara i telefonen.</li>
+  <li><b>Notiser:</b> för varningen på skärmen och frågan efter resan.</li>
+  <li><b>Bara Android: fysisk aktivitet och Bluetooth</b>, så att vakten kan starta av sig själv när du börjar köra eller när bilen kopplas.</li>
 </ul>
 
 <h2>// Teknisk nödvändighet</h2>
-<p>När appen hämtar vägdata sker vanlig internettrafik — din IP-adress passerar då, som vid all webbtrafik, våra leverantörers standardloggar (GitHub Pages respektive Supabase). Vi läser inte, sparar inte och kopplar aldrig sådana loggar till någon person.</p>
+<p>När appen hämtar vägdata eller skickar ett facitsvar sker vanlig internettrafik. Din IP-adress passerar då, som vid all webbtrafik, våra leverantörers standardloggar (GitHub Pages och Supabase). Vi läser inte, sparar inte och kopplar aldrig sådana loggar till någon person.</p>
 
 <h2>// Datakällor</h2>
-<p>Vägdatat kommer från Trafikverkets öppna data (CC0), Polisens viltolycksrapporter och SMHI:s vädervarningar. Det är data om vägar och väder — aldrig om dig.</p>
+<p>Vägdatat kommer från Trafikverkets öppna data (CC0). Det är data om vägar och väder, aldrig om dig.</p>
 
-<h2>// Ändringar &amp; kontakt</h2>
-<p>Ändras policyn uppdateras denna sida och datumet ovan. Frågor? Kontaktuppgifter publiceras i samband med att halkvakt.se öppnar; fram till dess når du oss via förregistreringen på <a href="./">startsidan</a>.</p>
+<h2>// Vem som står bakom &amp; kontakt</h2>
+<p>Halkvakt ges ut av Axel Lagerlöf, Malmö, under namnet Lagerlöf Labs. Frågor om integritet eller appen: <a href="mailto:axel.lagerlof.45@gmail.com">axel.lagerlof.45@gmail.com</a>. Ändras policyn uppdateras den här sidan och datumet ovan.</p>
 
-<p style="margin-top:36px;font-size:13px;color:#54677A"><a href="./">halkvakt</a> · <a href="om.html">om appen</a> · <a href="press.html">press</a></p>
+<p style="margin-top:36px;font-size:13px;color:#54677A"><a href="./">halkvakt</a> · <a href="om.html">om appen</a> · <a href="support.html">hjälp &amp; kontakt</a> · <a href="press.html">press</a></p>
 </div>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Halkvakt — rösten som varnar för halka, vilt och olyckor på vägen</title>
-<meta name="description" content="Halkvakt varnar dig med rösten om halka, viltolyckor, olyckor och fartkameror på vägen framför dig — byggd på Trafikverkets livedata. Gratis, positionen lämnar aldrig telefonen. Släpps i vinter till Android och iPhone.">
+<meta name="description" content="Halkvakt varnar dig med rösten om halka, viltolyckor, olyckor och fartkameror på vägen framför dig — byggd på Trafikverkets livedata. Gratis, och positionen lämnar inte telefonen av sig själv. Släpps i vinter till Android och iPhone.">
 <link rel="canonical" href="https://axelstar.github.io/halkvakt-karta/">
 <meta property="og:title" content="Halkvakt — rösten som varnar för halka på vägen">
 <meta property="og:description" content="Röstvarningar för halka, vilt, olyckor och fartkameror — livedata från Trafikverket. Släpps i vinter.">
@@ -28,7 +28,7 @@
  {"@type":"Question","name":"Är det halt på vägarna just nu?","acceptedAnswer":{"@type":"Answer","text":"Halkvakts livekarta visar väglag, vägbanetemperaturer och pågående olyckor i hela Sverige just nu, direkt från Trafikverkets mätstationer. Siffrorna på den här sidan uppdateras var 30:e minut."}},
  {"@type":"Question","name":"Vad är Halkvakt?","acceptedAnswer":{"@type":"Answer","text":"En app som varnar dig med rösten — som en passagerare — om halka, viltolyckor, trafikolyckor och fartkameror på vägen framför dig. Du startar den inte ens själv: den vaknar när du börjar köra."}},
  {"@type":"Question","name":"Vad kostar Halkvakt?","acceptedAnswer":{"@type":"Answer","text":"Appen är gratis."}},
- {"@type":"Question","name":"Sparar Halkvakt min position?","acceptedAnswer":{"@type":"Answer","text":"Nej. All matchning mot faror sker inne i telefonen mot en nedladdad datafil. Positionen lämnar aldrig enheten och skickas aldrig till någon server."}},
+ {"@type":"Question","name":"Sparar Halkvakt min position?","acceptedAnswer":{"@type":"Answer","text":"Nej. All matchning mot faror sker inne i telefonen mot en nedladdad datafil. Positionen skickas inte av sig själv. Det enda som någonsin skickas är betatestets facitsvar, om du själv slår på det: varningens id och klockslag."}},
  {"@type":"Question","name":"Finns Halkvakt till iPhone?","acceptedAnswer":{"@type":"Answer","text":"Ja — Halkvakt släpps till både iPhone och Android i vinter, lagom före första halkan."}}
 ]}
 </script>
@@ -117,7 +117,7 @@ footer{padding:32px 0;color:var(--dim);font-size:14px}
   <h1>Rösten som säger <em>»halka framför dig«</em> innan du är där.</h1>
   <p class="lead">Halkvakt varnar dig som en passagerare — om halka, viltolyckor, trafikolyckor och
   fartkameror på vägen framför dig. Byggd på Trafikverkets livedata. Vaknar själv när du börjar köra.
-  Positionen lämnar aldrig telefonen.</p>
+  Positionen lämnar inte telefonen av sig själv.</p>
   <a class="cta" href="#beta">Få mejl på släppdagen</a>
   <a class="cta alt" href="karta.html">Öppna livekartan →</a>
   <div style="margin-top:22px">
@@ -183,9 +183,10 @@ footer{padding:32px 0;color:var(--dim);font-size:14px}
     framför dig. Du startar den inte ens själv: den vaknar när du börjar köra.</p></details>
   <details><summary>Vad kostar det?</summary><p>Appen är gratis.</p></details>
   <details><summary>Sparar ni min position?</summary>
-    <p>Nej. All matchning sker inne i telefonen mot en nedladdad datafil. Positionen lämnar aldrig
-    enheten och skickas aldrig till någon server. Det är inte ett löfte i finstil — det är hur
-    appen är byggd.</p></details>
+    <p>Nej. All matchning sker inne i telefonen mot en nedladdad datafil, och positionen skickas inte
+    av sig själv. Det enda som någonsin skickas är betatestets facitsvar, om du själv slår på det och
+    trycker: varningens id och klockslaget, alltså ungefär var du var och när. Allt står i
+    <a href="integritet.html">integritetspolicyn</a>.</p></details>
   <details><summary>Finns det till iPhone?</summary>
     <p>Halkvakt släpps till både iPhone och Android i vinter — varningsmotorn är redan byggd och testad. Android
     först. Ställ dig i kön ovan så hör vi av oss.</p></details>
@@ -193,8 +194,8 @@ footer{padding:32px 0;color:var(--dim);font-size:14px}
 
 <footer>
   Halkvakt · Data: <a href="https://www.trafikverket.se" rel="noopener">Trafikverket</a>,
-  <a href="https://polisen.se" rel="noopener">Polisen</a>, <a href="https://www.smhi.se" rel="noopener">SMHI</a>
-  · <a href="karta.html">Livekarta</a> · <a href="press.html">Press</a> · <a href="integritet.html">Integritet</a>
+  <a href="https://www.smhi.se" rel="noopener">SMHI</a>
+  · <a href="karta.html">Livekarta</a> · <a href="press.html">Press</a> · <a href="integritet.html">Integritet</a> · <a href="support.html">Hjälp &amp; kontakt</a>
 </footer>
 </div>
 
