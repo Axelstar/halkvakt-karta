@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[13.668399792,56.517019129]},"properties":{"land":"SE","typ":"Olycka","msg":"Trafikolycka med flera fordon mellan trafikplatserna Strömsnäs-Traryd och Markaryd N.","allvar":"Stor påverkan","road":"E4","start":"2026-09-25T16:50:22.000Z"}}]}
