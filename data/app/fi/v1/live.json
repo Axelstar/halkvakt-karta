@@ -1,1 +1,1 @@
-{"schema":1,"generated_at":"2026-10-03T07:05:00.562Z","segments":[],"weather":[{"id":"FI:19935","lon":25.831997,"lat":66.563936,"yta":0,"fukt":false}],"deviations":[],"smhi":[],"wildlife":[],"djur":[]}
+{"schema":1,"generated_at":"2026-10-03T07:35:00.405Z","segments":[],"weather":[{"id":"FI:19935","lon":25.831997,"lat":66.563936,"yta":0,"fukt":false}],"deviations":[{"id":"FI:GUID50471798","lon":22.243016,"lat":60.454764,"typ":"Olycka","road":null,"sev":null,"slut":null}],"smhi":[],"wildlife":[],"djur":[]}
