@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[13.52322664,55.825886743]},"properties":{"land":"SE","typ":"Olycka","msg":"Trafikolycka med flera fordon i Fogdarp. ","allvar":"Stor påverkan","road":"Väg 17","start":"2026-10-04T15:45:16.000Z"}}]}
