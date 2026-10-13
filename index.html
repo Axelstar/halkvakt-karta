@@ -333,7 +333,8 @@
     fetch('data/meta.json' + bust).then(r => r.json()),
     fetch('data/vader.geojson' + bust).then(r => r.json()),
     fetch('data/vaglag.geojson' + bust).then(r => r.json()),
-  ]).then(([meta, vader, vaglag]) => {
+    fetch('assets/norden.json').then(r => r.json()).catch(() => ({})),
+  ]).then(([meta, vader, vaglag, norden]) => {
     const n = sthlm(new Date(meta.generated_at));
     const stat = vader.features.filter(f => f.properties.land === 'SE' && rimlig(f.properties));
     const kalla = stat.filter(f => f.properties.yta < 0);
@@ -355,12 +356,12 @@
     satt('k-halka', halt.length);
     satt('k-kalla', kalla.length);
     satt('k-varma', stat.length - kalla.length);
-    rita(stat, halt);
-    addEventListener('resize', () => rita(stat, halt));
+    rita(stat, halt, norden);
+    addEventListener('resize', () => rita(stat, halt, norden));
   }).catch(() => { satt('h-tid', 'Vägarna just nu'); });
 
   // ---- Kartan: stationer och hala sträckor, Sverige, enkel projektion ----
-  function rita(stat, halt) {
+  function rita(stat, halt, norden) {
     const cv = document.getElementById('karta');
     const box = cv.getBoundingClientRect();
     const dpr = Math.min(2, devicePixelRatio || 1);
@@ -373,6 +374,13 @@
     const s = Math.min((box.width - pad * 2) / w, (box.height - pad * 2) / h);
     const ox = (box.width - w * s) / 2, oy = (box.height - h * s) / 2;
     const xy = ([lon, lat]) => [ox + (lon - LON0) * k * s, oy + (LAT1 - lat) * s];
+    // Länderna: grannarna svagt, Sverige tydligare (Natural Earth 1:50m, public domain)
+    const land = (ringar, fyll, kant) => {
+      c.fillStyle = fyll; c.strokeStyle = kant; c.lineWidth = 1; c.lineJoin = 'round';
+      (ringar || []).forEach(r => { c.beginPath(); r.forEach((p, i) => { const [x, y] = xy(p); i ? c.lineTo(x, y) : c.moveTo(x, y); }); c.closePath(); c.fill(); c.stroke(); });
+    };
+    ['NO', 'FI', 'DK'].forEach(k => land(norden && norden[k], '#121A1E', '#1E282D'));
+    land(norden && norden.SE, '#162024', '#34424A');
     // Stationer över noll
     c.fillStyle = '#4A5A63';
     stat.forEach(f => { if (f.properties.yta >= 0) { const [x, y] = xy(f.geometry.coordinates); c.beginPath(); c.arc(x, y, 1.6, 0, Math.PI * 2); c.fill(); } });
