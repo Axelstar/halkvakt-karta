@@ -1,0 +1,106 @@
+/* Halkvakt – gemensam stil för sajten. Följer varumärkesguiden v1.0 (oktober 2026):
+   mark nästan svart, gult bara där det betyder något, Instrument Sans för text och IBM Plex Mono för etiketter och tal. */
+:root {
+  --mark: #080B0D;
+  --panel: #0F1518;
+  --upp: #1A2327;
+  --kant: #1E282D;
+  --skilje: #253036;
+  --text: #E9EFF2;
+  --text2: #A9B5BB;
+  --dampad: #8FA0A9;
+  --dampad2: #6F7C83;
+  --gul: #FFC94A;
+  --gultext: #3A2E0B;
+  --gron: #1FB25A;
+  --sans: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --bredd: 1320px;
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--mark); color: var(--text); font: 400 16px/1.55 var(--sans); }
+img, svg { max-width: 100%; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--gul); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: var(--bredd); margin: 0 auto; padding-inline: clamp(16px, 4vw, 60px); }
+
+/* Topp */
+.topp { position: sticky; top: 0; z-index: 20; background: rgba(8, 11, 13, .92); backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--kant); }
+.topp .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 72px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); }
+.logo svg { width: 22px; height: auto; flex: none; }
+.logo b, .ordmarke { font: 600 14px var(--mono); letter-spacing: .12em; }
+.meny { display: flex; gap: 28px; }
+.meny a { text-decoration: none; color: var(--text2); font-size: 15px; font-weight: 500; }
+.meny a:hover, .meny a[aria-current="page"] { color: var(--text); }
+@media (max-width: 860px) { .meny { display: none; } }
+
+/* Knappar */
+.knapp { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 20px;
+  border-radius: 28px; background: var(--gul); color: var(--mark); font: 600 15px var(--sans); text-decoration: none;
+  border: 0; cursor: pointer; white-space: nowrap; }
+.knapp:hover { filter: brightness(1.06); }
+.knapp.stor { min-height: 56px; padding: 14px 26px; font-size: 16px; }
+.knapp.neutral { background: var(--upp); color: var(--text); border: 1px solid var(--kant); }
+.lank-mono { font: 600 12px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--text); text-decoration: none;
+  border-bottom: 1px solid var(--skilje); padding-bottom: 3px; }
+.lank-mono:hover { border-color: var(--gul); }
+
+/* Text */
+.etikett { font: 500 12px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dampad); margin: 0; }
+.etikett .ljus { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--gul); margin-right: 8px;
+  vertical-align: 1px; box-shadow: 0 0 0 0 rgba(255, 201, 74, .5); }
+@media (prefers-reduced-motion: no-preference) { .etikett .ljus { animation: puls 2.4s ease-in-out infinite; } }
+@keyframes puls { 0%, 100% { box-shadow: 0 0 0 0 rgba(255, 201, 74, .45); } 50% { box-shadow: 0 0 0 5px rgba(255, 201, 74, 0); } }
+h1, h2, h3 { font-family: var(--sans); font-weight: 600; margin: 0; text-wrap: balance; }
+.jatte { font-size: clamp(44px, 6.6vw, 96px); line-height: .98; letter-spacing: -.04em; }
+.rubrik { font-size: clamp(36px, 4.4vw, 60px); line-height: 1.04; letter-spacing: -.03em; }
+.ingress { font-size: clamp(17px, 1.4vw, 19px); line-height: 1.5; color: var(--text2); max-width: 46ch; margin: 0; }
+p { margin: 0; }
+.mono { font-family: var(--mono); }
+
+/* Paneler och kvittorader */
+.panel { background: var(--panel); border: 1px solid var(--kant); border-radius: 18px; }
+.kvitto { display: grid; }
+.kvitto > div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 16px 20px;
+  border-top: 1px dashed var(--skilje); }
+.kvitto > div:first-child { border-top: 0; }
+.kvitto dt, .kvitto .nyckel { font: 500 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dampad); }
+.kvitto dd, .kvitto .varde { margin: 0; font-weight: 500; text-align: right; }
+
+/* Sektioner */
+.sektion { padding-block: clamp(64px, 9vw, 128px); border-top: 1px solid var(--kant); }
+.sektion:first-of-type { border-top: 0; }
+
+/* Fot */
+.fot { border-top: 1px solid var(--kant); padding-block: 32px 40px; }
+.fot .wrap { display: grid; grid-template-columns: auto 1fr auto; gap: 24px; align-items: center; }
+.fot .kallor { font: 500 11px/1.7 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--dampad2); max-width: 70ch; }
+.fot nav { display: flex; gap: 20px; flex-wrap: wrap; }
+.fot nav a { font: 500 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dampad); text-decoration: none; }
+.fot nav a:hover { color: var(--text); }
+@media (max-width: 860px) { .fot .wrap { grid-template-columns: 1fr; } }
+
+/* Textsidor (integritet, support, press, om) */
+.dok { max-width: 720px; padding-block: clamp(48px, 7vw, 96px) 80px; }
+.dok h1 { font-size: clamp(36px, 5vw, 56px); line-height: 1.04; letter-spacing: -.03em; margin-bottom: 14px; }
+.dok h2 { font: 500 12px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--gul); margin: 44px 0 12px; }
+.dok h3 { font-size: 19px; margin: 28px 0 8px; }
+.dok p, .dok li { color: var(--text2); font-size: 17px; line-height: 1.6; }
+.dok p { margin: 0 0 14px; }
+.dok ul, .dok ol { margin: 0 0 14px; padding-left: 1.2em; }
+.dok li { margin-bottom: 8px; }
+.dok strong, .dok b { color: var(--text); font-weight: 600; }
+.dok a { color: var(--text); text-decoration-color: var(--gul); text-underline-offset: 3px; }
+.dok .datum { font: 500 12px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--dampad); margin-bottom: 32px; }
+.dok .lofte { background: var(--panel); border: 1px solid var(--kant); border-radius: 18px; padding: 20px 22px; margin: 8px 0 12px;
+  color: var(--text); }
+.dok .lofte b { color: var(--gul); }
+.dok table { border-collapse: collapse; width: 100%; font-size: 15px; font-variant-numeric: tabular-nums; }
+.dok th, .dok td { text-align: left; padding: 10px 12px; border-bottom: 1px dashed var(--skilje); vertical-align: top; }
+.dok th { font: 500 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dampad); }
+.dok img { border-radius: 14px; }
+.dok code { font-family: var(--mono); font-size: .9em; }

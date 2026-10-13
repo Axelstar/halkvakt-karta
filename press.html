@@ -1,107 +1,90 @@
 <!doctype html>
 <html lang="sv">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Press — Halkvakt</title>
-<meta name="description" content="Pressmaterial för Halkvakt: fakta, logotyp, bilder och aktuella siffror om väglaget i Sverige. Appen som varnar med rösten för halka, vilt, olyckor och fartkameror.">
-<link rel="canonical" href="https://axelstar.github.io/halkvakt-karta/press.html">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Press · Halkvakt</title>
+<meta name="description" content="Pressmaterial, siffror och logotyp för Halkvakt.">
 <link rel="icon" type="image/png" href="favicon.png">
-<meta property="og:title" content="Pressmaterial — Halkvakt">
-<meta property="og:description" content="Fakta, logotyp och aktuella siffror om väglaget i Sverige.">
+<link rel="canonical" href="https://axelstar.github.io/halkvakt-karta/press.html">
+<meta property="og:title" content="Press · Halkvakt">
+<meta property="og:description" content="Pressmaterial, siffror och logotyp för Halkvakt.">
 <meta property="og:image" content="https://axelstar.github.io/halkvakt-karta/og.png">
 <meta name="twitter:card" content="summary_large_image">
-<style>
-*{box-sizing:border-box;margin:0}
-body{font:16px/1.6 system-ui,-apple-system,sans-serif;background:#06090D;color:#F3F6F9}
-.disp{font-family:"Avenir Next Condensed","Arial Narrow",system-ui,sans-serif}
-a{color:#7EC8E3}
-.wrap{max-width:680px;margin:0 auto;padding:26px 22px 70px}
-header{display:flex;align-items:center;gap:11px;padding-bottom:22px;border-bottom:1px solid #1B222A;margin-bottom:30px}
-header img{height:30px}
-header b{font-size:20px;letter-spacing:.05em}
-header span{color:#54677A;font:600 12px ui-monospace,monospace;letter-spacing:.14em;margin-left:auto}
-h1{font-size:34px;line-height:1.1;margin-bottom:10px}
-.lead{color:#B9C6D2;margin-bottom:34px;font-size:17px}
-h2{font-size:15px;color:#FFC400;letter-spacing:.14em;text-transform:uppercase;font-family:ui-monospace,monospace;margin:36px 0 12px}
-p{color:#B9C6D2;margin-bottom:12px}
-ul{margin:0 0 12px 20px;color:#B9C6D2}
-li{margin-bottom:7px}
-.live{border:1px solid #26313C;border-radius:14px;padding:16px 18px;background:#0B1620}
-.live h3{font:700 12px ui-monospace,monospace;color:#FFC400;letter-spacing:.12em;display:flex;align-items:center;gap:8px;margin-bottom:12px}
-.live .dot{width:8px;height:8px;border-radius:50%;background:#3ADB76;box-shadow:0 0 10px #3ADB76;animation:pu 2s infinite}
-@keyframes pu{50%{opacity:.35}}
-.lgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
-.lv b{display:block;font-size:26px;font-family:"Avenir Next Condensed",system-ui}
-.lv span{font-size:12.5px;color:#8FA1B3}
-.lfot{margin-top:10px;font-size:12px;color:#54677A}
-.assets{display:flex;gap:14px;flex-wrap:wrap}
-.asset{border:1px solid #26313C;border-radius:12px;padding:12px;background:#0B1119;text-align:center;font-size:13px;color:#8FA1B3;flex:1;min-width:160px}
-.asset img{max-width:100%;height:84px;object-fit:contain;display:block;margin:0 auto 8px}
-.boiler{border-left:3px solid #FFC400;padding:4px 0 4px 16px;color:#D5DEE6;font-style:italic}
-.rutor{display:grid;grid-template-columns:1fr 1fr;gap:10px 22px}
-.rutor div b{color:#F3F6F9}
-@media(max-width:520px){.rutor{grid-template-columns:1fr}}
-</style>
+<meta name="apple-itunes-app" content="app-id=6806939784">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/hv.css">
 </head>
 <body>
-<div class="wrap">
-<header>
-  <img src="logo.svg" alt="Halkvakt"><b class="disp">HALKVAKT</b><span>PRESS</span>
-</header>
-
-<h1 class="disp">Pressmaterial</h1>
-<p class="lead">Halkvakt är en gratis mobilapp som varnar bilförare med rösten — som en passagerare — för halka, vilt, olyckor och fartkameror på vägen framför dem. Byggd på Trafikverkets öppna livedata. Släpps i vinter till Android och iPhone.</p>
-
-<h2>// Läget på vägarna just nu</h2>
-<div class="live">
-  <h3><span class="dot"></span>LIVE FRÅN TRAFIKVERKETS DATA</h3>
-  <div class="lgrid">
-    <div class="lv"><b id="p-oly">–</b><span>pågående olyckor</span></div>
-    <div class="lv"><b id="p-vilt">–</b><span>viltolyckor senaste veckan</span></div>
-    <div class="lv"><b id="p-halka">–</b><span>sträckor besvärligt väglag</span></div>
-    <div class="lv"><b id="p-stn">–</b><span>mätstationer</span></div>
+<header class="topp">
+  <div class="wrap">
+    <a class="logo" href="./" aria-label="Halkvakt, till startsidan"><svg viewBox="3 3 94 83" aria-hidden="true"><path fill-rule="evenodd" fill="#FFC94A" d="M55.196 6 L96.196 77 A6 6 0 0 1 91 86 L9 86 A6 6 0 0 1 3.804 77 L44.804 6 A6 6 0 0 1 55.196 6 Z M46.4 32 L53.6 32 L52 58 L48 58 Z M45.6 68 A4.4 4.4 0 1 0 54.4 68 A4.4 4.4 0 1 0 45.6 68 Z"/></svg><b>HALKVAKT</b></a>
+    <nav class="meny" aria-label="Huvudmeny">
+      <a href="./#appen">Appen</a>
+      <a href="./#sa-funkar">Så funkar det</a>
+      <a href="karta.html">Livekartan</a>
+      <a href="integritet.html">Integritet</a>
+    </nav>
+    <a class="knapp" href="https://apps.apple.com/se/app/id6806939784">Ladda ner för iPhone</a>
   </div>
-  <div class="lfot" id="p-fot">Siffrorna uppdateras löpande och får citeras med källan "Halkvakt / Trafikverkets öppna data".</div>
+</header>
+<main class="wrap">
+<div class="dok">
+<h1>Press</h1>
+<p class="datum">Material och siffror som får användas fritt</p>
+<p>Halkvakt är en gratis app som säger till med rösten när det är halt på vägen framför dig. Den läser Trafikverkets vägväderstationer och rapporterade väglag och varnar ungefär 30 sekunder innan föraren är där. Halkvakt finns i App Store för iPhone sedan 13 oktober 2026. Android-versionen kommer i vinter.</p>
+
+<h2>Läget på vägarna just nu</h2>
+<table>
+  <tbody>
+    <tr><th scope="row">Sträckor med besvärligt väglag</th><td id="p-halka">–</td></tr>
+    <tr><th scope="row">Vägväderstationer på 0 °C eller kallare</th><td id="p-kalla">–</td></tr>
+    <tr><th scope="row">Pågående olyckor och hinder</th><td id="p-oly">–</td></tr>
+    <tr><th scope="row">Viltolyckor senaste veckan</th><td id="p-vilt">–</td></tr>
+  </tbody>
+</table>
+<p id="p-fot" style="margin-top:12px;font-size:14px">Siffrorna uppdateras var 30:e minut och får citeras med källan ”Halkvakt / Trafikverkets öppna data”.</p>
+
+<h2>Snabbfakta</h2>
+<table>
+  <tbody>
+    <tr><th scope="row">Vad</th><td>Röstvarningar i bilen för halka, frysrisk, olyckor och hinder, vilt och fartkameror</td></tr>
+    <tr><th scope="row">Pris</th><td>Gratis, inget konto, ingen reklam</td></tr>
+    <tr><th scope="row">Finns</th><td>iPhone, App Store sedan 13 oktober 2026. Android i vinter</td></tr>
+    <tr><th scope="row">Data</th><td>Trafikverkets öppna data, uppdaterad var 30:e minut</td></tr>
+    <tr><th scope="row">Integritet</th><td>Jämförelsen sker i telefonen. Positionen lämnar inte telefonen av sig själv</td></tr>
+    <tr><th scope="row">Handhavande</th><td>Vaknar själv när man börjar köra, eller med ”Hej Siri, starta Halkvakt”. Inget att trycka på under körning</td></tr>
+  </tbody>
+</table>
+
+<h2>Så beskriver vi Halkvakt</h2>
+<div class="lofte">Halkvakt säger till när det är halt. Appen läser Trafikverkets vägväderstationer och rapporterade väglag och varnar med rösten innan du är där, genom bilens högtalare. Gratis, utan konto, och din position lämnar inte telefonen av sig själv.</div>
+<p style="font-size:14px">Texten får användas fritt i redaktionella sammanhang.</p>
+
+<h2>Bilder och logotyp</h2>
+<p><a href="logo-512.png">Logotyp, PNG 512 px</a> · <a href="logo.svg">Logotyp, SVG</a> · <a href="og.png">Delningsbild, 1200 × 630</a></p>
+<p style="font-size:14px">Skärmbilder från <a href="karta.html">livekartan</a> får användas fritt med källangivelse.</p>
+
+<h2>Presskontakt</h2>
+<p>Mejla <a href="mailto:axel.lagerlof.45@gmail.com">axel.lagerlof.45@gmail.com</a>.</p>
 </div>
-
-<h2>// Snabbfakta</h2>
-<div class="rutor">
-  <div><b>Vad:</b> röstvarningar i bilen — halka, vilt, olyckor, fartkameror</div>
-  <div><b>Pris:</b> gratis</div>
-  <div><b>Släpps:</b> i vinter, Android + iPhone</div>
-  <div><b>Data:</b> Trafikverkets öppna data — 844 vägväderstationer, 2 771 fartkameror, olyckslägen minut för minut; Polisens viltolycksrapporter</div>
-  <div><b>Integritet:</b> all matchning sker i telefonen — positionen lämnar aldrig enheten</div>
-  <div><b>Handhavande:</b> startar sig själv när man börjar köra; ingen skärm att titta på</div>
-</div>
-
-<h2>// Så beskriver vi Halkvakt</h2>
-<p class="boiler">"Vintervägar dödar och skadar i tysthet — ofta för att föraren fick veta för sent. Halkvakt sitter bredvid dig som en passagerare som läst allt Trafikverket vet, och säger till i god tid: halka framför dig, vilt rapporterat, olycka bakom kurvan. Gratis, utan konto, och utan att din position någonsin lämnar telefonen."</p>
-<p style="font-size:13.5px;color:#54677A">Texten får användas fritt i redaktionellt sammanhang.</p>
-
-<h2>// Bilder &amp; logotyp</h2>
-<div class="assets">
-  <div class="asset"><img src="logo-512.png" alt="Halkvakts logotyp"><a href="logo-512.png" download>Logotyp PNG (512 px)</a> · <a href="logo.svg" download>SVG</a></div>
-  <div class="asset"><img src="og.png" alt="Halkvakt delningsbild"><a href="og.png" download>Delningsbild (1200×630)</a></div>
-</div>
-<p style="font-size:13.5px;color:#54677A;margin-top:10px">Fler bilder — appskärmar och butiksmaterial — publiceras här inför släppet. Skärmdumpar från <a href="karta.html">livekartan</a> får användas fritt med källangivelse.</p>
-
-<h2>// Presskontakt</h2>
-<p>Presskontakt och mejladress publiceras här i samband med att halkvakt.se öppnar. Fram till dess uppdateras denna sida löpande med aktuellt material.</p>
-
-<p style="margin-top:40px;font-size:13px;color:#54677A">
-  <a href="./">halkvakt</a> · <a href="karta.html">livekartan</a> · <a href="om.html">om appen</a> · Öppna data från Trafikverket (CC0)
-</p>
-</div>
+</main>
+<footer class="fot">
+  <div class="wrap">
+    <a class="logo" href="./"><svg viewBox="3 3 94 83" aria-hidden="true"><path fill-rule="evenodd" fill="#FFC94A" d="M55.196 6 L96.196 77 A6 6 0 0 1 91 86 L9 86 A6 6 0 0 1 3.804 77 L44.804 6 A6 6 0 0 1 55.196 6 Z M46.4 32 L53.6 32 L52 58 L48 58 Z M45.6 68 A4.4 4.4 0 1 0 54.4 68 A4.4 4.4 0 1 0 45.6 68 Z"/></svg><b>HALKVAKT</b></a>
+    <p class="kallor">Data: Trafikverket (CC0), SMHI, Fintraffic (CC BY 4.0), © OpenStreetMap-bidragsgivare (ODbL). Fristående från myndigheterna.</p>
+    <nav aria-label="Sidfot"><a href="karta.html">Livekartan</a><a href="lan/">Länen</a><a href="om.html">Om appen</a><a href="support.html">Hjälp</a><a href="integritet.html">Integritet</a><a href="press.html">Press</a></nav>
+  </div>
+</footer>
 <script>
-fetch('data/meta.json?t='+Date.now(),{cache:'no-cache'}).then(r=>r.json()).then(m=>{
-  const set=(id,v)=>document.getElementById(id).textContent=v;
-  set('p-oly',m.olyckor??0); set('p-vilt',m.vilt_vecka??0);
-  set('p-halka',m.vaglag_ej_normalt??0); set('p-stn',m.stationer??844);
-  const kl=new Date(m.generated_at).toLocaleString('sv-SE',{dateStyle:'short',timeStyle:'short'});
-  document.getElementById('p-fot').textContent=
-    `Senast uppdaterat ${kl}. Siffrorna får citeras med källan "Halkvakt / Trafikverkets öppna data".`
-    +(m.vilt_vanligast?` Vanligaste viltet just nu: ${m.vilt_vanligast}.`:'');
-}).catch(()=>{});
+fetch('data/meta.json?t=' + Date.now(), { cache: 'no-cache' }).then(r => r.json()).then(m => {
+  const s = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  s('p-halka', m.vaglag_ej_normalt ?? 0); s('p-kalla', m.kalla_stationer ?? 0); s('p-oly', m.olyckor ?? 0); s('p-vilt', m.vilt_vecka ?? 0);
+  const kl = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Stockholm', dateStyle: 'short', timeStyle: 'short' }).format(new Date(m.generated_at));
+  s('p-fot', 'Senast uppdaterat ' + kl + '. Siffrorna får citeras med källan ”Halkvakt / Trafikverkets öppna data”.');
+}).catch(() => {});
 </script>
 </body>
 </html>

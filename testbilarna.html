@@ -1,83 +1,119 @@
-<!doctype html><html lang="sv"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Halkvakt — testbilarna</title><style>
-body{background:#06090D;color:#E8EDF2;font:16px/1.55 -apple-system,system-ui,sans-serif;margin:auto;padding:20px;max-width:720px}
-h1{font-size:15px;letter-spacing:3.5px;font-weight:900;margin:0 0 4px}h1 .tri{color:#FFC400}
-h2{font-size:24px;margin:0 0 6px}
-.land{display:flex;gap:8px;margin:10px 0 16px}.land button{background:#0E1B25;color:#8FA3B5;border:1px solid #1E2F3B;border-radius:999px;padding:8px 14px;font:inherit;font-size:14px;cursor:pointer}.land button.on{background:#FFC400;color:#06090D;border-color:#FFC400;font-weight:700}
-.sub{color:#8A97A3;margin-bottom:18px}
-.tal{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
-.tot{flex:1;min-width:150px;background:#0E1B25;border:1px solid #26313C;border-radius:14px;padding:12px 16px}
-.tot b{display:block;color:#FFC400;font-size:26px}
-.tot span{color:#8A97A3;font-size:13px}
-.kort{background:#0E1B25;border:1px solid #26313C;border-radius:14px;padding:14px 18px;margin-bottom:12px}
-.kort.tyst{opacity:.85}
-.rad{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
-.rutt{font-weight:800;font-size:17px}
-.pill{font-size:11px;font-weight:800;letter-spacing:1px;background:#06090D;border:1px solid #26313C;border-radius:99px;padding:4px 12px;color:#2FBF71}
-.sagt{margin-top:10px;font-size:12px;letter-spacing:1.5px;font-weight:800;color:#FFC400;text-transform:uppercase}
-ul{margin:6px 0 2px;padding-left:8px;list-style:none}li{margin:6px 0}
-.chips{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap}
-.chip{font-size:12px;background:#06090D;border:1px solid #26313C;border-radius:99px;padding:3px 10px;color:#8A97A3}
-.dim{color:#5C6873;font-size:13px}
-.fot{margin-top:20px;color:#5C6873;font-size:12px}
-a{color:#8A97A3}</style></head><body>
-<h1><span class="tri">&#9888;</span> HALKVAKT</h1>
-<h2>Vad har testbilarna hört?</h2>
-<div class="land" id="land">
-  <button data-land="se" class="on">🇸🇪 Sverige</button>
-  <button data-land="fi">🇫🇮 Finland</button>
-  <button data-land="no">🇳🇴 Norge</button>
-  <button data-land="dk">🇩🇰 Danmark</button>
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Testbilarna · Halkvakt</title>
+<meta name="description" content="Vad varningsmotorn sagt i Halkvakts provbilar det senaste dygnet.">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="canonical" href="https://axelstar.github.io/halkvakt-karta/testbilarna.html">
+<meta property="og:title" content="Testbilarna · Halkvakt">
+<meta property="og:description" content="Vad varningsmotorn sagt i Halkvakts provbilar det senaste dygnet.">
+<meta property="og:image" content="https://axelstar.github.io/halkvakt-karta/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="apple-itunes-app" content="app-id=6806939784">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/hv.css">
+<style>
+  .land { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 22px; }
+  .land button { min-height: 40px; padding: 8px 16px; border-radius: 22px; border: 1px solid var(--kant); background: var(--panel); color: var(--text2);
+    font: 500 11px var(--mono); letter-spacing: .12em; text-transform: uppercase; cursor: pointer; }
+  .land button[aria-pressed="true"] { background: var(--upp); color: var(--text); border-color: var(--skilje); }
+  .siffror { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 26px 0 18px; }
+  @media (max-width: 560px) { .siffror { grid-template-columns: 1fr; } }
+  .siffror div { background: var(--panel); border: 1px solid var(--kant); border-radius: 16px; padding: 16px 18px; display: grid; gap: 4px; }
+  .siffror b { font: 600 32px var(--mono); letter-spacing: -.02em; color: var(--text); font-variant-numeric: tabular-nums; }
+  .siffror span { font: 500 10.5px/1.5 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--dampad); }
+  .rutt { background: var(--panel); border: 1px solid var(--kant); border-radius: 18px; padding: 18px 20px; margin-bottom: 10px; }
+  .rutt .topp-rad { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+  .rutt h3 { margin: 0; font-size: 18px; }
+  .rutt .antal { font: 600 11px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--gul); }
+  .rutt .meta { font: 500 11px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--dampad); margin: 4px 0 12px; }
+  .rutt ul { list-style: none; padding: 0; margin: 0; }
+  .rutt li { padding: 8px 0; border-top: 1px dashed var(--skilje); margin: 0; color: var(--text); font-size: 16px; }
+  .rutt li small { font: 500 10.5px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--dampad); margin-right: 10px; }
+  .chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+  .chips span { font: 500 10.5px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--dampad); border: 1px solid var(--kant); border-radius: 14px; padding: 4px 10px; }
+</style>
+</head>
+<body>
+<header class="topp">
+  <div class="wrap">
+    <a class="logo" href="./" aria-label="Halkvakt, till startsidan"><svg viewBox="3 3 94 83" aria-hidden="true"><path fill-rule="evenodd" fill="#FFC94A" d="M55.196 6 L96.196 77 A6 6 0 0 1 91 86 L9 86 A6 6 0 0 1 3.804 77 L44.804 6 A6 6 0 0 1 55.196 6 Z M46.4 32 L53.6 32 L52 58 L48 58 Z M45.6 68 A4.4 4.4 0 1 0 54.4 68 A4.4 4.4 0 1 0 45.6 68 Z"/></svg><b>HALKVAKT</b></a>
+    <nav class="meny" aria-label="Huvudmeny">
+      <a href="./#appen">Appen</a>
+      <a href="./#sa-funkar">Så funkar det</a>
+      <a href="karta.html">Livekartan</a>
+      <a href="integritet.html">Integritet</a>
+    </nav>
+    <a class="knapp" href="https://apps.apple.com/se/app/id6806939784">Ladda ner för iPhone</a>
+  </div>
+</header>
+<main class="wrap">
+<div class="dok">
+<h1>Vad har testbilarna hört?</h1>
+<p class="datum">Senaste dygnet · samma varningsmotor som i appen</p>
+<div class="land" id="land" role="group" aria-label="Land">
+  <button data-land="se" aria-pressed="true">Sverige</button>
+  <button data-land="fi" aria-pressed="false">Finland</button>
+  <button data-land="no" aria-pressed="false">Norge</button>
+  <button data-land="dk" aria-pressed="false">Danmark</button>
 </div>
-<div class="sub" id="ingress">Tjugo låtsasbilar kör Sveriges vägar dygnet runt — genom exakt samma
-varningsmotor som sitter i appen, med färsk riktig vägdata. Här är vad rösten
-sagt i dem det senaste dygnet.</div>
-<div id="app"><div class="dim">Hämtar färska siffror …</div></div>
-<div class="fot">Sidan hämtar färska siffror varje gång du laddar om den.
-Kameravarningar dominerar på sommaren — halka, frysrisk och vilt fyller på när vintern kommer.
-&nbsp;·&nbsp;<a href="index.html">Till livekartan</a></div>
+<p id="ingress">Tjugo provbilar kör Sveriges vägar dygnet runt genom exakt samma varningsmotor som sitter i appen, med färsk vägdata. Här är vad rösten sagt i dem det senaste dygnet.</p>
+<div id="app"><p>Hämtar färska siffror …</p></div>
+<p style="font-size:14px;margin-top:28px">Kameravarningar dominerar när det är varmt. Halka, frysrisk och vilt fyller på när vintern kommer. Se också <a href="karta.html">livekartan</a>.</p>
+</div>
+</main>
+<footer class="fot">
+  <div class="wrap">
+    <a class="logo" href="./"><svg viewBox="3 3 94 83" aria-hidden="true"><path fill-rule="evenodd" fill="#FFC94A" d="M55.196 6 L96.196 77 A6 6 0 0 1 91 86 L9 86 A6 6 0 0 1 3.804 77 L44.804 6 A6 6 0 0 1 55.196 6 Z M46.4 32 L53.6 32 L52 58 L48 58 Z M45.6 68 A4.4 4.4 0 1 0 54.4 68 A4.4 4.4 0 1 0 45.6 68 Z"/></svg><b>HALKVAKT</b></a>
+    <p class="kallor">Data: Trafikverket (CC0), SMHI, Fintraffic (CC BY 4.0), © OpenStreetMap-bidragsgivare (ODbL). Fristående från myndigheterna.</p>
+    <nav aria-label="Sidfot"><a href="karta.html">Livekartan</a><a href="lan/">Länen</a><a href="om.html">Om appen</a><a href="support.html">Hjälp</a><a href="integritet.html">Integritet</a><a href="press.html">Press</a></nav>
+  </div>
+</footer>
 <script>
-const IKON = { camera:"\uD83D\uDCF7", slippery:"\uD83E\uDDCA", accident:"\u26A0\uFE0F", freeze:"\u2744\uFE0F", wildlife:"\uD83E\uDD8C" };
-const esc = s => s.replace(/[<>&]/g, c => ({"<":"&lt;",">":"&gt;","&":"&amp;"}[c]));
-const svTid = iso => new Intl.DateTimeFormat("sv-SE",{timeZone:"Europe/Stockholm",weekday:"short",hour:"2-digit",minute:"2-digit"}).format(new Date(iso));
-const landAv = () => document.querySelector("#land .on").dataset.land;
-document.querySelectorAll("#land button").forEach(b => b.addEventListener("click", () => {
-  document.querySelectorAll("#land button").forEach(x => x.classList.toggle("on", x === b));
-  document.getElementById("app").innerHTML = "<div class=\"kort\"><div class=\"dim\">Hämtar…</div></div>";
-  document.getElementById("ingress").textContent = landAv() === "fi"
-    ? "Tjugo låtsasbilar kör Finlands vägar dygnet runt — samma varningsmotor som i appen, med Fintraffics riktiga vägdata. Ingen finsk användare finns än; det här är facit som samlas inför den dagen."
-    : landAv() === "dk"
-    ? "Tjugo låtsasbilar kör Danmarks vägar dygnet runt — samma varningsmotor, med Vejdirektoratets trafikhändelser och DMI:s väderstationer. Frysrisken bygger på markens temperatur (gräs), inte vägytan. Facit som samlas."
-    : landAv() === "no"
-    ? "Tjugo norska rutter är förberedda — E6 från Oslo till Kirkenes, kusten, fjällövergångarna. Bilarna startar den dag Statens vegvesen godkänt vår datatillgång (begärd 31/8). Tills dess står de stilla."
-    : "Tjugo låtsasbilar kör Sveriges vägar dygnet runt — genom exakt samma varningsmotor som sitter i appen, med färsk riktig vägdata. Här är vad rösten sagt i dem det senaste dygnet.";
+const SORT = { camera: 'Fartkamera', slippery: 'Halka', accident: 'Olycka', freeze: 'Frysrisk', wildlife: 'Vilt' };
+const esc = s => String(s).replace(/[<>&"]/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' }[c]));
+const svTid = iso => new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Stockholm', weekday: 'short', hour: '2-digit', minute: '2-digit' }).format(new Date(iso));
+const INGRESS = {
+  se: 'Tjugo provbilar kör Sveriges vägar dygnet runt genom exakt samma varningsmotor som sitter i appen, med färsk vägdata. Här är vad rösten sagt i dem det senaste dygnet.',
+  fi: 'Tjugo provbilar kör Finlands vägar dygnet runt, med samma varningsmotor som i appen och Fintraffics vägdata. Appen finns inte i Finland än. Det här är facit som samlas inför den dagen.',
+  dk: 'Tjugo provbilar kör Danmarks vägar dygnet runt, med samma varningsmotor och Vejdirektoratets trafikhändelser och DMI:s väderstationer. Frysrisken bygger på markens temperatur, inte vägytans.',
+  no: 'Tjugo norska rutter är förberedda: E6 från Oslo till Kirkenes, kusten och fjällövergångarna. Bilarna startar den dag Statens vegvesen godkänt vår datatillgång. Tills dess står de stilla.',
+};
+const knappar = [...document.querySelectorAll('#land button')];
+const land = () => knappar.find(b => b.getAttribute('aria-pressed') === 'true').dataset.land;
+knappar.forEach(b => b.addEventListener('click', () => {
+  knappar.forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+  document.getElementById('ingress').textContent = INGRESS[land()];
+  document.getElementById('app').innerHTML = '<p>Hämtar …</p>';
   ladda();
 }));
 function ladda() {
-fetch("https://xmpfztykhyvhmrzsnjrc.supabase.co/functions/v1/skuggrapport?land=" + landAv())
- .then(r => r.json())
- .then(d => {
-   let h = `<div class="tal">
-     <div class="tot"><b>${d.provkorningar}</b><span>provkörningar<br>senaste dygnet</span></div>
-     <div class="tot"><b>${d.rostvarningar}</b><span>röstvarningar<br>uttalade</span></div>
-     <div class="tot"><b>${d.bevakas.toLocaleString("sv-SE")}</b><span>punkter bevakas just nu<br>(faror + fartkameror i landet)</span></div>
-   </div>`;
-   for (const t of d.pratare) {
-     h += `<div class="kort"><div class="rad"><span class="rutt">\uD83D\uDE97 ${esc(t.rutt)}</span>
-       <span class="pill">${t.varningar} varning${t.varningar===1?"":"ar"}</span></div>
-       <div class="dim">Provkörd ${t.korningar} gång${t.korningar===1?"":"er"} senaste dygnet · senast ${svTid(t.senast)}</div>
-       <div class="sagt">Rösten har sagt:</div>
-       <ul>${t.sagt.map(l=>`<li>${IKON[l.kind]||"\uD83D\uDD14"} <i>"${esc(l.text)}"</i>${l.n>1?` <span class="dim">(${l.n} gånger)</span>`:""}</li>`).join("")}</ul></div>`;
-   }
-   if (!d.pratare.length) h += `<div class="kort"><div class="dim">Ingen bil har behövt varna det senaste dygnet.</div></div>`;
-   if (d.tysta.length) h += `<div class="kort tyst"><div class="rad"><span class="rutt">\uD83D\uDE34 Tysta vägar just nu — ${d.tysta.length} rutter</span></div>
-     <div class="dim">Inga faror längs dem i dag. Det är precis så här det ska se ut i augusti —
-     när första frostnatten kommer vaknar de.</div>
-     <div class="chips">${d.tysta.map(r=>`<span class="chip">${esc(r)}</span>`).join("")}</div></div>`;
-   document.getElementById("app").innerHTML = h;
- })
- .catch(e => document.getElementById("app").innerHTML = `<div class="kort"><div class="dim">Kunde inte hämta siffrorna just nu (${esc(String(e))}). Prova ladda om.</div></div>`);
+  fetch('https://xmpfztykhyvhmrzsnjrc.supabase.co/functions/v1/skuggrapport?land=' + land())
+    .then(r => r.json())
+    .then(d => {
+      let h = `<div class="siffror">
+        <div><b>${d.provkorningar}</b><span>provkörningar senaste dygnet</span></div>
+        <div><b>${d.rostvarningar}</b><span>röstvarningar uttalade</span></div>
+        <div><b>${d.bevakas.toLocaleString('sv-SE')}</b><span>punkter bevakas just nu</span></div>
+      </div>`;
+      for (const t of d.pratare) {
+        h += `<div class="rutt"><div class="topp-rad"><h3>${esc(t.rutt)}</h3><span class="antal">${t.varningar} varning${t.varningar === 1 ? '' : 'ar'}</span></div>
+          <div class="meta">Provkörd ${t.korningar} gång${t.korningar === 1 ? '' : 'er'} · senast ${svTid(t.senast)}</div>
+          <ul>${t.sagt.map(l => `<li><small>${SORT[l.kind] || 'Varning'}</small>”${esc(l.text)}”${l.n > 1 ? ` <small>· ${l.n} gånger</small>` : ''}</li>`).join('')}</ul></div>`;
+      }
+      if (!d.pratare.length) h += '<div class="rutt"><p>Ingen bil har behövt varna det senaste dygnet.</p></div>';
+      if (d.tysta.length) h += `<div class="rutt"><div class="topp-rad"><h3>Tysta vägar just nu</h3><span class="meta">${d.tysta.length} rutter</span></div>
+        <p style="margin:8px 0 0">Inga faror längs dem just nu. Så ska det se ut tills frosten kommer.</p>
+        <div class="chips">${d.tysta.map(r => `<span>${esc(r)}</span>`).join('')}</div></div>`;
+      document.getElementById('app').innerHTML = h;
+    })
+    .catch(() => document.getElementById('app').innerHTML = '<p>Siffrorna kunde inte hämtas just nu. Prova att ladda om sidan.</p>');
 }
 ladda();
-</script></body></html>
+</script>
+</body>
+</html>
