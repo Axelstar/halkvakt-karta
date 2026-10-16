@@ -31,6 +31,11 @@
   .status h1 { font-size: 20px; letter-spacing: -.015em; }
   .status p { color: var(--text2); font-size: 14px; }
   .status a { color: var(--text); text-decoration-color: var(--gul); text-underline-offset: 3px; }
+  .valj { display: flex; align-items: center; gap: 10px; margin-top: 4px; font: 500 11px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--dampad); }
+  .valj select { appearance: none; -webkit-appearance: none; min-height: 36px; padding: 6px 34px 6px 14px; border-radius: 20px; border: 1px solid var(--kant);
+    background: var(--upp) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23FFC94A' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 14px center;
+    color: var(--text); font: 500 12px var(--mono); letter-spacing: .1em; text-transform: uppercase; cursor: pointer; max-width: 240px; }
+  .valj select:hover { border-color: var(--gul); }
   .lager { position: fixed; z-index: 15; left: clamp(16px, 4vw, 60px); right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px));
     display: flex; gap: 8px; flex-wrap: wrap; pointer-events: none; }
   .chip { pointer-events: auto; display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 8px 14px; border-radius: 22px;
@@ -74,6 +79,7 @@
     <p class="etikett"><span class="ljus" aria-hidden="true"></span><span id="tid">Livekartan</span></p>
     <h1 id="rubrik">Sveriges väglag just nu</h1>
     <p id="rader">Hämtar Trafikverkets data …</p>
+    <label class="valj">Visa län <select id="lanval" aria-label="Välj län"><option value="">Hela landet</option></select></label>
   </div>
 </div>
 <div class="lager" role="group" aria-label="Kartlager">
@@ -83,7 +89,7 @@
   <button class="chip" data-layer="olyckor" aria-pressed="true"><i style="background:#FFC94A;box-shadow:0 0 0 2px #080B0D,0 0 0 3px #FFC94A"></i>Olyckor</button>
   <button class="chip" data-layer="kameror" aria-pressed="false"><i style="background:#6F7C83"></i>Fartkameror</button>
 </div>
-<p class="kalla-rad">Data: <a href="https://www.trafikverket.se" rel="noopener">Trafikverket</a> (CC0) · <a href="https://www.digitraffic.fi" rel="noopener">Fintraffic</a> (CC BY 4.0) · <a href="https://www.met.no" rel="noopener">MET Norway</a> (CC BY 4.0) · <a href="https://www.dmi.dk/friedata" rel="noopener">DMI</a> (<a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>) · Karta: <a href="https://openfreemap.org" rel="noopener">OpenFreeMap</a> © OpenStreetMap</p>
+<p class="kalla-rad">Data: <a href="https://www.trafikverket.se" rel="noopener">Trafikverket</a> (CC0) · <a href="https://www.digitraffic.fi" rel="noopener">Fintraffic</a> (CC BY 4.0) · <a href="https://www.met.no" rel="noopener">MET Norway</a> (CC BY 4.0) · <a href="https://www.dmi.dk/friedata" rel="noopener">DMI</a> (<a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>) · Karta: <a href="https://openfreemap.org" rel="noopener">OpenFreeMap</a> © OpenStreetMap · Länsgränser: Natural Earth</p>
 <script>
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -94,8 +100,13 @@ const LAN = { stockholm: [1, 'Stockholms län'], uppsala: [3, 'Uppsala län'], s
   skane: [12, 'Skåne'], halland: [13, 'Halland'], 'vastra-gotaland': [14, 'Västra Götaland'], varmland: [17, 'Värmland'], orebro: [18, 'Örebro län'],
   vastmanland: [19, 'Västmanland'], dalarna: [20, 'Dalarna'], gavleborg: [21, 'Gävleborg'], vasternorrland: [22, 'Västernorrland'],
   jamtland: [23, 'Jämtland'], vasterbotten: [24, 'Västerbotten'], norrbotten: [25, 'Norrbotten'] };
-const lanSlug = new URLSearchParams(location.search).get('lan');
-const lanVal = lanSlug && LAN[lanSlug] ? { slug: lanSlug, kod: LAN[lanSlug][0], namn: LAN[lanSlug][1] } : null;
+const lanAv = slug => slug && LAN[slug] ? { slug, kod: LAN[slug][0], namn: LAN[slug][1] } : null;
+let lanVal = lanAv(new URLSearchParams(location.search).get('lan'));
+const SVERIGE = [[10.9, 55.3], [24.2, 69.1]];
+for (const [slug, [, namn]] of Object.entries(LAN).sort((a, b) => a[1][1].localeCompare(b[1][1], 'sv'))) {
+  const o = document.createElement('option'); o.value = slug; o.textContent = namn; $('#lanval').appendChild(o);
+}
+$('#lanval').value = lanVal ? lanVal.slug : '';
 const map = new maplibregl.Map({
   container: 'map', style: 'https://tiles.openfreemap.org/styles/dark',
   center: [16.3, 62.6], zoom: 4.4, minZoom: 3.6, attributionControl: false
@@ -105,13 +116,19 @@ map.addControl(new maplibregl.GeolocateControl({ trackUserLocation: false }), 'b
 const forstaText = () => (map.getStyle().layers.find(x => x.type === 'symbol') || {}).id;
 map.on('load', async () => {
   const d = {};
-  for (const name of ['vaglag', 'kandidat', 'vader', 'olyckor', 'kameror', 'meta']) {
+  for (const name of ['vaglag', 'kandidat', 'vader', 'olyckor', 'kameror', 'meta', 'lan']) {
     try {
-      const r = await fetch(`data/${name}.${name === 'meta' ? 'json' : 'geojson'}?t=${Date.now()}`, { cache: 'no-cache' });
+      const r = await fetch(name === 'lan' ? 'assets/lan.geojson' : `data/${name}.${name === 'meta' ? 'json' : 'geojson'}?t=${Date.now()}`, { cache: 'no-cache' });
       if (!r.ok) throw 0;
       d[name] = await r.json();
     } catch { d[name] = name === 'meta' ? null : { type: 'FeatureCollection', features: [] }; }
   }
+  // Länsgränserna (Natural Earth, public domain): alla svagt, det valda länet gult. Klick på ett län väljer det.
+  map.addSource('lan', { type: 'geojson', data: d.lan });
+  map.addLayer({ id: 'lan-fyll', type: 'fill', source: 'lan', paint: { 'fill-color': '#FFC94A', 'fill-opacity': 0.02 } }, forstaText());
+  map.addLayer({ id: 'lan-alla', type: 'line', source: 'lan', paint: { 'line-color': '#A9B5BB', 'line-width': 1, 'line-opacity': .35 } }, forstaText());
+  map.addLayer({ id: 'lan-kant', type: 'line', source: 'lan', filter: ['==', ['get', 'slug'], ''], layout: { 'line-join': 'round' },
+    paint: { 'line-color': '#FFC94A', 'line-width': ['interpolate', ['linear'], ['zoom'], 4, 1.5, 9, 3], 'line-opacity': .9 } }, forstaText());
   map.addSource('vaglag', { type: 'geojson', data: d.vaglag });
   map.addLayer({ id: 'vaglag', type: 'line', source: 'vaglag',
     paint: { 'line-width': ['case', ['>', ['get', 'code'], 1], 4, 1.2],
@@ -139,28 +156,42 @@ map.on('load', async () => {
   document.querySelectorAll('.chip').forEach(c => map.setLayoutProperty(c.dataset.layer, 'visibility', c.getAttribute('aria-pressed') === 'true' ? 'visible' : 'none'));
 
   const m = d.meta;
-  if (lanVal) {
-    // Länets utbredning = dess vägavsnitt i väglagsrapporten; kartan zoomas dit och panelen visar länets tal.
-    const segs = d.vaglag.features.filter(f => f.properties.lan === lanVal.kod);
-    const b = new maplibregl.LngLatBounds();
-    for (const f of segs) { const g = f.geometry; (g.type === 'MultiLineString' ? g.coordinates.flat() : g.coordinates).forEach(c => b.extend(c)); }
-    if (segs.length) map.fitBounds(b, { padding: { top: 200, bottom: 90, left: 40, right: 40 }, maxZoom: 9, duration: 0 });
-    const hala = segs.filter(f => f.properties.code > 1).length;
-    $('#rubrik').textContent = `Väglaget i ${lanVal.namn} just nu`;
-    $('#tid').textContent = m ? 'Livekartan · uppdaterad ' + fmtTid(m.generated_at) : 'Livekartan';
-    $('#rader').innerHTML = `${hala ? `${hala} av ${segs.length} vägavsnitt med halka eller vinterväglag` : `Inget av länets ${segs.length} vägavsnitt har halka i Trafikverkets rapport`}. ` +
-      `<a href="lan/${lanVal.slug}/">Läget i ${esc(lanVal.namn)}</a> · <a href="karta.html">Hela landet</a>`;
-  } else if (m) {
-    $('#tid').textContent = 'Livekartan · uppdaterad ' + fmtTid(m.generated_at);
-    const bitar = [];
-    bitar.push(m.vaglag_ej_normalt > 0 ? `${m.vaglag_ej_normalt} sträckor med besvärligt väglag` : 'Normalt väglag i hela landet');
-    if (m.kalla_stationer > 0) bitar.push(`${m.kalla_stationer} stationer på 0 °C eller kallare`);
-    bitar.push(`${m.olyckor} pågående olyckor och hinder`);
-    if (m.smhi_vinter && m.smhi_vinter.length) { const v = m.smhi_vinter[0]; bitar.push(`SMHI: ${v.niva.toLowerCase()} varning för ${v.event.toLowerCase()}${v.omrade ? ', ' + v.omrade : ''}`); }
-    $('#rader').textContent = bitar.join(' · ') + '.';
-  } else {
-    $('#rader').textContent = 'Datan kunde inte hämtas just nu. Prova att ladda om sidan.';
-  }
+  $('#tid').textContent = m ? 'Livekartan · uppdaterad ' + fmtTid(m.generated_at) : 'Livekartan';
+  const granser = f => { const b = new maplibregl.LngLatBounds(); const g = f.geometry;
+    (g.type === 'MultiPolygon' ? g.coordinates.flat(2) : g.coordinates.flat()).forEach(c => b.extend(c)); return b; };
+  // Ett län: gränsen gul, kartan zoomad dit, panelen med länets vägavsnitt. Utan län: hela landet. Adressen följer med, så den går att dela.
+  const visaLan = (val, flyg) => {
+    lanVal = val;
+    $('#lanval').value = val ? val.slug : '';
+    history.replaceState(null, '', val ? `karta.html?lan=${val.slug}` : 'karta.html');
+    map.setFilter('lan-kant', ['==', ['get', 'slug'], val ? val.slug : '']);
+    map.setPaintProperty('lan-fyll', 'fill-opacity', val ? ['case', ['==', ['get', 'slug'], val.slug], 0.07, 0.02] : 0.02);
+    const fit = { padding: { top: 230, bottom: 90, left: 40, right: 40 }, maxZoom: 9, duration: flyg ? 900 : 0 };
+    if (val) {
+      const omr = d.lan.features.find(f => f.properties.slug === val.slug);
+      const segs = d.vaglag.features.filter(f => f.properties.lan === val.kod);
+      if (omr) map.fitBounds(granser(omr), fit);
+      const hala = segs.filter(f => f.properties.code > 1).length;
+      $('#rubrik').textContent = `Väglaget i ${val.namn} just nu`;
+      $('#rader').innerHTML = `${hala ? `${hala} av ${segs.length} vägavsnitt med halka eller vinterväglag` : `Inget av länets ${segs.length} vägavsnitt har halka i Trafikverkets rapport`}. ` +
+        `<a href="lan/${val.slug}/">Läget i ${esc(val.namn)}</a>`;
+    } else {
+      if (flyg) map.fitBounds(SVERIGE, fit);
+      $('#rubrik').textContent = 'Sveriges väglag just nu';
+      if (m) {
+        const bitar = [];
+        bitar.push(m.vaglag_ej_normalt > 0 ? `${m.vaglag_ej_normalt} sträckor med besvärligt väglag` : 'Normalt väglag i hela landet');
+        if (m.kalla_stationer > 0) bitar.push(`${m.kalla_stationer} stationer på 0 °C eller kallare`);
+        bitar.push(`${m.olyckor} pågående olyckor och hinder`);
+        if (m.smhi_vinter && m.smhi_vinter.length) { const v = m.smhi_vinter[0]; bitar.push(`SMHI: ${v.niva.toLowerCase()} varning för ${v.event.toLowerCase()}${v.omrade ? ', ' + v.omrade : ''}`); }
+        $('#rader').textContent = bitar.join(' · ') + '.';
+      } else {
+        $('#rader').textContent = 'Datan kunde inte hämtas just nu. Prova att ladda om sidan.';
+      }
+    }
+  };
+  visaLan(lanVal, false);
+  $('#lanval').addEventListener('change', e => visaLan(lanAv(e.target.value), true));
   // Brytaren (#578): avstängd kandidat ⇒ knappen säger det och går inte att slå på.
   if (m && m.kandidat && m.kandidat.pa === false) {
     const c = document.querySelector('.chip[data-layer="kandidat"]');
@@ -187,6 +218,8 @@ map.on('load', async () => {
       <div class="k">Vägytan beräknad${p.tid ? ' för kl. ' + fmtTid(p.tid) : ''} ur MET Nordic och vägväderstationerna runt omkring. Prövas mot verkligheten till mars.</div>`); });
   map.on('click', 'kameror', e => { const p = e.features[0].properties;
     pop(e, `<h3>Fartkamera</h3><div>${esc(p.name)}</div><div class="k">${esc(p.road ?? '')}</div>`); });
+  map.on('click', 'lan-fyll', e => { if (under(e, ['vaglag', 'kandidat', 'vader', 'olyckor', 'kameror'])) return;
+    const slug = e.features[0].properties.slug; if (!lanVal || lanVal.slug !== slug) visaLan(lanAv(slug), true); });
   for (const l of ['vader', 'vaglag', 'kandidat', 'olyckor', 'kameror']) {
     map.on('mouseenter', l, () => map.getCanvas().style.cursor = 'pointer');
     map.on('mouseleave', l, () => map.getCanvas().style.cursor = '');
