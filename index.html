@@ -27,12 +27,17 @@
   .hero .ingress { margin-top: 26px; }
   .lage { display: grid; grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr); gap: 14px; margin-top: 44px; }
   @media (max-width: 960px) { .lage { grid-template-columns: 1fr; } }
-  .kartruta { position: relative; min-height: 520px; overflow: hidden; display: block; text-decoration: none; color: inherit; }
+  .kartruta { position: relative; min-height: 520px; overflow: hidden; display: block; }
   .kartruta canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .kartruta .kartlank { position: absolute; inset: 0; z-index: 1; }
   .kartruta .ovre { position: absolute; top: 18px; left: 18px; right: 18px; display: flex; justify-content: space-between; gap: 12px;
-    align-items: center; z-index: 1; font-size: 11px; }
+    align-items: center; z-index: 2; font-size: 11px; pointer-events: none; }
+  .kartruta .ovre .hoger { display: flex; align-items: center; gap: 10px; pointer-events: auto; }
+  .kartruta .ovre .oppna { text-decoration: none; }
+  @media (max-width: 640px) { .kartruta .ovre { flex-wrap: wrap; gap: 10px; } .kartruta .ovre .etikett { flex: 1 0 100%; white-space: nowrap; }
+    .kartruta .ovre .hoger { width: 100%; justify-content: space-between; } .kartruta .ovre .valj-text { display: none; } .kartruta .ovre .valj select { max-width: 170px; } }
   .kartruta .ovre .etikett { font-size: 11px; color: var(--text); }
-  .kartruta .forklaring { position: absolute; left: 18px; bottom: 16px; z-index: 1; display: grid; gap: 4px; }
+  .kartruta .forklaring { position: absolute; left: 18px; bottom: 16px; z-index: 2; display: grid; gap: 4px; pointer-events: none; }
   .kartruta .forklaring span { font: 500 10.5px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--dampad); }
   .kartruta .forklaring i { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 8px; vertical-align: 1px; }
   .kartruta .oppna { font: 600 11px var(--mono); letter-spacing: .14em; color: var(--text); background: var(--upp);
@@ -160,15 +165,17 @@
       <p class="ingress">Trafikverkets vägväderstationer, uppdaterade var 30:e minut. Samma data som Halkvakt läser upp i bilen.</p>
 
       <div class="lage">
-        <a class="kartruta panel" href="karta.html" aria-label="Öppna livekartan">
-          <div class="ovre"><p class="etikett"><span class="ljus" aria-hidden="true"></span><span id="k-tid">Livekartan</span></p><span class="oppna">ÖPPNA KARTAN →</span></div>
+        <div class="kartruta panel">
+          <a class="kartlank" href="karta.html" aria-label="Öppna livekartan"></a>
+          <div class="ovre"><p class="etikett"><span class="ljus" aria-hidden="true"></span><span id="k-tid">Livekartan</span></p>
+            <div class="hoger"><label class="valj"><span class="valj-text">Visa län</span><select id="lanval" aria-label="Välj län och öppna livekartan"><option value="">Välj län</option></select></label><a class="oppna" href="karta.html">ÖPPNA KARTAN →</a></div></div>
           <canvas id="karta" aria-hidden="true"></canvas>
           <div class="forklaring">
             <span><i style="background:var(--gul)"></i>Halka rapporterad · <b id="k-halka">–</b> sträckor</span>
             <span><i style="background:#E9EFF2"></i>Vägbana under noll · <b id="k-kalla">–</b></span>
             <span><i style="background:#4A5A63"></i>Över noll · <b id="k-varma">–</b></span>
           </div>
-        </a>
+        </div>
         <div class="sidokolumn">
           <div class="panel tal">
             <p class="etikett huvud" id="t-tid">Hela landet</p>
@@ -274,6 +281,17 @@
 
 <script>
 (() => {
+  // ---- Länsväljaren: valt län öppnar livekartan inzoomad på länet (karta.html?lan=) ----
+  const LAN = { stockholm: 'Stockholms län', uppsala: 'Uppsala län', sodermanland: 'Södermanland', ostergotland: 'Östergötland', jonkoping: 'Jönköpings län',
+    kronoberg: 'Kronoberg', kalmar: 'Kalmar län', gotland: 'Gotland', blekinge: 'Blekinge', skane: 'Skåne', halland: 'Halland', 'vastra-gotaland': 'Västra Götaland',
+    varmland: 'Värmland', orebro: 'Örebro län', vastmanland: 'Västmanland', dalarna: 'Dalarna', gavleborg: 'Gävleborg', vasternorrland: 'Västernorrland',
+    jamtland: 'Jämtland', vasterbotten: 'Västerbotten', norrbotten: 'Norrbotten' };
+  const val = document.getElementById('lanval');
+  for (const [slug, namn] of Object.entries(LAN).sort((a, b) => a[1].localeCompare(b[1], 'sv'))) {
+    const o = document.createElement('option'); o.value = slug; o.textContent = namn; val.appendChild(o);
+  }
+  val.addEventListener('change', () => { if (val.value) location.href = 'karta.html?lan=' + val.value; });
+
   // ---- Varningskorten (repliker ordagrant från motorn, engine/src/texts.ts) ----
   const KORT = {
     halka:  { ikon: 'i-halka',  titel: 'Halka',      avstand: '<span class="text">FRAMFÖR DIG</span>', replik: 'Varning: halka rapporterad på vägen framför dig.' },

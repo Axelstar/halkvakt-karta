@@ -31,11 +31,7 @@
   .status h1 { font-size: 20px; letter-spacing: -.015em; }
   .status p { color: var(--text2); font-size: 14px; }
   .status a { color: var(--text); text-decoration-color: var(--gul); text-underline-offset: 3px; }
-  .valj { display: flex; align-items: center; gap: 10px; margin-top: 4px; font: 500 11px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--dampad); }
-  .valj select { appearance: none; -webkit-appearance: none; min-height: 36px; padding: 6px 34px 6px 14px; border-radius: 20px; border: 1px solid var(--kant);
-    background: var(--upp) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23FFC94A' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 14px center;
-    color: var(--text); font: 500 12px var(--mono); letter-spacing: .1em; text-transform: uppercase; cursor: pointer; max-width: 240px; }
-  .valj select:hover { border-color: var(--gul); }
+  .status .valj { margin-top: 4px; }
   .lager { position: fixed; z-index: 15; left: clamp(16px, 4vw, 60px); right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px));
     display: flex; gap: 8px; flex-wrap: wrap; pointer-events: none; }
   .chip { pointer-events: auto; display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 8px 14px; border-radius: 22px;
