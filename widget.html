@@ -11,11 +11,12 @@
 <style>
   :root { --mark: #080B0D; --panel: #0F1518; --kant: #1E282D; --skilje: #253036; --text: #E9EFF2; --text2: #A9B5BB; --dampad: #8FA0A9;
     --gul: #FFC94A; --sans: "Instrument Sans", "Helvetica Neue", Arial, sans-serif; --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace; }
-  html[data-tema="ljus"] { --panel: #FFFFFF; --kant: #DCE2E5; --skilje: #E6EBED; --text: #111719; --text2: #48555B; --dampad: #6A7880; --gul-tal: #9A6500; }
+  :root { color-scheme: dark; }
+  html[data-tema="ljus"] { color-scheme: light; --panel: #FFFFFF; --kant: #DCE2E5; --skilje: #E6EBED; --text: #111719; --text2: #48555B; --dampad: #6A7880; --gul-tal: #9A6500; }
   *, *::before, *::after { box-sizing: border-box; }
-  html, body { margin: 0; background: transparent; }
+  html, body { margin: 0; height: 100%; background: transparent; }
   body { color: var(--text); font: 400 15px/1.5 var(--sans); padding: 0; }
-  .kort { display: grid; gap: 12px; background: var(--panel); border: 1px solid var(--kant); border-radius: 16px; padding: 16px 18px; min-height: 100%; }
+  .kort { display: grid; gap: 12px; background: var(--panel); border: 1px solid var(--kant); border-radius: 16px; padding: 16px 18px; min-height: 100%; align-content: start; }
   .etikett { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font: 500 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dampad); margin: 0; }
   .etikett .ljus { width: 7px; height: 7px; border-radius: 50%; background: var(--gul); flex: none; }
   .etikett svg { width: 14px; height: auto; flex: none; }
