@@ -70,7 +70,16 @@
 
 <h2 id="redaktioner">För redaktioner: bädda in läget i ert län</h2>
 <p>Ett litet kort som visar väglaget i ett län just nu: halka enligt Trafikverket, vägväderstationer med vägbana under noll och den kallaste mätpunkten. Det uppdateras var 30:e minut, dygnet runt, utan att ni behöver göra något. Så här ser det ut:</p>
-<iframe src="widget.html?lan=varmland" width="100%" height="300" style="border:0;max-width:480px;display:block;border-radius:16px" title="Väglaget i Värmland just nu, Halkvakt" loading="lazy"></iframe>
+<div class="widgetpar">
+  <figure><iframe src="widget.html?lan=varmland&amp;v=2" width="100%" height="300" title="Väglaget i Värmland just nu, Halkvakt, mörkt" loading="lazy"></iframe><figcaption>Mörkt (standard)</figcaption></figure>
+  <figure><iframe src="widget.html?lan=varmland&amp;tema=ljus&amp;v=2" width="100%" height="300" title="Väglaget i Värmland just nu, Halkvakt, ljust" loading="lazy"></iframe><figcaption>Ljust: <code>&amp;tema=ljus</code></figcaption></figure>
+</div>
+<style>
+  .widgetpar { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 8px 0 0; }
+  .widgetpar figure { margin: 0; }
+  .widgetpar iframe { border: 0; display: block; width: 100%; max-width: 480px; border-radius: 16px; }
+  .widgetpar figcaption { font-size: 14px; margin-top: 8px; color: var(--text2, #A9B5BB); }
+</style>
 <p style="margin-top:18px">Klistra in den här koden där kortet ska ligga. Byt <code>varmland</code> mot ert län.</p>
 <pre id="inbadd"><code>&lt;iframe src="https://halkvakt.se/widget.html?lan=varmland"
   width="100%" height="300" style="border:0;max-width:480px"
