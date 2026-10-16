@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[15.531997608,60.509416437]},"properties":{"land":"SE","typ":"Olycka","msg":"Singelolycka personbil i höjd med Ornäs, begränsad framkomlighet.","allvar":"Stor påverkan","road":"E16","start":"2026-10-16T19:35:00.000Z"}}]}
