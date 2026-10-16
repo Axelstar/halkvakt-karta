@@ -92,6 +92,11 @@
   <a href="press/livekartan-dalarna.png"><img src="press/livekartan-dalarna.png" alt="Livekartan inzoomad på Dalarna med gul länsgräns" loading="lazy"><span>Livekartan, ett län</span></a>
   <a href="press/lanssidan-dalarna.png"><img src="press/lanssidan-dalarna.png" alt="Länssidan Är det halt i Dalarna just nu" loading="lazy"><span>Länssidan</span></a>
 </div>
+<dialog id="visare" class="visare" aria-label="Bild i full storlek">
+  <button type="button" class="stang" id="visare-stang" aria-label="Stäng">×</button>
+  <img id="visare-bild" alt="">
+  <div class="visare-rad"><span id="visare-text"></span><a id="visare-ladda" class="lank-mono" href="" download>Ladda ner →</a></div>
+</dialog>
 <p><a href="logo-512.png">Logotyp, PNG 512 px</a> · <a href="logo.svg">Logotyp, SVG</a> · <a href="og.png">Delningsbild, 1200 × 630</a></p>
 <p style="font-size:14px">Varningskorten visar appens riktiga rösttexter. Kartbilderna är ögonblicksbilder från 16 oktober 2026; egna skärmbilder från <a href="karta.html">livekartan</a> får användas fritt med källangivelse.</p>
 
@@ -119,6 +124,19 @@ fetch('data/lan.json?t=' + Date.now(), { cache: 'no-cache' }).then(r => r.json()
     [l.halt > 0 ? `${l.halt} av ${l.vagavsnitt} vägavsnitt med halka` : '', l.kalla > 0 ? `${l.kalla} ${l.kalla === 1 ? 'station' : 'stationer'} under noll` : ''].filter(Boolean).join(', '));
   el.innerHTML = rader.length ? 'Just nu: ' + rader.join(' · ') + '.' : 'Just nu har inget län halka i Trafikverkets rapport eller vägbana under noll.';
 }).catch(() => { const el = document.getElementById('p-lan'); if (el) el.textContent = ''; });
+// Bildvisaren: klick på en pressbild öppnar den i en ruta som stängs med krysset, Esc eller ett klick utanför. Utan JS öppnas filen som förut.
+(() => {
+  const v = document.getElementById('visare'); if (!v || !v.showModal) return;
+  const bild = document.getElementById('visare-bild'), text = document.getElementById('visare-text'), ladda = document.getElementById('visare-ladda');
+  document.querySelectorAll('.galleri a').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    bild.src = a.href; bild.alt = a.querySelector('img').alt; text.textContent = a.querySelector('span').textContent; ladda.href = a.href;
+    v.showModal();
+  }));
+  document.getElementById('visare-stang').addEventListener('click', () => v.close());
+  v.addEventListener('click', e => { if (e.target === v) v.close(); });
+  v.addEventListener('close', () => { bild.src = ''; });
+})();
 </script>
 </body>
 </html>
