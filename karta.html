@@ -82,7 +82,7 @@
   <button class="chip" data-layer="olyckor" aria-pressed="true"><i style="background:#FFC94A;box-shadow:0 0 0 2px #080B0D,0 0 0 3px #FFC94A"></i>Olyckor</button>
   <button class="chip" data-layer="kameror" aria-pressed="false"><i style="background:#6F7C83"></i>Fartkameror</button>
 </div>
-<p class="kalla-rad">Data: <a href="https://www.trafikverket.se" rel="noopener">Trafikverket</a> (CC0) · <a href="https://www.digitraffic.fi" rel="noopener">Fintraffic</a> (CC BY 4.0) · <a href="https://www.met.no" rel="noopener">MET Norway</a> (CC BY 4.0) · Karta: <a href="https://openfreemap.org" rel="noopener">OpenFreeMap</a> © OpenStreetMap</p>
+<p class="kalla-rad">Data: <a href="https://www.trafikverket.se" rel="noopener">Trafikverket</a> (CC0) · <a href="https://www.digitraffic.fi" rel="noopener">Fintraffic</a> (CC BY 4.0) · <a href="https://www.met.no" rel="noopener">MET Norway</a> (CC BY 4.0) · <a href="https://www.dmi.dk/friedata" rel="noopener">DMI</a> (<a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>) · Karta: <a href="https://openfreemap.org" rel="noopener">OpenFreeMap</a> © OpenStreetMap</p>
 <script>
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -149,15 +149,16 @@ map.on('load', async () => {
   }
 
   const pop = (e, html) => new maplibregl.Popup({ closeButton: false }).setLngLat(e.lngLat).setHTML(`<div class="pop">${html}</div>`).addTo(map);
-  map.on('click', 'vader', e => { const p = e.features[0].properties;
+  // DMI mäter gräsytan, inte vägen, och nederbördsfältet bär då 'grass' (Halkvakt DECISIONS #45, #585).
+  map.on('click', 'vader', e => { const p = e.features[0].properties; const dk = p.land === 'DK';
     pop(e, `<h3>${esc(p.name)}</h3>
-      <div>Vägbana <b>${grad(p.yta)}</b></div>
+      <div>${dk ? 'Gräsyta' : 'Vägbana'} <b>${grad(p.yta)}</b></div>
       <div>Luft ${grad(p.luft)}</div>
-      <div>Nederbörd ${p.nbd === 'no' ? 'ingen' : esc(p.nbd ?? '–')}</div>
+      ${dk ? '' : `<div>Nederbörd ${p.nbd === 'no' ? 'ingen' : esc(p.nbd ?? '–')}</div>`}
       <div class="k">Mätt ${fmtTid(p.t)}</div>`); });
-  // Kandidaten (#579) ligger ovanpå väglagslinjen: där den syns går dess ruta före väglagets, och punkterna går före kandidaten.
+  // Kandidaten (#579) ligger ovanpå väglagslinjen: där den syns går dess ruta före väglagets, och punkterna går före båda (16/10: en station på en väg gav två rutor).
   const under = (e, lager) => map.queryRenderedFeatures(e.point, { layers: lager.filter(l => map.getLayer(l)) }).length > 0;
-  map.on('click', 'vaglag', e => { if (under(e, ['kandidat'])) return; const p = e.features[0].properties; let info = [];
+  map.on('click', 'vaglag', e => { if (under(e, ['kandidat', 'vader', 'olyckor', 'kameror'])) return; const p = e.features[0].properties; let info = [];
     try { info = JSON.parse(p.info || '[]'); } catch {}
     pop(e, `<h3>${esc(p.road ?? 'Vägsträcka')}</h3><div><b>${esc(p.text)}</b></div><div class="k">${esc(info.join(', '))}</div>`); });
   map.on('click', 'olyckor', e => { const p = e.features[0].properties;
