@@ -10,7 +10,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root { --mark: #080B0D; --panel: #0F1518; --kant: #1E282D; --skilje: #253036; --text: #E9EFF2; --text2: #A9B5BB; --dampad: #8FA0A9;
-    --gul: #FFC94A; --sans: "Instrument Sans", "Helvetica Neue", Arial, sans-serif; --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace; color-scheme: dark; }
+    --gul: #FFC94A; --sans: "Instrument Sans", "Helvetica Neue", Arial, sans-serif; --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace; }
+  html[data-tema="ljus"] { --panel: #FFFFFF; --kant: #DCE2E5; --skilje: #E6EBED; --text: #111719; --text2: #48555B; --dampad: #6A7880; --gul-tal: #9A6500; }
   *, *::before, *::after { box-sizing: border-box; }
   html, body { margin: 0; background: transparent; }
   body { color: var(--text); font: 400 15px/1.5 var(--sans); padding: 0; }
@@ -24,7 +25,7 @@
   .tal div { min-width: 0; }
   .tal small { display: block; font: 500 10px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--dampad); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .tal strong { display: block; font: 600 24px/1.1 var(--mono); margin-top: 4px; white-space: nowrap; }
-  .tal strong.varm { color: var(--gul); }
+  .tal strong.varm { color: var(--gul-tal, var(--gul)); }
   .tal em { display: block; font: 400 12px var(--sans); color: var(--text2); font-style: normal; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   p { margin: 0; color: var(--text2); }
   .fot { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
@@ -51,6 +52,9 @@
   var BAS = 'https://halkvakt.se/';
   var q = new URLSearchParams(location.search);
   var lanSlug = q.get('lan'), vagSlug = q.get('vag');
+  var tema = q.get('tema');
+  if (tema === 'auto') tema = (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches) ? 'ljus' : 'mork';
+  if (tema === 'ljus') document.documentElement.setAttribute('data-tema', 'ljus');
   var $ = function (id) { return document.getElementById(id.replace('#', '')); };
   var minus = function (n) { return String(n).replace('.', ',').replace('-', '−'); };
   var tid = function (iso) {
