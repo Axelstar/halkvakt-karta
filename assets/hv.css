@@ -107,3 +107,10 @@ p { margin: 0; }
 .dok pre { background: var(--panel); border: 1px solid var(--kant); border-radius: 14px; padding: 16px 18px; overflow-x: auto;
   font: 400 13px/1.6 var(--mono); color: var(--text2); margin: 0 0 16px; }
 .dok pre code { font-size: inherit; }
+
+/* Remsan: en tillfällig rad om ett läge Trafikverket varnat för. Dold från början; sidans skript visar den till ett slutdatum. */
+.remsa { background: var(--gul); color: var(--gultext); font-size: 14px; line-height: 1.45; }
+.remsa[hidden] { display: none; }
+.remsa .wrap { padding-block: 10px; }
+.remsa a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.remsa .kalla { white-space: nowrap; }
