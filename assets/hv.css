@@ -114,3 +114,11 @@ p { margin: 0; }
   background: var(--upp) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23FFC94A' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 14px center;
   color: var(--text); font: 500 12px var(--mono); letter-spacing: .1em; text-transform: uppercase; cursor: pointer; max-width: 240px; }
 .valj select:hover { border-color: var(--gul); }
+
+/* Pressbilder */
+.galleri { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin: 16px 0 12px; }
+.galleri.bred { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.galleri a { display: grid; gap: 6px; align-content: start; text-decoration: none; color: var(--text2); font-size: 13px; }
+.galleri img { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--kant); background: var(--panel); }
+.galleri a:hover img { border-color: var(--gul); }
+@media (max-width: 640px) { .galleri { grid-template-columns: repeat(3, minmax(0, 1fr)); } .galleri.bred { grid-template-columns: 1fr; } }
