@@ -25,7 +25,7 @@
       <a href="./#appen">Appen</a>
       <a href="./#sa-funkar">Så funkar det</a>
       <a href="karta.html">Livekartan</a>
-      <a href="integritet.html">Integritet</a>
+      <a href="lan/">Länen</a>
     </nav>
     <a class="knapp" href="https://apps.apple.com/se/app/id6806939784">Ladda ner för iPhone</a>
   </div>
@@ -47,6 +47,10 @@
 </table>
 <p id="p-fot" style="margin-top:12px;font-size:14px">Siffrorna uppdateras var 30:e minut och får citeras med källan ”Halkvakt / Trafikverkets öppna data”.</p>
 
+<h2>Läget per län</h2>
+<p>Varje län har en egen sida med Trafikverkets rapporterade halka, vägbanans temperatur vid mätstationerna och pågående olyckor: <a href="lan/">halkvakt.se/lan</a>. På <a href="karta.html">livekartan</a> väljer man län i panelen eller öppnar det direkt, till exempel <a href="karta.html?lan=dalarna">karta.html?lan=dalarna</a>. Allt uppdateras var 30:e minut.</p>
+<p id="p-lan" style="font-size:14px">Län med halka eller vägbana under noll just nu hämtas …</p>
+
 <h2>Snabbfakta</h2>
 <table>
   <tbody>
@@ -54,6 +58,7 @@
     <tr><th scope="row">Pris</th><td>Gratis, inget konto, ingen reklam</td></tr>
     <tr><th scope="row">Finns</th><td>iPhone, App Store sedan 13 oktober 2026. Android i vinter</td></tr>
     <tr><th scope="row">Data</th><td>Trafikverkets öppna data, uppdaterad var 30:e minut</td></tr>
+    <tr><th scope="row">Webb</th><td>Livekartan, läget per län (<a href="lan/">halkvakt.se/lan</a>) och ett inbäddningskort för redaktioner, alla gratis att använda</td></tr>
     <tr><th scope="row">Integritet</th><td>Jämförelsen sker i telefonen. Positionen lämnar inte telefonen av sig själv</td></tr>
     <tr><th scope="row">Handhavande</th><td>Vaknar själv när man börjar köra, eller med ”Hej Siri, starta Halkvakt”. Inget att trycka på under körning</td></tr>
   </tbody>
@@ -95,6 +100,12 @@ fetch('data/meta.json?t=' + Date.now(), { cache: 'no-cache' }).then(r => r.json(
   const kl = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Stockholm', dateStyle: 'short', timeStyle: 'short' }).format(new Date(m.generated_at));
   s('p-fot', 'Senast uppdaterat ' + kl + '. Siffrorna får citeras med källan ”Halkvakt / Trafikverkets öppna data”.');
 }).catch(() => {});
+fetch('data/lan.json?t=' + Date.now(), { cache: 'no-cache' }).then(r => r.json()).then(d => {
+  const el = document.getElementById('p-lan'); if (!el) return;
+  const rader = d.lan.filter(l => l.halt > 0 || l.kalla > 0).map(l => `<a href="lan/${l.slug}/">${l.kort}</a>: ` +
+    [l.halt > 0 ? `${l.halt} av ${l.vagavsnitt} vägavsnitt med halka` : '', l.kalla > 0 ? `${l.kalla} ${l.kalla === 1 ? 'station' : 'stationer'} under noll` : ''].filter(Boolean).join(', '));
+  el.innerHTML = rader.length ? 'Just nu: ' + rader.join(' · ') + '.' : 'Just nu har inget län halka i Trafikverkets rapport eller vägbana under noll.';
+}).catch(() => { const el = document.getElementById('p-lan'); if (el) el.textContent = ''; });
 </script>
 </body>
 </html>
