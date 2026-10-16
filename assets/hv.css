@@ -104,3 +104,6 @@ p { margin: 0; }
 .dok th { font: 500 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dampad); }
 .dok img { border-radius: 14px; }
 .dok code { font-family: var(--mono); font-size: .9em; }
+.dok pre { background: var(--panel); border: 1px solid var(--kant); border-radius: 14px; padding: 16px 18px; overflow-x: auto;
+  font: 400 13px/1.6 var(--mono); color: var(--text2); margin: 0 0 16px; }
+.dok pre code { font-size: inherit; }

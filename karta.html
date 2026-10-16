@@ -30,6 +30,7 @@
     max-width: 560px; display: grid; gap: 6px; }
   .status h1 { font-size: 20px; letter-spacing: -.015em; }
   .status p { color: var(--text2); font-size: 14px; }
+  .status a { color: var(--text); text-decoration-color: var(--gul); text-underline-offset: 3px; }
   .lager { position: fixed; z-index: 15; left: clamp(16px, 4vw, 60px); right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px));
     display: flex; gap: 8px; flex-wrap: wrap; pointer-events: none; }
   .chip { pointer-events: auto; display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 8px 14px; border-radius: 22px;
@@ -88,6 +89,13 @@ const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const fmtTid = iso => new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Stockholm', hour: '2-digit', minute: '2-digit' }).format(new Date(iso));
 const grad = v => v == null ? '–' : (v < 0 ? '−' : '') + Math.abs(Number(v)).toFixed(1).replace('.', ',') + ' °C';
+const LAN = { stockholm: [1, 'Stockholms län'], uppsala: [3, 'Uppsala län'], sodermanland: [4, 'Södermanland'], ostergotland: [5, 'Östergötland'],
+  jonkoping: [6, 'Jönköpings län'], kronoberg: [7, 'Kronoberg'], kalmar: [8, 'Kalmar län'], gotland: [9, 'Gotland'], blekinge: [10, 'Blekinge'],
+  skane: [12, 'Skåne'], halland: [13, 'Halland'], 'vastra-gotaland': [14, 'Västra Götaland'], varmland: [17, 'Värmland'], orebro: [18, 'Örebro län'],
+  vastmanland: [19, 'Västmanland'], dalarna: [20, 'Dalarna'], gavleborg: [21, 'Gävleborg'], vasternorrland: [22, 'Västernorrland'],
+  jamtland: [23, 'Jämtland'], vasterbotten: [24, 'Västerbotten'], norrbotten: [25, 'Norrbotten'] };
+const lanSlug = new URLSearchParams(location.search).get('lan');
+const lanVal = lanSlug && LAN[lanSlug] ? { slug: lanSlug, kod: LAN[lanSlug][0], namn: LAN[lanSlug][1] } : null;
 const map = new maplibregl.Map({
   container: 'map', style: 'https://tiles.openfreemap.org/styles/dark',
   center: [16.3, 62.6], zoom: 4.4, minZoom: 3.6, attributionControl: false
@@ -131,7 +139,18 @@ map.on('load', async () => {
   document.querySelectorAll('.chip').forEach(c => map.setLayoutProperty(c.dataset.layer, 'visibility', c.getAttribute('aria-pressed') === 'true' ? 'visible' : 'none'));
 
   const m = d.meta;
-  if (m) {
+  if (lanVal) {
+    // Länets utbredning = dess vägavsnitt i väglagsrapporten; kartan zoomas dit och panelen visar länets tal.
+    const segs = d.vaglag.features.filter(f => f.properties.lan === lanVal.kod);
+    const b = new maplibregl.LngLatBounds();
+    for (const f of segs) { const g = f.geometry; (g.type === 'MultiLineString' ? g.coordinates.flat() : g.coordinates).forEach(c => b.extend(c)); }
+    if (segs.length) map.fitBounds(b, { padding: { top: 200, bottom: 90, left: 40, right: 40 }, maxZoom: 9, duration: 0 });
+    const hala = segs.filter(f => f.properties.code > 1).length;
+    $('#rubrik').textContent = `Väglaget i ${lanVal.namn} just nu`;
+    $('#tid').textContent = m ? 'Livekartan · uppdaterad ' + fmtTid(m.generated_at) : 'Livekartan';
+    $('#rader').innerHTML = `${hala ? `${hala} av ${segs.length} vägavsnitt med halka eller vinterväglag` : `Inget av länets ${segs.length} vägavsnitt har halka i Trafikverkets rapport`}. ` +
+      `<a href="lan/${lanVal.slug}/">Läget i ${esc(lanVal.namn)}</a> · <a href="karta.html">Hela landet</a>`;
+  } else if (m) {
     $('#tid').textContent = 'Livekartan · uppdaterad ' + fmtTid(m.generated_at);
     const bitar = [];
     bitar.push(m.vaglag_ej_normalt > 0 ? `${m.vaglag_ej_normalt} sträckor med besvärligt väglag` : 'Normalt väglag i hela landet');

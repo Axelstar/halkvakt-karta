@@ -63,6 +63,16 @@
 <div class="lofte">Halkvakt säger till när det är halt. Appen läser Trafikverkets vägväderstationer och rapporterade väglag och varnar med rösten innan du är där, genom bilens högtalare. Gratis, utan konto, och din position lämnar inte telefonen av sig själv.</div>
 <p style="font-size:14px">Texten får användas fritt i redaktionella sammanhang.</p>
 
+<h2 id="redaktioner">För redaktioner: bädda in läget i ert län</h2>
+<p>Ett litet kort som visar väglaget i ett län just nu: halka enligt Trafikverket, vägväderstationer med vägbana under noll och den kallaste mätpunkten. Det uppdateras var 30:e minut, dygnet runt, utan att ni behöver göra något. Så här ser det ut:</p>
+<iframe src="widget.html?lan=varmland" width="100%" height="300" style="border:0;max-width:480px;display:block;border-radius:16px" title="Väglaget i Värmland just nu, Halkvakt" loading="lazy"></iframe>
+<p style="margin-top:18px">Klistra in den här koden där kortet ska ligga. Byt <code>varmland</code> mot ert län.</p>
+<pre id="inbadd"><code>&lt;iframe src="https://halkvakt.se/widget.html?lan=varmland"
+  width="100%" height="300" style="border:0;max-width:480px"
+  title="Väglaget i Värmland just nu, Halkvakt" loading="lazy"&gt;&lt;/iframe&gt;</code></pre>
+<p style="font-size:14px">Länsnamn i adressen: stockholm, uppsala, sodermanland, ostergotland, jonkoping, kronoberg, kalmar, gotland, blekinge, skane, halland, vastra-gotaland, varmland, orebro, vastmanland, dalarna, gavleborg, vasternorrland, jamtland, vasterbotten, norrbotten. Vägar: <code>?vag=e4</code>, e6, e18, e20, e22, rv40. Utan parameter visas hela landet.</p>
+<p style="font-size:14px">Kortet får bäddas in fritt i redaktionella sammanhang. Siffrorna kommer från Trafikverkets öppna data och får citeras med källan ”Halkvakt / Trafikverkets öppna data”. Rådata finns på <a href="data/lan.json">data/lan.json</a>. Läget per län i text finns på <a href="lan/">halkvakt.se/lan</a>.</p>
+
 <h2>Bilder och logotyp</h2>
 <p><a href="logo-512.png">Logotyp, PNG 512 px</a> · <a href="logo.svg">Logotyp, SVG</a> · <a href="og.png">Delningsbild, 1200 × 630</a></p>
 <p style="font-size:14px">Skärmbilder från <a href="karta.html">livekartan</a> får användas fritt med källangivelse.</p>
