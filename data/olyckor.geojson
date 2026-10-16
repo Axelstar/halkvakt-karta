@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[16.671551297,59.622807296]},"properties":{"land":"SE","typ":"Olycka","msg":"Singelolycka med personbil, risk för begränsad framkomlighet i riktning mot Västerås.","allvar":"Stor påverkan","road":"E18","start":"2026-10-16T23:16:00.000Z"}}]}
