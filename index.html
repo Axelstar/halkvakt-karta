@@ -218,6 +218,7 @@
         <a class="knapp stor" href="https://apps.apple.com/se/app/id6806939784">Ladda ner för iPhone</a>
         <div class="flikar" role="tablist" aria-label="Exempel på varningar">
           <button role="tab" aria-selected="true" data-kort="halka"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-halka"/></svg>Halka</button>
+          <button role="tab" aria-selected="false" data-kort="frys"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-frys"/></svg>Frysrisk</button>
           <button role="tab" aria-selected="false" data-kort="kamera"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-kamera"/></svg>Fartkamera</button>
           <button role="tab" aria-selected="false" data-kort="vilt"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-vilt"/></svg>Vilt</button>
           <button role="tab" aria-selected="false" data-kort="olycka"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-olycka"/></svg>Olycka</button>
@@ -276,11 +277,12 @@
   // ---- Varningskorten (repliker ordagrant från motorn, engine/src/texts.ts) ----
   const KORT = {
     halka:  { ikon: 'i-halka',  titel: 'Halka',      avstand: '<span class="text">FRAMFÖR DIG</span>', replik: 'Varning: halka rapporterad på vägen framför dig.' },
+    frys:   { ikon: 'i-frys',   titel: 'Frysrisk',   avstand: '<span class="text">FRAMÖVER</span>', replik: 'Isrisk framöver — vägbanan nära noll grader.' },
     kamera: { ikon: 'i-kamera', titel: 'Fartkamera', avstand: '<span class="tal">500<small>M</small></span><span class="grans">80</span>', replik: 'Fartkamera om 500 meter. Gränsen är 80.' },
     vilt:   { ikon: 'i-vilt',   titel: 'Vilt',       avstand: '<span class="text">FRAMÖVER</span>', replik: 'Viltrisk framöver.' },
     olycka: { ikon: 'i-olycka', titel: 'Olycka',     avstand: '<span class="tal">3<small>KM</small></span><span class="vag">E18</span>', replik: 'Olycka rapporterad på E18 3 kilometer framför dig.' },
   };
-  const ordning = ['halka', 'kamera', 'vilt', 'olycka'];
+  const ordning = ['halka', 'frys', 'kamera', 'vilt', 'olycka'];
   const kortet = document.getElementById('kortet');
   const flikar = [...document.querySelectorAll('.flikar button')];
   const lugn = matchMedia('(prefers-reduced-motion: reduce)').matches;
