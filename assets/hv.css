@@ -128,7 +128,7 @@ p { margin: 0; }
   width: min(96vw, 1200px); max-height: 94vh; display: none; grid-template-rows: auto 1fr auto; gap: 12px; }
 .visare[open] { display: grid; }
 .visare::backdrop { background: rgba(8, 11, 13, .86); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
-.visare img { width: 100%; height: auto; max-height: calc(94vh - 120px); object-fit: contain; border-radius: 12px; background: var(--mark); }
+.visare img { display: block; max-width: 100%; max-height: calc(94vh - 120px); width: auto; height: auto; margin: 0 auto; object-fit: contain; border-radius: 12px; background: var(--mark); }
 .visare .stang { justify-self: end; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--kant); background: var(--upp); color: var(--text);
   font: 400 24px/1 var(--sans); cursor: pointer; }
 .visare .stang:hover { border-color: var(--gul); }
