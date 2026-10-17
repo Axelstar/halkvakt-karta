@@ -21,8 +21,8 @@
   body { overflow: hidden; }
   #map { position: fixed; inset: 0; background: var(--mark); }
   .topp { position: fixed; left: 0; right: 0; top: 0; }
-  .topp .wrap { max-width: none; padding-top: env(safe-area-inset-top, 0px); }
-  .rad { position: fixed; z-index: 15; left: 0; right: 0; top: calc(72px + env(safe-area-inset-top, 0px)); padding: 12px clamp(16px, 4vw, 60px);
+  .topp .wrap { max-width: none; }
+  .rad { position: fixed; z-index: 15; left: 0; right: 0; top: var(--topph, 72px); padding: 12px clamp(16px, 4vw, 60px);
     pointer-events: none; display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-start; }
   .status { pointer-events: auto; background: rgba(15, 21, 24, .96); border: 1px solid var(--kant); border-radius: 16px; padding: 12px 16px;
     width: 100%; max-width: 560px; display: grid; gap: 6px; }
@@ -68,11 +68,7 @@
   @media (max-width: 640px) {
     .kalla-rad { display: none; }
     /* Mobilen: lägre topp, en kompakt panel och lagren på en rad längst ner, så att kartan får skärmen. */
-    .topp .wrap { min-height: 56px; }
-    .topp .knapp { min-height: 38px; padding: 8px 16px; font-size: 14px; }
-    .topp .logo svg { width: 20px; }
-    .topp .logo b { font-size: 13px; }
-    .rad { top: calc(56px + env(safe-area-inset-top, 0px)); padding: 10px 12px; }
+    .rad { padding: 10px 12px; }
     .status { max-width: none; padding: 10px 14px 12px; gap: 4px; }
     .status .valj-text { display: none; }
     .status .etikett { font-size: 11px; letter-spacing: .12em; }
@@ -89,6 +85,12 @@
     .chip { flex: none; min-height: 38px; padding: 6px 13px; }
     .maplibregl-ctrl-bottom-right { bottom: calc(58px + env(safe-area-inset-bottom, 0px)); }
   }
+  /* Mellanbredd: källraden bryts på två rader, så knapparna och kartkontrollerna lyfts över den. */
+  @media (min-width: 641px) and (max-width: 1100px) {
+    .kalla-rad { left: 16px; }
+    .lager { bottom: calc(46px + env(safe-area-inset-bottom, 0px)); }
+    .maplibregl-ctrl-bottom-right { bottom: 98px; }
+  }
   /* Pekskärm: man nyper för att zooma, så plus och minus tas bort. Knappen för din position står kvar. */
   @media (hover: none) and (pointer: coarse) { .maplibregl-ctrl-group:has(.maplibregl-ctrl-zoom-in) { display: none; } }
   .maplibregl-ctrl-bottom-right { bottom: 64px; }
@@ -98,7 +100,7 @@
   .maplibregl-ctrl-attrib { background: var(--panel) !important; color: var(--dampad); font: 500 10px/1.5 var(--mono); letter-spacing: .06em; }
   .maplibregl-ctrl-attrib a { color: var(--text2); }
   .maplibregl-ctrl-attrib-button { filter: invert(1) brightness(.8); }
-  .maplibregl-ctrl-top-right { top: calc(56px + 10px + var(--panelhojd, 120px) + env(safe-area-inset-top, 0px)); }
+  .maplibregl-ctrl-top-right { top: calc(var(--topph, 72px) + 10px + var(--panelhojd, 120px)); }
   .maplibregl-popup-content { background: var(--panel); color: var(--text); border: 1px solid var(--kant); border-radius: 14px;
     font: 14px/1.45 var(--sans); padding: 12px 14px; max-width: 280px; }
   .maplibregl-popup-tip { border-top-color: var(--panel) !important; border-bottom-color: var(--panel) !important; }
@@ -144,6 +146,9 @@
 <p class="kalla-rad">Data: <a href="https://www.trafikverket.se" rel="noopener">Trafikverket</a> (CC0) · <a href="https://www.digitraffic.fi" rel="noopener">Fintraffic</a> (CC BY 4.0) · <a href="https://www.met.no" rel="noopener">MET Norway</a> (CC BY 4.0) · <a href="https://www.dmi.dk/friedata" rel="noopener">DMI</a> (<a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>) · Karta: <a href="https://openfreemap.org" rel="noopener">OpenFreeMap</a> © OpenStreetMap · Länsgränser: Natural Earth</p>
 <script>
 const $ = s => document.querySelector(s);
+// Toppens höjd (en eller två rader beroende på skärm) styr var panelen ligger.
+const toppHojd = () => document.documentElement.style.setProperty('--topph', Math.round(document.querySelector('.topp').getBoundingClientRect().height) + 'px');
+toppHojd(); new ResizeObserver(toppHojd).observe(document.querySelector('.topp'));
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const fmtTid = iso => new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Stockholm', hour: '2-digit', minute: '2-digit' }).format(new Date(iso));
 const grad = v => v == null ? '–' : (v < 0 ? '−' : '') + Math.abs(Number(v)).toFixed(1).replace('.', ',') + ' °C';
