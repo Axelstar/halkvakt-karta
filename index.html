@@ -128,6 +128,51 @@
   .butik svg { width: 22px; height: 22px; }
   .butik.snart { background: var(--panel); color: var(--dampad); border: 1px solid var(--kant); }
   .butik.snart b { color: var(--text2); }
+  dl.kvitto { margin: 0; }
+
+  /* Mobilen: lägre topp, kortare etiketter, kompakta paneler och flikar på en rad. */
+  @media (max-width: 640px) {
+    .topp .wrap { min-height: 56px; }
+    .topp .knapp { min-height: 38px; padding: 8px 16px; font-size: 14px; }
+    .topp .logo svg { width: 20px; }
+    .topp .logo b { font-size: 13px; }
+    .hero { padding-block: 32px 56px; }
+    .hero .etikett { margin-bottom: 16px; font-size: 11px; }
+    .hero .ingress { margin-top: 18px; }
+    .lang { display: none; }
+    .jatte { font-size: 40px; }
+    .lage { margin-top: 32px; gap: 12px; }
+    .kartruta { min-height: 400px; }
+    .kartruta .ovre { top: 14px; left: 14px; right: 14px; }
+    .kartruta .ovre .valj { flex: 1; min-width: 0; }
+    .kartruta .ovre .valj select { width: 100%; max-width: none; }
+    .kartruta .oppna { flex: none; padding: 8px 12px; }
+    .kartruta .forklaring { left: 14px; bottom: 12px; }
+    .tal .huvud { padding: 16px 20px 4px; }
+    .tal .kvitto > div { padding: 12px 20px; gap: 2px; }
+    .tal .stort b { font-size: 28px; }
+    .tal .stort span { font-size: 15px; }
+    .ladda { padding: 18px 20px; }
+    .sa .rubrik { margin: 12px 0 28px; }
+    .tre { gap: 10px; }
+    .tre .panel { padding: 20px 22px 22px; gap: 8px; }
+    .tre .panel .etikett { font-size: 11px; }
+    .tre h3 { font-size: 21px; }
+    .tre p { font-size: 16px; }
+    .faror { padding: 4px 20px; margin-top: 10px; }
+    .faror li { padding: 14px 0; }
+    .faror .namn { font-size: 16px; gap: 12px; }
+    .faror .kalla { font-size: 10px; }
+    .appen .wrap { grid-template-columns: minmax(0, 1fr); }
+    .flikar { flex-wrap: nowrap; overflow-x: auto; gap: 18px; margin-inline: -16px; padding: 4px 16px; scrollbar-width: none; }
+    .flikar::-webkit-scrollbar { display: none; }
+    .flikar button { flex: none; }
+    .telefon { width: 280px; border-radius: 44px; padding: 9px; }
+    .skarm { border-radius: 36px; padding: 16px 20px 18px; }
+    .skarm .ikon { width: 60px; height: 60px; margin-top: 24px; }
+    .skarm .titel { font-size: 40px; }
+    .skarm .avstand .tal { font-size: 44px; }
+  }
 </style>
 </head>
 <body>
@@ -166,12 +211,12 @@
         <div class="kartruta panel">
           <a class="kartlank" href="karta.html" aria-label="Öppna livekartan"></a>
           <div class="ovre"><p class="etikett"><span class="ljus" aria-hidden="true"></span><span id="k-tid">Livekartan</span></p>
-            <div class="hoger"><label class="valj"><span class="valj-text">Visa län</span><select id="lanval" aria-label="Välj län och öppna livekartan"><option value="">Välj län</option></select></label><a class="oppna" href="karta.html">ÖPPNA KARTAN →</a></div></div>
+            <div class="hoger"><label class="valj"><span class="valj-text">Visa län</span><select id="lanval" aria-label="Välj län och öppna livekartan"><option value="">Välj län</option></select></label><a class="oppna" href="karta.html"><span class="lang">ÖPPNA </span>KARTAN →</a></div></div>
           <canvas id="karta" aria-hidden="true"></canvas>
           <div class="forklaring">
             <span><i style="background:var(--gul)"></i>Halka rapporterad · <b id="k-halka">–</b> sträckor</span>
             <span><i style="background:#E9EFF2"></i>Vägbana under noll · <b id="k-kalla">–</b></span>
-            <span><i style="background:#4A5A63"></i>Över noll · <b id="k-varma">–</b></span>
+            <span><i style="background:#34424A"></i>Över noll · <b id="k-varma">–</b></span>
           </div>
         </div>
         <div class="sidokolumn">
@@ -360,7 +405,7 @@
     const halt = vaglag.features.filter(f => arHalt(f.properties.code, f.properties.info));
     const plats = kallast ? ren(kallast.properties.name) : '';
 
-    satt('h-tid', 'Vägarna just nu · ' + n.dag + ' ' + n.datum + ' · ' + n.tid);
+    document.getElementById('h-tid').innerHTML = '<span class="lang">Vägarna just nu · </span>' + n.dag + ' ' + n.datum + ' · ' + n.tid;
     satt('k-tid', 'Livekartan · uppdaterad ' + n.tid);
     satt('t-tid', 'Hela landet · ' + n.tid);
     const rubrik = kalla.length
@@ -400,8 +445,9 @@
     ['NO', 'FI', 'DK'].forEach(k => land(norden && norden[k], '#121A1E', '#1E282D'));
     land(norden && norden.SE, '#162024', '#34424A');
     // Stationer över noll
-    c.fillStyle = '#4A5A63';
-    stat.forEach(f => { if (f.properties.yta >= 0) { const [x, y] = xy(f.geometry.coordinates); c.beginPath(); c.arc(x, y, 1.6, 0, Math.PI * 2); c.fill(); } });
+    // Stationer över noll: små och svaga, de är bakgrund. Halkan och kylan ska synas först.
+    c.fillStyle = '#34424A';
+    stat.forEach(f => { if (f.properties.yta >= 0) { const [x, y] = xy(f.geometry.coordinates); c.beginPath(); c.arc(x, y, 1.2, 0, Math.PI * 2); c.fill(); } });
     // Hala sträckor
     c.strokeStyle = '#FFC94A'; c.lineWidth = 2.4; c.lineCap = 'round'; c.lineJoin = 'round';
     c.shadowColor = 'rgba(255,201,74,.6)'; c.shadowBlur = 8;
