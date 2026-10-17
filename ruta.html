@@ -31,6 +31,10 @@
   .nasta { appearance: none; background: none; border: 1px solid var(--kant); border-radius: 999px; padding: 4px 10px; cursor: pointer;
     font: 600 11px var(--mono); letter-spacing: .06em; color: var(--text); white-space: nowrap; }
   .nasta:hover { border-color: var(--gul); }
+  .sponsor { margin: -4px 0 0; font: 500 12px var(--sans); color: var(--text2); }
+  .sponsor b { color: var(--text); font-weight: 600; }
+  .sponsor a { color: inherit; text-decoration: none; }
+  .fot .teknik a { color: var(--dampad); border: 0; padding: 0; font: inherit; letter-spacing: inherit; text-transform: none; text-decoration: underline; }
   .hoger { display: flex; align-items: center; gap: 10px; }
   .spar { flex: 1; min-height: 0; display: flex; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; }
   .spar::-webkit-scrollbar { display: none; }
@@ -64,7 +68,8 @@
 <body>
 <div class="kort">
   <div class="topp">
-    <p class="etikett"><svg viewBox="3 3 94 83" aria-hidden="true"><path fill-rule="evenodd" fill="#FFC94A" d="M55.196 6 L96.196 77 A6 6 0 0 1 91 86 L9 86 A6 6 0 0 1 3.804 77 L44.804 6 A6 6 0 0 1 55.196 6 Z M46.4 32 L53.6 32 L52 58 L48 58 Z M45.6 68 A4.4 4.4 0 1 0 54.4 68 A4.4 4.4 0 1 0 45.6 68 Z"/></svg><b>Halkvakt</b><span id="tid">Hämtar läget</span></p>
+    <p class="etikett"><svg viewBox="3 3 94 83" aria-hidden="true"><path fill-rule="evenodd" fill="#FFC94A" d="M55.196 6 L96.196 77 A6 6 0 0 1 91 86 L9 86 A6 6 0 0 1 3.804 77 L44.804 6 A6 6 0 0 1 55.196 6 Z M46.4 32 L53.6 32 L52 58 L48 58 Z M45.6 68 A4.4 4.4 0 1 0 54.4 68 A4.4 4.4 0 1 0 45.6 68 Z"/></svg><b id="namn">Halkvakt</b><span id="tid">Hämtar läget</span></p>
+    <p class="sponsor" id="sponsor" hidden></p>
     <div class="flikar" role="tablist" id="flikar">
       <button role="tab" id="f-lan" aria-controls="v-lan" aria-selected="true">Länet</button>
       <button role="tab" id="f-vagar" aria-controls="v-vagar" aria-selected="false">Vägarna</button>
@@ -92,7 +97,7 @@
       <p id="pendling-text"></p>
     </section>
   </div>
-  <div class="fot"><a id="lank" href="https://halkvakt.se/lan/" target="_top" rel="noopener">Läget i alla län</a><span class="hoger"><span class="prickar" id="prickar" aria-hidden="true"></span><button class="nasta" id="nasta" type="button"></button></span><span>Källa: Halkvakt / Trafikverkets öppna data</span></div>
+  <div class="fot"><a id="lank" href="https://halkvakt.se/lan/" target="_blank" rel="noopener">Läget i alla län</a><span class="hoger"><span class="prickar" id="prickar" aria-hidden="true"></span><button class="nasta" id="nasta" type="button"></button></span><span id="kalla">Källa: Halkvakt / Trafikverkets öppna data</span></div>
 </div>
 <script>
 (function () {
@@ -100,6 +105,11 @@
   var q = new URLSearchParams(location.search);
   var lanSlug = q.get('lan') || 'varmland';
   var tema = q.get('tema');
+  // Tidningens egen ruta (Axel 17/10): &namn= ersätter Halkvakt i rubriken, &lank= och &lanktext= styr länken i foten (bara https),
+  // &sponsor= och &sponsorlank= ger raden "Presenteras av". Halkvakt står kvar som teknik i foten. Allt skrivs som text, aldrig som HTML.
+  var egetNamn = (q.get('namn') || '').slice(0, 40), egenLank = q.get('lank') || '', sponsor = (q.get('sponsor') || '').slice(0, 60);
+  var sakerLank = function (u) { try { var x = new URL(u); return x.protocol === 'https:' ? x.href : ''; } catch (e) { return ''; } };
+  egenLank = sakerLank(egenLank);
   if (tema === 'auto') tema = (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches) ? 'ljus' : 'mork';
   if (tema === 'ljus') document.documentElement.setAttribute('data-tema', 'ljus');
 
@@ -149,6 +159,18 @@
   addEventListener('load', function () { ga(start, false); });
   addEventListener('resize', function () { ga(Math.round(spar.scrollLeft / spar.clientWidth), false); });
 
+  if (egetNamn) {
+    $('namn').textContent = egetNamn + ' · Väglaget'; document.querySelector('.etikett svg').style.display = 'none';
+    var k = $('kalla'); k.textContent = 'Data: Trafikverket · Teknik: '; k.className = 'teknik';
+    var h = document.createElement('a'); h.href = 'https://halkvakt.se/'; h.target = '_blank'; h.rel = 'noopener'; h.textContent = 'Halkvakt'; k.appendChild(h);
+  }
+  if (sponsor) {
+    var sp = $('sponsor'); sp.hidden = false; sp.appendChild(document.createTextNode('Presenteras av '));
+    var sl = sakerLank(q.get('sponsorlank') || ''), sn = document.createElement(sl ? 'a' : 'b');
+    if (sl) { sn.href = sl; sn.target = '_blank'; sn.rel = 'noopener sponsored'; sn.style.fontWeight = '600'; sn.style.color = 'var(--text)'; }
+    sn.textContent = sponsor; sp.appendChild(sn);
+  }
+
   function visaLan(d) {
     var l = d.lan.filter(function (x) { return x.slug === lanSlug; })[0];
     if (!l) return;
@@ -164,6 +186,8 @@
     if (l.olyckor) t += ' ' + l.olyckor + (l.olyckor === 1 ? ' olycka eller hinder pågår.' : ' olyckor eller hinder pågår.');
     $('lan-text').textContent = t;
     $('lank').href = BAS + 'lan/' + l.slug + '/'; $('lank').textContent = 'Läget i ' + l.kort + ' på halkvakt.se';
+    if (egenLank) { $('lank').href = egenLank; $('lank').target = '_top'; $('lank').textContent = (q.get('lanktext') || 'Mer om trafiken').slice(0, 40); }
+    else { $('lank').target = '_blank'; }   // halkvakt.se i ny flik: läsaren ska aldrig lämna tidningens artikel för oss
     $('tid').textContent = 'Uppdaterad ' + tid(d.generated_at);
   }
 
