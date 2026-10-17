@@ -129,7 +129,7 @@
     vyer.forEach(function (v, k) { $('f-' + v).setAttribute('aria-selected', k === i ? 'true' : 'false'); $('f-' + v).tabIndex = k === i ? 0 : -1; });
     [].forEach.call(prickar.children, function (p, k) { p.className = k === i ? 'pa' : ''; });
   }
-  function ga(i, mjukt) { spar.scrollTo({ left: i * spar.clientWidth, behavior: mjukt === false ? 'auto' : 'smooth' }); markera(i); }
+  function ga(i, mjukt) { spar.scrollTo({ left: i * spar.clientWidth, behavior: mjukt === false ? 'instant' : 'smooth' }); markera(i); }
   vyer.forEach(function (v, k) { $('f-' + v).addEventListener('click', function () { ga(k); }); });
   $('flikar').addEventListener('keydown', function (e) {
     var i = vyer.indexOf(document.activeElement.id.slice(2));
@@ -139,6 +139,7 @@
   spar.addEventListener('scroll', function () { clearTimeout(rull); rull = setTimeout(function () { markera(Math.round(spar.scrollLeft / spar.clientWidth)); }, 60); });
   var start = vyer.indexOf(q.get('flik')); if (start < 0) start = 0;
   requestAnimationFrame(function () { ga(start, false); });
+  addEventListener('load', function () { ga(start, false); });
   addEventListener('resize', function () { ga(Math.round(spar.scrollLeft / spar.clientWidth), false); });
 
   function visaLan(d) {
