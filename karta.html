@@ -53,8 +53,15 @@
   .chip i { width: 9px; height: 9px; border-radius: 50%; flex: none; }
   .chip i.linje { width: 14px; height: 3px; border-radius: 2px; }
   /* Avslaget lager släcks ner, men knappen behåller sin täckande bakgrund så att kartan inte lyser igenom. */
-  .chip[aria-pressed="false"], .chip:disabled { color: var(--dampad2); }
-  .chip[aria-pressed="false"] i, .chip:disabled i { opacity: .35; }
+  .chip[aria-pressed="false"], .chip[aria-disabled="true"] { color: var(--dampad2); }
+  .chip[aria-pressed="false"] i, .chip[aria-disabled="true"] i { opacity: .35; }
+  .chip[aria-disabled="true"] { border-style: dashed; }
+  /* Kort besked ovanför lagerknapparna, t.ex. när ett lager är avstängt. Försvinner själv. */
+  .notis { position: fixed; z-index: 16; left: 50%; transform: translateX(-50%); bottom: calc(68px + env(safe-area-inset-bottom, 0px));
+    width: min(92vw, 420px); background: var(--upp); border: 1px solid #34424A; border-radius: 14px; padding: 12px 14px;
+    color: var(--text); font-size: 14px; line-height: 1.4; box-shadow: 0 18px 40px rgba(0, 0, 0, .6); }
+  .notis b { display: block; font: 500 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dampad); margin-bottom: 2px; }
+  .notis[hidden] { display: none; }
   .kalla-rad { position: fixed; z-index: 14; right: 12px; bottom: calc(4px + env(safe-area-inset-bottom, 0px)); font: 500 10px var(--mono);
     letter-spacing: .08em; color: var(--dampad2); text-transform: uppercase; }
   .kalla-rad a { color: var(--dampad); }
@@ -88,6 +95,10 @@
   .maplibregl-ctrl-group { background: var(--panel) !important; border: 1px solid var(--kant); }
   .maplibregl-ctrl-group button + button { border-top-color: var(--kant) !important; }
   .maplibregl-ctrl-group button span { filter: invert(1) brightness(.9); }
+  .maplibregl-ctrl-attrib { background: var(--panel) !important; color: var(--dampad); font: 500 10px/1.5 var(--mono); letter-spacing: .06em; }
+  .maplibregl-ctrl-attrib a { color: var(--text2); }
+  .maplibregl-ctrl-attrib-button { filter: invert(1) brightness(.8); }
+  .maplibregl-ctrl-top-right { top: calc(56px + 10px + var(--panelhojd, 120px) + env(safe-area-inset-top, 0px)); }
   .maplibregl-popup-content { background: var(--panel); color: var(--text); border: 1px solid var(--kant); border-radius: 14px;
     font: 14px/1.45 var(--sans); padding: 12px 14px; max-width: 280px; }
   .maplibregl-popup-tip { border-top-color: var(--panel) !important; border-bottom-color: var(--panel) !important; }
@@ -129,6 +140,7 @@
   <button class="chip" data-layer="kameror" aria-pressed="false"><i style="background:#6F7C83"></i>Fartkameror</button>
   <button class="chip" data-layer="kandidat" aria-pressed="false" title="Modellerat, inte uppmätt — beta till mars"><i class="linje" style="background:repeating-linear-gradient(90deg,#FF8F6B 0 4px,transparent 4px 7px)"></i>Halkvakt tror · beta</button>
 </div>
+<p class="notis" id="notis" role="status" hidden></p>
 <p class="kalla-rad">Data: <a href="https://www.trafikverket.se" rel="noopener">Trafikverket</a> (CC0) · <a href="https://www.digitraffic.fi" rel="noopener">Fintraffic</a> (CC BY 4.0) · <a href="https://www.met.no" rel="noopener">MET Norway</a> (CC BY 4.0) · <a href="https://www.dmi.dk/friedata" rel="noopener">DMI</a> (<a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>) · Karta: <a href="https://openfreemap.org" rel="noopener">OpenFreeMap</a> © OpenStreetMap · Länsgränser: Natural Earth</p>
 <script>
 const $ = s => document.querySelector(s);
@@ -152,6 +164,10 @@ const map = new maplibregl.Map({
   center: [16.3, 62.6], zoom: 4.4, minZoom: 2.8, attributionControl: false
 });
 map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
+// Källraden längst ner får inte plats på mobilen. Där ligger källorna bakom kartans ⓘ i stället, så att licenserna (CC BY, ODbL) alltid syns.
+if (matchMedia('(max-width: 640px)').matches) {
+  map.addControl(new maplibregl.AttributionControl({ compact: true, customAttribution: document.querySelector('.kalla-rad').innerHTML }), 'top-right');
+}
 map.addControl(new maplibregl.GeolocateControl({ trackUserLocation: false }), 'bottom-right');
 // Kartans fria yta: det som inte ligger under panelen, lagerknapparna eller toppen. Räknas om vid varje inzoomning.
 function kanter() {
@@ -260,6 +276,11 @@ map.on('load', async () => {
     dl.hidden = !rader.length; $('#mer').hidden = !rader.length;
   }
   visaLan(lanVal, false);
+  const panelHojd = () => document.documentElement.style.setProperty('--panelhojd', Math.round(document.querySelector('.status').getBoundingClientRect().height + 8) + 'px');
+  panelHojd(); new ResizeObserver(panelHojd).observe(document.querySelector('.status'));
+  // ⓘ börjar stängd så att källorna inte täcker kartan; ett tryck öppnar dem.
+  const attrib = document.querySelector('.maplibregl-ctrl-attrib');
+  if (attrib) { attrib.removeAttribute('open'); attrib.classList.remove('maplibregl-compact-show'); }
   $('#mer').addEventListener('click', () => {
     const oppen = $('.status').classList.toggle('oppen');
     $('#mer').setAttribute('aria-expanded', String(oppen));
@@ -268,7 +289,7 @@ map.on('load', async () => {
   // Brytaren (#578): avstängd kandidat ⇒ knappen säger det och går inte att slå på.
   if (m && m.kandidat && m.kandidat.pa === false) {
     const c = document.querySelector('.chip[data-layer="kandidat"]');
-    c.lastChild.textContent = 'Halkvakt tror · avstängd'; c.disabled = true; c.title = 'Avstängd just nu';
+    c.lastChild.textContent = 'Halkvakt tror · avstängd'; c.setAttribute('aria-disabled', 'true'); c.title = 'Avstängd just nu';
   }
 
   const pop = (e, html) => new maplibregl.Popup({ closeButton: false }).setLngLat(e.lngLat).setHTML(`<div class="pop">${html}</div>`).addTo(map);
@@ -298,7 +319,18 @@ map.on('load', async () => {
     map.on('mouseleave', l, () => map.getCanvas().style.cursor = '');
   }
 });
+let notisTimer = 0;
+function notis(rubrik, text) {
+  const n = $('#notis');
+  n.innerHTML = `<b>${esc(rubrik)}</b>${esc(text)}`; n.hidden = false;
+  clearTimeout(notisTimer); notisTimer = setTimeout(() => { n.hidden = true; }, 5000);
+}
 document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {
+  // Avstängt lager (brytaren, #578): knappen går att trycka på men säger bara varför inget visas.
+  if (c.getAttribute('aria-disabled') === 'true') {
+    notis('Halkvakt tror · avstängd', 'Modellen är avstängd just nu, så ingen beräknad halka visas. Trafikverkets rapporterade halka syns som vanligt.');
+    return;
+  }
   const pa = c.getAttribute('aria-pressed') !== 'true';
   c.setAttribute('aria-pressed', String(pa));
   lagerAv(c.dataset.layer).forEach(l => map.setLayoutProperty(l, 'visibility', pa ? 'visible' : 'none'));
