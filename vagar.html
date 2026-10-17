@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Vägarna just nu, Halkvakt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  /* Vägrutan (DECISIONS #611): samma ram som widget.html, men länets stora vägar eller pendlarstråk, sträcka för sträcka. */
+  :root { --mark: #080B0D; --panel: #0F1518; --kant: #1E282D; --skilje: #253036; --text: #E9EFF2; --text2: #A9B5BB; --dampad: #8FA0A9;
+    --gul: #FFC94A; --gul-yta: rgba(255, 201, 74, .14); --sans: "Instrument Sans", "Helvetica Neue", Arial, sans-serif; --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace; }
+  :root { color-scheme: dark; }
+  html[data-tema="ljus"] { color-scheme: light; --panel: #FFFFFF; --kant: #DCE2E5; --skilje: #E6EBED; --text: #111719; --text2: #48555B; --dampad: #6A7880; --gul-tal: #9A6500; --gul-yta: #FFF4D6; }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: transparent; }
+  body { color: var(--text); font: 400 15px/1.5 var(--sans); }
+  .kort { display: grid; gap: 12px; background: var(--panel); border: 1px solid var(--kant); border-radius: 16px; padding: 16px 18px; min-height: 100%; align-content: start; }
+  .etikett { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font: 500 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dampad); margin: 0; }
+  .etikett svg { width: 14px; height: auto; flex: none; }
+  .etikett b { color: var(--text); font-weight: 600; }
+  h1 { margin: 0; font: 600 20px/1.2 var(--sans); letter-spacing: -.01em; }
+  p { margin: 0; color: var(--text2); }
+  ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--skilje); }
+  li { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 4px 12px; padding: 9px 0; border-bottom: 1px solid var(--skilje); align-items: baseline; }
+  .vag { font: 600 13px var(--mono); letter-spacing: .02em; white-space: nowrap; }
+  .lage { font: 600 14px var(--sans); min-width: 0; }
+  .lage.halt { color: var(--gul-tal, var(--gul)); }
+  .sub { grid-column: 2; font: 400 12px var(--sans); color: var(--text2); min-width: 0; }
+  .strackor { grid-column: 2; display: flex; flex-wrap: wrap; gap: 4px 6px; }
+  .strackor span { font: 400 12px var(--sans); color: var(--text2); white-space: nowrap; }
+  .strackor span.halt { color: var(--text); background: var(--gul-yta); border-radius: 4px; padding: 0 5px; font-weight: 600; }
+  .strackor span:not(:last-child)::after { content: " ·"; color: var(--dampad); }
+  .strackor span.halt::after { content: ""; }
+  .fot { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .fot a { font: 600 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--skilje); padding-bottom: 2px; }
+  .fot a:hover { border-color: var(--gul); }
+  .fot span { font: 400 11px var(--mono); color: var(--dampad); letter-spacing: .04em; }
+</style>
+</head>
+<body>
+<div class="kort">
+  <p class="etikett"><svg viewBox="3 3 94 83" aria-hidden="true"><path fill-rule="evenodd" fill="#FFC94A" d="M55.196 6 L96.196 77 A6 6 0 0 1 91 86 L9 86 A6 6 0 0 1 3.804 77 L44.804 6 A6 6 0 0 1 55.196 6 Z M46.4 32 L53.6 32 L52 58 L48 58 Z M45.6 68 A4.4 4.4 0 1 0 54.4 68 A4.4 4.4 0 1 0 45.6 68 Z"/></svg><b>Halkvakt</b><span id="tid">Hämtar läget</span></p>
+  <h1 id="rubrik">Vägarna just nu</h1>
+  <ul id="lista"></ul>
+  <p id="text">Läget hämtas från Trafikverkets öppna data.</p>
+  <div class="fot"><a id="lank" href="https://halkvakt.se/lan/" target="_top" rel="noopener">Läget i alla län</a><span>Källa: Halkvakt / Trafikverkets öppna data</span></div>
+</div>
+<script>
+(function () {
+  var BAS = 'https://halkvakt.se/';
+  var q = new URLSearchParams(location.search);
+  var lanSlug = q.get('lan') || 'varmland', vy = q.get('vy') === 'pendling' ? 'pendling' : 'vagar';
+  var tema = q.get('tema');
+  if (tema === 'auto') tema = (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches) ? 'ljus' : 'mork';
+  if (tema === 'ljus') document.documentElement.setAttribute('data-tema', 'ljus');
+
+  // Pendlarstråken: Trafikverkets egna sträckor i rätt ordning, med namnen så som de står i väglagsrapporten.
+  var STRAK = {
+    varmland: { fran: 'Karlstad', strak: [
+      { till: 'Kristinehamn', delar: [['E 18', 'Karlstad - Kristinehamn']] },
+      { till: 'Arvika', delar: [['Väg 61', 'Kil - Karlstad'], ['Väg 61', 'Högboda - Kil'], ['Väg 61', 'Arvika - Högboda']] },
+      { till: 'Säffle', delar: [['E 18', 'Grums - Karlstad'], ['E 18', 'Segmon - Grums'], ['E 45', 'Segmon - Säffle']] },
+      { till: 'Sunne och Torsby', delar: [['E 18', 'Grums - Karlstad'], ['E 45', 'Fagerås - Grums'], ['E 45', 'Sunne - Fagerås'], ['E 45', 'Torsby - Sunne']] },
+      { till: 'Filipstad', delar: [['Väg 63', 'Molkom - Karlstad'], ['Väg 63', 'Filipstad - Molkom']] },
+      { till: 'Årjäng', delar: [['E 18', 'Grums - Karlstad'], ['E 18', 'Segmon - Grums'], ['E 18', 'Långserud - Segmon'], ['E 18', 'Årjäng - Långserud']] }
+    ] }
+  };
+
+  var $ = function (id) { return document.getElementById(id); };
+  var minus = function (n) { return n.toFixed(1).replace('.', ',').replace('-', '−'); };
+  var tid = function (iso) { try { return new Date(iso).toLocaleTimeString('sv-SE', { timeZone: 'Europe/Stockholm', hour: '2-digit', minute: '2-digit' }); } catch (e) { return ''; } };
+  var kortVag = function (v) { var m = /^Väg (\d+)$/.exec(v); return m ? (Number(m[1]) < 100 ? 'Rv' : 'Väg ') + m[1] : v.replace(/^E /, 'E'); };
+  var stor = function (v) { var m = /^(E|Väg)\s*(\d+)/.exec(v.vag); return m && (m[1] === 'E' || Number(m[2]) < 100); };
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function chips(strackor) {
+    var d = el('div', 'strackor');
+    strackor.forEach(function (s) { d.appendChild(el('span', s.halt ? 'halt' : '', s.plats.replace(/ - /g, '–'))); });
+    return d;
+  }
+
+  function visa(data) {
+    var lan = data.lan.filter(function (l) { return l.slug === lanSlug; })[0];
+    if (!lan) { $('text').textContent = 'Länet finns inte i datan.'; return; }
+    var lista = $('lista'); lista.textContent = '';
+    $('tid').textContent = 'Uppdaterad ' + tid(data.generated_at);
+    $('lank').href = BAS + 'lan/' + lan.slug + '/';
+    $('lank').textContent = 'Läget i ' + lan.kort + ' på halkvakt.se';
+    var antalHalt = 0, antal = 0;
+
+    if (vy === 'pendling' && STRAK[lanSlug]) {
+      var p = STRAK[lanSlug];
+      $('rubrik').textContent = 'Pendlarvägarna från ' + p.fran + ' just nu';
+      var hitta = function (vag, plats) {
+        var v = lan.vagar.filter(function (x) { return x.vag === vag; })[0];
+        return v ? v.strackor.filter(function (s) { return s.plats === plats; })[0] : null;
+      };
+      p.strak.forEach(function (s) {
+        var delar = s.delar.map(function (d) { return hitta(d[0], d[1]); }).filter(Boolean);
+        if (!delar.length) return;
+        var halt = delar.filter(function (d) { return d.halt; }).length;
+        antal++; if (halt) antalHalt++;
+        var vagar = [];
+        s.delar.forEach(function (d) { var k = kortVag(d[0]); if (vagar.indexOf(k) < 0) vagar.push(k); });
+        var li = el('li');
+        li.appendChild(el('span', 'vag', vagar.join('/')));
+        li.appendChild(el('span', 'lage' + (halt ? ' halt' : ''), p.fran + '–' + s.till + ': ' + (halt ? 'halka på ' + halt + ' av ' + delar.length + (delar.length === 1 ? ' sträcka' : ' sträckor') : 'ingen halka rapporterad')));
+        if (halt) li.appendChild(chips(delar.filter(function (d) { return d.halt; })));
+        lista.appendChild(li);
+      });
+      $('text').textContent = antalHalt
+        ? 'Trafikverket rapporterar halka på ' + antalHalt + ' av ' + antal + ' stråk. Markerade sträckor har halka.'
+        : 'Trafikverket rapporterar ingen halka på stråken just nu.';
+    } else {
+      $('rubrik').textContent = lan.kort + 's stora vägar just nu';
+      lan.vagar.filter(stor).forEach(function (v) {
+        var halt = v.strackor.filter(function (s) { return s.halt; }).length;
+        antal++; if (halt) antalHalt++;
+        var li = el('li');
+        li.appendChild(el('span', 'vag', kortVag(v.vag)));
+        li.appendChild(el('span', 'lage' + (halt ? ' halt' : ''), halt ? 'Halka på ' + halt + ' av ' + v.strackor.length + (v.strackor.length === 1 ? ' sträcka' : ' sträckor') : 'Ingen halka rapporterad'));
+        if (v.kallast) li.appendChild(el('span', 'sub', 'Vägbanan vid vägen: kallast ' + minus(v.kallast.yta) + ' °C vid ' + v.kallast.namn));
+        if (halt) li.appendChild(chips(v.strackor.filter(function (s) { return s.halt; })));
+        lista.appendChild(li);
+      });
+      $('text').textContent = antalHalt
+        ? 'Trafikverket rapporterar halka på ' + antalHalt + ' av länets ' + antal + ' stora vägar. Markerade sträckor har halka.'
+        : 'Trafikverket rapporterar ingen halka på länets stora vägar just nu.';
+    }
+  }
+
+  var visat = false;
+  function hamta() {
+    fetch('data/strackor.json', { cache: 'no-cache' })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function (d) { visat = true; visa(d); })
+      .catch(function () {
+        if (visat) return;
+        $('tid').textContent = 'Läget kunde inte hämtas';
+        $('text').textContent = 'Se läget direkt på halkvakt.se. Uppdateras var 30:e minut.';
+      });
+  }
+  hamta();
+  setInterval(function () { if (!document.hidden) hamta(); }, 5 * 60 * 1000);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) hamta(); });
+})();
+</script>
+</body>
+</html>
