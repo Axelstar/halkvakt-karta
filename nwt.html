@@ -65,6 +65,9 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gul);outline-offset
 .artikel iframe{display:block;width:100%;max-width:480px;height:440px;border:0;border-radius:16px}
 .artikel .kol{max-width:640px;display:grid;gap:16px}
 
+.montage{margin:0}
+.montage img{display:block;width:100%;height:auto;border-radius:18px}
+
 /* code */
 .kod{position:relative;background:var(--panel);border:1px solid var(--kant);border-radius:16px;overflow:hidden}
 .kod pre{margin:0;padding:20px 22px;font:500 14px/1.65 var(--mono);color:var(--text);overflow-x:auto;white-space:pre}
@@ -140,17 +143,10 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
       <p class="etikett">I en artikel</p>
       <h2>Så kan det se ut en morgon med halka</h2>
     </div>
-    <div class="artikel" aria-label="Exempel på en artikel med rutan">
-      <div class="kol">
-        <p class="meta">Värmland · Trafik</p>
-        <p class="rubrik">Halt på vägarna i Värmland i morse</p>
-        <p class="ingress">Trafikverket varnar för halka i stora delar av länet. Här är läget just nu, vägsträcka för vägsträcka.</p>
-        <div class="rad"></div><div class="rad kort-rad"></div>
-        <iframe src="ruta.html?lan=varmland&amp;tema=ljus&amp;flik=pendling" title="Pendlarvägarna från Karlstad just nu" loading="lazy"></iframe>
-        <div class="rad"></div><div class="rad"></div><div class="rad kort-rad"></div>
-      </div>
-    </div>
-    <p class="not">Artikeln är ett exempel. Rutan i den är live och öppnar på fliken Pendling.</p>
+    <figure class="montage">
+      <a href="press/nwt-artikel.jpg" target="_blank" rel="noopener"><img src="press/nwt-artikel.jpg" width="2400" height="1638" alt="Bildmontage: en artikel på nwt.se, Halt på vägarna i Värmland i morse, med Halkvakts ruta efter ingressen. På datorn visar rutan fliken Vägarna, på mobilen fliken Pendling." loading="lazy"></a>
+    </figure>
+    <p class="not">Bildmontage med exempelsiffror: så kan rutan se ut i en artikel hos er, på dator och mobil. Tryck på bilden för full storlek. Rutan överst på sidan är live.</p>
   </div>
 </section>
 
