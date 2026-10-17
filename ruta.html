@@ -23,11 +23,17 @@
   .etikett { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font: 500 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dampad); margin: 0; }
   .etikett svg { width: 14px; height: auto; flex: none; }
   .etikett b { color: var(--text); font-weight: 600; }
-  .flikar { display: flex; gap: 4px; border-bottom: 1px solid var(--skilje); }
-  .flikar button { appearance: none; background: none; border: 0; border-bottom: 2px solid transparent; margin-bottom: -1px; padding: 6px 10px 8px;
-    font: 600 12px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--dampad); cursor: pointer; }
-  .flikar button[aria-selected="true"] { color: var(--text); border-bottom-color: var(--gul); }
-  .flikar button:focus-visible { outline: 2px solid var(--gul); outline-offset: 2px; border-radius: 4px; }
+  /* Flikarna ritas som knappar (Axel 17/10: syns det att man kan trycka?), och foten pekar på nästa vy. */
+  .flikar { display: flex; gap: 4px; padding: 4px; background: var(--skilje); border-radius: 999px; width: max-content; max-width: 100%; }
+  .flikar button { appearance: none; background: none; border: 0; border-radius: 999px; padding: 6px 14px;
+    font: 600 12px var(--sans); letter-spacing: .02em; color: var(--text2); cursor: pointer; white-space: nowrap; }
+  .flikar button:hover { color: var(--text); }
+  .flikar button[aria-selected="true"] { color: #111719; background: var(--gul); }
+  .flikar button:focus-visible { outline: 2px solid var(--gul); outline-offset: 2px; }
+  .nasta { appearance: none; background: none; border: 1px solid var(--kant); border-radius: 999px; padding: 4px 10px; cursor: pointer;
+    font: 600 11px var(--mono); letter-spacing: .06em; color: var(--text); white-space: nowrap; }
+  .nasta:hover { border-color: var(--gul); }
+  .hoger { display: flex; align-items: center; gap: 10px; }
   .spar { flex: 1; min-height: 0; display: flex; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; }
   .spar::-webkit-scrollbar { display: none; }
   .vy { flex: 0 0 100%; min-width: 0; scroll-snap-align: start; overflow-y: auto; padding: 14px 18px; display: grid; gap: 12px; align-content: start; }
@@ -88,7 +94,7 @@
       <p id="pendling-text"></p>
     </section>
   </div>
-  <div class="fot"><a id="lank" href="https://halkvakt.se/lan/" target="_top" rel="noopener">Läget i alla län</a><span class="prickar" id="prickar" aria-hidden="true"></span><span>Källa: Halkvakt / Trafikverkets öppna data</span></div>
+  <div class="fot"><a id="lank" href="https://halkvakt.se/lan/" target="_top" rel="noopener">Läget i alla län</a><span class="hoger"><span class="prickar" id="prickar" aria-hidden="true"></span><button class="nasta" id="nasta" type="button"></button></span><span>Källa: Halkvakt / Trafikverkets öppna data</span></div>
 </div>
 <script>
 (function () {
@@ -128,6 +134,9 @@
   function markera(i) {
     vyer.forEach(function (v, k) { $('f-' + v).setAttribute('aria-selected', k === i ? 'true' : 'false'); $('f-' + v).tabIndex = k === i ? 0 : -1; });
     [].forEach.call(prickar.children, function (p, k) { p.className = k === i ? 'pa' : ''; });
+    var n = (i + 1) % vyer.length;
+    $('nasta').textContent = (n ? '' : '← ') + $('f-' + vyer[n]).textContent + (n ? ' →' : '');
+    $('nasta').onclick = function () { ga(n); };
   }
   function ga(i, mjukt) { spar.scrollTo({ left: i * spar.clientWidth, behavior: mjukt === false ? 'instant' : 'smooth' }); markera(i); }
   vyer.forEach(function (v, k) { $('f-' + v).addEventListener('click', function () { ga(k); }); });
