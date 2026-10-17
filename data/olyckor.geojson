@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[26.094282407,60.926071075]},"properties":{"land":"FI","typ":"Olycka","msg":"Tie 12, Lahti. Ensitiedote liikenneonnettomuudesta.  · Onnettomuus","allvar":null,"road":null,"start":"2026-10-17T10:06:00.000Z"}}]}
