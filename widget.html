@@ -99,13 +99,21 @@
     $('#lank').textContent = 'Läget i ' + namn + ' på halkvakt.se';
   }
 
-  fetch('data/lan.json', { cache: 'no-cache' })
-    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-    .then(visa)
-    .catch(function () {
-      $('#tid').textContent = 'Läget kunde inte hämtas';
-      $('#text').textContent = 'Se läget direkt på halkvakt.se. Uppdateras var 30:e minut.';
-    });
+  var visat = false;
+  function hamta() {
+    fetch('data/lan.json', { cache: 'no-cache' })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function (d) { visat = true; visa(d); })
+      .catch(function () {
+        if (visat) return;   // behåll senaste läget om en senare hämtning misslyckas
+        $('#tid').textContent = 'Läget kunde inte hämtas';
+        $('#text').textContent = 'Se läget direkt på halkvakt.se. Uppdateras var 30:e minut.';
+      });
+  }
+  hamta();
+  // Rutan står ofta öppen i en liveblogg: hämta läget igen var femte minut och när fliken visas igen.
+  setInterval(function () { if (!document.hidden) hamta(); }, 5 * 60 * 1000);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) hamta(); });
 })();
 </script>
 </body>
