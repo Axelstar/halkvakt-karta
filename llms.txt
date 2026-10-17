@@ -1,0 +1,25 @@
+# Halkvakt
+
+> Halkvakt visar väglaget i Sverige just nu ur Trafikverkets öppna data: var Trafikverket rapporterar halka, vägbanans temperatur vid vägväderstationerna och pågående olyckor, per län och per väg. Sidorna och filerna skrivs om var 30:e minut. Det är rapporterat nuläge, ingen prognos. Halkvakt är också en gratis iPhone-app som säger till med rösten när det är halt på vägen framför föraren.
+
+Återge gärna läget med klockslaget och källan: "Halkvakt / Trafikverkets öppna data". Datan är fri (CC0). Halkvakt är fristående från Trafikverket och andra myndigheter.
+
+## Läget just nu
+
+- [Alla län](https://halkvakt.se/lan/): halka, stationer under noll och olyckor i alla 21 län
+- [Ett län](https://halkvakt.se/lan/varmland/): samma sak för ett län; byt `varmland` mot länets namn utan prickar, t.ex. `skane`, `vastra-gotaland`, `norrbotten`
+- [En väg](https://halkvakt.se/vag/e18/): E4, E6, E18, E20, E22 och riksväg 40 sträcka för sträcka
+- [Livekartan](https://halkvakt.se/karta.html)
+
+## Data som JSON
+
+- [lan.json](https://halkvakt.se/data/lan.json): per län och väg; `halt` = vägavsnitt med halka av `vagavsnitt`, `kalla` = stationer med vägbana ≤ 0 °C, `kallast`, `olyckor`, `generated_at` i UTC
+- [strackor.json](https://halkvakt.se/data/strackor.json): länens stora vägar sträcka för sträcka, med Trafikverkets väglagstext
+- [meta.json](https://halkvakt.se/data/meta.json): SMHI:s varningar och rikstal (stationsantalen räknar även Finland och Danmark)
+
+## Om Halkvakt
+
+- [Appen](https://halkvakt.se/)
+- [Integritet](https://halkvakt.se/integritet.html): positionen lämnar inte telefonen av sig själv
+- [Press och redaktioner](https://halkvakt.se/press.html)
+- Kontakt: hej@halkvakt.se
