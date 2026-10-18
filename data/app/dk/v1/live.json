@@ -1,1 +1,1 @@
-{"schema":1,"generated_at":"2026-10-18T17:05:01.878Z","segments":[],"weather":[],"deviations":[],"smhi":[],"wildlife":[],"djur":[]}
+{"schema":1,"generated_at":"2026-10-18T17:35:01.993Z","segments":[],"weather":[{"id":"DK:06188","lon":12.4121,"lat":55.8764,"yta":2.99,"fukt":false},{"id":"DK:06060","lon":9.1139,"lat":56.2934,"yta":2.3,"fukt":false},{"id":"DK:06072","lon":10.1272,"lat":56.3027,"yta":2.57,"fukt":false}],"deviations":[],"smhi":[],"wildlife":[],"djur":[]}
