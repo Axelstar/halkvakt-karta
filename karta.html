@@ -260,9 +260,9 @@ map.on('load', async () => {
         if (m) {
           rader.push(['Stationer på 0 °C eller kallare', m.kalla_stationer]);
           rader.push(['Olyckor och hinder', m.olyckor]);
-          // Bara varningar som gäller vägen; vind till havs säger inget om väglaget.
-          (m.smhi_vinter || []).filter(v => !/havs/i.test(v.event + ' ' + (v.omrade || ''))).slice(0, 2)
-            .forEach(v => rader.push(['SMHI', `${v.niva} varning: ${v.event.toLowerCase()}`]));
+          // Bara varningar som gäller vägen; vind till havs säger inget om väglaget. Samma nivå och händelse i flera områden blir EN rad
+          // med områdena (18/10: två gula "vind på kalfjället" för överlappande delar av Lapplandsfjällen stod som två likadana rader).
+          smhiRader(m.smhi_vinter || []).forEach(t => rader.push(['SMHI', t]));
         }
         detaljer(rader);
       } else {
@@ -272,6 +272,22 @@ map.on('load', async () => {
     }
   };
   // Samma mening och samma ord för landet och länet: sträckor med halka eller vinterväglag (kod över 1, som motorn).
+  /** SMHI:s varningar som rader: en per nivå och händelse, med områdena — "Gul varning: vind på kalfjället · Delar av norra
+   *  Lapplandsfjällen och Norra Lapplandsfjällen". Områdena är egennamn och står som SMHI skriver dem. Vind till havs står inte
+   *  med; högst två rader. */
+  function smhiRader(lista) {
+    const grupper = new Map();
+    for (const v of lista.filter(v => !/havs/i.test(v.event + ' ' + (v.omrade || '')))) {
+      const k = v.niva + '|' + v.event;
+      if (!grupper.has(k)) grupper.set(k, { v, omraden: [] });
+      const g = grupper.get(k);
+      if (v.omrade && !g.omraden.includes(v.omrade)) g.omraden.push(v.omrade);
+    }
+    return [...grupper.values()].slice(0, 2).map(({ v, omraden: o }) => {
+      const var_ = o.length ? ' · ' + (o.length > 1 ? o.slice(0, -1).join(', ') + ' och ' + o[o.length - 1] : o[0]) : '';
+      return `${v.niva} varning: ${v.event.toLowerCase()}${var_}`;
+    });
+  }
   function halkMening(hala, alla, vems) {
     return hala ? `${hala} av ${alla} sträckor med halka eller vinterväglag.` : `Ingen av ${vems} ${alla} sträckor har halka eller vinterväglag i Trafikverkets rapport.`;
   }
