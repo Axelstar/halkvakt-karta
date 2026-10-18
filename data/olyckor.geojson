@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[25.544668855,60.840277981]},"properties":{"land":"FI","typ":"Olycka","msg":"Tie 4, Orimattila. Liikennetiedote onnettomuudesta.  · Onnettomuus · Onnettomuuspaikan pelastus- ja raivaustyöt käynnissä · Ajokaistoja suljettu liikenteeltä","allvar":null,"road":null,"start":"2026-10-18T01:41:00.000Z"}}]}
