@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[22.277922,60.4592315]},"properties":{"land":"FI","typ":"Olycka","msg":"Helsinginkatu, Turku. Liikennetiedote onnettomuudesta.  · Onnettomuus · Toinen ajorata on suljettu liikenteeltä · Liikenne ruuhkautuu","allvar":null,"road":null,"start":"2026-10-18T08:12:00.000Z"}}]}
