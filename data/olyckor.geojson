@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[15.421061093,60.212395582]},"properties":{"land":"SE","typ":"Olycka","msg":"Singelolycka med personbil i höjd med Finngården, risk för begränsad framkomlighet.","allvar":"Liten påverkan","road":"Väg 635","start":"2026-10-19T02:00:00.000Z"}}]}
