@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Halkvakt för Folkbladet</title>
+<meta name="description" content="Väglaget i Västerbotten, live i Folkbladets artiklar och liveblogg. Ett förslag från Halkvakt.">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+/* Förslaget till Folkbladet (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna. */
+:root{
+  --mark:#080B0D; --panel:#0F1518; --kant:#1E282D; --skilje:#253036;
+  --text:#E9EFF2; --text2:#A9B5BB; --dampad:#8FA0A9; --gul:#FFC94A;
+  --papper:#F4F6F7; --papper-text:#111719; --papper-text2:#48555B; --papper-kant:#DCE2E5;
+  --sans:"Instrument Sans","Helvetica Neue",Arial,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--mark);color:var(--text);font:400 18px/1.6 var(--sans)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+section{padding-block:88px;border-top:1px solid var(--kant)}
+.etikett{display:flex;align-items:center;gap:12px;font:600 12px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--dampad);margin:0}
+.etikett svg{width:18px;height:auto;flex:none}
+.etikett b{color:var(--text)}
+h1{font:700 clamp(40px,6.4vw,78px)/1.02 var(--sans);letter-spacing:-.025em;margin:0;text-wrap:balance}
+h2{font:700 clamp(30px,4vw,48px)/1.08 var(--sans);letter-spacing:-.02em;margin:0;text-wrap:balance;max-width:22ch}
+h3{font:600 21px/1.25 var(--sans);margin:0}
+p{margin:0}
+.lead{font-size:clamp(18px,1.9vw,22px);line-height:1.5;color:var(--text2);max-width:58ch}
+.gul{color:var(--gul)}
+.stack{display:grid;gap:22px;align-content:start;min-width:0}
+.tva{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:56px;align-items:center}
+.tre{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.tre.par{grid-template-columns:repeat(2,minmax(0,1fr))}
+.kort{background:var(--panel);border:1px solid var(--kant);border-radius:18px;padding:24px;display:grid;gap:10px;align-content:start}
+.kort small{font:600 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dampad)}
+.kort p{color:var(--text2);font-size:16px;line-height:1.55}
+.lista{margin:0;padding:0;list-style:none;display:grid;gap:12px}
+.lista li{display:grid;grid-template-columns:18px 1fr;gap:12px;color:var(--text2);font-size:17px}
+.lista li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gul);margin-top:10px}
+.lista b{color:var(--text);font-weight:600}
+.not{font:400 13px var(--mono);color:var(--dampad);letter-spacing:.02em}
+a{color:var(--text)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--gul);outline-offset:3px;border-radius:4px}
+
+/* hero */
+.hero{padding-block:72px 96px;border-top:0}
+.hero .tva{align-items:start}
+.live{display:grid;gap:12px;justify-items:start}
+.live iframe{display:block;width:100%;max-width:480px;height:440px;border:0;border-radius:16px;box-shadow:0 30px 90px rgba(0,0,0,.5)}
+.live .not::before{content:"● ";color:var(--gul)}
+
+/* the article mock, drawn without any newspaper's branding */
+.artikel{background:var(--papper);color:var(--papper-text);border-radius:18px;padding:40px clamp(20px,5vw,64px);display:grid;gap:18px}
+.artikel .rad{height:12px;border-radius:6px;background:var(--papper-kant)}
+.artikel .rad.kort-rad{width:62%}
+.artikel .rubrik{font:700 clamp(26px,3.2vw,38px)/1.12 var(--sans);letter-spacing:-.015em;max-width:22ch}
+.artikel .ingress{font:600 18px/1.5 var(--sans);color:var(--papper-text);max-width:56ch}
+.artikel .meta{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--papper-text2)}
+.artikel iframe{display:block;width:100%;max-width:480px;height:440px;border:0;border-radius:16px}
+.artikel .kol{max-width:640px;display:grid;gap:16px}
+
+.montage{margin:0}
+.montage img{display:block;width:100%;height:auto;border-radius:18px}
+
+/* code */
+.kod{position:relative;background:var(--panel);border:1px solid var(--kant);border-radius:16px;overflow:hidden}
+.kod pre{margin:0;padding:58px 22px 20px;font:500 14px/1.65 var(--mono);color:var(--text);overflow-x:auto;white-space:pre}
+.kod .k{color:var(--gul)}
+.kod button{position:absolute;top:12px;right:12px;font:600 13px var(--sans);background:var(--gul);color:#111719;border:0;border-radius:999px;padding:8px 14px;cursor:pointer}
+table{width:100%;border-collapse:collapse;font-size:16px}
+th,td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--kant);vertical-align:top}
+th{font:600 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dampad)}
+td code{font:500 14px var(--mono);color:var(--gul);white-space:nowrap}
+.tabell{overflow-x:auto}
+
+.tal{font:600 clamp(40px,5vw,60px)/1 var(--mono);color:var(--gul);letter-spacing:-.02em}
+.sociala{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.sociala a{font:600 14px var(--sans);color:var(--text);text-decoration:none;border:1px solid var(--kant);border-radius:999px;padding:8px 16px}
+.sociala a:hover{border-color:var(--gul)}
+.kontakt{font:600 clamp(26px,4vw,44px)/1.2 var(--mono);color:var(--gul);user-select:all;word-break:break-all}
+footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--dampad);font-size:14px}
+
+@media (max-width:900px){
+  .tva{grid-template-columns:1fr;gap:36px}
+  .tre,.tre.par{grid-template-columns:1fr}
+  section{padding-block:64px}
+}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap tva">
+    <div class="stack">
+      <p class="etikett"><svg viewBox="3 3 94 83" aria-hidden="true"><path fill-rule="evenodd" fill="#FFC94A" d="M55.196 6 L96.196 77 A6 6 0 0 1 91 86 L9 86 A6 6 0 0 1 3.804 77 L44.804 6 A6 6 0 0 1 55.196 6 Z M46.4 32 L53.6 32 L52 58 L48 58 Z M45.6 68 A4.4 4.4 0 1 0 54.4 68 A4.4 4.4 0 1 0 45.6 68 Z"/></svg><b>Halkvakt</b>Förslag till Folkbladet</p>
+      <h1>Väglaget i Västerbotten, <span class="gul">live</span> hos Folkbladet</h1>
+      <p class="lead">En ruta för artiklar och liveblogg som visar läget på vägarna just nu: i Västerbotten, på de stora vägarna och på pendlarvägarna från Umeå. Den läggs in med en rad kod och uppdaterar sig själv dygnet runt.</p>
+      <p class="lead" style="font-size:17px"><b style="color:var(--text)">Rutan är er.</b> Den bär Folkbladets namn och länkar till folkbladet.nu. Raden överst är en annonsplats ni kan sälja till era annonsörer, och intäkten är er.</p>
+      <p class="lead" style="font-size:17px">Rutan bredvid är den riktiga, med dagens siffror. Svep i sidled eller tryck på flikarna.</p>
+    </div>
+    <div class="live">
+      <iframe src="ruta.html?v=5&amp;lan=vasterbotten&amp;tema=ljus&amp;strak=umea&amp;namn=Folkbladet&amp;lank=https://www.folkbladet.nu/&amp;lanktext=Mer%20trafik%20p%C3%A5%20folkbladet.nu" title="Väglaget i Västerbotten just nu" loading="eager"></iframe>
+      <p class="not">Live från Trafikverkets öppna data</p>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap stack" style="gap:36px">
+    <div class="stack">
+      <p class="etikett">Varför</p>
+      <h2>Halkan kommer på natten. Frågan kommer klockan sex: <span class="gul">hur är vägarna nu?</span></h2>
+    </div>
+    <div class="tre">
+      <div class="kort"><small>Läsaren</small><h3>Vill veta innan bilen</h3><p>Är det halt till Holmsund i morse? Svaret gäller bara den här morgonen och den här vägen.</p></div>
+      <div class="kort"><small>Redaktionen</small><h3>Svaret ändras hela tiden</h3><p>En text om halka är gammal efter en timme, och någon måste hålla den aktuell mitt i natten.</p></div>
+      <div class="kort"><small>Datan</small><h3>Finns, men är svår att läsa</h3><p>Trafikverket publicerar väglag och vägtemperatur öppet, men som rådata för hela landet.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap stack" style="gap:36px">
+    <div class="stack">
+      <p class="etikett">Rutan</p>
+      <h2>Tre vyer, byggda för Västerbotten</h2>
+      <p class="lead">Läsaren sveper mellan vyerna som bland bilderna i ett inlägg. Ni väljer vilken som syns först.</p>
+    </div>
+    <div class="tre">
+      <div class="kort"><small>Länet</small><h3>Läget i en blick</h3><p>Hur många av länets 44 vägavsnitt Trafikverket rapporterar med halka, hur många vägväderstationer som visar vägbana under noll, och var det är kallast just nu.</p></div>
+      <div class="kort"><small>Vägarna</small><h3>E4, E12 och E45 och riksvägarna</h3><p>De 26 sträckorna på E4, E12, E45, 90, 92 och 95, med halka markerad sträcka för sträcka med Trafikverkets egna namn, till exempel Umeå–Husum.</p></div>
+      <div class="kort"><small>Pendling</small><h3>Från Umeå</h3><p>Fem stråk som läsarna kör varje dag: till Vännäs, Holmsund, Skellefteå, Husum och Vindeln. Rutan visar vilken del som har halka.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap tva" style="align-items:start">
+    <div class="stack">
+      <p class="etikett">Tekniken</p>
+      <h2>En rad kod. Inget konto.</h2>
+      <ul class="lista">
+        <li><span><b>Fungerar där ni kan bädda in en iframe</b>: artikel, liveblogg eller temasida.</span></li>
+        <li><span><b>Hämtar läget igen var femte minut</b> och när läsaren kommer tillbaka till fliken. Läget räknas om var 30:e minut.</span></li>
+        <li><span><b>Inga kakor, ingen spårning och ingen reklam</b> i rutan. Allt hämtas från halkvakt.se, även typsnitten, så läsarnas webbläsare kontaktar ingen tredje part.</span></li>
+        <li><span><b>Liten:</b> en sida på ett tiotal kB och två datafiler.</span></li>
+      </ul>
+    </div>
+    <div class="stack" style="gap:16px">
+      <div class="kod">
+        <button type="button" id="kopiera">Kopiera</button>
+<pre id="koden"><span class="k">&lt;iframe</span> src="https://halkvakt.se/ruta.html?lan=vasterbotten&amp;tema=ljus&amp;strak=umea&amp;namn=Folkbladet&amp;lank=https://www.folkbladet.nu/"
+  width="100%" height="440"
+  style="border:0;max-width:480px"
+  title="Väglaget i Västerbotten just nu" loading="lazy"<span class="k">&gt;&lt;/iframe&gt;</span></pre>
+      </div>
+      <div class="tabell">
+        <table>
+          <thead><tr><th>Lägg till</th><th>Vad det gör</th></tr></thead>
+          <tbody>
+            <tr><td><code>&amp;flik=vagar</code></td><td>Öppnar på de stora vägarna</td></tr>
+            <tr><td><code>&amp;flik=pendling</code></td><td>Öppnar på pendlarvägarna</td></tr>
+            <tr><td><code>&amp;tema=auto</code></td><td>Följer läsarens ljusa eller mörka läge</td></tr>
+            <tr><td><code>&amp;namn=Folkbladet</code></td><td>Rutan heter Folkbladet · Väglaget, utan Halkvakts märke</td></tr>
+            <tr><td><code>&amp;lank=…</code></td><td>Länken i foten går till er egen sida</td></tr>
+            <tr><td><code>&amp;sponsor=…</code></td><td>Raden "Presenteras av" överst, för er annonsör</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap tva" style="align-items:start">
+    <div class="stack">
+      <p class="etikett">Er ruta</p>
+      <h2>Folkbladets väglagsruta, och en plats ni kan sälja</h2>
+      <ul class="lista">
+        <li><span><b>Ert namn överst:</b> rutan heter Folkbladet · Väglaget. Halkvakt står bara som en rad i foten: <i>Data: Trafikverket · Teknik: Halkvakt</i>.</span></li>
+        <li><span><b>Läsarna stannar hos er:</b> länken i rutan går till er egen trafiksida. Det enda som pekar mot oss öppnas i en ny flik.</span></li>
+        <li><span><b>En sponsorrad</b> överst, till exempel <i>Presenteras av</i> en däckfirma eller bilhandlare i Västerbotten. Annonsplatsen är er, ni sätter priset, och intäkten är er. Halkvakt tar ingen del av den.</span></li>
+      </ul>
+    </div>
+    <div class="live">
+      <iframe src="ruta.html?v=5&amp;lan=vasterbotten&amp;tema=ljus&amp;strak=umea&amp;namn=Folkbladet&amp;lank=https://www.folkbladet.nu/&amp;lanktext=Mer%20trafik%20p%C3%A5%20folkbladet.nu&amp;sponsor=Er%20annons%C3%B6r%20h%C3%A4r" title="Folkbladets väglagsruta med sponsorrad" loading="lazy"></iframe>
+      <p class="not">Live, med sponsorraden ifylld som exempel.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap stack" style="gap:36px">
+    <div class="stack">
+      <p class="etikett">Mer än rutan</p>
+      <h2>Två saker till, om ni vill</h2>
+    </div>
+    <div class="tre par">
+      <div class="kort"><small>Morgonnotisen</small><h3>Nattens siffror som text</h3><p>Morgnar med halka i Västerbotten får redaktionen ett mejl före kl. 07 med nattens siffror och en färdig notis som är fri att använda.</p></div>
+      <div class="kort"><small>Länssidan</small><h3>En sida att länka till</h3><p><a href="https://halkvakt.se/lan/vasterbotten/">halkvakt.se/lan/vasterbotten</a> visar läget i länet och en karta. Den fungerar som "läs mer" under en halkartikel.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap tva" style="align-items:start">
+    <div class="stack">
+      <p class="etikett">Datan</p>
+      <h2>Trafikverkets öppna data, läst med försiktighet</h2>
+      <p class="lead">Halkvakt är en oberoende app och sajt, inte en del av Trafikverket. Siffrorna kommer från Trafikverkets öppna data om väglag och vägväderstationer. Halkvakt granskar dem med egna beräkningar, med stöd av meteorologiska och fysikaliska jämförelser, och utvecklar en egen prognos för vägbanans temperatur.</p>
+    </div>
+    <ul class="lista" style="padding-top:8px">
+      <li><span><b>Bara det datan säger.</b> Rutan visar vad Trafikverket rapporterar och vad stationerna mäter. Den påstår aldrig själv att det är halt.</span></li>
+      <li><span><b>Vakter mot trasiga givare.</b> Mätvärden som är fysiskt omöjliga eller för gamla räknas inte.</span></li>
+      <li><span><b>Samma regel överallt.</b> Rutan, länssidorna och appens röstvarning menar samma sak med halka.</span></li>
+      <li><span><b>Källa att ange:</b> "Halkvakt / Trafikverkets öppna data".</span></li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap stack" style="gap:36px">
+    <div class="stack">
+      <p class="etikett">Villkoren</p>
+      <h2>Gratis, och ni bestämmer</h2>
+    </div>
+    <div class="tre">
+      <div class="kort"><div class="tal">0 kr</div><p>Rutan är gratis för er och förblir det tills vidare. Inget avtal behövs för att prova, och ingen reklam i rutan.</p></div>
+      <div class="kort"><div class="tal">1 rad</div><p>Det enda vi ber om är källan: "Halkvakt / Trafikverkets öppna data".</p></div>
+      <div class="kort"><div class="tal">Er plats</div><p>Ni väljer var och när rutan syns, och tar bort den när ni vill.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap tva" style="align-items:start">
+    <div class="stack">
+      <p class="etikett">Om Halkvakt</p>
+      <h2>En app som säger till innan det blir halt</h2>
+    </div>
+    <div class="stack">
+      <p class="lead">Halkvakt är en gratis app för privatpersoner, för iPhone, som varnar med rösten genom bilens högtalare när Trafikverket rapporterar halka på vägen framför bilen. Den finns i <a href="https://apps.apple.com/se/app/halkvakt/id6806939784">App Store</a>, och en version för Android kommer snart. Appen har ingen reklam och inget konto, och ingen position lämnar telefonen automatiskt.</p>
+      <p class="lead" style="font-size:17px">Morgnar med halka postar Halkvakt läget per län på Facebook och Instagram. Halkvakt byggs i Malmö.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap stack" style="gap:36px">
+    <div class="stack">
+      <p class="etikett">Nästa steg</p>
+      <h2>Prova i en artikel nästa gång det blir halt</h2>
+    </div>
+    <div class="tre">
+      <div class="kort"><small>15 minuter</small><h3>Ett kort samtal</h3><p>Vi visar rutan och svarar på frågor från redaktionen och er tekniska sida.</p></div>
+      <div class="kort"><small>En artikel</small><h3>Ett skarpt prov</h3><p>Ni lägger in rutan i en halkartikel eller i livebloggen och ser hur den fungerar hos läsarna.</p></div>
+      <div class="kort"><small>Utvärdering</small><h3>Fortsätt eller avsluta</h3><p>Fungerar det fortsätter vi och kan anpassa mer för Västerbotten. Annars tar ni bort raden.</p></div>
+    </div>
+    <p class="lead" style="font-size:17px;max-width:62ch">Om ni vill kan rutan också ligga fast på er trafiksida eller i livebloggen hela vintern. Det tar vi när ni har sett den i en artikel.</p>
+    <div class="stack" style="gap:8px">
+      <p class="etikett">Kontakt</p>
+      <p class="kontakt">hej@halkvakt.se</p>
+      <p class="lead" style="font-size:17px">Axel Lagerlöf, Halkvakt</p>
+      <p class="sociala"><a href="https://www.facebook.com/profile.php?id=61595485615603" target="_blank" rel="noopener">Facebook</a><a href="https://www.instagram.com/halkvakt/" target="_blank" rel="noopener">Instagram</a><a href="https://apps.apple.com/se/app/halkvakt/id6806939784" target="_blank" rel="noopener">App Store</a></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Halkvakt · halkvakt.se · Data: Trafikverket (CC0). Fristående från myndigheterna.</div>
+</footer>
+
+<script>
+document.getElementById("kopiera").addEventListener("click", async function () {
+  var b = this, kod = document.getElementById("koden").textContent;
+  try { await navigator.clipboard.writeText(kod); b.textContent = "Kopierat"; }
+  catch (e) { var r = document.createRange(); r.selectNodeContents(document.getElementById("koden")); var s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = "Markerat"; }
+  setTimeout(function () { b.textContent = "Kopiera"; }, 1600);
+});
+</script>
+<script src="/assets/besok.js" defer></script>
+</body>
+</html>
