@@ -139,6 +139,18 @@
       { till: 'Alfta och Edsbyn', delar: [['Väg 50', 'Bollnäs - Alfta'], ['Väg 50', 'Alfta - Lamborn']] },
       { till: 'Ljusdal', delar: [['Väg 83', 'Undersvik - Bollnäs'], ['Väg 83', 'Ljusdal - Undersvik']] },
       { till: 'Tönnebro och E4', delar: [['Väg 83', 'Bollnäs - Tönnebro']] }
+    ] },
+    // Söderhamns-Kuriren och Ljusdals-Posten (Axel 19/10): stråken från den egna orten. &strak=soderhamn / &strak=ljusdal.
+    soderhamn: { lan: 'gavleborg', fran: 'Söderhamn', strak: [
+      { till: 'Hudiksvall', delar: [['E 4', 'Enånger - Söderhamn'], ['E 4', 'Hudiksvall - Enånger']] },
+      { till: 'Gävle', delar: [['E 4', 'Söderhamn - Axmartavlan'], ['E 4', 'Axmartavlan - Gävle']] },
+      { till: 'Bollnäs', delar: [['Väg 50', 'Söderhamn - Bollnäs']] }
+    ] },
+    ljusdal: { lan: 'gavleborg', fran: 'Ljusdal', strak: [
+      { till: 'Bollnäs', delar: [['Väg 83', 'Ljusdal - Undersvik'], ['Väg 83', 'Undersvik - Bollnäs']] },
+      { till: 'Hudiksvall', delar: [['Väg 84', 'Ljusdal - Delsbo'], ['Väg 84', 'Delsbo - Hudiksvall']] },
+      { till: 'Kårböle', delar: [['Väg 84', 'Korskrogen - Ljusdal'], ['Väg 84', 'Kårböle - Korskrogen']] },
+      { till: 'Ramsjö', delar: [['Väg 83', 'Tallåsen - Ljusdal'], ['Väg 83', 'Ramsjö - Tallåsen']] }
     ] }
   };
   var strakNyckel = q.get('strak') || lanSlug, PEND = STRAK[strakNyckel];

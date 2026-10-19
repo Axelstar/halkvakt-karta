@@ -64,6 +64,22 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gul);outline-offset
 
 .montage{margin:0}
 .montage img{display:block;width:100%;height:auto;border-radius:18px}
+/* Bildbläddraren (Axel 19/10): en artikel per tidning, pilar och svep. */
+.blad{position:relative}
+.blad-spar{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;border-radius:18px}
+.blad-spar::-webkit-scrollbar{display:none}
+.blad-spar figure{flex:0 0 100%;scroll-snap-align:start;margin:0}
+.blad-pil{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:1px solid var(--kant);background:rgba(15,21,24,.88);color:var(--text);font:600 22px var(--sans);cursor:pointer;display:grid;place-items:center}
+.blad-pil:hover{border-color:var(--gul);color:var(--gul)}
+.blad-pil[disabled]{opacity:.3;cursor:default;border-color:var(--kant);color:var(--text)}
+.blad-pil.v{left:14px}.blad-pil.h{right:14px}
+.blad-rad{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:16px}
+.blad-namn{font:600 12px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--text)}
+.blad-namn span{color:var(--dampad)}
+.blad-prickar{display:flex;gap:8px}
+.blad-prickar button{width:9px;height:9px;padding:0;border-radius:50%;border:0;background:var(--kant);cursor:pointer}
+.blad-prickar button[aria-current="true"]{background:var(--gul);width:24px;border-radius:5px}
+@media (max-width:640px){.blad-pil{width:40px;height:40px;font-size:18px}.blad-pil.v{left:8px}.blad-pil.h{right:8px}}
 
 /* code */
 .kod{position:relative;background:var(--panel);border:1px solid var(--kant);border-radius:16px;overflow:hidden}
@@ -144,10 +160,29 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
       <p class="etikett">I en artikel</p>
       <h2>Så kan det se ut en morgon med halka</h2>
     </div>
-    <figure class="montage">
-      <a href="press/ht-artikel.jpg?v=1" target="_blank" rel="noopener"><img src="press/ht-artikel.jpg?v=1" width="2400" height="1638" alt="Bildmontage: en artikel på ht.se, Halt på vägarna i Hälsingland i morse, med HT:s väglagsruta efter ingressen. På datorn visar rutan fliken Vägarna, på mobilen stråken i Hälsingland." loading="lazy"></a>
-    </figure>
-    <p class="not">Bildmontage med exempelsiffror: så kan rutan se ut i en artikel hos er, på dator och mobil. Tryck på bilden för full storlek. Rutan överst på sidan är live.</p>
+    <div class="blad" id="blad" aria-roledescription="bildspel" aria-label="Rutan i en artikel hos era tidningar">
+      <div class="blad-spar" id="blad-spar">
+        <figure class="montage" data-namn="HT" data-sajt="ht.se">
+          <a href="press/ht-artikel.jpg?v=1" target="_blank" rel="noopener"><img src="press/ht-artikel.jpg?v=1" width="2400" height="1638" alt="Bildmontage: en artikel på ht.se, Halt på vägarna i Hälsingland i morse, med HT:s väglagsruta efter ingressen. På datorn visar rutan fliken Vägarna, på mobilen stråken i Hälsingland." loading="lazy"></a>
+        </figure>
+        <figure class="montage" data-namn="Ljusnan" data-sajt="ljusnan.se">
+          <a href="press/ljusnan-artikel.jpg?v=1" target="_blank" rel="noopener"><img src="press/ljusnan-artikel.jpg?v=1" width="2400" height="1638" alt="Bildmontage: en artikel på ljusnan.se, Halt på vägarna runt Bollnäs i morse, med Ljusnans väglagsruta efter ingressen. På datorn visar rutan fliken Vägarna, på mobilen pendlarvägarna från Bollnäs." loading="lazy"></a>
+        </figure>
+        <figure class="montage" data-namn="Söderhamns-Kuriren" data-sajt="soderhamnskuriren.se">
+          <a href="press/soderhamnskuriren-artikel.jpg?v=1" target="_blank" rel="noopener"><img src="press/soderhamnskuriren-artikel.jpg?v=1" width="2400" height="1638" alt="Bildmontage: en artikel på soderhamnskuriren.se, Halt på vägarna runt Söderhamn i morse, med Söderhamns-Kurirens väglagsruta. På mobilen pendlarvägarna från Söderhamn." loading="lazy"></a>
+        </figure>
+        <figure class="montage" data-namn="Ljusdals-Posten" data-sajt="ljusdalsposten.se">
+          <a href="press/ljusdalsposten-artikel.jpg?v=1" target="_blank" rel="noopener"><img src="press/ljusdalsposten-artikel.jpg?v=1" width="2400" height="1638" alt="Bildmontage: en artikel på ljusdalsposten.se, Halt på vägarna runt Ljusdal i morse, med Ljusdals-Postens väglagsruta. På mobilen pendlarvägarna från Ljusdal." loading="lazy"></a>
+        </figure>
+      </div>
+      <button class="blad-pil v" id="blad-v" type="button" aria-label="Föregående tidning">←</button>
+      <button class="blad-pil h" id="blad-h" type="button" aria-label="Nästa tidning">→</button>
+    </div>
+    <div class="blad-rad">
+      <p class="blad-namn" id="blad-namn" aria-live="polite"></p>
+      <div class="blad-prickar" id="blad-prickar"></div>
+    </div>
+    <p class="not">Bildmontage med exempelsiffror: så kan rutan se ut i en artikel hos er, på dator och mobil. Bläddra med pilarna eller svep, och tryck på bilden för full storlek. Rutan överst på sidan är live.</p>
   </div>
 </section>
 
@@ -302,6 +337,31 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
   <div class="wrap">Halkvakt · halkvakt.se · Data: Trafikverket (CC0). Fristående från myndigheterna.</div>
 </footer>
 
+<script>
+(function () {
+  var spar = document.getElementById("blad-spar"), bilder = [].slice.call(spar.children);
+  var v = document.getElementById("blad-v"), h = document.getElementById("blad-h");
+  var namn = document.getElementById("blad-namn"), prickar = document.getElementById("blad-prickar"), nu = 0;
+  bilder.forEach(function (b, i) {
+    var p = document.createElement("button"); p.type = "button"; p.setAttribute("aria-label", b.dataset.namn);
+    p.addEventListener("click", function () { ga(i); }); prickar.appendChild(p);
+  });
+  function visa(i) {
+    nu = i; v.disabled = i === 0; h.disabled = i === bilder.length - 1;
+    namn.innerHTML = ""; namn.appendChild(document.createTextNode(bilder[i].dataset.namn + " "));
+    var s = document.createElement("span"); s.textContent = "· " + bilder[i].dataset.sajt + " · " + (i + 1) + " av " + bilder.length; namn.appendChild(s);
+    [].forEach.call(prickar.children, function (p, k) { p.setAttribute("aria-current", k === i ? "true" : "false"); });
+  }
+  function ga(i) { i = Math.max(0, Math.min(bilder.length - 1, i)); spar.scrollTo({ left: i * spar.clientWidth, behavior: "smooth" }); visa(i); }
+  v.addEventListener("click", function () { ga(nu - 1); });
+  h.addEventListener("click", function () { ga(nu + 1); });
+  document.getElementById("blad").addEventListener("keydown", function (e) {
+    if (e.key === "ArrowLeft") { e.preventDefault(); ga(nu - 1); } else if (e.key === "ArrowRight") { e.preventDefault(); ga(nu + 1); }
+  });
+  var t; spar.addEventListener("scroll", function () { clearTimeout(t); t = setTimeout(function () { visa(Math.round(spar.scrollLeft / spar.clientWidth)); }, 60); });
+  visa(0);
+})();
+</script>
 <script>
 document.getElementById("kopiera").addEventListener("click", async function () {
   var b = this, kod = document.getElementById("koden").textContent;
