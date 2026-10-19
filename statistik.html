@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Besök på halkvakt.se</title>
+<link rel="icon" href="favicon.png">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+  :root { --mark:#080B0D; --panel:#0F1518; --kant:#1E282D; --skilje:#253036; --text:#E9EFF2; --text2:#A9B5BB; --dampad:#8FA0A9;
+    --gul:#FFC94A; --gul2:rgba(255,201,74,.28); --sans:"Instrument Sans","Helvetica Neue",Arial,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace; color-scheme:dark; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--mark); color:var(--text); font:15px/1.5 var(--sans); }
+  .wrap { max-width:960px; margin:0 auto; padding:24px 16px 64px; }
+  header { display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:20px; }
+  h1 { font-size:22px; margin:0; letter-spacing:-.01em; }
+  h1 b { font-family:var(--mono); font-weight:600; letter-spacing:.06em; }
+  .meta { font:12px var(--mono); color:var(--dampad); }
+  .val { display:flex; gap:6px; }
+  .val button { background:var(--panel); color:var(--text2); border:1px solid var(--kant); border-radius:6px; padding:6px 10px; font:12px var(--mono); cursor:pointer; }
+  .val button[aria-pressed="true"] { border-color:var(--gul); color:var(--gul); }
+  .tal { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:10px; margin-bottom:14px; }
+  .ruta { background:var(--panel); border:1px solid var(--kant); border-radius:10px; padding:14px 16px; }
+  .tal .ruta span { display:block; font:11px var(--mono); color:var(--dampad); text-transform:uppercase; letter-spacing:.06em; }
+  .tal .ruta b { display:block; font:600 30px/1.2 var(--mono); margin-top:4px; }
+  .tal .ruta small { color:var(--text2); font-size:12px; }
+  h2 { font:600 11px var(--mono); color:var(--dampad); text-transform:uppercase; letter-spacing:.08em; margin:0 0 12px; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px; }
+  @media (max-width:700px) { .grid { grid-template-columns:1fr; } }
+  .stapel { display:flex; align-items:flex-end; gap:3px; height:160px; padding-top:8px; }
+  .stapel div { flex:1; position:relative; display:flex; flex-direction:column; justify-content:flex-end; min-width:0; height:100%; }
+  .stapel i { display:block; background:var(--gul); border-radius:2px 2px 0 0; min-height:1px; }
+  .stapel i.b { background:var(--gul2); }
+  .stapel div:hover i { outline:1px solid var(--text); }
+  .axel { display:flex; justify-content:space-between; font:11px var(--mono); color:var(--dampad); margin-top:6px; }
+  .forklaring { font-size:12px; color:var(--text2); margin-top:8px; }
+  .forklaring em { display:inline-block; width:10px; height:10px; border-radius:2px; vertical-align:-1px; margin-right:4px; }
+  table { width:100%; border-collapse:collapse; font-size:14px; }
+  td { padding:6px 0; border-top:1px solid var(--skilje); vertical-align:middle; }
+  tr:first-child td { border-top:0; }
+  td.n { text-align:right; font-family:var(--mono); width:56px; white-space:nowrap; padding-left:8px; }
+  td.namn { word-break:break-all; padding-right:10px; }
+  .bar { height:4px; background:var(--gul); border-radius:2px; margin-top:4px; opacity:.85; }
+  .tom { color:var(--dampad); font-size:13px; }
+  .lankar code { font:12px var(--mono); color:var(--text); background:var(--mark); border:1px solid var(--kant); border-radius:4px; padding:2px 6px; word-break:break-all; }
+  .lankar td { padding:8px 0; }
+  #las { max-width:360px; margin:15vh auto; }
+  #las input { width:100%; padding:10px 12px; background:var(--panel); color:var(--text); border:1px solid var(--kant); border-radius:8px; font:14px var(--mono); }
+  #las button { margin-top:10px; padding:10px 14px; background:var(--gul); color:var(--mark); border:0; border-radius:8px; font:600 14px var(--sans); cursor:pointer; }
+  .fel { color:#FF8A7A; font-size:13px; margin-top:8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <form id="las" hidden>
+    <h1><b>HALKVAKT</b> · besök</h1>
+    <p class="meta">Skriv in nyckeln för att se statistiken.</p>
+    <input id="nyckel" type="password" autocomplete="current-password" placeholder="Nyckel">
+    <button type="submit">Visa</button>
+    <div class="fel" id="lasfel"></div>
+  </form>
+
+  <div id="sida" hidden>
+    <header>
+      <div>
+        <h1><b>HALKVAKT</b> · besök på halkvakt.se</h1>
+        <div class="meta" id="genererad"></div>
+      </div>
+      <div class="val" role="group" aria-label="Period">
+        <button data-d="7">7 dygn</button><button data-d="30" aria-pressed="true">30 dygn</button><button data-d="90">90 dygn</button>
+      </div>
+    </header>
+
+    <div class="tal">
+      <div class="ruta"><span>I dag</span><b id="t-idag">–</b><small>sidvisningar</small></div>
+      <div class="ruta"><span>I går</span><b id="t-igar">–</b><small>sidvisningar</small></div>
+      <div class="ruta"><span>Senaste 7 dygnen</span><b id="t-sju">–</b><small>sidvisningar</small></div>
+      <div class="ruta"><span id="t-perlabel">Besök in</span><b id="t-in">–</b><small>kom utifrån till sajten</small></div>
+    </div>
+
+    <div class="ruta">
+      <h2>Per dygn</h2>
+      <div class="stapel" id="dagar"></div>
+      <div class="axel"><span id="ax-fran"></span><span id="ax-till"></span></div>
+      <div class="forklaring"><em style="background:var(--gul)"></em>besök in utifrån &nbsp; <em style="background:var(--gul2)"></em>klick vidare inom sajten</div>
+    </div>
+
+    <div class="grid">
+      <div class="ruta"><h2>Varifrån de kom</h2><table id="kallor"></table></div>
+      <div class="ruta"><h2>Mest lästa sidor</h2><table id="sidor"></table></div>
+      <div class="ruta"><h2>Tid på dygnet</h2><div class="stapel" id="timmar" style="height:110px"></div><div class="axel"><span>00</span><span>06</span><span>12</span><span>18</span><span>23</span></div></div>
+      <div class="ruta"><h2>Mobil eller dator</h2><table id="enheter"></table></div>
+    </div>
+
+    <div class="ruta" style="margin-top:10px">
+      <h2>Spårlänkar</h2>
+      <p class="forklaring" style="margin-top:0">Lägg till <code style="font:12px var(--mono)">?r=namn</code> på en länk du skickar, så syns här när den öppnas.</p>
+      <table id="koder" class="lankar"></table>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var API = "https://xmpfztykhyvhmrzsnjrc.supabase.co/functions/v1/besok";
+  var LANKAR = [
+    ["ht", "HT", "https://halkvakt.se/halsingland?r=ht"],
+    ["ljusnan", "Ljusnan", "https://halkvakt.se/halsingland?r=ljusnan"],
+    ["sk", "Söderhamns-Kuriren", "https://halkvakt.se/halsingland?r=sk"],
+    ["lp", "Ljusdals-Posten", "https://halkvakt.se/halsingland?r=lp"],
+    ["nwt", "NWT", "https://halkvakt.se/nwt?r=nwt"]
+  ];
+  var dagar = 30, nyckel = "";
+  function hamtaNyckel() {
+    var h = decodeURIComponent(location.hash.slice(1));
+    if (h) { try { localStorage.setItem("hv-besok", h); } catch (e) {} history.replaceState(null, "", location.pathname); return h; }
+    try { return localStorage.getItem("hv-besok") || ""; } catch (e) { return ""; }
+  }
+  var $ = function (id) { return document.getElementById(id); };
+  var fmt = function (n) { return Number(n).toLocaleString("sv-SE"); };
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+
+  function lista(el, rader, namn) {
+    if (!rader.length) { el.innerHTML = '<tr><td class="tom">Inget ännu.</td></tr>'; return; }
+    var max = Math.max.apply(null, rader.map(function (r) { return r.visningar; }));
+    el.innerHTML = rader.slice(0, 12).map(function (r) {
+      return '<tr><td class="namn">' + esc(namn(r)) + '<div class="bar" style="width:' + (100 * r.visningar / max) + '%"></div></td><td class="n">' + fmt(r.visningar) + "</td></tr>";
+    }).join("");
+  }
+
+  function rita(d) {
+    $("genererad").textContent = "Uppdaterad " + new Date(d.genererad).toLocaleString("sv-SE", { dateStyle: "short", timeStyle: "short" }) + " · ingen IP, inga kakor";
+    $("t-idag").textContent = fmt(d.idag); $("t-igar").textContent = fmt(d.igar); $("t-sju").textContent = fmt(d.sju);
+    $("t-in").textContent = fmt(d.ingangar); $("t-perlabel").textContent = "Besök in, " + dagar + " dygn";
+
+    // Fyll i tomma dygn så att staplarna står på en riktig tidsaxel.
+    var per = {}; d.per_dag.forEach(function (r) { per[r.dag] = r; });
+    var serie = [], idag = new Date(); idag.setHours(12, 0, 0, 0);
+    for (var i = dagar - 1; i >= 0; i--) {
+      var t = new Date(idag); t.setDate(t.getDate() - i);
+      var k = t.toLocaleDateString("sv-SE"); var r = per[k] || { visningar: 0, ingangar: 0 };
+      serie.push({ dag: k, in: r.ingangar, inom: r.visningar - r.ingangar });
+    }
+    var max = Math.max(1, Math.max.apply(null, serie.map(function (s) { return s.in + s.inom; })));
+    $("dagar").innerHTML = serie.map(function (s) {
+      return '<div title="' + s.dag + ": " + s.in + " in, " + s.inom + ' inom sajten"><i class="b" style="height:' + (100 * s.inom / max) + '%"></i><i style="height:' + (100 * s.in / max) + '%"></i></div>';
+    }).join("");
+    $("ax-fran").textContent = serie[0].dag; $("ax-till").textContent = serie[serie.length - 1].dag;
+
+    var h = {}; d.per_timme.forEach(function (r) { h[r.timme] = r.visningar; });
+    var hmax = Math.max(1, Math.max.apply(null, d.per_timme.map(function (r) { return r.visningar; }).concat([0])));
+    var tim = ""; for (var j = 0; j < 24; j++) { var v = h[j] || 0; tim += '<div title="' + (j < 10 ? "0" : "") + j + ":00: " + v + '"><i style="height:' + (100 * v / hmax) + '%"></i></div>'; }
+    $("timmar").innerHTML = tim;
+
+    lista($("kallor"), d.kallor, function (r) { return r.kalla; });
+    lista($("sidor"), d.sidor, function (r) { return r.sida; });
+    lista($("enheter"), Object.keys(d.enheter).map(function (k) { return { namn: k, visningar: d.enheter[k] }; }).sort(function (a, b) { return b.visningar - a.visningar; }), function (r) { return r.namn === "mobil" ? "Mobil" : "Dator"; });
+
+    var kod = {}; d.koder.forEach(function (r) { kod[r.kod] = r; });
+    var kanda = LANKAR.map(function (l) { return l[0]; });
+    var rader = LANKAR.map(function (l) {
+      var r = kod[l[0]];
+      return "<tr><td class=\"namn\"><b>" + esc(l[1]) + "</b><br><code>" + esc(l[2]) + "</code></td><td class=\"n\">" +
+        (r ? fmt(r.visningar) + '<br><span class="meta">' + esc(r.senast.slice(5, 16).replace("T", " ")) + "</span>" : '<span class="meta">ej öppnad</span>') + "</td></tr>";
+    });
+    d.koder.filter(function (r) { return kanda.indexOf(r.kod) < 0; }).forEach(function (r) {
+      rader.push('<tr><td class="namn"><b>?r=' + esc(r.kod) + '</b></td><td class="n">' + fmt(r.visningar) + "</td></tr>");
+    });
+    $("koder").innerHTML = rader.join("");
+  }
+
+  function ladda() {
+    fetch(API + "?dagar=" + dagar + "&nyckel=" + encodeURIComponent(nyckel), { cache: "no-store" })
+      .then(function (r) { if (r.status === 401) throw new Error("nyckel"); return r.json(); })
+      .then(function (d) { $("las").hidden = true; $("sida").hidden = false; rita(d); })
+      .catch(function (e) {
+        if (e.message === "nyckel") { try { localStorage.removeItem("hv-besok"); } catch (x) {} $("sida").hidden = true; $("las").hidden = false; $("lasfel").textContent = nyckel ? "Fel nyckel." : ""; }
+        else { $("genererad").textContent = "Kunde inte hämta siffrorna just nu."; }
+      });
+  }
+
+  document.querySelectorAll(".val button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      document.querySelectorAll(".val button").forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
+      b.setAttribute("aria-pressed", "true"); dagar = Number(b.dataset.d); ladda();
+    });
+  });
+  $("las").addEventListener("submit", function (e) {
+    e.preventDefault(); nyckel = $("nyckel").value.trim();
+    try { localStorage.setItem("hv-besok", nyckel); } catch (x) {}
+    ladda();
+  });
+  nyckel = hamtaNyckel();
+  if (nyckel) ladda(); else $("las").hidden = false;
+})();
+</script>
+</body>
+</html>
