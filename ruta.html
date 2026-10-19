@@ -122,8 +122,20 @@
       { till: 'Sunne och Torsby', delar: [['E 18', 'Grums - Karlstad'], ['E 45', 'Fagerås - Grums'], ['E 45', 'Sunne - Fagerås'], ['E 45', 'Torsby - Sunne']] },
       { till: 'Filipstad', delar: [['Väg 63', 'Molkom - Karlstad'], ['Väg 63', 'Filipstad - Molkom']] },
       { till: 'Årjäng', delar: [['E 18', 'Grums - Karlstad'], ['E 18', 'Segmon - Grums'], ['E 18', 'Långserud - Segmon'], ['E 18', 'Årjäng - Långserud']] }
+    ] },
+    // Hälsingland (Axel 19/10, förslaget till HT, Ljusnan, Söderhamns-Kuriren och Ljusdals-Posten): stråk mellan orterna, inte från en stad.
+    // Väljs med &strak=halsingland; gäller bara när &lan=gavleborg.
+    halsingland: { lan: 'gavleborg', rubrik: 'Stråken i Hälsingland just nu', strak: [
+      { fran: 'Hudiksvall', till: 'Söderhamn', delar: [['E 4', 'Hudiksvall - Enånger'], ['E 4', 'Enånger - Söderhamn']] },
+      { fran: 'Söderhamn', till: 'Gävle', delar: [['E 4', 'Söderhamn - Axmartavlan'], ['E 4', 'Axmartavlan - Gävle']] },
+      { fran: 'Söderhamn', till: 'Bollnäs', delar: [['Väg 50', 'Söderhamn - Bollnäs']] },
+      { fran: 'Bollnäs', till: 'Ljusdal', delar: [['Väg 83', 'Undersvik - Bollnäs'], ['Väg 83', 'Ljusdal - Undersvik']] },
+      { fran: 'Hudiksvall', till: 'Ljusdal', delar: [['Väg 84', 'Delsbo - Hudiksvall'], ['Väg 84', 'Ljusdal - Delsbo']] },
+      { fran: 'Bollnäs', till: 'Alfta', delar: [['Väg 50', 'Bollnäs - Alfta']] }
     ] }
   };
+  var strakNyckel = q.get('strak') || lanSlug, PEND = STRAK[strakNyckel];
+  if (PEND && (PEND.lan || strakNyckel) !== lanSlug) PEND = null;
 
   var $ = function (id) { return document.getElementById(id); };
   var minus = function (n) { return n.toFixed(1).replace('.', ',').replace('-', '−'); };
@@ -136,7 +148,7 @@
 
   // Flikarna och svepet: spåret rullar i sidled med snäpp, flikarna och prickarna följer.
   var vyer = ['lan', 'vagar', 'pendling'];
-  if (!STRAK[lanSlug]) { $('f-pendling').hidden = true; $('v-pendling').remove(); vyer.pop(); }
+  if (!PEND) { $('f-pendling').hidden = true; $('v-pendling').remove(); vyer.pop(); }
   var spar = $('spar'), prickar = $('prickar');
   vyer.forEach(function () { prickar.appendChild(el('i')); });
   function markera(i) {
@@ -207,9 +219,9 @@
     });
     $('vagar-text').textContent = nHalt ? 'Trafikverket rapporterar halka på ' + nHalt + ' av länets ' + n + ' stora vägar.' : 'Trafikverket rapporterar ingen halka på länets stora vägar just nu.';
 
-    var p = STRAK[lanSlug];
+    var p = PEND;
     if (!p) return;
-    $('pendling-rubrik').textContent = 'Pendlarvägarna från ' + p.fran + ' just nu';
+    $('pendling-rubrik').textContent = p.rubrik || 'Pendlarvägarna från ' + p.fran + ' just nu';
     var hitta = function (vag, plats) { var x = l.vagar.filter(function (y) { return y.vag === vag; })[0]; return x ? x.strackor.filter(function (s) { return s.plats === plats; })[0] : null; };
     var pl = $('pendling-lista'), m = 0, mHalt = 0; pl.textContent = '';
     p.strak.forEach(function (s) {
@@ -219,7 +231,7 @@
       var vagar = []; s.delar.forEach(function (x) { var k = kortVag(x[0]); if (vagar.indexOf(k) < 0) vagar.push(k); });
       var li = el('li');
       li.appendChild(el('span', 'vag', vagar.join('/')));
-      li.appendChild(el('span', 'lage' + (halt.length ? ' halt' : ''), p.fran + '–' + s.till + ': ' + (halt.length ? 'halka på ' + halt.length + ' av ' + delar.length + strackOrd(delar.length) : 'ingen halka rapporterad')));
+      li.appendChild(el('span', 'lage' + (halt.length ? ' halt' : ''), (s.fran || p.fran) + '–' + s.till + ': ' + (halt.length ? 'halka på ' + halt.length + ' av ' + delar.length + strackOrd(delar.length) : 'ingen halka rapporterad')));
       if (halt.length) li.appendChild(chips(halt));
       pl.appendChild(li);
     });
