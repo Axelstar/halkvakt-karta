@@ -151,6 +151,68 @@
       { till: 'Hudiksvall', delar: [['Väg 84', 'Ljusdal - Delsbo'], ['Väg 84', 'Delsbo - Hudiksvall']] },
       { till: 'Kårböle', delar: [['Väg 84', 'Korskrogen - Ljusdal'], ['Väg 84', 'Kårböle - Korskrogen']] },
       { till: 'Ramsjö', delar: [['Väg 83', 'Tallåsen - Ljusdal'], ['Väg 83', 'Ramsjö - Tallåsen']] }
+    ] },
+    // Tidningssidorna (Axel 19/10): stråken från varje tidnings huvudort. &strak=<nyckel>, bara med rätt &lan=.
+    vasteras: { lan: 'vastmanland', fran: 'Västerås', strak: [
+      { till: 'Köping', delar: [['E 18', 'Köping - Västerås']] },
+      { till: 'Arboga', delar: [['E 18', 'Köping - Västerås'], ['E 18', 'Arboga - Köping']] },
+      { till: 'Sala', delar: [['Väg 56', 'Sala - Västerås']] },
+      { till: 'Fagersta', delar: [['Väg 66', 'Ramnäs - Västerås'], ['Väg 66', 'Fagersta - Ramnäs']] },
+      { till: 'Enköping', delar: [['E 18', 'Västerås - Enköping']] }
+    ] },
+    sala: { lan: 'vastmanland', fran: 'Sala', strak: [
+      { till: 'Västerås', delar: [['Väg 56', 'Sala - Västerås']] },
+      { till: 'Avesta', delar: [['Väg 70', 'Avesta - Sala']] },
+      { till: 'Fjärdhundra', delar: [['Väg 70', 'Sala - Fjärdhundra']] },
+      { till: 'Norberg', delar: [['Väg 256', 'Salbohed - Sala (Kolbäcksbro)'], ['Väg 256', 'Norberg - Salbohed']] }
+    ] },
+    orebro: { lan: 'orebro', fran: 'Örebro', strak: [
+      { till: 'Lindesberg', delar: [['Väg 50', 'Lindesberg - Örebro']] },
+      { till: 'Laxå', delar: [['E 20', 'Örebro - Laxå']] },
+      { till: 'Karlskoga', delar: [['E 18', 'Lekhyttan - Trafikplats Adolfsberg']] },
+      { till: 'Arboga', delar: [['E 18', 'Trafikplats Adolfsberg - Länsgräns Västmanland/Örebro län']] },
+      { till: 'Odensbacken', delar: [['Väg 207', 'Odensbacken - Örebro']] }
+    ] },
+    falun: { lan: 'dalarna', fran: 'Falun', strak: [
+      { till: 'Borlänge', delar: [['E 16', 'Falun - Borlänge']] },
+      { till: 'Rättvik', delar: [['Väg 69', 'Rättvik - Falun']] },
+      { till: 'Hedemora', delar: [['Väg 69', 'Falun - Hedemora']] },
+      { till: 'Hofors', delar: [['E 16', 'Hofors - Falun']] },
+      { till: 'Enviken', delar: [['Väg 50', 'Enviken - Falun']] }
+    ] },
+    gavle: { lan: 'gavleborg', fran: 'Gävle', strak: [
+      { till: 'Söderhamn', delar: [['E 4', 'Axmartavlan - Gävle'], ['E 4', 'Söderhamn - Axmartavlan']] },
+      { till: 'Sandviken och Hofors', delar: [['E 16', 'Gävle - Hofors']] },
+      { till: 'Skutskär', delar: [['Väg 76', 'Gävle - Skutskär']] },
+      { till: 'Gysinge', delar: [['Väg 56', 'Valbo - Gysinge']] },
+      { till: 'Hyttön', delar: [['E 4', 'Gävle - Hyttön']] }
+    ] },
+    eskilstuna: { lan: 'sodermanland', fran: 'Eskilstuna', strak: [
+      { till: 'Strängnäs', delar: [['E 20', 'Strängnäs - Eskilstuna']] },
+      { till: 'Kungsör', delar: [['E 20', 'Eskilstuna - Kungsör']] },
+      { till: 'Malmköping', delar: [['Väg 53', 'Eskilstuna - Malmköping']] },
+      { till: 'Kvicksund', delar: [['Väg 56', 'Kvicksund - Eskilstuna']] },
+      { till: 'Katrineholm', delar: [['Väg 230', 'Eskilstuna - Stora Sundby'], ['Väg 56', 'Stora Sundby - Katrineholm']] }
+    ] },
+    nykoping: { lan: 'sodermanland', fran: 'Nyköping', strak: [
+      { till: 'Kolmården', delar: [['E 4', 'Nyköping - Kolmården']] },
+      { till: 'Vagnhärad', delar: [['E 4', 'Vagnhärad - Nyköping']] },
+      { till: 'Oxelösund', delar: [['Väg 53', 'Nyköping - Oxelösund']] },
+      { till: 'Katrineholm', delar: [['Väg 52', 'Nyköping - Bettna'], ['Väg 52', 'Bettna - Katrineholm']] },
+      { till: 'Malmköping', delar: [['Väg 53', 'Malmköping - Nyköping']] }
+    ] },
+    uppsala: { lan: 'uppsala', fran: 'Uppsala', strak: [
+      { till: 'Enköping', delar: [['Väg 55', 'Uppsala - Enköping']] },
+      { till: 'Knivsta', delar: [['E 4', 'Uppsala - Knivsta']] },
+      { till: 'Björklinge', delar: [['E 4', 'Björklinge - Uppsala']] },
+      { till: 'Östhammar', delar: [['Väg 288', 'Gimo - Uppsala'], ['Väg 288', 'Östhammar - Gimo']] },
+      { till: 'Sala', delar: [['Väg 72', 'Uppsala - Vittinge'], ['Väg 72', 'Vittinge - Sala']] }
+    ] },
+    enkoping: { lan: 'uppsala', fran: 'Enköping', strak: [
+      { till: 'Uppsala', delar: [['Väg 55', 'Uppsala - Enköping']] },
+      { till: 'Bålsta', delar: [['E 18', 'Enköping - Bålsta']] },
+      { till: 'Fjärdhundra', delar: [['Väg 70', 'Fjärdhundra - Enköping']] },
+      { till: 'Hjulstabron', delar: [['Väg 55', 'Enköping - Hjulstabron']] }
     ] }
   };
   var strakNyckel = q.get('strak') || lanSlug, PEND = STRAK[strakNyckel];
