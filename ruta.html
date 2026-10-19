@@ -132,6 +132,13 @@
       { fran: 'Bollnäs', till: 'Ljusdal', delar: [['Väg 83', 'Undersvik - Bollnäs'], ['Väg 83', 'Ljusdal - Undersvik']] },
       { fran: 'Hudiksvall', till: 'Ljusdal', delar: [['Väg 84', 'Delsbo - Hudiksvall'], ['Väg 84', 'Ljusdal - Delsbo']] },
       { fran: 'Bollnäs', till: 'Alfta', delar: [['Väg 50', 'Bollnäs - Alfta']] }
+    ] },
+    // Ljusnan (Axel 19/10): Bollnäs och Ovanåker, stråken från Bollnäs. &strak=ljusnan, bara med &lan=gavleborg.
+    ljusnan: { lan: 'gavleborg', fran: 'Bollnäs', strak: [
+      { till: 'Söderhamn', delar: [['Väg 50', 'Söderhamn - Bollnäs']] },
+      { till: 'Alfta och Edsbyn', delar: [['Väg 50', 'Bollnäs - Alfta'], ['Väg 50', 'Alfta - Lamborn']] },
+      { till: 'Ljusdal', delar: [['Väg 83', 'Undersvik - Bollnäs'], ['Väg 83', 'Ljusdal - Undersvik']] },
+      { till: 'Tönnebro och E4', delar: [['Väg 83', 'Bollnäs - Tönnebro']] }
     ] }
   };
   var strakNyckel = q.get('strak') || lanSlug, PEND = STRAK[strakNyckel];
