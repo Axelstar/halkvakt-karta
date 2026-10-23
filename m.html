@@ -14,6 +14,7 @@
 :root{
   --mark:#080B0D; --panel:#0F1518; --kant:#1E282D; --skilje:#253036;
   --text:#E9EFF2; --text2:#A9B5BB; --dampad:#8FA0A9; --gul:#FFC94A;
+  --papper:#F4F6F7; --papper-text:#111719; --papper-text2:#48555B; --papper-kant:#DCE2E5;
   --sans:"Instrument Sans","Helvetica Neue",Arial,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
   color-scheme:dark;
 }
@@ -52,6 +53,16 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gul);outline-offset
 .live iframe{display:block;width:100%;max-width:480px;height:320px;border:0;border-radius:16px;box-shadow:0 30px 90px rgba(0,0,0,.5)}
 .live .not::before{content:"● ";color:var(--gul)}
 
+/* posten i applistan, ritad utan M:s utseende (Bengt 23/10: "Vi bör kanske visa hur det kan se ut här") */
+.skiss{margin:0;background:var(--papper);color:var(--papper-text);border-radius:18px;padding:40px clamp(20px,5vw,64px)}
+.skiss .post{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:32px;align-items:start;max-width:880px}
+.skiss img{display:block;width:100%;max-width:215px;height:auto;border-radius:8px}
+.skiss h3{font:700 28px/1.2 var(--sans);margin:0 0 12px}
+.skiss p{font-size:17px;line-height:1.6;margin:0 0 12px;color:var(--papper-text)}
+.skiss a{color:#1F5FA8}
+.skiss .ovan{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--papper-text2);margin:0 0 20px}
+@media (max-width:600px){.skiss .post{grid-template-columns:1fr;gap:20px}.skiss img{max-width:120px}}
+
 /* code */
 .kod{position:relative;background:var(--panel);border:1px solid var(--kant);border-radius:16px;overflow:hidden}
 .kod pre{margin:0;padding:58px 22px 20px;font:500 14px/1.65 var(--mono);color:var(--text);overflow-x:auto;white-space:pre}
@@ -87,7 +98,7 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
       <h1>Väglaget i hela Sverige, <span class="gul">live</span> hos M</h1>
       <p class="lead">En ruta för er sida om vintertrafik som visar läget på vägarna i hela landet just nu: hur många vägavsnitt Trafikverket rapporterar med halka, hur många vägväderstationer som visar vägbana under noll, och var det är kallast. Den läggs in med en rad kod och uppdaterar sig själv dygnet runt.</p>
       <p class="lead" style="font-size:17px"><b style="color:var(--text)">Rutan är er.</b> Den bär M:s namn och länkar till era egna råd för vintertrafiken. Halkvakt står bara som en rad i foten.</p>
-      <p class="lead" style="font-size:17px">Rutan bredvid är den riktiga, med dagens siffror.</p>
+      <p class="lead" style="font-size:17px">Rutan bredvid är den riktiga, med dagens siffror. Längre ner: <a href="#applistan">så kan Halkvakt stå i er applista</a>.</p>
     </div>
     <div class="live">
       <iframe src="widget.html?v=3&amp;tema=ljus&amp;namn=M&amp;lank=https://www.msverige.se/resa-med-bil/trafiksakerhet-regler/i-vintertrafiken/&amp;lanktext=Kör%20säkert%20i%20vinter" title="Väglaget i Sverige just nu" loading="eager"></iframe>
@@ -173,6 +184,28 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
       <div class="kort"><small>Er sida</small><h3>Läsarna stannar hos er</h3><p>Länken i rutan går till er egen sida om vintertrafik. Det enda som pekar mot oss öppnas i en ny flik.</p></div>
       <div class="kort"><small>Länen</small><h3>En sida att länka till</h3><p><a href="https://halkvakt.se/lan/">halkvakt.se/lan</a> visar läget i varje län och en karta. Den fungerar som "läs mer" under en text om halka.</p></div>
     </div>
+  </div>
+</section>
+
+<section id="applistan">
+  <div class="wrap stack" style="gap:28px">
+    <div class="stack">
+      <p class="etikett">Applistan</p>
+      <h2>Och en post bland era appar</h2>
+      <p class="lead">Så kan Halkvakt stå på er sida <a href="https://www.msverige.se/resa-med-bil/appar-med-pa-resan/">Appar till hjälp och nöje på resan</a>, under Trafikinformation i realtid, i samma form som de andra posterna.</p>
+    </div>
+    <figure class="skiss">
+      <p class="ovan">Trafikinformation i realtid</p>
+      <div class="post">
+        <img src="logo-512.png" width="215" height="215" alt="Halkvakts appikon: en gul varningstriangel på svart botten" loading="lazy">
+        <div>
+          <h3>Halkvakt</h3>
+          <p>Varnar med rösten för halka, frysrisk, olyckor och djur på vägen innan du är där, utan att du behöver röra telefonen. Bygger på Trafikverkets öppna data. Gratis, utan konto och reklam.</p>
+          <p><a href="https://halkvakt.se/">Halkvakt.se</a><br><a href="https://apps.apple.com/se/app/halkvakt/id6806939784">Halkvakt</a> (iOS)<br>Android kommer i vinter</p>
+        </div>
+      </div>
+    </figure>
+    <p class="not">Skiss av posten, ritad utan er sidas utseende. Texten är vårt förslag, och ni ändrar den som ni vill. Vill ni hellre vänta tills appen finns för Android, hör vi av oss då.</p>
   </div>
 </section>
 
