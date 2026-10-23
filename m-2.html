@@ -33,6 +33,7 @@ h2{font:700 clamp(30px,4vw,46px)/1.08 var(--sans);letter-spacing:-.02em;margin:0
 h3{font:600 21px/1.3 var(--sans);margin:0}
 .lead{font-size:clamp(18px,1.9vw,22px);line-height:1.5;color:var(--text2);max-width:56ch}
 .stack{display:grid;gap:22px;align-content:start;min-width:0}
+.tva>*{min-width:0}
 .tva{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:56px;align-items:start}
 .not{font:400 13px/1.5 var(--mono);color:var(--dampad)}
 .steg{font:600 12px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--gul);margin:0}
@@ -81,7 +82,7 @@ summary::-webkit-details-marker{display:none}
 summary::after{content:" +";color:var(--gul)}
 details[open] summary::after{content:" −"}
 .kod{position:relative;border-top:1px solid var(--kant)}
-.kod pre{margin:0;padding:52px 20px 18px;font:500 13.5px/1.65 var(--mono);overflow-x:auto;white-space:pre}
+.kod pre{margin:0;padding:52px 20px 18px;font:500 13.5px/1.65 var(--mono);white-space:pre-wrap;word-break:break-all}
 .kod button{position:absolute;top:12px;right:12px;font:600 13px var(--sans);background:var(--gul);color:#111719;border:0;border-radius:999px;padding:7px 14px;cursor:pointer}
 .kod + p{padding:0 20px 18px;color:var(--text2);font-size:15px}
 
@@ -118,7 +119,7 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
   .sidor,.rapport,.villkor{grid-template-columns:1fr}
   section{padding-block:64px}
 }
-@media (min-width:601px){ .live iframe,.skiss iframe{height:270px} }
+@media (min-width:601px){ .live iframe{height:270px} .skiss iframe{height:290px} }
 @media (max-width:520px){ .skiss .post{grid-template-columns:64px minmax(0,1fr)} .skiss .post img{width:64px;height:64px;border-radius:15px} }
 </style>
 </head>
@@ -154,7 +155,7 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
           <h3><a href="https://www.msverige.se/resa-med-bil/appar-med-pa-resan/" target="_blank" rel="noopener">Appar med på resan</a></h3>
           <dl>
             <div><dt>Där står i dag</dt><dd>Appar för kartor, laddning, camping och språk, och under trafikinformation en app att titta på.</dd></div>
-            <div><dt>Vi lägger till</dt><dd class="ny">En app som säger till med rösten innan det blir halt, så att föraren aldrig behöver titta.</dd></div>
+            <div><dt>Vårt förslag</dt><dd class="ny">En app som säger till med rösten innan det blir halt, så att föraren aldrig behöver titta.</dd></div>
           </dl>
         </article>
         <article class="sida">
@@ -162,7 +163,7 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
           <h3><a href="https://www.msverige.se/resa-med-bil/trafiksakerhet-regler/i-vintertrafiken/" target="_blank" rel="noopener">I vintertrafiken</a></h3>
           <dl>
             <div><dt>Där står i dag</dt><dd>Råd om sladd, vinterdäck och klassiska fällor, och rådet att planera resvägen.</dd></div>
-            <div><dt>Vi lägger till</dt><dd class="ny">Väglaget i hela Sverige just nu, i en ruta med ert namn som uppdaterar sig själv.</dd></div>
+            <div><dt>Vårt förslag</dt><dd class="ny">Väglaget i hela Sverige just nu, i en ruta med ert namn som uppdaterar sig själv.</dd></div>
           </dl>
         </article>
         <article class="sida">
@@ -170,7 +171,7 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
           <h3><a href="https://msverige.se/resa-med-bil/det-har-galler-vid-viltolycka/" target="_blank" rel="noopener">Det här gäller vid viltolycka</a></h3>
           <dl>
             <div><dt>Där står i dag</dt><dd>Vad föraren gör efter en viltolycka, och er önskan om ny teknik för viltvarning.</dd></div>
-            <div><dt>Vi lägger till</dt><dd class="ny">En röst som varnar när Trafikverket rapporterar djur på vägen, innan föraren är där.</dd></div>
+            <div><dt>Vårt förslag</dt><dd class="ny">En röst som varnar när Trafikverket rapporterar djur på vägen, innan föraren är där.</dd></div>
           </dl>
         </article>
       </div>
@@ -275,8 +276,9 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
   <section id="senare">
     <div class="tva">
       <div class="stack">
-        <p class="etikett">Längre fram</p>
-        <h2>Om ni vill gå vidare</h2>
+        <p class="etikett">Tillsammans</p>
+        <h2>Vi bygger gärna vidare med er</h2>
+        <p class="lead">Vi är väldigt öppna för att jobba med er. Målet är detsamma som ert: att färre förare överraskas av halkan. Har ni en kampanj, en granskning eller en idé om vad era medlemmar behöver i vinter, bygger vi det med er.</p>
       </div>
       <ul class="lista">
         <li><span><b>Lokalklubbarna.</b> Samma ruta för ett län, för en klubbs egen sida. Den finns redan.</span></li>
@@ -318,7 +320,7 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
       <div class="stack">
         <p class="etikett">Nästa steg</p>
         <h2>Ett samtal på 15 minuter</h2>
-        <p class="lead">Vi visar rutan och svarar på frågor från er och er tekniska sida.</p>
+        <p class="lead">Vi visar rutan, svarar på frågor och hör vad ni själva vill göra för säkrare vinterkörning.</p>
       </div>
       <div class="stack">
         <p class="kontakt">hej@halkvakt.se</p>
