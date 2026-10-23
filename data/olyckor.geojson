@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[12.515568449,57.56146886]},"properties":{"land":"SE","typ":"Olycka","msg":"Viltolycka. ","allvar":"Liten påverkan","road":"Väg 156","start":"2026-10-23T03:41:49.000Z"}}]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[14.722243033,57.449859096]},"properties":{"land":"SE","typ":"Olycka","msg":"Singelolycka med personbil norr om Sävsjö.","allvar":"Stor påverkan","road":"Väg 128","start":"2026-10-23T04:09:00.000Z"}}]}
