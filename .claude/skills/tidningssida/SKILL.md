@@ -38,7 +38,7 @@ cd halkvakt-karta
 
 Sök på slug och namn i `verktyg/tidningar.json`. Hälsinglands fyra tidningar (HT, Ljusnan, Söderhamns-Kuriren,
 Ljusdals-Posten) delar `halsingland.html` och byggs inte av det här verktyget; `nwt.html` är också handbyggd.
-Rör inte dem.
+Rör inte dem. `m.html` (M Sverige, hela landet utan län) är handbyggd och bäddar in `widget.html` i stället för `ruta.html`.
 
 ### 3. Samla uppgifterna om tidningen
 
@@ -118,6 +118,13 @@ git status --short                              # bara de nya filerna och ev. ru
 
 Ändrar körningen andra tidningars sidor än den nya, stanna och ta reda på varför innan du pushar.
 Raden `obs …` är en varning, inget fel.
+
+**Varje förslagssida ska ha en egen rutadress, också en handbyggd** (Axel 23/10: *"skapa en länk som här"*).
+`rutor.py` läser första iframen till `ruta.html` eller `widget.html` med `&namn=` på varje sida i roten, så en
+handbyggd sida som `nwt.html` eller `m.html` får sin adress `halkvakt.se/ruta/<slug>/` av samma körning. Visa den
+på sidan som `st.html` gör, under Tekniken: punkten *En egen adress till er ruta* med `halkvakt.se/ruta/<slug>`, och
+rutan med adressen, Kopiera-knappen och raden *Bara en länk? Den här räcker.* med rätt höjd (440 px för `ruta.html`,
+320 px för `widget.html`).
 
 ### 7. Titta på sidan innan den går ut
 

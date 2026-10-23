@@ -31,12 +31,13 @@
   .fot a { font: 600 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--skilje); padding-bottom: 2px; }
   .fot a:hover { border-color: var(--gul); }
   .fot span { font: 400 11px var(--mono); color: var(--dampad); letter-spacing: .04em; }
+  .fot .teknik a { color: var(--dampad); border: 0; padding: 0; font: inherit; letter-spacing: inherit; text-transform: none; text-decoration: underline; }
   @media (max-width: 330px) { .tal { grid-template-columns: 1fr 1fr; } .tal div:last-child { grid-column: 1 / -1; } }
 </style>
 </head>
 <body>
 <div class="kort" id="kort">
-  <p class="etikett"><svg viewBox="3 3 94 83" aria-hidden="true"><path fill-rule="evenodd" fill="#FFC94A" d="M55.196 6 L96.196 77 A6 6 0 0 1 91 86 L9 86 A6 6 0 0 1 3.804 77 L44.804 6 A6 6 0 0 1 55.196 6 Z M46.4 32 L53.6 32 L52 58 L48 58 Z M45.6 68 A4.4 4.4 0 1 0 54.4 68 A4.4 4.4 0 1 0 45.6 68 Z"/></svg><b>Halkvakt</b><span id="tid">Hämtar läget</span></p>
+  <p class="etikett"><svg viewBox="3 3 94 83" aria-hidden="true"><path fill-rule="evenodd" fill="#FFC94A" d="M55.196 6 L96.196 77 A6 6 0 0 1 91 86 L9 86 A6 6 0 0 1 3.804 77 L44.804 6 A6 6 0 0 1 55.196 6 Z M46.4 32 L53.6 32 L52 58 L48 58 Z M45.6 68 A4.4 4.4 0 1 0 54.4 68 A4.4 4.4 0 1 0 45.6 68 Z"/></svg><b id="namn">Halkvakt</b><span id="tid">Hämtar läget</span></p>
   <h1 id="rubrik">Väglaget just nu</h1>
   <div class="tal">
     <div><small>Halka</small><strong id="t-halt">–</strong><em id="t-halt-av">av vägavsnitten</em></div>
@@ -44,7 +45,7 @@
     <div><small>Kallast</small><strong id="t-kallast">–</strong><em id="t-kallast-var">just nu</em></div>
   </div>
   <p id="text">Läget hämtas från Trafikverkets öppna data.</p>
-  <div class="fot"><a id="lank" href="https://halkvakt.se/lan/" target="_top" rel="noopener">Läget i alla län</a><span>Källa: Halkvakt / Trafikverkets öppna data</span></div>
+  <div class="fot"><a id="lank" href="https://halkvakt.se/lan/" target="_top" rel="noopener">Läget i alla län</a><span id="kalla">Källa: Halkvakt / Trafikverkets öppna data</span></div>
 </div>
 <script>
 (function () {
@@ -52,6 +53,11 @@
   var q = new URLSearchParams(location.search);
   var lanSlug = q.get('lan'), vagSlug = q.get('vag');
   var tema = q.get('tema');
+  // Mottagarens egen ruta (Bengt 23/10, förslaget till M Sverige), som i ruta.html: &namn= ersätter Halkvakt i rubriken,
+  // &lank= och &lanktext= styr länken i foten (bara https). Halkvakt står kvar som teknik i foten. Allt skrivs som text, aldrig som HTML.
+  var egetNamn = (q.get('namn') || '').slice(0, 40), egenLank = q.get('lank') || '';
+  var sakerLank = function (u) { try { var x = new URL(u); return x.protocol === 'https:' ? x.href : ''; } catch (e) { return ''; } };
+  egenLank = sakerLank(egenLank);
   if (tema === 'auto') tema = (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches) ? 'ljus' : 'mork';
   if (tema === 'ljus') document.documentElement.setAttribute('data-tema', 'ljus');
   var $ = function (id) { return document.getElementById(id.replace('#', '')); };
@@ -95,6 +101,14 @@
     $('#text').textContent = text;
     $('#lank').href = lank;
     $('#lank').textContent = 'Läget i ' + namn + ' på halkvakt.se';
+    if (egenLank) { $('#lank').href = egenLank; $('#lank').textContent = (q.get('lanktext') || 'Mer om trafiken').slice(0, 40); }
+    else if (egetNamn) $('#lank').target = '_blank';   // halkvakt.se i ny flik: läsaren ska inte lämna mottagarens sida för oss
+  }
+
+  if (egetNamn) {
+    $('#namn').textContent = egetNamn + ' · Väglaget'; document.querySelector('.etikett svg').style.display = 'none';
+    var k = $('#kalla'); k.textContent = 'Data: Trafikverket · Teknik: '; k.className = 'teknik';
+    var h = document.createElement('a'); h.href = 'https://halkvakt.se/'; h.target = '_blank'; h.rel = 'noopener'; h.textContent = 'Halkvakt'; k.appendChild(h);
   }
 
   var visat = false;
