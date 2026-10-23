@@ -39,10 +39,10 @@
 <body>
 <iframe id="ruta" src="https://halkvakt.se/widget.html?v=3&amp;tema=ljus&amp;namn=M&amp;lank=https://www.msverige.se/resa-med-bil/trafiksakerhet-regler/i-vintertrafiken/&amp;lanktext=K%C3%B6r%20s%C3%A4kert%20i%20vinter" title="Väglaget i Sverige just nu" loading="eager"></iframe>
 <script>
-  // Tillval som går vidare till rutan: ?tema=auto|mork
+  // Tillval som går vidare till rutan: ?tema=auto|mork, ?lan=<län>
   (function () {
     var in_ = new URLSearchParams(location.search), f = document.getElementById('ruta'), u = new URL(f.src);
-    ['tema'].forEach(function (k) { var v = in_.get(k); if (v) u.searchParams.set(k, v); });
+    ['tema', 'lan'].forEach(function (k) { var v = in_.get(k); if (v) u.searchParams.set(k, v); });
     if (u.href !== f.src) f.src = u.href;
   })();
 </script>
