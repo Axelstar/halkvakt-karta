@@ -154,7 +154,7 @@ Mallen följer redan reglerna. Skriver du ny text någonstans gäller samma sak:
 - **Positionsmeningen:** "ingen position lämnar telefonen automatiskt". Aldrig "Positionen lämnar aldrig telefonen".
 - **Inga långa tankstreck (—)**, inga utropstecken. Kort streck (–) bara mellan orter: Sundsvall–Gnarp.
 - Sidorna är `noindex` och ligger inte i `sitemap.xml`. Lägg inte in dem där.
-- Rutan har ingen spårning och inga kakor. Lägg aldrig till skript i `ruta.html`, `widget.html` eller `ruta/`.
+- Rutan lovar tidningarna inga kakor och ingen spårning. Lägg inte till något sådant i `ruta.html`, `widget.html` eller `ruta/`.
 - Halkvakt är fristående från Trafikverket. Skriv aldrig att vi samarbetar med dem.
 
 ## När generatorn stoppar
