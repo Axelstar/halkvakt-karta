@@ -29,6 +29,12 @@
 <style>
   html, body { margin: 0; height: 100%; background: transparent; }
   iframe { display: block; width: 100%; height: 100%; min-height: 440px; border: 0; }
+  /* Öppnas länken direkt i ett stort fönster ska rutan se ut som den gör i en artikel: 480 × 440, inte hela skärmen (Axel 23/10).
+     I en tidnings ram (smalare än 560 px eller lägre än 560 px) fyller den ramen som förut. */
+  @media (min-width: 560px) and (min-height: 560px) {
+    body { display: grid; place-items: center; }
+    iframe { width: 480px; height: 440px; min-height: 0; border-radius: 16px; box-shadow: 0 20px 60px rgba(8, 11, 13, .18); }
+  }
 </style>
 </head>
 <body>
