@@ -62,6 +62,13 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gul);outline-offset
 .skiss a{color:#1F5FA8}
 .skiss .ovan{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--papper-text2);margin:0 0 20px}
 @media (max-width:600px){.skiss .post{grid-template-columns:1fr;gap:20px}.skiss img{max-width:120px}}
+/* rutan på vintersidan, med val av län (Bengt 23/10: "med län eller hela sverige") */
+.valj{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:0 0 16px}
+.valj label{font:600 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--papper-text2)}
+.valj select{font:500 16px var(--sans);padding:8px 12px;border:1px solid var(--papper-kant);border-radius:10px;background:#fff;color:var(--papper-text);max-width:100%}
+.skiss iframe{display:block;width:100%;max-width:480px;height:320px;border:0;border-radius:16px}
+@media (max-width:420px){.skiss iframe{height:400px}}   /* under 330 px bredd lägger widgeten talen på två rader */
+.skiss .kodrad{font:500 13px/1.6 var(--mono);color:var(--papper-text2);word-break:break-all;margin:16px 0 0}
 
 /* code */
 .kod{position:relative;background:var(--panel);border:1px solid var(--kant);border-radius:16px;overflow:hidden}
@@ -218,14 +225,21 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
   <div class="wrap stack" style="gap:28px">
     <div class="stack">
       <p class="etikett">Vintersidan</p>
-      <h2>Och ett råd till på er vintersida</h2>
-      <p class="lead">Så kan raden stå på er sida <a href="https://www.msverige.se/resa-med-bil/trafiksakerhet-regler/i-vintertrafiken/">Kör säkert i vintertrafiken</a>, i samma form som era tips: läsaren ser väglaget före resan och hittar appen bland era appar.</p>
+      <h2>Och på er vintersida: ett råd eller rutan</h2>
+      <p class="lead">Två sätt att visa väglaget på er sida <a href="https://www.msverige.se/resa-med-bil/trafiksakerhet-regler/i-vintertrafiken/">Kör säkert i vintertrafiken</a>. Ni väljer det ena, båda eller inget.</p>
     </div>
     <figure class="skiss">
-      <p class="ovan">Kör säkert i vintertrafiken</p>
+      <p class="ovan">1. En rad bland era tips</p>
       <p><b>Kolla väglaget</b> innan du åker: <a href="https://halkvakt.se/">halkvakt.se</a> visar Trafikverkets väglag och vägväderstationer i hela landet. Vill du bli varnad med rösten under resan finns appen Halkvakt <a href="https://www.msverige.se/resa-med-bil/appar-med-pa-resan/">bland våra appar för resan</a>.</p>
     </figure>
-    <p class="not">Skiss av raden, ritad utan er sidas utseende. Andra meningen och länken till applistan gäller om ni tar med Halkvakt där. Webbplatsen fungerar på alla telefoner och datorer.</p>
+    <p class="not">Skiss av raden, ritad utan er sidas utseende. Andra meningen och länken till applistan gäller om ni tar med Halkvakt där.</p>
+    <figure class="skiss">
+      <p class="ovan">2. Rutan, live, för hela Sverige eller ett län</p>
+      <div class="valj"><label for="valj-lan">Visa</label><select id="valj-lan"><option value="">Hela Sverige</option></select></div>
+      <iframe id="vinter-ruta" src="widget.html?v=3&amp;tema=ljus&amp;namn=M&amp;lank=https://www.msverige.se/resa-med-bil/trafiksakerhet-regler/i-vintertrafiken/&amp;lanktext=Kör%20säkert%20i%20vinter" title="Väglaget i Sverige just nu" loading="lazy"></iframe>
+      <p class="kodrad">Länken att klistra in: <span id="vinter-lank">https://halkvakt.se/ruta/m/</span></p>
+    </figure>
+    <p class="not">Rutan är den riktiga, med dagens siffror. Välj ett län så ser ni hur den ser ut för länet. Den bär M:s namn, länkar till er vintersida och uppdaterar sig själv dygnet runt, utan kakor, spårning eller reklam. Koden finns under Tekniken ovan.</p>
   </div>
 </section>
 
@@ -306,6 +320,26 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
     setTimeout(function () { b.textContent = "Kopiera"; }, 1600);
   });
 });
+</script>
+<script>
+// Rutan på vintersidan: välj hela Sverige eller ett län, och se länken att klistra in för valet.
+(function () {
+  var sel = document.getElementById("valj-lan"), f = document.getElementById("vinter-ruta"), lank = document.getElementById("vinter-lank");
+  if (!sel || !f) return;
+  var bas = f.getAttribute("src"), namn = { "": "Sverige" };
+  fetch("data/lan.json", { cache: "no-cache" })
+    .then(function (r) { return r.json(); })
+    .then(function (d) {
+      d.lan.forEach(function (l) { var o = document.createElement("option"); o.value = l.slug; o.textContent = l.kort; namn[l.slug] = l.kort; sel.appendChild(o); });
+    })
+    .catch(function () {});
+  sel.addEventListener("change", function () {
+    var v = sel.value;
+    f.src = bas + (v ? "&lan=" + encodeURIComponent(v) : "");
+    f.title = "Väglaget i " + (namn[v] || "Sverige") + " just nu";
+    lank.textContent = "https://halkvakt.se/ruta/m/" + (v ? "?lan=" + v : "");
+  });
+})();
 </script>
 <script src="/assets/besok.js" defer></script>
 </body>

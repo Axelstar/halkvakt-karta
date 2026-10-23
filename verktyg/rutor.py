@@ -32,7 +32,7 @@ SORT = {
     'ruta': dict(sida='ruta.html', v='6', hojd=440, tillval=['flik', 'tema', 'sponsor', 'sponsorlank'],
                  tillvaltext='?flik=lan|vagar|pendling, ?tema=auto|mork, ?sponsor=…, ?sponsorlank=…',
                  vad='länet, de stora vägarna och pendlarvägarna'),
-    'widget': dict(sida='widget.html', v='3', hojd=320, tillval=['tema'], tillvaltext='?tema=auto|mork',
+    'widget': dict(sida='widget.html', v='3', hojd=320, tillval=['tema', 'lan'], tillvaltext='?tema=auto|mork, ?lan=<län>',
                    vad='halka, vägväderstationer under noll och den kallaste vägbanan'),
 }
 
