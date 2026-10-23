@@ -98,6 +98,11 @@
       <p class="forklaring" style="margin-top:0">Lägg till <code style="font:12px var(--mono)">?r=namn</code> på en länk du skickar, så syns här när den öppnas.</p>
       <table id="koder" class="lankar"></table>
     </div>
+    <div class="ruta" style="margin-top:10px">
+      <h2>Rutorna hos tidningarna</h2>
+      <p class="forklaring" style="margin-top:0">Visningar av väglagsrutan inbäddad på tidningarnas sajter, räknade för sig och inte med i siffrorna ovan. Öppnad direkt = någon har öppnat länken, till exempel för att testa.</p>
+      <table id="rutor" class="lankar"></table>
+    </div>
   </div>
 </div>
 
@@ -168,6 +173,17 @@
       rader.push('<tr><td class="namn"><b>?r=' + esc(r.kod) + '</b></td><td class="n">' + fmt(r.visningar) + "</td></tr>");
     });
     $("koder").innerHTML = rader.join("");
+
+    // Rutorna hos tidningarna (Axel 23/10): per tidning, inbäddad hos dem respektive öppnad direkt.
+    var rutor = d.rutor || [];
+    $("rutor").innerHTML = rutor.length ? rutor.map(function (r) {
+      var sajter = (r.sajter || []).filter(function (x) { return x !== "(inbaddad)"; });
+      var under = r.inbaddad
+        ? fmt(r.sju) + " senaste 7 dygnen · " + fmt(r.idag) + " i dag · senast " + esc(String(r.senast).slice(5, 16).replace("T", " ")) + (sajter.length ? "<br>på " + sajter.map(esc).join(", ") : "")
+        : "inte inbäddad än" + (r.direkt ? " · öppnad direkt " + fmt(r.direkt) + " gånger" : "");
+      return '<tr><td class="namn"><b>' + esc(r.tidning) + '</b><br><span class="meta">' + under + "</span></td>" +
+        '<td class="n">' + (r.inbaddad ? fmt(r.inbaddad) : '<span class="meta">–</span>') + "</td></tr>";
+    }).join("") : '<tr><td class="tom">Ingen ruta har visats än.</td></tr>';
   }
 
   function ladda() {
