@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Halkvakt för M Sverige</title>
+<meta name="description" content="Väglaget just nu på M Sveriges sidor om vintern, en röst som varnar under resan och siffror till arbetet för säkrare vintervägar. Ett förslag från Halkvakt.">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+/* Förslaget till M Sverige, version 2 (Axel 23/10): byggd kring M:s egna tre sidor, med ett steg per sida och vinterrapporten sist.
+   Handbyggd, som nwt.html och m.html: generatorn för tidningssidorna kräver ett län. Rutan är widget.html för hela landet. */
+:root{
+  --mark:#080B0D; --panel:#0F1518; --upp:#1A2327; --kant:#1E282D; --skilje:#253036;
+  --text:#E9EFF2; --text2:#A9B5BB; --dampad:#8FA0A9; --gul:#FFC94A; --gul-text:#3A2E0B;
+  --papper:#F4F6F7; --ptext:#111719; --ptext2:#48555B; --pkant:#DCE2E5;
+  --sans:"Instrument Sans","Helvetica Neue",Arial,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--mark);color:var(--text);font:400 18px/1.6 var(--sans)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+section{padding-block:88px;border-top:1px solid var(--kant)}
+p{margin:0}
+a{color:var(--text)}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--gul);outline-offset:3px;border-radius:4px}
+.etikett{display:flex;align-items:center;gap:12px;font:600 12px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--dampad);margin:0}
+.etikett svg{width:18px;height:auto;flex:none}
+.etikett b{color:var(--text)}
+h1{font:700 clamp(40px,6.2vw,76px)/1.02 var(--sans);letter-spacing:-.025em;margin:0;text-wrap:balance}
+h2{font:700 clamp(30px,4vw,46px)/1.08 var(--sans);letter-spacing:-.02em;margin:0;text-wrap:balance;max-width:24ch}
+h3{font:600 21px/1.3 var(--sans);margin:0}
+.lead{font-size:clamp(18px,1.9vw,22px);line-height:1.5;color:var(--text2);max-width:56ch}
+.stack{display:grid;gap:22px;align-content:start;min-width:0}
+.tva{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:56px;align-items:start}
+.not{font:400 13px/1.5 var(--mono);color:var(--dampad)}
+.steg{font:600 12px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--gul);margin:0}
+
+/* hero */
+.hero{border-top:0;padding-block:64px 88px}
+.live{display:grid;gap:12px;justify-items:start}
+.live iframe{display:block;width:100%;max-width:480px;height:320px;border:0;border-radius:16px;box-shadow:0 30px 90px rgba(0,0,0,.5)}
+.live .not::before{content:"● ";color:var(--gul)}
+.hopp{display:flex;flex-wrap:wrap;gap:10px}
+.hopp a{font:600 14px var(--sans);text-decoration:none;border:1px solid var(--kant);border-radius:999px;padding:8px 16px}
+.hopp a:hover{border-color:var(--gul)}
+
+/* tre sidor */
+.sidor{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.sida{background:var(--panel);border:1px solid var(--kant);border-radius:18px;padding:24px;display:grid;gap:16px;align-content:start}
+.sida h3 a{text-decoration:none;border-bottom:1px solid var(--skilje)}
+.sida h3 a:hover{border-color:var(--gul)}
+.sida dl{margin:0;display:grid;gap:14px}
+.sida dt{font:600 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dampad);margin-bottom:4px}
+.sida dd{margin:0;color:var(--text2);font-size:16px;line-height:1.55}
+.sida dd.ny{color:var(--text)}
+.sida .steg a{color:inherit;text-decoration:none}
+
+/* skisser av M:s sidor, ritade utan deras utseende */
+.skiss{margin:0;background:var(--papper);color:var(--ptext);border-radius:18px;padding:36px clamp(20px,5vw,56px);display:grid;gap:18px}
+.skiss .ovan{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ptext2)}
+.skiss h4{font:700 26px/1.2 var(--sans);margin:0}
+.skiss p{font-size:17px;line-height:1.6;color:var(--ptext)}
+.skiss a{color:#1F5FA8}
+.skiss .grat{display:grid;gap:9px}
+.skiss .grat i{display:block;height:11px;border-radius:6px;background:var(--pkant)}
+.skiss .grat i:nth-child(2){width:92%}.skiss .grat i:nth-child(3){width:78%}
+.skiss .vart{border-left:4px solid var(--gul);background:#fff;border-radius:0 12px 12px 0;padding:16px 20px;display:grid;gap:8px}
+.skiss .vart small{font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ptext2)}
+.skiss iframe{display:block;width:100%;max-width:480px;height:320px;border:0;border-radius:14px}
+.skiss .post{display:grid;grid-template-columns:96px minmax(0,1fr);gap:20px;align-items:start}
+.skiss .post img{width:96px;height:96px;border-radius:22px;display:block}
+.skiss .post h5{font:700 20px/1.25 var(--sans);margin:0 0 6px}
+.skiss figcaption{font:400 13px/1.5 var(--mono);color:var(--ptext2)}
+
+/* koden */
+details{background:var(--panel);border:1px solid var(--kant);border-radius:16px}
+summary{cursor:pointer;padding:16px 20px;font:600 16px var(--sans);list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:" +";color:var(--gul)}
+details[open] summary::after{content:" −"}
+.kod{position:relative;border-top:1px solid var(--kant)}
+.kod pre{margin:0;padding:52px 20px 18px;font:500 13.5px/1.65 var(--mono);overflow-x:auto;white-space:pre}
+.kod button{position:absolute;top:12px;right:12px;font:600 13px var(--sans);background:var(--gul);color:#111719;border:0;border-radius:999px;padding:7px 14px;cursor:pointer}
+.kod + p{padding:0 20px 18px;color:var(--text2);font-size:15px}
+
+/* vinterrapporten */
+.tabell{overflow-x:auto;background:var(--panel);border:1px solid var(--kant);border-radius:18px}
+table{width:100%;border-collapse:collapse;font-size:15px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:11px 16px;border-bottom:1px solid var(--kant);white-space:nowrap}
+th{font:600 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dampad);position:sticky;top:0;background:var(--panel)}
+tr:last-child td{border-bottom:0}
+td.halt{color:var(--gul);font-weight:600}
+td.noll{color:var(--dampad)}
+.rapport{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.rapport div{background:var(--panel);border:1px solid var(--kant);border-radius:16px;padding:20px;display:grid;gap:6px}
+.rapport b{font-weight:600}
+.rapport span{color:var(--text2);font-size:16px}
+
+/* senare, villkor */
+.lista{margin:0;padding:0;list-style:none;display:grid;gap:12px}
+.lista li{display:grid;grid-template-columns:18px 1fr;gap:12px;color:var(--text2)}
+.lista li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gul);margin-top:11px}
+.lista b{color:var(--text);font-weight:600}
+.villkor{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.villkor div{background:var(--panel);border:1px solid var(--kant);border-radius:18px;padding:24px;display:grid;gap:8px}
+.tal{font:600 clamp(36px,4.6vw,54px)/1 var(--mono);color:var(--gul);letter-spacing:-.02em}
+.villkor p{color:var(--text2);font-size:16px}
+.kontakt{font:600 clamp(26px,4vw,44px)/1.2 var(--mono);color:var(--gul);user-select:all;word-break:break-all}
+.sociala{display:flex;flex-wrap:wrap;gap:10px}
+.sociala a{font:600 14px var(--sans);text-decoration:none;border:1px solid var(--kant);border-radius:999px;padding:8px 16px}
+.sociala a:hover{border-color:var(--gul)}
+footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--dampad);font-size:14px}
+
+@media (max-width:900px){
+  .tva{grid-template-columns:1fr;gap:36px}
+  .sidor,.rapport,.villkor{grid-template-columns:1fr}
+  section{padding-block:64px}
+}
+@media (min-width:601px){ .live iframe,.skiss iframe{height:270px} }
+@media (max-width:520px){ .skiss .post{grid-template-columns:64px minmax(0,1fr)} .skiss .post img{width:64px;height:64px;border-radius:15px} }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="tva">
+      <div class="stack">
+        <p class="etikett"><svg viewBox="3 3 94 83" aria-hidden="true"><path fill-rule="evenodd" fill="#FFC94A" d="M55.196 6 L96.196 77 A6 6 0 0 1 91 86 L9 86 A6 6 0 0 1 3.804 77 L44.804 6 A6 6 0 0 1 55.196 6 Z M46.4 32 L53.6 32 L52 58 L48 58 Z M45.6 68 A4.4 4.4 0 1 0 54.4 68 A4.4 4.4 0 1 0 45.6 68 Z"/></svg><b>Halkvakt</b> Förslag till M Sverige</p>
+        <h1>Väglaget just nu, på era sidor om vintern</h1>
+        <p class="lead">Ni ger bilisterna råden. Vi ger dem läget på vägen innan de åker, och en röst som varnar under resan. Gratis för er och för era medlemmar.</p>
+        <p class="lead">Förslaget utgår från tre av era egna sidor och ett steg för varje. Det minsta tar fem minuter.</p>
+        <div class="hopp"><a href="#applistan">1 · Applistan</a><a href="#vintersidan">2 · Vintersidan</a><a href="#viltsidan">3 · Viltsidan</a><a href="#rapporten">4 · Vinterrapporten</a></div>
+      </div>
+      <div class="live">
+        <iframe src="widget.html?v=3&amp;tema=ljus&amp;namn=M&amp;lank=https://www.msverige.se/resa-med-bil/trafiksakerhet-regler/i-vintertrafiken/&amp;lanktext=Kör%20säkert%20i%20vinter" title="Väglaget i Sverige just nu" loading="eager"></iframe>
+        <p class="not">Rutan är riktig, med läget i hela landet just nu</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="sidorna">
+    <div class="stack" style="gap:40px">
+      <div class="stack">
+        <p class="etikett">Era sidor</p>
+        <h2>Tre sidor ni redan har, och vad vi kan lägga till</h2>
+        <p class="lead">Råden på era sidor gäller hela vintern. Väglaget ändras varje timme. Det som saknas är läget just nu, och något som varnar föraren utan att hen behöver titta på telefonen.</p>
+      </div>
+      <div class="sidor">
+        <article class="sida">
+          <p class="steg"><a href="#applistan">Steg 1</a></p>
+          <h3><a href="https://www.msverige.se/resa-med-bil/appar-med-pa-resan/" target="_blank" rel="noopener">Appar med på resan</a></h3>
+          <dl>
+            <div><dt>Där står i dag</dt><dd>Appar för kartor, laddning, camping och språk, och under trafikinformation en app att titta på.</dd></div>
+            <div><dt>Vi lägger till</dt><dd class="ny">En app som säger till med rösten innan det blir halt, så att föraren aldrig behöver titta.</dd></div>
+          </dl>
+        </article>
+        <article class="sida">
+          <p class="steg"><a href="#vintersidan">Steg 2</a></p>
+          <h3><a href="https://www.msverige.se/resa-med-bil/trafiksakerhet-regler/i-vintertrafiken/" target="_blank" rel="noopener">I vintertrafiken</a></h3>
+          <dl>
+            <div><dt>Där står i dag</dt><dd>Råd om sladd, vinterdäck och klassiska fällor, och rådet att planera resvägen.</dd></div>
+            <div><dt>Vi lägger till</dt><dd class="ny">Väglaget i hela Sverige just nu, i en ruta med ert namn som uppdaterar sig själv.</dd></div>
+          </dl>
+        </article>
+        <article class="sida">
+          <p class="steg"><a href="#viltsidan">Steg 3</a></p>
+          <h3><a href="https://msverige.se/resa-med-bil/det-har-galler-vid-viltolycka/" target="_blank" rel="noopener">Det här gäller vid viltolycka</a></h3>
+          <dl>
+            <div><dt>Där står i dag</dt><dd>Vad föraren gör efter en viltolycka, och er önskan om ny teknik för viltvarning.</dd></div>
+            <div><dt>Vi lägger till</dt><dd class="ny">En röst som varnar när Trafikverket rapporterar djur på vägen, innan föraren är där.</dd></div>
+          </dl>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="applistan">
+    <div class="tva">
+      <div class="stack">
+        <p class="steg">Steg 1 · Fem minuter</p>
+        <h2>En post i applistan</h2>
+        <p class="lead">Under trafikinformation, i samma form som de andra posterna. Texten är vårt förslag, och ni ändrar den som ni vill.</p>
+        <p class="not">Appen finns för iPhone. Android kommer i vinter, och vill ni vänta på den hör vi av oss då.</p>
+      </div>
+      <figure class="skiss">
+        <span class="ovan">Appar med på resan · Trafikinformation</span>
+        <div class="post">
+          <img src="logo-512.png" alt="">
+          <div>
+            <h5>Halkvakt</h5>
+            <p>Varnar med rösten för halka, frysrisk, olyckor och djur på vägen innan du är där, utan att du behöver röra telefonen. Bygger på Trafikverkets öppna data. Gratis, utan konto och reklam.</p>
+            <p><a href="https://apps.apple.com/se/app/halkvakt/id6806939784" target="_blank" rel="noopener">Halkvakt i App Store</a> · <a href="https://halkvakt.se/" target="_blank" rel="noopener">halkvakt.se</a></p>
+          </div>
+        </div>
+        <figcaption>Skiss, ritad utan er sidas utseende</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="vintersidan">
+    <div class="tva">
+      <div class="stack">
+        <p class="steg">Steg 2 · En rad kod</p>
+        <h2>Rutan på vintersidan</h2>
+        <p class="lead">Direkt under era råd om halka. Läsaren ser hur det ser ut på vägarna innan resan börjar, och följer rådet att anpassa farten till väglaget.</p>
+        <ul class="lista">
+          <li><span><b>Ert namn.</b> Rutan heter M · Väglaget. Halkvakt står bara som en rad i foten.</span></li>
+          <li><span><b>Er sida.</b> Länken i rutan går till er egen vintersida.</span></li>
+          <li><span><b>Hela landet.</b> Halka, vägbanor under noll och den kallaste vägbanan, för alla län tillsammans.</span></li>
+          <li><span><b>Ingen skötsel.</b> Läget räknas om var 30:e minut, dygnet runt.</span></li>
+        </ul>
+        <details>
+          <summary>Koden att klistra in</summary>
+          <div class="kod"><button type="button" id="kopiera">Kopiera</button><pre id="koden">&lt;iframe src="https://halkvakt.se/widget.html?tema=ljus&amp;namn=M&amp;lank=https://www.msverige.se/resa-med-bil/trafiksakerhet-regler/i-vintertrafiken/&amp;lanktext=Kör%20säkert%20i%20vinter"
+  width="100%" height="320" style="border:0;max-width:480px"
+  title="Väglaget i Sverige just nu" loading="lazy"&gt;&lt;/iframe&gt;</pre></div>
+          <p>Tar ert verktyg bara en länk räcker <b>halkvakt.se/ruta/m/</b>. Med <b>&amp;lan=skane</b> visar rutan ett län, till exempel för en lokalklubb.</p>
+        </details>
+      </div>
+      <figure class="skiss">
+        <span class="ovan">Resa med bil · Trafiksäkerhet och regler</span>
+        <h4>I vintertrafiken</h4>
+        <div class="grat" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="vart"><small>Väglaget just nu</small><p>Kolla väglaget innan du åker. Rutan visar Trafikverkets väglag och vägväderstationer i hela landet.</p></div>
+        <iframe src="widget.html?v=3&amp;tema=ljus&amp;namn=M&amp;lank=https://www.msverige.se/resa-med-bil/trafiksakerhet-regler/i-vintertrafiken/&amp;lanktext=Kör%20säkert%20i%20vinter" title="Väglaget i Sverige just nu, i skissen" loading="lazy"></iframe>
+        <figcaption>Skiss, ritad utan er sidas utseende. De grå raderna är era råd.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="viltsidan">
+    <div class="tva">
+      <div class="stack">
+        <p class="steg">Steg 3 · Ett stycke text</p>
+        <h2>Ett råd före olyckan på viltsidan</h2>
+        <p class="lead">Er sida säger vad föraren gör efter en viltolycka, och att ni vill se ny teknik för viltvarning. Halkvakt är en liten del av det svaret, byggd på data som redan finns.</p>
+        <p class="lead">När Trafikverket rapporterar djur på vägen säger appen till med rösten innan föraren är där. Den bygger på rapporter, inte på sensorer, och ersätter varken viltstängsel eller uppmärksamhet.</p>
+      </div>
+      <figure class="skiss">
+        <span class="ovan">Resa med bil</span>
+        <h4>Det här gäller vid viltolycka</h4>
+        <div class="grat" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="vart"><small>Bli varnad innan</small><p>Appen Halkvakt varnar med rösten när Trafikverket rapporterar djur på vägen du kör, så att du hinner sänka farten. Den finns bland <a href="https://www.msverige.se/resa-med-bil/appar-med-pa-resan/" target="_blank" rel="noopener">våra appar för resan</a>.</p></div>
+        <figcaption>Skiss, ritad utan er sidas utseende. De grå raderna är era råd.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="rapporten">
+    <div class="stack" style="gap:36px">
+      <div class="stack">
+        <p class="steg">Steg 4 · När vintern har gett data</p>
+        <h2>Siffror till ert arbete för säkrare vintervägar</h2>
+        <p class="lead">Halkvakt läser Trafikverkets väglag och vägväderstationer var 30:e minut, hela vintern. Ur det kan vi ta fram en rapport per län och månad till era rapporter, granskningar och remissvar.</p>
+      </div>
+      <div class="rapport">
+        <div><b>Halka per län</b><span>Hur stor del av tiden Trafikverket rapporterade halka på länets vägavsnitt.</span></div>
+        <div><b>Kalla vägbanor</b><span>Hur ofta vägbanan låg under noll, och var den var kallast.</span></div>
+        <div><b>Kallt utan rapporterad halka</b><span>Hur ofta vägbanan låg under noll när Trafikverket inte rapporterade halka.</span></div>
+      </div>
+      <div class="stack" style="gap:14px">
+        <h3 id="tabell-rubrik">Underlaget just nu</h3>
+        <div class="tabell"><table>
+          <thead><tr><th>Län</th><th>Halka</th><th>Vägbana under noll</th><th>Kallast</th></tr></thead>
+          <tbody id="lanen"><tr><td colspan="4" class="noll">Hämtar läget</td></tr></tbody>
+        </table></div>
+        <p class="not">Live ur Trafikverkets öppna data. Halka = vägavsnitt med halka i Trafikverkets rapport av länets vägavsnitt. Under noll = vägväderstationer som mäter vägbana på 0 °C eller kallare. Mätvärden som är fysiskt omöjliga eller för gamla räknas inte.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="senare">
+    <div class="tva">
+      <div class="stack">
+        <p class="etikett">Längre fram</p>
+        <h2>Om ni vill gå vidare</h2>
+      </div>
+      <ul class="lista">
+        <li><span><b>Lokalklubbarna.</b> Samma ruta för ett län, för en klubbs egen sida. Den finns redan.</span></li>
+        <li><span><b>Morgonläget.</b> Väglaget i varje län efter natten, färdigt till nyhetsbrevet eller medlemsappen. Det bygger vi i vinter.</span></li>
+        <li><span><b>För medlemmarna.</b> Hur Halkvakt kan bli en förmån för era medlemmar pratar vi gärna om när ni sett rutan i bruk.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="villkor">
+    <div class="stack" style="gap:36px">
+      <div class="stack">
+        <p class="etikett">Villkoren</p>
+        <h2>Gratis, och ni bestämmer</h2>
+      </div>
+      <div class="villkor">
+        <div><span class="tal">0 kr</span><p>Rutan och posten är gratis. Inget avtal behövs för att prova.</p></div>
+        <div><span class="tal">0 kakor</span><p>Ingen spårning och ingen reklam i rutan. Allt hämtas från halkvakt.se, även typsnitten.</p></div>
+        <div><span class="tal">1 rad</span><p>Det enda vi ber om är källan: "Halkvakt / Trafikverkets öppna data". Ni tar bort rutan när ni vill.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="om">
+    <div class="tva">
+      <div class="stack">
+        <p class="etikett">Om Halkvakt</p>
+        <h2>En app som säger till innan det blir halt</h2>
+      </div>
+      <div class="stack">
+        <p class="lead">Halkvakt är en gratis app som varnar med rösten genom bilens högtalare för halka, frysrisk, olyckor och djur på vägen, ungefär 30 sekunder innan föraren är där. Den har ingen reklam och inget konto, och ingen position lämnar telefonen automatiskt.</p>
+        <p class="lead">Halkvakt är fristående från Trafikverket och byggs i Malmö av Bengt och Axel Lagerlöf.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontakt">
+    <div class="tva">
+      <div class="stack">
+        <p class="etikett">Nästa steg</p>
+        <h2>Ett samtal på 15 minuter</h2>
+        <p class="lead">Vi visar rutan och svarar på frågor från er och er tekniska sida.</p>
+      </div>
+      <div class="stack">
+        <p class="kontakt">hej@halkvakt.se</p>
+        <p class="not">Bengt och Axel Lagerlöf, Halkvakt</p>
+        <div class="sociala"><a href="https://apps.apple.com/se/app/halkvakt/id6806939784" target="_blank" rel="noopener">App Store</a><a href="https://www.facebook.com/profile.php?id=61595485615603" target="_blank" rel="noopener">Facebook</a><a href="https://www.instagram.com/halkvakt/" target="_blank" rel="noopener">Instagram</a></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>Halkvakt · halkvakt.se · Data: Trafikverket (CC0). Fristående från myndigheterna.</footer>
+</div>
+
+<script>
+(function () {
+  var knapp = document.getElementById('kopiera');
+  knapp.addEventListener('click', async function () {
+    var el = document.getElementById('koden');
+    try { await navigator.clipboard.writeText(el.textContent); knapp.textContent = 'Kopierat'; }
+    catch (e) { var r = document.createRange(); r.selectNodeContents(el); var s = getSelection(); s.removeAllRanges(); s.addRange(r); knapp.textContent = 'Markerat'; }
+    setTimeout(function () { knapp.textContent = 'Kopiera'; }, 1600);
+  });
+
+  // Underlaget till vinterrapporten: länen ur data/lan.json, samma tal som länssidorna. Flest vägavsnitt med halka först.
+  var minus = function (n) { return n.toFixed(1).replace('.', ',').replace('-', '−'); };
+  var tid = function (iso) { try { return new Date(iso).toLocaleTimeString('sv-SE', { timeZone: 'Europe/Stockholm', hour: '2-digit', minute: '2-digit' }); } catch (e) { return ''; } };
+  function td(text, cls) { var e = document.createElement('td'); e.textContent = text; if (cls) e.className = cls; return e; }
+  fetch('data/lan.json', { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (d) {
+    var kropp = document.getElementById('lanen'); kropp.textContent = '';
+    d.lan.slice().sort(function (a, b) { return (b.halt / b.vagavsnitt) - (a.halt / a.vagavsnitt) || b.kalla - a.kalla || a.kort.localeCompare(b.kort, 'sv'); }).forEach(function (l) {
+      var tr = document.createElement('tr');
+      tr.appendChild(td(l.kort));
+      tr.appendChild(td(l.halt ? l.halt + ' av ' + l.vagavsnitt : 'Ingen av ' + l.vagavsnitt, l.halt ? 'halt' : 'noll'));
+      tr.appendChild(td(l.kalla ? l.kalla + (l.kalla === 1 ? ' station' : ' stationer') : 'Ingen station', l.kalla ? '' : 'noll'));
+      tr.appendChild(td(l.kallast ? minus(l.kallast.yta) + ' °C vid ' + l.kallast.namn : 'Alla över noll', l.kallast ? '' : 'noll'));
+      kropp.appendChild(tr);
+    });
+    document.getElementById('tabell-rubrik').textContent = 'Underlaget just nu, kl. ' + tid(d.generated_at);
+  }).catch(function () {
+    document.getElementById('lanen').innerHTML = '<tr><td colspan="4" class="noll">Läget kunde inte hämtas just nu. Se halkvakt.se/lan.</td></tr>';
+  });
+})();
+</script>
+<script src="/assets/besok.js"></script>
+</body>
+</html>
