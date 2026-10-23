@@ -157,13 +157,19 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
       <p class="etikett">Tekniken</p>
       <h2>En rad kod. Inget konto.</h2>
       <ul class="lista">
-        <li><span><b>Fungerar där ni kan bädda in en iframe</b>: artikel, liveblogg eller temasida.</span></li>
+        <li><span><b>En egen adress till er ruta:</b> <code>halkvakt.se/ruta/sala</code>. Klistra in den där ert verktyg tar en länk, i artikel, liveblogg eller temasida.</span></li>
+        <li><span><b>Eller en rad iframe-kod</b>, där ni kan bädda in kod.</span></li>
         <li><span><b>Hämtar läget igen var femte minut</b> och när läsaren kommer tillbaka till fliken. Läget räknas om var 30:e minut.</span></li>
         <li><span><b>Inga kakor, ingen spårning och ingen reklam</b> i rutan. Allt hämtas från halkvakt.se, även typsnitten, så läsarnas webbläsare kontaktar ingen tredje part.</span></li>
         <li><span><b>Liten:</b> en sida på ett tiotal kB och två datafiler.</span></li>
       </ul>
     </div>
     <div class="stack" style="gap:16px">
+      <div class="kod">
+        <button type="button" id="kopiera-lank">Kopiera</button>
+<pre id="lanken">https://halkvakt.se/ruta/sala/</pre>
+      </div>
+      <p class="not" style="margin-top:-4px">Bara en länk? Den här räcker. Rekommenderad höjd 440 px.</p>
       <div class="kod">
         <button type="button" id="kopiera">Kopiera</button>
 <pre id="koden"><span class="k">&lt;iframe</span> src="https://halkvakt.se/ruta.html?lan=vastmanland&amp;tema=ljus&amp;strak=sala&amp;namn=Sala%20Allehanda&amp;lank=https://www.salaallehanda.com/"
@@ -288,11 +294,14 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
 </footer>
 
 <script>
-document.getElementById("kopiera").addEventListener("click", async function () {
-  var b = this, kod = document.getElementById("koden").textContent;
-  try { await navigator.clipboard.writeText(kod); b.textContent = "Kopierat"; }
-  catch (e) { var r = document.createRange(); r.selectNodeContents(document.getElementById("koden")); var s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = "Markerat"; }
-  setTimeout(function () { b.textContent = "Kopiera"; }, 1600);
+[["kopiera", "koden"], ["kopiera-lank", "lanken"]].forEach(function (par) {
+  var knapp = document.getElementById(par[0]); if (!knapp) return;
+  knapp.addEventListener("click", async function () {
+    var b = this, el = document.getElementById(par[1]);
+    try { await navigator.clipboard.writeText(el.textContent); b.textContent = "Kopierat"; }
+    catch (e) { var r = document.createRange(); r.selectNodeContents(el); var s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = "Markerat"; }
+    setTimeout(function () { b.textContent = "Kopiera"; }, 1600);
+  });
 });
 </script>
 </body>

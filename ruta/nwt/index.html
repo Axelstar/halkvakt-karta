@@ -5,16 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <title>NWT · Väglaget i Värmland just nu</title>
-<!-- NWT:s egen adress till rutan (Axel 23/10): deras verktyg tar inte längre iframe-kod, bara en URL.
-     Sidan är bara ett skal runt ruta.html med NWT:s inställningar, så rutan ändras på ett ställe.
-     oEmbed och player-taggarna låter verktyg som bygger inbäddningen själva ur länken hitta rätt storlek. -->
-<meta name="description" content="Väglaget i Värmland just nu: länet, de stora vägarna och pendlarvägarna från Karlstad. Live ur Trafikverkets öppna data.">
+<!-- Byggd av verktyg/rutor.py, ändra där. NWT:s egen adress till rutan (Axel 23/10): ett skal runt ruta.html med
+     tidningens inställningar, så rutan ändras på ett ställe. oEmbed och player-taggarna låter verktyg som bygger
+     inbäddningen själva ur länken hitta rätt storlek. -->
+<meta name="description" content="Väglaget i Värmland just nu: länet, de stora vägarna och pendlarvägarna. Live ur Trafikverkets öppna data.">
 <link rel="canonical" href="https://halkvakt.se/ruta/nwt/">
 <link rel="alternate" type="application/json+oembed" href="https://halkvakt.se/ruta/nwt/oembed.json" title="NWT · Väglaget i Värmland just nu">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Halkvakt">
 <meta property="og:title" content="NWT · Väglaget i Värmland just nu">
-<meta property="og:description" content="Länet, de stora vägarna och pendlarvägarna från Karlstad. Live ur Trafikverkets öppna data.">
+<meta property="og:description" content="Länet, de stora vägarna och pendlarvägarna. Live ur Trafikverkets öppna data.">
 <meta property="og:url" content="https://halkvakt.se/ruta/nwt/">
 <meta property="og:image" content="https://halkvakt.se/og.png">
 <meta property="og:image:width" content="1200">
@@ -29,8 +29,7 @@
 <style>
   html, body { margin: 0; height: 100%; background: transparent; }
   iframe { display: block; width: 100%; height: 100%; min-height: 440px; border: 0; }
-  /* Öppnas länken direkt i ett stort fönster ska rutan se ut som den gör i en artikel: 480 × 440, inte hela skärmen (Axel 23/10).
-     I en tidnings ram (smalare än 560 px eller lägre än 560 px) fyller den ramen som förut. */
+  /* Öppnas länken direkt i ett stort fönster visas rutan som i en artikel, 480 × 440. I en tidnings ram fyller den ramen. */
   @media (min-width: 560px) and (min-height: 560px) {
     body { display: grid; place-items: center; }
     iframe { width: 480px; height: 440px; min-height: 0; border-radius: 16px; box-shadow: 0 20px 60px rgba(8, 11, 13, .18); }
@@ -38,9 +37,9 @@
 </style>
 </head>
 <body>
-<iframe id="ruta" src="https://halkvakt.se/ruta.html?v=3&amp;lan=varmland&amp;tema=ljus&amp;namn=NWT&amp;lank=https://www.nwt.se/&amp;lanktext=Mer%20trafik%20p%C3%A5%20nwt.se" title="Väglaget i Värmland just nu" loading="eager"></iframe>
+<iframe id="ruta" src="https://halkvakt.se/ruta.html?v=6&amp;lan=varmland&amp;tema=ljus&amp;namn=NWT&amp;lank=https://www.nwt.se/&amp;lanktext=Mer%20trafik%20p%C3%A5%20nwt.se" title="Väglaget i Värmland just nu" loading="eager"></iframe>
 <script>
-  // Tillval som går vidare till rutan: halkvakt.se/ruta/nwt/?flik=vagar, ?flik=pendling, ?tema=auto, ?sponsor=…
+  // Tillval som går vidare till rutan: ?flik=lan|vagar|pendling, ?tema=auto|mork, ?sponsor=…, ?sponsorlank=…
   (function () {
     var in_ = new URLSearchParams(location.search), f = document.getElementById('ruta'), u = new URL(f.src);
     ['flik', 'tema', 'sponsor', 'sponsorlank'].forEach(function (k) { var v = in_.get(k); if (v) u.searchParams.set(k, v); });
