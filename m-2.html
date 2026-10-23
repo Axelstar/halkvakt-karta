@@ -85,6 +85,11 @@ details[open] summary::after{content:" −"}
 .kod pre{margin:0;padding:52px 20px 18px;font:500 13.5px/1.65 var(--mono);white-space:pre-wrap;word-break:break-all}
 .kod button{position:absolute;top:12px;right:12px;font:600 13px var(--sans);background:var(--gul);color:#111719;border:0;border-radius:999px;padding:7px 14px;cursor:pointer}
 .kod + p{padding:0 20px 18px;color:var(--text2);font-size:15px}
+.lankruta{background:var(--panel);border:1px solid var(--kant);border-radius:16px;overflow:hidden}
+.lankruta small{display:block;padding:16px 20px 0;font:600 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dampad)}
+.lankruta .kod{border-top:0}
+.lankruta .kod pre{padding:14px 120px 14px 20px;font-size:16px;color:var(--gul)}
+.lankruta .kod button{top:50%;transform:translateY(-50%)}
 
 /* vinterrapporten */
 .tabell{overflow-x:auto;background:var(--panel);border:1px solid var(--kant);border-radius:18px}
@@ -213,12 +218,17 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
           <li><span><b>Hela landet.</b> Halka, vägbanor under noll och den kallaste vägbanan, för alla län tillsammans.</span></li>
           <li><span><b>Ingen skötsel.</b> Läget räknas om var 30:e minut, dygnet runt.</span></li>
         </ul>
+        <div class="lankruta">
+          <small>Er egen adress till rutan</small>
+          <div class="kod"><button type="button" id="kopiera-lank">Kopiera</button><pre id="lanken">https://halkvakt.se/ruta/m/</pre></div>
+          <p>Bara en länk? Den här räcker. Klistra in den där ert verktyg tar en länk, på vintersidan eller i en nyhet om halka. Rekommenderad höjd 320 px.</p>
+        </div>
         <details>
-          <summary>Koden att klistra in</summary>
+          <summary>Eller koden att klistra in</summary>
           <div class="kod"><button type="button" id="kopiera">Kopiera</button><pre id="koden">&lt;iframe src="https://halkvakt.se/widget.html?tema=ljus&amp;namn=M&amp;lank=https://www.msverige.se/resa-med-bil/trafiksakerhet-regler/i-vintertrafiken/&amp;lanktext=Kör%20säkert%20i%20vinter"
   width="100%" height="320" style="border:0;max-width:480px"
   title="Väglaget i Sverige just nu" loading="lazy"&gt;&lt;/iframe&gt;</pre></div>
-          <p>Tar ert verktyg bara en länk räcker <b>halkvakt.se/ruta/m/</b>. Med <b>&amp;lan=skane</b> visar rutan ett län, till exempel för en lokalklubb.</p>
+          <p>Med <b>&amp;lan=skane</b> visar rutan ett län, till exempel för en lokalklubb.</p>
         </details>
       </div>
       <figure class="skiss">
@@ -335,12 +345,14 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
 
 <script>
 (function () {
-  var knapp = document.getElementById('kopiera');
-  knapp.addEventListener('click', async function () {
-    var el = document.getElementById('koden');
-    try { await navigator.clipboard.writeText(el.textContent); knapp.textContent = 'Kopierat'; }
-    catch (e) { var r = document.createRange(); r.selectNodeContents(el); var s = getSelection(); s.removeAllRanges(); s.addRange(r); knapp.textContent = 'Markerat'; }
-    setTimeout(function () { knapp.textContent = 'Kopiera'; }, 1600);
+  [['kopiera', 'koden'], ['kopiera-lank', 'lanken']].forEach(function (par) {
+    var knapp = document.getElementById(par[0]);
+    knapp.addEventListener('click', async function () {
+      var el = document.getElementById(par[1]);
+      try { await navigator.clipboard.writeText(el.textContent); knapp.textContent = 'Kopierat'; }
+      catch (e) { var r = document.createRange(); r.selectNodeContents(el); var s = getSelection(); s.removeAllRanges(); s.addRange(r); knapp.textContent = 'Markerat'; }
+      setTimeout(function () { knapp.textContent = 'Kopiera'; }, 1600);
+    });
   });
 
   // Underlaget till vinterrapporten: länen ur data/lan.json, samma tal som länssidorna. Flest vägavsnitt med halka först.
