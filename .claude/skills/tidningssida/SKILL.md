@@ -1,6 +1,6 @@
 ---
 name: tidningssida
-description: Bygger en förslagssida till en lokaltidning på halkvakt.se/<tidning> (som halkvakt.se/st), med tidningens egen väglagsruta, pendlarstråk, artikelmontage och egen rutadress. Använd när en ny tidning ska få en sida, när en befintlig tidningssida ska rättas, eller när någon säger "gör en sida till <tidning>".
+description: Bygger en förslagssida till en lokaltidning på en egen adress på halkvakt.se (som halkvakt.se/st), med tidningens egen väglagsruta, pendlarstråk, artikelmontage och egen rutadress. Använd när en ny tidning ska få en sida, när en befintlig tidningssida ska rättas, eller när någon säger "gör en sida till" en tidning.
 ---
 
 # Tidningssidorna på halkvakt.se
