@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[16.978862368,61.58236164]},"properties":{"land":"SE","typ":"Olycka","msg":"Trafikolycka med lastbil mellan Njutånger och Enånger. Begränsad framkomlighet under räddningsarbetet","allvar":"Liten påverkan","road":"E4","start":"2026-10-24T11:17:00.000Z"}}]}
