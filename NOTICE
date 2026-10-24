@@ -1,0 +1,15 @@
+Halkvakt, kartsajten (halkvakt.se)
+Copyright 2026 Axel Lagerlöf och Bengt Lagerlöf
+
+Koden (HTML, CSS, JavaScript, inbäddningskortet widget.html) är licensierad
+under Apache License 2.0 (se LICENSE).
+Texterna på sidorna följer huvudrepots dokumentlicens, CC BY-SA 4.0
+(https://github.com/Axelstar/halkvakt/blob/main/LICENSE-docs).
+Data under data/ kommer ur Trafikverkets öppna data (CC0), SMHI, Fintraffic
+(CC BY 4.0) och OpenStreetMap (ODbL), med respektive källas licens.
+
+Namnet Halkvakt, logotypen och pressbilderna är varumärken respektive bilder
+som får användas redaktionellt med källan Halkvakt, men omfattas inte av
+licenserna ovan.
+
+Citera som: Halkvakt / Trafikverkets öppna data
