@@ -96,44 +96,69 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
 .steg{font:600 12px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--gul)}
 .rad-text{background:var(--panel);border:1px solid var(--kant);border-radius:16px;padding:22px 22px 22px;font:500 18px/1.5 var(--sans);color:var(--text)}
 .liten{font-size:16px;color:var(--text2);max-width:60ch}
+[hidden]{display:none!important}
+.toppband{display:block;width:100%;height:40px;border:0}
+.hero .montage{margin-top:56px}
+.hero .montage img{border-radius:14px;box-shadow:0 30px 90px rgba(0,0,0,.5)}
+.montage figcaption{margin-top:12px;font:400 13px var(--mono);color:var(--dampad)}
+/* telefonen med kundens meddelande */
+.tel{width:300px;max-width:100%;justify-self:center;border-radius:44px;background:#141819;padding:10px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.tel .skarm{border-radius:36px;background:#F2F3F5;min-height:0;padding:18px 16px 24px;display:grid;align-content:start;gap:14px}
+.tel .avs{text-align:center;font:600 13px/1.3 var(--sans);color:#111719}
+.tel .avs small{display:block;font:400 11px var(--sans);color:#6b737a}
+.tel .bubbla{background:#fff;color:#111719;border-radius:18px 18px 18px 6px;padding:12px 14px;font:400 15px/1.45 var(--sans);box-shadow:0 1px 2px rgba(0,0,0,.08);white-space:pre-line}
+.tel .bubbla b{font-weight:600;background:#FFF3C4;border-radius:4px;padding:0 2px}
+.tel .bubbla a{color:#1a5fd0}
 </style>
 </head>
 <body>
+<iframe class="toppband" src="/band.html?lan=varmland&amp;namn=D%C3%A4ckalen&amp;ort=Karlstad&amp;lank=https://www.dackalen.com/&amp;lanktext=Ring%20eller%20mejla%20D%C3%A4ckalen" title="Väglaget i Värmland just nu"></iframe>
 
 <header class="hero">
   <div class="wrap tva">
     <div class="stack">
       <p class="etikett"><svg viewBox="3 3 94 83" aria-hidden="true"><path fill-rule="evenodd" fill="#FFC94A" d="M55.196 6 L96.196 77 A6 6 0 0 1 91 86 L9 86 A6 6 0 0 1 3.804 77 L44.804 6 A6 6 0 0 1 55.196 6 Z M46.4 32 L53.6 32 L52 58 L48 58 Z M45.6 68 A4.4 4.4 0 1 0 54.4 68 A4.4 4.4 0 1 0 45.6 68 Z"/></svg><b>Halkvakt</b>Förslag till Däckalen i Karlstad</p>
-      <h1 style="--ord:8">Nya däck, och <span class="gul">väglaget</span> på vägen hem</h1>
-      <p class="lead">Era kunder byter till vinterdäck nu, och nästa fråga är hur vägarna är. Rutan bredvid visar väglaget i Värmland just nu, med Däckalens namn. Länken längst ner går till er.</p>
-      <p class="lead" style="font-size:17px">Den är gratis och sköter sig själv. Läget räknas om var 30:e minut ur Trafikverkets öppna data. Tryck på flikarna för att se vägarna och pendlarvägarna.</p>
+      <h1 style="--ord:8;max-width:16ch">Nya däck hos Däckalen, och <span class="gul">väglaget</span> på vägen hem</h1>
+      <p class="lead">Ni har funnits sedan 1998, och kunderna når er alltid på telefon. Nu byter era kunder till vinterdäck, och nästa fråga är hur vägarna är på vägen hem. Bandet överst på den här sidan visar väglaget i Värmland just nu, med Däckalens namn, och erbjudandet i det går till er sajt.</p>
+      <p class="lead" style="font-size:17px">Det är gratis och sköter sig självt. Läget räknas om var 30:e minut ur Trafikverkets öppna data.</p>
     </div>
-    <div class="live">
+    <div class="live" >
       <iframe src="/ruta.html?v=6&amp;lan=varmland&amp;tema=ljus&amp;strak=varmland&amp;namn=D%C3%A4ckalen&amp;lank=https://www.dackalen.com/&amp;lanktext=Ring%20eller%20mejla%20D%C3%A4ckalen" title="Väglaget i Värmland just nu" loading="eager"></iframe>
       <p class="not">Live från Trafikverkets öppna data</p>
     </div>
   </div>
+  
 </header>
 
 <section>
   <div class="wrap stack" style="gap:28px">
     <p class="steg">1 · Två minuter</p>
-    <h2>En rad i mejlen till kunderna</h2>
-    <p class="lead">Svarar ni kunderna på mejl? Lägg till den här raden i signaturen. Länken öppnar rutan med ert namn.</p>
-    <div class="kod"><button type="button" id="kopiera-rad">Kopiera</button><pre id="raden" style="white-space:pre-wrap">Kolla väglaget innan du kör: https://halkvakt.se/ruta/dackalen/</pre></div>
-    <p class="liten">Raden fungerar överallt där ni skriver text till kunden, och kunden behöver inte ladda ner något.</p>
+    <div class="tva">
+      <div class="stack">
+        <h2>En rad i mejlen till kunderna</h2>
+        <p class="lead">Svarar ni kunderna på mejl? Lägg till den här raden i signaturen. Länken öppnar rutan med ert namn.</p>
+        <div class="kod"><button type="button" id="kopiera-rad">Kopiera</button><pre id="raden" style="white-space:pre-wrap">Kolla väglaget innan du kör: https://halkvakt.se/ruta/dackalen/</pre></div>
+        <p class="liten">Raden fungerar överallt där ni skriver text till kunden, och kunden behöver inte ladda ner något.</p>
+      </div>
+      <div class="tel" aria-label="Exempel på ett meddelande till kunden"><div class="skarm">
+        <p class="avs">Däckalen<small>Mejl</small></p>
+        <p class="bubbla">Hej! Tack för bokningen, vi ses hos Däckalen.
+
+<b>Kolla väglaget innan du kör: <a href="https://halkvakt.se/ruta/dackalen/">halkvakt.se/ruta/dackalen/</a></b></p>
+        <p class="liten" style="font-size:12px;color:#6b737a;text-align:center">Exempel. Er egen text står kvar, raden läggs till sist.</p>
+      </div></div>
+    </div>
   </div>
 </section>
 
 <section>
   <div class="wrap stack" style="gap:28px">
     <p class="steg">2 · På er sajt</p>
-    <h2>Rutan på startsidan, med ert namn</h2>
-    <p class="lead">Rutan läggs in i Wix-redigeraren på några minuter, till exempel på startsidan. Raden längst ner i rutan, ”Ring eller mejla Däckalen”, går till dackalen.com.</p>
-    <p class="liten">Er egen adress till rutan, för verktyg som tar en länk:</p>
-    <div class="kod"><button type="button" id="kopiera-lank">Kopiera</button><pre id="lanken">https://halkvakt.se/ruta/dackalen/</pre></div>
-    <p class="liten">Eller koden, i Wix under Lägg till, Bädda in kod, Bädda in HTML:</p>
-    <div class="kod"><button type="button" id="kopiera">Kopiera</button><pre id="koden">&lt;iframe src="https://halkvakt.se/ruta/dackalen/" width="100%" height="440" style="border:0;max-width:480px" title="Väglaget i Värmland just nu" loading="lazy"&gt;&lt;/iframe&gt;</pre></div>
+    <h2>Bandet överst på er sajt</h2>
+    <p class="lead">En smal rad överst som rullar väglaget i Värmland, med vägarna genom Karlstad först. När det är kallt frågar den om sommardäcken, och ”Ring eller mejla Däckalen” går till dackalen.com. Det är bandet ni ser överst på den här sidan.</p>
+    <p class="liten">Koden, i Wix under Lägg till, Bädda in kod, Bädda in HTML. Lägg den överst, till exempel i sidhuvudet:</p>
+    <div class="kod"><button type="button" id="kopiera">Kopiera</button><pre id="koden">&lt;iframe src="https://halkvakt.se/band.html?lan=varmland&amp;namn=D%C3%A4ckalen&amp;ort=Karlstad&amp;lank=https://www.dackalen.com/&amp;lanktext=Ring%20eller%20mejla%20D%C3%A4ckalen" width="100%" height="40" style="border:0;display:block" title="Väglaget i Värmland just nu"&gt;&lt;/iframe&gt;</pre></div>
+    <p class="liten">Vill ni hellre ha en större ruta på en sida, med länet, vägarna och pendlarvägarna, är adressen <a href="https://halkvakt.se/ruta/dackalen/">halkvakt.se/ruta/dackalen/</a>.</p>
   </div>
 </section>
 
@@ -145,9 +170,9 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
     </div>
     <ul class="lista">
       <li><span>Gratis, utan konto och utan avtal.</span></li>
-      <li><span>Ingen reklam i rutan. Den bär ert namn och länkar till er.</span></li>
+      <li><span>Ingen reklam i bandet. Det bär ert namn och länkar till er.</span></li>
       <li><span>Inga kakor och ingen spårning av era kunder.</span></li>
-      <li><span>Vill ni ta bort rutan tar ni bort raden eller koden. Inget mer.</span></li>
+      <li><span>Vill ni sluta tar ni bort raden eller koden. Inget mer.</span></li>
       <li><span>Datan kommer från Trafikverkets öppna data. Halkvakt är fristående från Trafikverket.</span></li>
     </ul>
   </div>
@@ -156,7 +181,7 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
 <section>
   <div class="wrap stack">
     <p class="steg">Om Halkvakt</p>
-    <p class="lead">Halkvakt är en gratis app som varnar bilister med rösten när Trafikverket rapporterar halka på vägen framför dem. Den byggs av Axel och Bengt Lagerlöf i Malmö. Frågor, eller vill ni ha rutan i en annan färg:</p>
+    <p class="lead">Halkvakt är en gratis app som varnar bilister med rösten när Trafikverket rapporterar halka på vägen framför dem. Den byggs av Axel och Bengt Lagerlöf i Malmö. Frågor, eller vill ni ha bandet i en annan färg:</p>
     <p class="kontakt">hej@halkvakt.se</p>
   </div>
 </section>
@@ -166,7 +191,7 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
 </footer>
 
 <script>
-[["kopiera", "koden"], ["kopiera-lank", "lanken"], ["kopiera-rad", "raden"]].forEach(function (par) {
+[["kopiera", "koden"], ["kopiera-rad", "raden"]].forEach(function (par) {
   var knapp = document.getElementById(par[0]); if (!knapp) return;
   knapp.addEventListener("click", async function () {
     var b = this, el = document.getElementById(par[1]);

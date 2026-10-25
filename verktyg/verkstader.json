@@ -12,7 +12,10 @@
   "kommentar": "Första verkstadssidan (Axel 25/10): utan affisch, med raden till bekräftelsen, rutan på sajten och villkoren.",
   "plattform": "wix",
   "kundkontakt": "mejl",
-  "start": "https://www.dackalen.com/"
+  "start": "https://www.dackalen.com/",
+  "personer": "",
+  "om": "Ni har funnits sedan 1998, och kunderna når er alltid på telefon.",
+  "ort": "Karlstad"
  },
  {
   "slug": "lattkrangt",
@@ -28,7 +31,10 @@
   "kommentar": "Verkstadssida (Axel 25/10), uppgifterna lästa på verkstadens egen sajt 25/10.",
   "strak": "varmland",
   "bokning": "https://lattkrangt.se/boka/",
-  "start": "https://lattkrangt.se/"
+  "start": "https://lattkrangt.se/",
+  "personer": "Jan och Johannes",
+  "om": "Ni startade 2020 på Skårevägen och tar bara bokade tider, så kunden vet precis när bilen är klar.",
+  "ort": "Karlstad"
  },
  {
   "slug": "partillebilringar",
@@ -44,7 +50,10 @@
   "kommentar": "Verkstadssida (Axel 25/10), uppgifterna lästa på verkstadens egen sajt 25/10.",
   "strak": "varmland",
   "bokning": "https://partillebilringar.compilator.com/public/cms?Id=1&CompanyId=6fc1a04a-d497-4281-b3af-9f43bd6884b0&branchId=1",
-  "start": "https://partillebilringar.se/"
+  "start": "https://partillebilringar.se/",
+  "personer": "Edris",
+  "om": "Ni har bytt däck sedan 1959 och är DRF-certifierade.",
+  "ort": "Karlstad"
  },
  {
   "slug": "rezasbilservice",
@@ -59,7 +68,10 @@
   "till": "info@rezabilteknik.se",
   "kommentar": "Verkstadssida (Axel 25/10), uppgifterna lästa på verkstadens egen sajt 25/10.",
   "strak": "varmland",
-  "start": "https://rezabilteknik.se/"
+  "start": "https://rezabilteknik.se/",
+  "personer": "",
+  "om": "Ni har över 20 års erfarenhet, på Gjuterigatan i Karlstad.",
+  "ort": "Karlstad"
  },
  {
   "slug": "soltorpet",
@@ -73,7 +85,10 @@
   "kundkontakt": "paminnelse",
   "till": "soltorpetmekotuning@hotmail.com",
   "kommentar": "Verkstadssida (Axel 25/10), uppgifterna lästa på verkstadens egen sajt 25/10.",
-  "start": "https://soltorpetmekotuning.se/"
+  "start": "https://soltorpetmekotuning.se/",
+  "personer": "",
+  "om": "Ni påminner redan kunderna inför varje säsong.",
+  "ort": "Säffle"
  },
  {
   "slug": "niniverkstad",
@@ -89,7 +104,10 @@
   "kommentar": "Verkstadssida (Axel 25/10), uppgifterna lästa på verkstadens egen sajt 25/10.",
   "strak": "falun",
   "bokning": "https://www.niniverkstad.se/kontakta-oss",
-  "start": "https://www.niniverkstad.se/"
+  "start": "https://www.niniverkstad.se/",
+  "personer": "",
+  "om": "Ni har drop-in och jour på lördagar, och kunder ända från Leksand och Rättvik.",
+  "ort": "Falun"
  },
  {
   "slug": "falubm",
@@ -105,7 +123,10 @@
   "kommentar": "Verkstadssida (Axel 25/10), uppgifterna lästa på verkstadens egen sajt 25/10.",
   "strak": "falun",
   "bokning": "https://falubm.se/tjanster/boka-bilservice/",
-  "start": "https://falubm.se/"
+  "start": "https://falubm.se/",
+  "personer": "",
+  "om": "Ni servar allt från lastbilar till en gammal Saab V4.",
+  "ort": "Falun"
  },
  {
   "slug": "speedmek",
@@ -119,7 +140,10 @@
   "kundkontakt": "mejl",
   "till": "info@speedmek.se",
   "kommentar": "Verkstadssida (Axel 25/10), uppgifterna lästa på verkstadens egen sajt 25/10.",
-  "start": "https://www.dalaspeedmek.se/"
+  "start": "https://www.dalaspeedmek.se/",
+  "personer": "",
+  "om": "Ni lånar ut en bil när kunden förbokar tid.",
+  "ort": "Orsa"
  },
  {
   "slug": "heladinbil",
@@ -134,7 +158,10 @@
   "till": "order@heladinbil.se",
   "kommentar": "Verkstadssida (Axel 25/10), uppgifterna lästa på verkstadens egen sajt 25/10.",
   "bokning": "https://heladinbil.se/onlinebokning/",
-  "start": "https://heladinbil.se/"
+  "start": "https://heladinbil.se/",
+  "personer": "Jimmy",
+  "om": "Ni började 2007 med en polermaskin i ett kallgarage.",
+  "ort": "Ludvika"
  },
  {
   "slug": "avestadackservice",
@@ -149,7 +176,10 @@
   "till": "kundservice@avestadackservice.se",
   "kommentar": "Verkstadssida (Axel 25/10), uppgifterna lästa på verkstadens egen sajt 25/10.",
   "bokning": "https://avestadackservice.se/boka-online/",
-  "start": "https://avestadackservice.se/"
+  "start": "https://avestadackservice.se/",
+  "personer": "Micke",
+  "om": "Ni är DRF-auktoriserade och har däck och däckhotell i Avesta.",
+  "ort": "Avesta"
  },
  {
   "slug": "hedemoradackservice",
@@ -164,7 +194,10 @@
   "till": "kundservice@hedemoradackservice.se",
   "kommentar": "Verkstadssida (Axel 25/10), uppgifterna lästa på verkstadens egen sajt 25/10.",
   "bokning": "https://hedemoradackservice.se/boka-online/",
-  "start": "https://hedemoradackservice.se/"
+  "start": "https://hedemoradackservice.se/",
+  "personer": "Per",
+  "om": "Ni har varit experter på däck och fälg sedan 1936.",
+  "ort": "Hedemora"
  },
  {
   "slug": "malungsnyavulk",
@@ -179,6 +212,9 @@
   "till": "info@mnv.se",
   "kommentar": "Verkstadssida (Axel 25/10), uppgifterna lästa på verkstadens egen sajt 25/10.",
   "bokning": "https://mnv.se/dackverkstad/",
-  "start": "https://mnv.se/"
+  "start": "https://mnv.se/",
+  "personer": "",
+  "om": "Henrik tar hand om däckhotellet, och ni bokar däckbytet personligen.",
+  "ort": "Malung"
  }
 ]

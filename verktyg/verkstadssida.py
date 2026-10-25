@@ -41,7 +41,6 @@ def main():
             'namn_q': urllib.parse.quote(v['namn']), 'lanktext_q': urllib.parse.quote(v['lanktext']),
             'strak_param': '&amp;strak=' + strak if strak else '',
             'pendling_text': ' och pendlarvägarna' if strak else '',
-            'langsta_ord': str(max(len(w) for w in 'Nya däck, och väglaget på vägen hem'.split())),
         }
         pl = v.get('plattform', '').lower()
         f['kod_instruktion'] = {'wix': 'i Wix under Lägg till, Bädda in kod, Bädda in HTML',
@@ -57,6 +56,39 @@ def main():
             'mejl': ('En rad i mejlen till kunderna', 'Svarar ni kunderna på mejl? Lägg till den här raden i signaturen.'),
             'paminnelse': ('En rad i påminnelsen inför säsongen', 'Ni påminner kunderna inför nästa säsong. Lägg till den här raden i påminnelsen.'),
         }[kk]
+        f['halsning'] = f"Hej {v['personer']}. " if v.get('personer') else ''
+        f['om'] = v.get('om', '')
+        f['lank_mal'] = 'er bokning' if bokar else 'er sajt'
+        f['langsta_ord'] = str(max(len(w.strip(',')) for w in ('Nya däck hos ' + v['namn'] + ', och väglaget på vägen hem').split()))
+        f['kanal_visas'] = {'sms': 'Sms', 'bokning': 'Bokningsbekräftelse', 'mejl': 'Mejl', 'paminnelse': 'Påminnelse'}[kk]
+        f['exempel_text'] = {'sms': f"Hej! Din bil är klar att hämtas hos {v['namn']}.",
+                             'bokning': f"Hej! Din tid för däckbyte hos {v['namn']} är bokad. Välkommen.",
+                             'mejl': f"Hej! Tack för bokningen, vi ses hos {v['namn']}.",
+                             'paminnelse': f"Hej! Dags att byta till vinterdäck. Boka din tid hos {v['namn']}."}[kk]
+        bild = f"press/verkstad-{v['slug']}.jpg"
+        doman = re.sub(r'^https?://(www\.)?|/.*$', '', v.get('start') or v['lank'])
+        f['montage_sektion'] = (f'''
+<section>
+  <div class="wrap stack" style="gap:28px">
+    <p class="steg">Så kan det se ut hos er</p>
+    <h2>Rutan på {doman}</h2>
+    <figure class="montage"><a href="/{bild}"><img src="/{bild}" alt="Skiss: rutan med {f['genitiv']} namn inlagd på {doman}, på dator och mobil" loading="lazy" width="2400" height="1638"></a>
+      <figcaption>Skiss med er startsida och exempelsiffror. Inget är ändrat på er sajt.</figcaption></figure>
+  </div>
+</section>
+''' if os.path.exists(os.path.join(ROT, bild)) else '')
+        f['band_q'] = '&amp;'.join(k + '=' + urllib.parse.quote(val, safe=':/') for k, val in
+                                   [('lan', v['lan']), ('namn', v['namn']), ('ort', v.get('ort', '')), ('lank', v['lank']), ('lanktext', v['lanktext'])] if val)
+        f['ort'] = v.get('ort', '') or kort
+        f['kod_instruktion_kort'] = {'wix': 'i Wix under Lägg till, Bädda in kod, Bädda in HTML',
+                                     'wordpress': 'i WordPress med blocket Anpassad HTML eller i temats sidhuvud'}.get(pl, 'där er sajt tar inbäddad kod')
+        if os.path.exists(os.path.join(ROT, bild)):
+            f['hero_klass'] = 'stack'
+            f['hero_hoger'] = (f'''<div class="wrap"><figure class="montage"><a href="/{bild}"><img src="/{bild}" alt="Skiss: bandet med {f['genitiv']} namn överst på {doman}, på dator och mobil" width="2400" height="1638"></a>
+      <figcaption>Skiss: bandet överst på {doman}, med exempelsiffror. Inget är ändrat på er sajt.</figcaption></figure></div>''')
+            f['ruta_dold'] = 'hidden'
+        else:
+            f['hero_hoger'], f['ruta_dold'], f['hero_klass'] = '', '', 'tva'
         ut = mall
         for k, val in f.items(): ut = ut.replace('{{' + k + '}}', val)
         kvar = re.findall(r'\{\{[a-z_]+\}\}', ut)
