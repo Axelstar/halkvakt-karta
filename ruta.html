@@ -43,7 +43,7 @@
   p { margin: 0; color: var(--text2); }
   ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--skilje); }
   li { display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 3px 12px; padding: 8px 0; border-bottom: 1px solid var(--skilje); align-items: baseline; }
-  .vag { font: 600 13px var(--mono); white-space: nowrap; }
+  .vag { font: 600 13px var(--mono); white-space: normal; }
   /* Länet som samma radlista som Vägarna och Pendling (Axel 23/10: talrutorna i bredd såg ut som en annan ruta). */
   .lan-lista li { grid-template-columns: 92px minmax(0, 1fr); }
   .lage { font: 600 14px var(--sans); min-width: 0; }
@@ -351,7 +351,7 @@
   var $ = function (id) { return document.getElementById(id); };
   var minus = function (n) { return n.toFixed(1).replace('.', ',').replace('-', '−'); };
   var tid = function (iso) { try { return new Date(iso).toLocaleTimeString('sv-SE', { timeZone: 'Europe/Stockholm', hour: '2-digit', minute: '2-digit' }); } catch (e) { return ''; } };
-  var kortVag = function (v) { var m = /^Väg (\d+)$/.exec(v); return m ? (Number(m[1]) < 100 ? 'Rv' : 'Väg ') + m[1] : v.replace(/^E /, 'E'); };
+  var kortVag = function (v) { var m = /^Väg (\d+)$/.exec(v); return m ? (Number(m[1]) < 100 ? 'Rv' : 'Väg\u00a0') + m[1] : v.replace(/^E /, 'E'); };
   var stor = function (v) { var m = /^(E|Väg)\s*(\d+)/.exec(v.vag); return m && (m[1] === 'E' || Number(m[2]) < 100); };
   var strackOrd = function (n) { return n === 1 ? ' sträcka' : ' sträckor'; };
   function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
@@ -442,7 +442,8 @@
       var halt = delar.filter(function (x) { return x.halt; }); m++; if (halt.length) mHalt++;
       var vagar = []; s.delar.forEach(function (x) { var k = kortVag(x[0]); if (vagar.indexOf(k) < 0) vagar.push(k); });
       var li = el('li');
-      li.appendChild(el('span', 'vag', vagar.join('/')));
+      // Flera vägar (Väg 136/Väg 137) bryts efter snedstrecket, aldrig inne i ett vägnamn, så de ryms i kolumnen.
+      li.appendChild(el('span', 'vag', vagar.map(function (x) { return x.replace(' ', '\u00a0'); }).join('/\u200b')));
       li.appendChild(el('span', 'lage' + (halt.length ? ' halt' : ''), (s.fran || p.fran) + '–' + s.till + ': ' + (halt.length ? 'halka på ' + halt.length + ' av ' + delar.length + strackOrd(delar.length) : 'ingen halka rapporterad')));
       if (halt.length) li.appendChild(chips(halt));
       pl.appendChild(li);

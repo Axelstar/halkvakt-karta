@@ -100,6 +100,25 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
 .titlar a:hover{border-color:var(--gul)}
 .titlar b{font:600 18px var(--sans)}
 .titlar span{font:500 12px var(--mono);overflow-wrap:anywhere;letter-spacing:.08em;text-transform:uppercase;color:var(--dampad)}
+/* Bildbläddraren (som halsingland.html): en titel per bild, pilar och svep, och två lägen: vid vädret och i en artikel. */
+.blad{position:relative}
+.blad-spar{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;border-radius:18px}
+.blad-spar::-webkit-scrollbar{display:none}
+.blad-spar figure{flex:0 0 100%;scroll-snap-align:start;margin:0}
+.blad-pil{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:1px solid var(--kant);background:rgba(15,21,24,.88);color:var(--text);font:600 22px var(--sans);cursor:pointer;display:grid;place-items:center}
+.blad-pil:hover{border-color:var(--gul);color:var(--gul)}
+.blad-pil[disabled]{opacity:.3;cursor:default;border-color:var(--kant);color:var(--text)}
+.blad-pil.v{left:14px}.blad-pil.h{right:14px}
+.blad-rad{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:16px}
+.blad-namn{font:600 12px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--text)}
+.blad-namn span{color:var(--dampad)}
+.blad-prickar{display:flex;gap:8px}
+.blad-prickar button{width:9px;height:9px;padding:0;border-radius:50%;border:0;background:var(--kant);cursor:pointer}
+.blad-prickar button[aria-current="true"]{background:var(--gul);width:24px;border-radius:5px}
+.lage{justify-self:start;display:inline-flex;gap:4px;background:var(--panel);border:1px solid var(--kant);border-radius:999px;padding:4px}
+.lage button{font:600 14px var(--sans);color:var(--text2);background:none;border:0;border-radius:999px;padding:8px 16px;cursor:pointer}
+.lage button[aria-pressed="true"]{background:var(--gul);color:#111719}
+@media (max-width:640px){.blad-pil{width:40px;height:40px;font-size:18px}.blad-pil.v{left:8px}.blad-pil.h{right:8px}}
 </style>
 </head>
 <body>
@@ -147,6 +166,64 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
         <li><span><b>Pendling:</b> vägarna från tidningens ort till grannorterna, till exempel Kalmar–Oskarshamn eller Borås–Göteborg.</span></li>
       </ul>
     </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap stack" style="gap:24px">
+    <div class="stack" style="gap:14px">
+      <p class="etikett">Två platser</p>
+      <h2>Vid vädret hela vintern, i artikeln de halkiga morgnarna</h2>
+      <p class="lead">Bläddra mellan titlarna. Byt läge för att se rutan bredvid väderprognosen eller i en artikel.</p>
+    </div>
+    <div class="lage" role="group" aria-label="Var rutan ligger">
+      <button type="button" data-lage="vader" aria-pressed="true">Vid vädret</button>
+      <button type="button" data-lage="artikel" aria-pressed="false">I en artikel</button>
+    </div>
+    <div class="blad" id="blad" aria-roledescription="bildspel" aria-label="Rutan hos Gota Medias titlar">
+      <div class="blad-spar" id="blad-spar">
+        <figure class="montage" data-namn="Barometern" data-sajt="barometern.se" data-vader="press/barometern-vader.jpg?v=1" data-artikel="press/barometern-artikel.jpg?v=1">
+          <a href="press/barometern-vader.jpg?v=1" target="_blank" rel="noopener"><img src="press/barometern-vader.jpg?v=1" width="2400" height="1638" alt="Bildmontage: Barometerns väglagsruta, på dator och mobil" loading="lazy"></a>
+        </figure>
+        <figure class="montage" data-namn="Ölandsbladet" data-sajt="olandsbladet.se" data-vader="press/olandsbladet-vader.jpg?v=1" data-artikel="press/olandsbladet-artikel.jpg?v=1">
+          <a href="press/olandsbladet-vader.jpg?v=1" target="_blank" rel="noopener"><img src="press/olandsbladet-vader.jpg?v=1" width="2400" height="1638" alt="Bildmontage: Ölandsbladets väglagsruta, på dator och mobil" loading="lazy"></a>
+        </figure>
+        <figure class="montage" data-namn="Smålandsposten" data-sajt="smp.se" data-vader="press/smp-vader.jpg?v=1" data-artikel="press/smp-artikel.jpg?v=1">
+          <a href="press/smp-vader.jpg?v=1" target="_blank" rel="noopener"><img src="press/smp-vader.jpg?v=1" width="2400" height="1638" alt="Bildmontage: Smålandspostens väglagsruta, på dator och mobil" loading="lazy"></a>
+        </figure>
+        <figure class="montage" data-namn="BLT" data-sajt="blt.se" data-vader="press/blt-vader.jpg?v=1" data-artikel="press/blt-artikel.jpg?v=1">
+          <a href="press/blt-vader.jpg?v=1" target="_blank" rel="noopener"><img src="press/blt-vader.jpg?v=1" width="2400" height="1638" alt="Bildmontage: BLT:s väglagsruta, på dator och mobil" loading="lazy"></a>
+        </figure>
+        <figure class="montage" data-namn="Sydöstran" data-sajt="sydostran.se" data-vader="press/sydostran-vader.jpg?v=1" data-artikel="press/sydostran-artikel.jpg?v=1">
+          <a href="press/sydostran-vader.jpg?v=1" target="_blank" rel="noopener"><img src="press/sydostran-vader.jpg?v=1" width="2400" height="1638" alt="Bildmontage: Sydöstrans väglagsruta, på dator och mobil" loading="lazy"></a>
+        </figure>
+        <figure class="montage" data-namn="Kristianstadsbladet" data-sajt="kristianstadsbladet.se" data-vader="press/kristianstadsbladet-vader.jpg?v=1" data-artikel="press/kristianstadsbladet-artikel.jpg?v=1">
+          <a href="press/kristianstadsbladet-vader.jpg?v=1" target="_blank" rel="noopener"><img src="press/kristianstadsbladet-vader.jpg?v=1" width="2400" height="1638" alt="Bildmontage: Kristianstadsbladets väglagsruta, på dator och mobil" loading="lazy"></a>
+        </figure>
+        <figure class="montage" data-namn="Ystads Allehanda" data-sajt="ystadsallehanda.se" data-vader="press/ystadsallehanda-vader.jpg?v=1" data-artikel="press/ystadsallehanda-artikel.jpg?v=1">
+          <a href="press/ystadsallehanda-vader.jpg?v=1" target="_blank" rel="noopener"><img src="press/ystadsallehanda-vader.jpg?v=1" width="2400" height="1638" alt="Bildmontage: Ystads Allehandas väglagsruta, på dator och mobil" loading="lazy"></a>
+        </figure>
+        <figure class="montage" data-namn="Trelleborgs Allehanda" data-sajt="trelleborgsallehanda.se" data-vader="press/trelleborgsallehanda-vader.jpg?v=1" data-artikel="press/trelleborgsallehanda-artikel.jpg?v=1">
+          <a href="press/trelleborgsallehanda-vader.jpg?v=1" target="_blank" rel="noopener"><img src="press/trelleborgsallehanda-vader.jpg?v=1" width="2400" height="1638" alt="Bildmontage: Trelleborgs Allehandas väglagsruta, på dator och mobil" loading="lazy"></a>
+        </figure>
+        <figure class="montage" data-namn="Norra Skåne" data-sajt="nsk.se" data-vader="press/nsk-vader.jpg?v=1" data-artikel="press/nsk-artikel.jpg?v=1">
+          <a href="press/nsk-vader.jpg?v=1" target="_blank" rel="noopener"><img src="press/nsk-vader.jpg?v=1" width="2400" height="1638" alt="Bildmontage: Norra Skånes väglagsruta, på dator och mobil" loading="lazy"></a>
+        </figure>
+        <figure class="montage" data-namn="Borås Tidning" data-sajt="bt.se" data-vader="press/bt-vader.jpg?v=1" data-artikel="press/bt-artikel.jpg?v=1">
+          <a href="press/bt-vader.jpg?v=1" target="_blank" rel="noopener"><img src="press/bt-vader.jpg?v=1" width="2400" height="1638" alt="Bildmontage: Borås Tidnings väglagsruta, på dator och mobil" loading="lazy"></a>
+        </figure>
+        <figure class="montage" data-namn="Ulricehamns Tidning" data-sajt="ut.se" data-vader="press/ut-vader.jpg?v=1" data-artikel="press/ut-artikel.jpg?v=1">
+          <a href="press/ut-vader.jpg?v=1" target="_blank" rel="noopener"><img src="press/ut-vader.jpg?v=1" width="2400" height="1638" alt="Bildmontage: Ulricehamns Tidnings väglagsruta, på dator och mobil" loading="lazy"></a>
+        </figure>
+      </div>
+      <button class="blad-pil v" id="blad-v" type="button" aria-label="Föregående titel">←</button>
+      <button class="blad-pil h" id="blad-h" type="button" aria-label="Nästa titel">→</button>
+    </div>
+    <div class="blad-rad">
+      <p class="blad-namn" id="blad-namn" aria-live="polite"></p>
+      <div class="blad-prickar" id="blad-prickar"></div>
+    </div>
+    <p class="not">Bildmontage med exempelsiffror. Väderprognosen och tidningens sida är ritade som exempel, utan tidningens märke. Rutan överst på sidan är live.</p>
   </div>
 </section>
 
@@ -207,6 +284,42 @@ document.querySelectorAll('.valjare button').forEach(function (b) {
     document.querySelectorAll('.valjare button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
   });
 });
+</script>
+<script>
+(function () {
+  var spar = document.getElementById("blad-spar"), bilder = [].slice.call(spar.children);
+  var v = document.getElementById("blad-v"), h = document.getElementById("blad-h");
+  var namn = document.getElementById("blad-namn"), prickar = document.getElementById("blad-prickar"), nu = 0;
+  bilder.forEach(function (b, i) {
+    var p = document.createElement("button"); p.type = "button"; p.setAttribute("aria-label", b.dataset.namn);
+    p.addEventListener("click", function () { ga(i); }); prickar.appendChild(p);
+  });
+  function visa(i) {
+    nu = i; v.disabled = i === 0; h.disabled = i === bilder.length - 1;
+    namn.textContent = ""; namn.appendChild(document.createTextNode(bilder[i].dataset.namn + " "));
+    var s = document.createElement("span"); s.textContent = "· " + bilder[i].dataset.sajt + " · " + (i + 1) + " av " + bilder.length; namn.appendChild(s);
+    [].forEach.call(prickar.children, function (p, k) { p.setAttribute("aria-current", k === i ? "true" : "false"); });
+  }
+  function ga(i) { i = Math.max(0, Math.min(bilder.length - 1, i)); spar.scrollTo({ left: i * spar.clientWidth, behavior: "smooth" }); visa(i); }
+  v.addEventListener("click", function () { ga(nu - 1); });
+  h.addEventListener("click", function () { ga(nu + 1); });
+  document.getElementById("blad").addEventListener("keydown", function (e) {
+    if (e.key === "ArrowLeft") { e.preventDefault(); ga(nu - 1); } else if (e.key === "ArrowRight") { e.preventDefault(); ga(nu + 1); }
+  });
+  var t; spar.addEventListener("scroll", function () { clearTimeout(t); t = setTimeout(function () { visa(Math.round(spar.scrollLeft / spar.clientWidth)); }, 60); });
+  document.querySelectorAll(".lage button").forEach(function (k) {
+    k.addEventListener("click", function () {
+      var lage = k.dataset.lage;
+      document.querySelectorAll(".lage button").forEach(function (x) { x.setAttribute("aria-pressed", String(x === k)); });
+      bilder.forEach(function (b) {
+        var src = b.dataset[lage], a = b.querySelector("a"), img = b.querySelector("img");
+        a.href = src; img.src = src;
+        img.alt = "Bildmontage: " + b.dataset.namn + (lage === "vader" ? ", rutan bredvid väderprognosen" : ", rutan i en artikel") + ", på dator och mobil";
+      });
+    });
+  });
+  visa(0);
+})();
 </script>
 <script src="/assets/besok.js" defer></script>
 </body>

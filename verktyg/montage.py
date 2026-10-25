@@ -6,6 +6,9 @@ och tidningens ruta efter ingressen. Rutan visar EXEMPELSIFFROR (halka på ungef
 dagens läge, så montaget ser likadant ut oavsett väder. På datorn visar rutan fliken Vägarna, på mobilen
 Pendling (eller Länet om tidningen saknar stråk).
 
+Med --vader blir det i stället press/<slug>-vader.jpg: rutan bredvid en ritad väderprognos för tidningens ort
+(Gota Medias titlar, Axel 25/10). Prognosen är påhittad som exempel; på datorn visar rutan Länet, på mobilen Pendling.
+
 Vill du hellre ha tidningens riktiga artikelsida: ta två skärmbilder själv (en artikel på tidningens sajt med
 rutan inlagd efter ingressen; dator 1280 × 976, mobil 390 × 832) och ge dem med --dator och --mobil. Sätt då
 montage till "egen" i tidningar.json.
@@ -81,6 +84,65 @@ iframe{width:100%;max-width:480px;height:440px;border:0;display:block;margin:0 0
 <p>Halkan är värst på morgonen, innan solen hunnit värma vägbanan. Trafikverket uppmanar till försiktighet och god tid i trafiken.</p>
 </article><aside class="side"><i></i></aside></main></body></html>'''
 
+
+# Vädersidan (Axel 25/10, Gota Media): rutan bredvid tidningens väderprognos, som på bt.se/vader och barometern.se/vader.
+# Prognosen är ritad och påhittad som exempel (en kall morgon med plusgrader i luften), sidan har inget av tidningens märke.
+MOLN = '<svg viewBox="0 0 40 30" width="{w}" height="{h}"><path d="M10 24h20a7 7 0 0 0 0-14 9 9 0 0 0-17-2A7 7 0 0 0 10 24z" fill="#b9c0c5"/>{regn}</svg>'
+REGN = '<path d="M13 27l-2 3M19 27l-2 3M25 27l-2 3" stroke="#4a8fd6" stroke-width="1.6" stroke-linecap="round"/>'
+SOL = '<svg viewBox="0 0 40 30" width="{w}" height="{h}"><circle cx="15" cy="12" r="6" fill="#f2b33d"/><path d="M14 26h18a6 6 0 0 0 0-12 8 8 0 0 0-15-1 6 6 0 0 0-3 13z" fill="#d4d9dc"/></svg>'
+def ikon(typ, w=34, h=26):
+    if typ == 'sol': return SOL.replace('{w}', str(w)).replace('{h}', str(h))
+    return MOLN.replace('{w}', str(w)).replace('{h}', str(h)).replace('{regn}', REGN if typ == 'regn' else '')
+DAGAR = [('Mån', 'sol', 4, -1), ('Tis', 'moln', 3, -2), ('Ons', 'regn', 5, 1), ('Tors', 'regn', 6, 2), ('Fre', 'sol', 3, -3),
+         ('Lör', 'moln', 2, -2), ('Sön', 'moln', 4, 0), ('Mån', 'regn', 5, 1), ('Tis', 'sol', 4, -1)]
+PERIODER = [('02–08', 'sol', 1, -3, '0 mm', '2–5 m/s'), ('08–14', 'sol', 4, 1, '0 mm', '3–6 m/s'),
+            ('14–20', 'moln', 3, 0, '0 mm', '3–6 m/s'), ('20–02', 'moln', 1, -3, '0 mm', '2–4 m/s')]
+TIMMAR = [('06', 'sol', 1, -3), ('07', 'sol', 1, -3), ('08', 'sol', 2, -2), ('09', 'sol', 3, -1), ('10', 'sol', 4, 0)]
+def grad(n): return ('−' if n < 0 else '') + str(abs(n)) + '°'
+
+VADER = '''<!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+:root{--ink:#16191c;--mute:#6b737a;--rule:#e3e6e9;--bar:#eef0f2;--or:#e8a33a;--bla:#4a8fd6}
+*{box-sizing:border-box}body{margin:0;background:#fff;color:var(--ink);font:400 15px/1.5 Arial,"Helvetica Neue",sans-serif}
+.top{border-bottom:1px solid var(--rule)}
+.mast{max-width:1180px;margin:0 auto;padding:22px 40px;display:flex;align-items:center;justify-content:space-between}
+.namn{font:700 30px/1 Georgia,serif;letter-spacing:-.01em}
+.knapp{width:96px;height:32px;border-radius:6px;background:var(--bar)}
+.nav{max-width:1180px;margin:0 auto;padding:0 40px 16px;display:flex;gap:22px}
+.nav i{display:block;height:12px;border-radius:6px;background:var(--bar)}
+main{max-width:1180px;margin:0 auto;padding:32px 40px;display:grid;grid-template-columns:580px 420px;gap:32px;align-items:start}
+.sok{border:1px solid #9aa3a8;padding:9px 14px;width:320px;color:var(--mute)}.sok b{color:var(--ink);font-weight:400;margin-left:22px}
+.dagar{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));margin-top:22px;text-align:center;font-size:13px}
+.dagar div{background:#f2f4f5;padding:10px 2px 8px}.dagar div:first-child{background:#fff;font-weight:700}
+.dagar svg{display:block;margin:4px auto}.dagar span{color:var(--or)}
+.per{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:18px;border-bottom:1px solid var(--rule);padding-bottom:16px}
+.per div{text-align:center;border-left:1px solid var(--rule)}.per div:first-child{border-left:0}
+.per h4{margin:0 0 4px;font-size:13px}.per .t{font-size:38px;color:var(--or);font-weight:300;line-height:1.1}
+.per small{display:block;color:var(--mute);font-size:12px}
+h3{font-weight:400;font-size:22px;text-align:center;margin:22px 0 8px}
+table{width:100%;border-collapse:collapse}td{padding:9px 6px;border-bottom:1px solid #f2f4f5}td:first-child{font-weight:700}
+.or{color:var(--or)}.bl{color:var(--bla)}
+.ruta small{display:block;font:700 12px Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin:0 0 8px}
+iframe{width:100%;height:440px;border:0;display:block;border-radius:12px;box-shadow:0 0 0 1px var(--rule)}
+.kalla{margin-top:16px;font-size:12px;color:var(--mute)}
+@media(max-width:600px){.mast{padding:16px 20px}.namn{font-size:22px}.nav{padding:0 20px 12px;gap:14px}
+ main{display:flex;flex-direction:column;gap:18px;padding:18px 20px}.prog{display:contents}.sok{width:100%;order:1}.dagar{order:2;margin-top:0;grid-template-columns:repeat(5,1fr)}
+ .dagar div:nth-child(n+6){display:none}.per{order:3}.ruta{order:4}.tim{order:5}.per .t{font-size:30px}.per small:last-child{display:none}}
+</style></head><body>
+<div class="top"><div class="mast"><div class="namn">{tidning}</div><div class="knapp"></div></div>
+<div class="nav"><i style="width:60px"></i><i style="width:48px"></i><i style="width:70px"></i><i style="width:56px"></i><i style="width:64px"></i></div></div>
+<main><div class="prog"><div class="sok">Sök ort <b>{ORT}</b></div>
+<div class="dagar">{dagar}</div><div class="per">{perioder}</div>
+<div class="tim"><h3>Timme för timme</h3><table>{timmar}</table></div></div>
+<div class="ruta"><small>Bilvädret just nu</small><iframe src="{ruta}"></iframe></div></main></body></html>'''
+
+def vadersida(tidning, ort):
+    dagar = ''.join(f'<div>{d}{ikon(i, 30, 22)}<span>{grad(hi)} / {grad(lo)}</span></div>' for d, i, hi, lo in DAGAR)
+    per = ''.join(f'<div><h4>{t}</h4>{ikon(i, 52, 40)}<div class="t">{grad(g)}</div><small>Känns som {grad(k)}</small><small>{mm} · {v}</small></div>' for t, i, g, k, mm, v in PERIODER)
+    tim = ''.join(f'<tr><td>{h}</td><td>{ikon(i, 28, 20)}</td><td class="or">{grad(g)}</td><td>Känns som <span class="or">{grad(k)}</span></td><td class="bl">0 mm</td></tr>' for h, i, g, k in TIMMAR)
+    return (VADER.replace('{tidning}', html.escape(tidning)).replace('{ORT}', html.escape(ort.upper()))
+            .replace('{dagar}', dagar).replace('{perioder}', per).replace('{timmar}', tim))
+
 KOMPOSIT = '''<!doctype html><html><head><meta charset="utf-8"><style>
 *{box-sizing:border-box}html,body{margin:0;width:1200px;height:819px;overflow:hidden;background:#0B0E10;font-family:-apple-system,"Helvetica Neue",Arial,sans-serif}
 .panel{position:absolute;left:30px;top:30px;width:1140px;height:820px;border-radius:40px;background:#111618;border:1px solid #1E282D}
@@ -113,6 +175,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('slug')
     ap.add_argument('--dator'); ap.add_argument('--mobil'); ap.add_argument('--ut')
+    ap.add_argument('--vader', action='store_true', help='rutan bredvid väderprognosen: press/<slug>-vader.jpg')
     a = ap.parse_args()
     from playwright.sync_api import sync_playwright
 
@@ -124,7 +187,9 @@ def main():
     ort = st['fran'] if st else t.get('ort', '')   # utan stråk: tidningens ort om den står i tidningar.json
     lankort = next(l['kort'] for l in json.load(open(os.path.join(ROT, 'data/lan.json'), encoding='utf-8'))['lan'] if l['slug'] == t['lan'])
     lan_d, str_d = exempeldata(t['lan'], ort)
-    ut = a.ut or os.path.join(ROT, 'press', f"{a.slug}-artikel.jpg")
+    ut = a.ut or os.path.join(ROT, 'press', f"{a.slug}-{'vader' if a.vader else 'artikel'}.jpg")
+    if a.vader and not ort:
+        raise SystemExit('Vädersidan behöver en ort: tidningen saknar stråk.')
     tmp = tempfile.mkdtemp(prefix='montage-')
 
     srv = socketserver.TCPServer(('127.0.0.1', 0), functools.partial(TystHanterare, directory=ROT))
@@ -147,8 +212,12 @@ def main():
             ctx.route('**/data/strackor.json*', lambda r: r.fulfill(json=str_d))
             ctx.route('**/assets/*besok.js*', lambda r: r.fulfill(body='', content_type='text/javascript'))
             sida = os.path.join(ROT, '.montage-artikel.html')
-            open(sida, 'w', encoding='utf-8').write(ARTIKEL.replace('{tidning}', html.escape(t['fullnamn']))
-                .replace('{kick}', html.escape(ort or lankort)).replace('{var}', html.escape('runt ' + ort if ort else 'i ' + lankort)).replace('{datum}', DATUMRAD).replace('{ruta}', html.escape(ruta(flik))))
+            if a.vader:
+                text = vadersida(t['fullnamn'], ort).replace('{ruta}', html.escape(ruta(flik)))
+            else:
+                text = (ARTIKEL.replace('{tidning}', html.escape(t['fullnamn']))
+                    .replace('{kick}', html.escape(ort or lankort)).replace('{var}', html.escape('runt ' + ort if ort else 'i ' + lankort)).replace('{datum}', DATUMRAD).replace('{ruta}', html.escape(ruta(flik))))
+            open(sida, 'w', encoding='utf-8').write(text)
             try:
                 pg = ctx.new_page()
                 pg.goto(bas + '.montage-artikel.html', wait_until='networkidle')
@@ -162,7 +231,7 @@ def main():
 
         dator, mobil = a.dator, a.mobil
         if not dator:
-            dator = os.path.join(tmp, 'dator.png'); skott(1280, 1100, 2, 'vagar', dator)
+            dator = os.path.join(tmp, 'dator.png'); skott(1280, 1100, 2, 'lan' if a.vader else 'vagar', dator)
         if not mobil:
             mobil = os.path.join(tmp, 'mobil.png'); skott(390, 832, 3, 'pendling' if st else 'lan', mobil)
 
