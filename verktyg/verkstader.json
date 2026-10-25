@@ -7,8 +7,10 @@
   "lan": "varmland",
   "strak": "varmland",
   "lank": "https://www.dackalen.com/",
-  "lanktext": "Boka däckbyte hos Däckalen",
+  "lanktext": "Ring eller mejla Däckalen",
   "till": "boka@dackalen.se",
-  "kommentar": "Första verkstadssidan (Axel 25/10): utan affisch, med raden till bekräftelsen, rutan på sajten och villkoren."
+  "kommentar": "Första verkstadssidan (Axel 25/10): utan affisch, med raden till bekräftelsen, rutan på sajten och villkoren.",
+  "plattform": "wix",
+  "kundkontakt": "mejl"
  }
 ]

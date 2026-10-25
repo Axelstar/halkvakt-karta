@@ -12,6 +12,7 @@ import json, os, re, sys, urllib.parse
 
 ROT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FALT = ['slug', 'namn', 'fullnamn', 'genitiv', 'lan', 'lank', 'lanktext', 'kommentar']
+# Valfria: strak (nyckel i STRAK), plattform (wix|wordpress|annat), bokning (URL), kundkontakt (sms|bokning|mejl, standard mejl)
 FORBJUDET = ['—', '!', 'lämnar aldrig telefonen']
 
 def main():
@@ -42,6 +43,19 @@ def main():
             'pendling_text': ' och pendlarvägarna' if strak else '',
             'langsta_ord': str(max(len(w) for w in 'Nya däck, och väglaget på vägen hem'.split())),
         }
+        pl = v.get('plattform', '').lower()
+        f['kod_instruktion'] = {'wix': 'i Wix under Lägg till, Bädda in kod, Bädda in HTML',
+                                'wordpress': 'i WordPress med blocket Anpassad HTML'}.get(pl, 'för verktyg som tar iframe (Wix: Bädda in kod, WordPress: blocket Anpassad HTML)')
+        f['steg2_text'] = {'wix': 'Rutan läggs in i Wix-redigeraren på några minuter, till exempel på startsidan.',
+                           'wordpress': 'Rutan läggs in i WordPress på några minuter, till exempel på startsidan.'}.get(pl, 'Den som sköter er sajt klistrar in länken eller koden, till exempel på startsidan.')
+        bokar = v.get('bokning', '')
+        f['steg2_rubrik'] = 'Rutan på startsidan, med länk till er bokning' if bokar else 'Rutan på startsidan, med ert namn'
+        kk = v.get('kundkontakt', 'mejl')
+        f['steg1_rubrik'], f['steg1_text'] = {
+            'sms': ('En rad i sms:et till kunden', 'Skickar ni sms när kunden bokat eller kan hämta bilen? Lägg till den här raden.'),
+            'bokning': ('En rad i bokningsbekräftelsen', 'Er bokning skickar en bekräftelse till kunden. Lägg till den här raden i texten.'),
+            'mejl': ('En rad i mejlen till kunderna', 'Svarar ni kunderna på mejl? Lägg till den här raden i signaturen.'),
+        }[kk]
         ut = mall
         for k, val in f.items(): ut = ut.replace('{{' + k + '}}', val)
         kvar = re.findall(r'\{\{[a-z_]+\}\}', ut)

@@ -36,21 +36,21 @@
 <section>
   <div class="wrap stack" style="gap:28px">
     <p class="steg">1 · Två minuter</p>
-    <h2>En rad i bekräftelsen eller påminnelsen</h2>
-    <p class="lead">Skickar ni ett sms eller mejl när kunden bokar eller ska hämta bilen? Lägg till den här raden. Länken öppnar rutan med ert namn.</p>
+    <h2>{{steg1_rubrik}}</h2>
+    <p class="lead">{{steg1_text}} Länken öppnar rutan med ert namn.</p>
     <div class="kod"><button type="button" id="kopiera-rad">Kopiera</button><pre id="raden" style="white-space:pre-wrap">Kolla väglaget innan du kör: https://halkvakt.se/ruta/{{slug}}/</pre></div>
-    <p class="liten">Raden fungerar i alla bokningssystem som skickar text, och kunden behöver inte ladda ner något.</p>
+    <p class="liten">Raden fungerar överallt där ni skriver text till kunden, och kunden behöver inte ladda ner något.</p>
   </div>
 </section>
 
 <section>
   <div class="wrap stack" style="gap:28px">
     <p class="steg">2 · På er sajt</p>
-    <h2>Rutan på startsidan, med länk till er bokning</h2>
-    <p class="lead">Den som sköter er sajt klistrar in länken eller koden, till exempel på startsidan. Raden längst ner i rutan, ”{{lanktext}}”, går till {{lank_visas}}.</p>
+    <h2>{{steg2_rubrik}}</h2>
+    <p class="lead">{{steg2_text}} Raden längst ner i rutan, ”{{lanktext}}”, går till {{lank_visas}}.</p>
     <p class="liten">Er egen adress till rutan, för verktyg som tar en länk:</p>
     <div class="kod"><button type="button" id="kopiera-lank">Kopiera</button><pre id="lanken">https://halkvakt.se/ruta/{{slug}}/</pre></div>
-    <p class="liten">Eller koden, för verktyg som tar iframe (Wix: Bädda in kod, WordPress: blocket Anpassad HTML):</p>
+    <p class="liten">Eller koden, {{kod_instruktion}}:</p>
     <div class="kod"><button type="button" id="kopiera">Kopiera</button><pre id="koden">&lt;iframe src="https://halkvakt.se/ruta/{{slug}}/" width="100%" height="440" style="border:0;max-width:480px" title="Väglaget i {{lankort}} just nu" loading="lazy"&gt;&lt;/iframe&gt;</pre></div>
   </div>
 </section>
