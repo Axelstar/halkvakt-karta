@@ -269,6 +269,80 @@
       { till: 'Sundsvall', delar: [['E 4', 'Härnösand - Sundsvall']] },
       { till: 'Gallsäter', delar: [['E 4', 'Gallsäter - Härnösand']] },
       { till: 'Örnsköldsvik', delar: [['E 4', 'Gallsäter - Härnösand'], ['E 4', 'Docksta - Gallsäter'], ['E 4', 'Örnsköldsvik - Docksta']] }
+    ] },
+    // Gota Medias titlar (Axel 25/10, förslaget om bilvädret bredvid vädersidorna): stråken från varje tidnings huvudort.
+    // &strak=<nyckel>, bara med rätt &lan=. Kalmar är också standard för Kalmar län, som Karlstad för Värmland.
+    kalmar: { lan: 'kalmar', fran: 'Kalmar', strak: [
+      { till: 'Oskarshamn', delar: [['E 22', 'Ålem - Kalmar'], ['E 22', 'Oskarshamn - Ålem']] },
+      { till: 'Nybro', delar: [['Väg 25', 'Kalmar - Nybro']] },
+      { till: 'Brömsebro', delar: [['E 22', 'Kalmar - Brömsebro']] },
+      { till: 'Färjestaden', delar: [['Väg 137', 'Färjestaden - Kalmar / Ölandsbron']] },
+      { till: 'Högsby', delar: [['E 22', 'Ålem - Kalmar'], ['Väg 34', 'Högsby - Ålem']] }
+    ] },
+    borgholm: { lan: 'kalmar', fran: 'Borgholm', strak: [
+      { till: 'Kalmar', delar: [['Väg 136', 'Borgholm - Färjestaden'], ['Väg 137', 'Färjestaden - Kalmar / Ölandsbron']] },
+      { till: 'Mörbylånga', delar: [['Väg 136', 'Borgholm - Färjestaden'], ['Väg 136', 'Färjestaden - Mörbylånga']] },
+      { till: 'Löttorp', delar: [['Väg 136', 'Löttorp - Borgholm']] }
+    ] },
+    vaxjo: { lan: 'kronoberg', fran: 'Växjö', strak: [
+      { till: 'Alvesta', delar: [['Väg 25', 'Växjö - Alvesta']] },
+      { till: 'Ljungby', delar: [['Väg 25', 'Växjö - Alvesta'], ['Väg 25', 'Alvesta - Ljungby']] },
+      { till: 'Lammhult', delar: [['Väg 30', 'Lammhult - Växjö']] },
+      { till: 'Eriksmåla', delar: [['Väg 25', 'Eriksmåla - Växjö']] },
+      { till: 'Eneryda', delar: [['Väg 23', 'Växjö Trafikplats Helgevärma - Eneryda']] },
+      { till: 'Djuramåla', delar: [['Väg 27', 'Växjö Fagrabäcksrondellen - Ingelstad'], ['Väg 27', 'Ingelstad - Djuramåla']] }
+    ] },
+    karlskrona: { lan: 'blekinge', fran: 'Karlskrona', strak: [
+      { till: 'Ronneby', delar: [['E 22', 'Karlskrona - Ronneby']] },
+      { till: 'Karlshamn', delar: [['E 22', 'Karlskrona - Ronneby'], ['E 22', 'Ronneby - Karlshamn']] },
+      { till: 'Brömsebro', delar: [['E 22', 'Brömsebro - Karlskrona']] },
+      { till: 'Vissefjärda', delar: [['Väg 28', 'Vissefjärda - Karlskrona']] }
+    ] },
+    karlshamn: { lan: 'blekinge', fran: 'Karlshamn', strak: [
+      { till: 'Ronneby', delar: [['E 22', 'Ronneby - Karlshamn']] },
+      { till: 'Karlskrona', delar: [['E 22', 'Ronneby - Karlshamn'], ['E 22', 'Karlskrona - Ronneby']] },
+      { till: 'Bromölla', delar: [['E 22', 'Karlshamn - Bromölla']] },
+      { till: 'Tingsryd', delar: [['Väg 29', 'Tingsryd - Karlshamn']] },
+      { till: 'Olofström', delar: [['Väg 126', 'Fridafors - Karlshamn'], ['Väg 116', 'Fridafors - Olofström']] }
+    ] },
+    kristianstad: { lan: 'skane', fran: 'Kristianstad', strak: [
+      { till: 'Hässleholm', delar: [['Väg 21', 'Kristianstad - Hässleholm']] },
+      { till: 'Bromölla', delar: [['E 22', 'Bromölla - Kristianstad']] },
+      { till: 'Hörby', delar: [['E 22', 'Kristianstad - Tollarp'], ['E 22', 'Tollarp - Hörby']] },
+      { till: 'Broby', delar: [['Väg 19', 'Broby - Kristianstad']] }
+    ] },
+    ystad: { lan: 'skane', fran: 'Ystad', strak: [
+      { till: 'Malmö', delar: [['E 65', 'Ystad Ringvägen - Svedala'], ['E 65', 'Svedala - Malmö']] },
+      { till: 'Simrishamn', delar: [['Väg 9', 'Simrishamn - Ystad']] },
+      { till: 'Tomelilla', delar: [['Väg 19', 'Tomelilla - Ystad']] },
+      { till: 'Sjöbo', delar: [['Väg 13', 'Sjöbo - Ystad']] },
+      { till: 'Trelleborg', delar: [['Väg 9', 'Ystad - Trelleborg']] }
+    ] },
+    trelleborg: { lan: 'skane', fran: 'Trelleborg', strak: [
+      { till: 'Malmö', delar: [['E 6', 'Malmö Trafikplats Petersborg - Trelleborg']] },
+      { till: 'Svedala', delar: [['Väg 108', 'Svedala - Trelleborg']] },
+      { till: 'Ystad', delar: [['Väg 9', 'Ystad - Trelleborg']] }
+    ] },
+    hassleholm: { lan: 'skane', fran: 'Hässleholm', strak: [
+      { till: 'Kristianstad', delar: [['Väg 21', 'Kristianstad - Hässleholm']] },
+      { till: 'Osby', delar: [['Väg 23', 'Osby - Hässleholm']] },
+      { till: 'Höör', delar: [['Väg 23', 'Hässleholm - Höör']] },
+      { till: 'Perstorp', delar: [['Väg 21', 'Hässleholm - Perstorp']] },
+      { till: 'Örkelljunga', delar: [['Väg 24', 'Hässleholm - Örkelljunga']] },
+      { till: 'Markaryd', delar: [['Väg 117', 'Markaryd - Hässleholm']] }
+    ] },
+    boras: { lan: 'vastra-gotaland', fran: 'Borås', strak: [
+      { till: 'Göteborg', delar: [['Väg 40', 'Borås - Bollebygd'], ['Väg 40', 'Bollebygd - Landvetter'], ['Väg 40', 'Landvetter - Kallebäcksmotet Göteborg']] },
+      { till: 'Ulricehamn', delar: [['Väg 40', 'Getared - Borås'], ['Väg 40', 'Ulricehamn - Getared']] },
+      { till: 'Kinna', delar: [['Väg 41', 'Borås - Kinna']] },
+      { till: 'Vårgårda', delar: [['Väg 42', 'Tämta - Borås'], ['Väg 42', 'Vårgårda - Tämta']] },
+      { till: 'Kila', delar: [['Väg 27', 'Borås - Kila']] }
+    ] },
+    ulricehamn: { lan: 'vastra-gotaland', fran: 'Ulricehamn', strak: [
+      { till: 'Borås', delar: [['Väg 40', 'Ulricehamn - Getared'], ['Väg 40', 'Getared - Borås']] },
+      { till: 'Bottnaryd', delar: [['Väg 40', 'Bottnaryd - Ulricehamn']] },
+      { till: 'Falköping', delar: [['Väg 46', 'Åsarp - Ulricehamn'], ['Väg 46', 'Falköping - Åsarp']] },
+      { till: 'Limmared', delar: [['Väg 157', 'Ulricehamn - Gällstad'], ['Väg 157', 'Gällstad - Limmared']] }
     ] }
   };
   var strakNyckel = q.get('strak') || lanSlug, PEND = STRAK[strakNyckel];
