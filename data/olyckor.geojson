@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[13.855857617,55.625178573]},"properties":{"land":"SE","typ":"Olycka","msg":"Vägen avstängd. Trafikolycka med flera fordon i höjd med Vanstad.  I nuläget finns ingen prognos på när vägen kan öppna igen.","allvar":"Mycket stor påverkan","road":null,"start":"2026-10-25T15:00:00.000Z"}}]}
