@@ -92,9 +92,10 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
 
 /* titelväljaren */
-.valjare{display:flex;flex-wrap:wrap;gap:8px}
-.valjare button{font:600 14px var(--sans);color:var(--text);background:var(--panel);border:1px solid var(--kant);border-radius:999px;padding:8px 14px;cursor:pointer}
-.valjare button[aria-pressed="true"]{background:var(--gul);color:#111719;border-color:var(--gul)}
+.valj{display:grid;gap:8px;justify-self:start}
+.valj span{font:600 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dampad)}
+.valj select{font:600 17px var(--sans);color:var(--text);background:var(--panel);border:1px solid var(--kant);border-radius:12px;padding:12px 44px 12px 16px;cursor:pointer;appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--gul) 50%),linear-gradient(135deg,var(--gul) 50%,transparent 50%);background-position:calc(100% - 22px) 52%,calc(100% - 16px) 52%;background-size:6px 6px;background-repeat:no-repeat}
+.valj select:focus-visible{outline:2px solid var(--gul);outline-offset:3px}
 .titlar{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
 .titlar a{display:grid;gap:4px;text-decoration:none;background:var(--panel);border:1px solid var(--kant);border-radius:16px;padding:18px 20px}
 .titlar a:hover{border-color:var(--gul)}
@@ -115,9 +116,12 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
 .blad-prickar{display:flex;gap:8px}
 .blad-prickar button{width:9px;height:9px;padding:0;border-radius:50%;border:0;background:var(--kant);cursor:pointer}
 .blad-prickar button[aria-current="true"]{background:var(--gul);width:24px;border-radius:5px}
-.lage{justify-self:start;display:inline-flex;gap:4px;background:var(--panel);border:1px solid var(--kant);border-radius:999px;padding:4px}
-.lage button{font:600 14px var(--sans);color:var(--text2);background:none;border:0;border-radius:999px;padding:8px 16px;cursor:pointer}
-.lage button[aria-pressed="true"]{background:var(--gul);color:#111719}
+.lage{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.lage button{display:grid;gap:4px;text-align:left;font:400 15px var(--sans);color:var(--text2);background:var(--panel);border:2px solid var(--kant);border-radius:16px;padding:16px 20px;cursor:pointer}
+.lage button b{font:700 19px var(--sans);color:var(--text)}
+.lage button:hover{border-color:var(--dampad)}
+.lage button[aria-pressed="true"]{border-color:var(--gul);background:#16190f}
+.lage button[aria-pressed="true"] b{color:var(--gul)}
 @media (max-width:640px){.blad-pil{width:40px;height:40px;font-size:18px}.blad-pil.v{left:8px}.blad-pil.h{right:8px}}
 </style>
 </head>
@@ -129,21 +133,31 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
       <p class="etikett"><svg viewBox="3 3 94 83" aria-hidden="true"><path fill-rule="evenodd" fill="#FFC94A" d="M55.196 6 L96.196 77 A6 6 0 0 1 91 86 L9 86 A6 6 0 0 1 3.804 77 L44.804 6 A6 6 0 0 1 55.196 6 Z M46.4 32 L53.6 32 L52 58 L48 58 Z M45.6 68 A4.4 4.4 0 1 0 54.4 68 A4.4 4.4 0 1 0 45.6 68 Z"/></svg><b>Halkvakt</b>Förslag till Gota Media</p>
       <h1>Bilvädret, <span class="gul">live</span> hos elva titlar</h1>
       <p class="lead">Er väderprognos säger hur vädret blir. Rutan säger hur det är att köra: halkan i länet, de stora vägarna och pendlarvägarna från tidningens egen ort, ur Trafikverkets öppna data.</p>
-      <p class="lead" style="font-size:17px">Välj en titel. Rutan byter namn, län, pendlarvägar och länk.</p>
-      <div class="valjare" role="group" aria-label="Välj titel">
-        <button type="button" data-i="0" aria-pressed="true">Barometern</button>
-        <button type="button" data-i="1" aria-pressed="false">Ölandsbladet</button>
-        <button type="button" data-i="2" aria-pressed="false">Smålandsposten</button>
-        <button type="button" data-i="3" aria-pressed="false">BLT</button>
-        <button type="button" data-i="4" aria-pressed="false">Sydöstran</button>
-        <button type="button" data-i="5" aria-pressed="false">Kristianstadsbladet</button>
-        <button type="button" data-i="6" aria-pressed="false">Ystads Allehanda</button>
-        <button type="button" data-i="7" aria-pressed="false">Trelleborgs Allehanda</button>
-        <button type="button" data-i="8" aria-pressed="false">Norra Skåne</button>
-        <button type="button" data-i="9" aria-pressed="false">Borås Tidning</button>
-        <button type="button" data-i="10" aria-pressed="false">Ulricehamns Tidning</button>
-      </div>
-      <p class="not">Varje titel har också en egen sida och en egen rutadress, se längre ner.</p>
+      <label class="valj"><span>Visa rutan för</span>
+        <select id="titel">
+          <optgroup label="Kalmar län">
+            <option value="0">Barometern</option>
+            <option value="1">Ölandsbladet</option>
+          </optgroup>
+          <optgroup label="Kronoberg">
+            <option value="2">Smålandsposten</option>
+          </optgroup>
+          <optgroup label="Blekinge">
+            <option value="3">BLT</option>
+            <option value="4">Sydöstran</option>
+          </optgroup>
+          <optgroup label="Skåne">
+            <option value="5">Kristianstadsbladet</option>
+            <option value="6">Ystads Allehanda</option>
+            <option value="7">Trelleborgs Allehanda</option>
+            <option value="8">Norra Skåne</option>
+          </optgroup>
+          <optgroup label="Västra Götaland">
+            <option value="9">Borås Tidning</option>
+            <option value="10">Ulricehamns Tidning</option>
+          </optgroup>
+        </select>
+      </label>
     </div>
     <div class="live">
       <iframe id="ruta" src="ruta.html?v=6&amp;lan=kalmar&amp;tema=ljus&amp;strak=kalmar&amp;namn=Barometern&amp;lank=https://www.barometern.se/&amp;lanktext=Mer%20trafik%20p%C3%A5%20barometern.se" title="Väglaget just nu" loading="eager"></iframe>
@@ -153,18 +167,14 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
 </header>
 
 <section>
-  <div class="wrap tva">
-    <div class="stack">
-      <p class="etikett">Varför bredvid vädret</p>
-      <h2>Plusgrader i prognosen, <span class="gul">halt på vägen</span></h2>
+  <div class="wrap stack" style="gap:28px">
+    <div class="stack" style="gap:14px">
+      <p class="etikett">Två platser för samma ruta</p>
+      <h2>Fast vid vädret, och i artikeln <span class="gul">när det är halt</span></h2>
     </div>
-    <div class="stack">
-      <p class="lead">En prognos visar luftens temperatur. Vägbanan kan ligga under noll fast luften är några grader varm, särskilt på broar, i sänkor och tidigt på morgonen. Det är det läsaren vill veta innan hon sätter sig i bilen.</p>
-      <ul class="lista">
-        <li><span><b>Länet:</b> hur många vägavsnitt Trafikverket rapporterar med halka, och hur många vägväderstationer som mäter vägbana under noll.</span></li>
-        <li><span><b>Vägarna:</b> länets stora vägar, sträcka för sträcka.</span></li>
-        <li><span><b>Pendling:</b> vägarna från tidningens ort till grannorterna, till exempel Kalmar–Oskarshamn eller Borås–Göteborg.</span></li>
-      </ul>
+    <div class="tre par">
+      <div class="kort"><small>1 · Vid vädret, hela vintern</small><h3>Plusgrader i prognosen, halt på vägen</h3><p>Prognosen visar luftens temperatur. Vägbanan kan ligga under noll fast luften är några grader varm, på broar, i sänkor och tidigt på morgonen. Den som läser vädret ska iväg, och rutan svarar på hur det är att köra. Läggs in en gång och sköter sig själv.</p></div>
+      <div class="kort"><small>2 · I artikeln, de halkiga morgnarna</small><h3>Läget just nu, sträcka för sträcka</h3><p>När ni skriver om halkan klockan sex lägger reportern in rutan med en länk, i artikeln eller livebloggen. Den visar länet, de stora vägarna och pendlarvägarna från tidningens ort, och uppdateras medan artikeln är uppe.</p></div>
     </div>
   </div>
 </section>
@@ -172,13 +182,12 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
 <section>
   <div class="wrap stack" style="gap:24px">
     <div class="stack" style="gap:14px">
-      <p class="etikett">Två platser</p>
-      <h2>Vid vädret hela vintern, i artikeln de halkiga morgnarna</h2>
-      <p class="lead">Bläddra mellan titlarna. Byt läge för att se rutan bredvid väderprognosen eller i en artikel.</p>
+      <p class="etikett">Så kan det se ut</p>
+      <h2>Bläddra mellan titlarna</h2>
     </div>
-    <div class="lage" role="group" aria-label="Var rutan ligger">
-      <button type="button" data-lage="vader" aria-pressed="true">Vid vädret</button>
-      <button type="button" data-lage="artikel" aria-pressed="false">I en artikel</button>
+    <div class="lage" role="tablist" aria-label="Var rutan ligger">
+      <button type="button" role="tab" data-lage="vader" aria-pressed="true"><b>1 · Vid vädret</b><span>Rutan bredvid prognosen</span></button>
+      <button type="button" role="tab" data-lage="artikel" aria-pressed="false"><b>2 · I en artikel</b><span>Rutan efter ingressen</span></button>
     </div>
     <div class="blad" id="blad" aria-roledescription="bildspel" aria-label="Rutan hos Gota Medias titlar">
       <div class="blad-spar" id="blad-spar">
@@ -228,27 +237,6 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
 </section>
 
 <section>
-  <div class="wrap stack" style="gap:28px">
-    <p class="etikett">En sida per titel</p>
-    <h2>Elva titlar, var och en med sin egen ruta</h2>
-    <p class="lead">Varje sida visar titelns ruta live, ett exempel i en artikel, koden och en egen adress att klistra in.</p>
-    <div class="titlar">
-      <a href="barometern"><b>Barometern OT</b><span>Kalmar län · halkvakt.se/barometern</span></a>
-      <a href="olandsbladet"><b>Ölandsbladet</b><span>Kalmar län · halkvakt.se/olandsbladet</span></a>
-      <a href="smp"><b>Smålandsposten</b><span>Kronoberg · halkvakt.se/smp</span></a>
-      <a href="blt"><b>Blekinge Läns Tidning</b><span>Blekinge · halkvakt.se/blt</span></a>
-      <a href="sydostran"><b>Sydöstran</b><span>Blekinge · halkvakt.se/sydostran</span></a>
-      <a href="kristianstadsbladet"><b>Kristianstadsbladet</b><span>Skåne · halkvakt.se/kristianstadsbladet</span></a>
-      <a href="ystadsallehanda"><b>Ystads Allehanda</b><span>Skåne · halkvakt.se/ystadsallehanda</span></a>
-      <a href="trelleborgsallehanda"><b>Trelleborgs Allehanda</b><span>Skåne · halkvakt.se/trelleborgsallehanda</span></a>
-      <a href="nsk"><b>Norra Skåne</b><span>Skåne · halkvakt.se/nsk</span></a>
-      <a href="bt"><b>Borås Tidning</b><span>Västra Götaland · halkvakt.se/bt</span></a>
-      <a href="ut"><b>Ulricehamns Tidning</b><span>Västra Götaland · halkvakt.se/ut</span></a>
-    </div>
-  </div>
-</section>
-
-<section>
   <div class="wrap tre">
     <div class="kort"><small>Enkelt</small><h3>En länk eller en rad kod</h3><p>Inget konto och ingen integration. Rutan läggs in där ert verktyg tar en länk eller kod.</p></div>
     <div class="kort"><small>Er</small><h3>Ert namn och er länk</h3><p>Rutan bär titelns namn och länkar till er sajt. Halkvakt står bara i foten.</p></div>
@@ -262,6 +250,7 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
       <p class="etikett">Nästa steg</p>
       <h2>Prova på en titel först</h2>
       <p class="lead">Femton minuter där vi visar rutan. Sedan provar ni den på en titel innan ni bestämmer något om de andra.</p>
+      <p class="lead" style="font-size:17px">Varje titel har redan en egen sida med koden och en färdig länk, till exempel <a href="barometern">halkvakt.se/barometern</a>.</p>
     </div>
     <div class="stack" style="gap:8px">
       <p class="etikett">Kontakt</p>
@@ -277,19 +266,17 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
 
 <script>
 var TITLAR = [{"src": "ruta.html?v=6&lan=kalmar&tema=ljus&strak=kalmar&namn=Barometern&lank=https://www.barometern.se/&lanktext=Mer%20trafik%20p%C3%A5%20barometern.se", "namn": "Barometern"}, {"src": "ruta.html?v=6&lan=kalmar&tema=ljus&strak=borgholm&namn=%C3%96landsbladet&lank=https://www.olandsbladet.se/&lanktext=Mer%20trafik%20p%C3%A5%20olandsbladet.se", "namn": "Ölandsbladet"}, {"src": "ruta.html?v=6&lan=kronoberg&tema=ljus&strak=vaxjo&namn=Sm%C3%A5landsposten&lank=https://www.smp.se/&lanktext=Mer%20trafik%20p%C3%A5%20smp.se", "namn": "Smålandsposten"}, {"src": "ruta.html?v=6&lan=blekinge&tema=ljus&strak=karlskrona&namn=BLT&lank=https://www.blt.se/&lanktext=Mer%20trafik%20p%C3%A5%20blt.se", "namn": "BLT"}, {"src": "ruta.html?v=6&lan=blekinge&tema=ljus&strak=karlshamn&namn=Syd%C3%B6stran&lank=https://www.sydostran.se/&lanktext=Mer%20trafik%20p%C3%A5%20sydostran.se", "namn": "Sydöstran"}, {"src": "ruta.html?v=6&lan=skane&tema=ljus&strak=kristianstad&namn=Kristianstadsbladet&lank=https://www.kristianstadsbladet.se/&lanktext=Mer%20trafik%20p%C3%A5%20kristianstadsbladet.se", "namn": "Kristianstadsbladet"}, {"src": "ruta.html?v=6&lan=skane&tema=ljus&strak=ystad&namn=Ystads%20Allehanda&lank=https://www.ystadsallehanda.se/&lanktext=Mer%20trafik%20p%C3%A5%20ystadsallehanda.se", "namn": "Ystads Allehanda"}, {"src": "ruta.html?v=6&lan=skane&tema=ljus&strak=trelleborg&namn=Trelleborgs%20Allehanda&lank=https://www.trelleborgsallehanda.se/&lanktext=Mer%20trafik%20p%C3%A5%20trelleborgsallehanda.se", "namn": "Trelleborgs Allehanda"}, {"src": "ruta.html?v=6&lan=skane&tema=ljus&strak=hassleholm&namn=Norra%20Sk%C3%A5ne&lank=https://www.nsk.se/&lanktext=Mer%20trafik%20p%C3%A5%20nsk.se", "namn": "Norra Skåne"}, {"src": "ruta.html?v=6&lan=vastra-gotaland&tema=ljus&strak=boras&namn=Bor%C3%A5s%20Tidning&lank=https://www.bt.se/&lanktext=Mer%20trafik%20p%C3%A5%20bt.se", "namn": "Borås Tidning"}, {"src": "ruta.html?v=6&lan=vastra-gotaland&tema=ljus&strak=ulricehamn&namn=Ulricehamns%20Tidning&lank=https://www.ut.se/&lanktext=Mer%20trafik%20p%C3%A5%20ut.se", "namn": "Ulricehamns Tidning"}];
-document.querySelectorAll('.valjare button').forEach(function (b) {
-  b.addEventListener('click', function () {
-    var t = TITLAR[Number(b.dataset.i)];
-    document.getElementById('ruta').src = t.src;
-    document.querySelectorAll('.valjare button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
-  });
+document.getElementById('titel').addEventListener('change', function () {
+  var i = Number(this.value);
+  document.getElementById('ruta').src = TITLAR[i].src;
+  if (window.gaTillTitel) window.gaTillTitel(i);
 });
 </script>
 <script>
 (function () {
   var spar = document.getElementById("blad-spar"), bilder = [].slice.call(spar.children);
   var v = document.getElementById("blad-v"), h = document.getElementById("blad-h");
-  var namn = document.getElementById("blad-namn"), prickar = document.getElementById("blad-prickar"), nu = 0;
+  var namn = document.getElementById("blad-namn"), prickar = document.getElementById("blad-prickar"), nu = 0, lage = "vader";
   bilder.forEach(function (b, i) {
     var p = document.createElement("button"); p.type = "button"; p.setAttribute("aria-label", b.dataset.namn);
     p.addEventListener("click", function () { ga(i); }); prickar.appendChild(p);
@@ -297,7 +284,7 @@ document.querySelectorAll('.valjare button').forEach(function (b) {
   function visa(i) {
     nu = i; v.disabled = i === 0; h.disabled = i === bilder.length - 1;
     namn.textContent = ""; namn.appendChild(document.createTextNode(bilder[i].dataset.namn + " "));
-    var s = document.createElement("span"); s.textContent = "· " + bilder[i].dataset.sajt + " · " + (i + 1) + " av " + bilder.length; namn.appendChild(s);
+    var s = document.createElement("span"); s.textContent = "· " + (lage === "vader" ? "vid vädret" : "i en artikel") + " · " + (i + 1) + " av " + bilder.length; namn.appendChild(s);
     [].forEach.call(prickar.children, function (p, k) { p.setAttribute("aria-current", k === i ? "true" : "false"); });
   }
   function ga(i) { i = Math.max(0, Math.min(bilder.length - 1, i)); spar.scrollTo({ left: i * spar.clientWidth, behavior: "smooth" }); visa(i); }
@@ -309,15 +296,17 @@ document.querySelectorAll('.valjare button').forEach(function (b) {
   var t; spar.addEventListener("scroll", function () { clearTimeout(t); t = setTimeout(function () { visa(Math.round(spar.scrollLeft / spar.clientWidth)); }, 60); });
   document.querySelectorAll(".lage button").forEach(function (k) {
     k.addEventListener("click", function () {
-      var lage = k.dataset.lage;
+      lage = k.dataset.lage;
       document.querySelectorAll(".lage button").forEach(function (x) { x.setAttribute("aria-pressed", String(x === k)); });
       bilder.forEach(function (b) {
         var src = b.dataset[lage], a = b.querySelector("a"), img = b.querySelector("img");
         a.href = src; img.src = src;
         img.alt = "Bildmontage: " + b.dataset.namn + (lage === "vader" ? ", rutan bredvid väderprognosen" : ", rutan i en artikel") + ", på dator och mobil";
       });
+      visa(nu);
     });
   });
+  window.gaTillTitel = function (i) { spar.scrollTo({ left: i * spar.clientWidth }); visa(i); };
   visa(0);
 })();
 </script>
