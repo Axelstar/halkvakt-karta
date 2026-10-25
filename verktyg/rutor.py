@@ -38,14 +38,17 @@ SORT = {
 
 def tidningar():
     ut = {}
-    for f in sorted(os.listdir(ROT)):
+    # Tidningarnas förslagssidor ligger i roten, verkstädernas i verkstad/ (Axel 25/10).
+    filer = [f for f in sorted(os.listdir(ROT))] + ['verkstad/' + f for f in sorted(os.listdir(os.path.join(ROT, 'verkstad')))] if os.path.isdir(os.path.join(ROT, 'verkstad')) else sorted(os.listdir(ROT))
+    for f in filer:
         if not f.endswith('.html') or f[:-5] in HOPPA: continue
-        m = re.search(r'<iframe src="(ruta|widget)\.html\?([^"]+)"', open(os.path.join(ROT, f), encoding='utf-8').read())
+        m = re.search(r'<iframe src="/?(ruta|widget)\.html\?([^"]+)"', open(os.path.join(ROT, f), encoding='utf-8').read())
         if not m: continue
         q = dict(urllib.parse.parse_qsl(html.unescape(m.group(2))))
         if m.group(1) == 'widget' and 'namn' not in q: continue   # pressidans exempel på widgeten, ingen förslagssida
-        ut[f[:-5]] = {k: q[k] for k in ORDNING if k in q}
-        if m.group(1) == 'widget': ut[f[:-5]]['sort'] = 'widget'
+        slug = os.path.basename(f)[:-5]
+        ut[slug] = {k: q[k] for k in ORDNING if k in q}
+        if m.group(1) == 'widget': ut[slug]['sort'] = 'widget'
     ut.update(EXTRA)
     return ut
 

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Halkvakt för {{namn}}</title>
+<meta name="description" content="Väglaget i {{lankort}} för {{genitiv}} kunder. Ett förslag från Halkvakt.">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
+<style>
+/* Byggd av verktyg/verkstadssida.py ur verktyg/verkstader.json. Ändra mallen eller posten, aldrig sidan. {{kommentar}} */
+{{css}}
+.steg{font:600 12px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--gul)}
+.rad-text{background:var(--panel);border:1px solid var(--kant);border-radius:16px;padding:22px 22px 22px;font:500 18px/1.5 var(--sans);color:var(--text)}
+.liten{font-size:16px;color:var(--text2);max-width:60ch}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap tva">
+    <div class="stack">
+      <p class="etikett"><svg viewBox="3 3 94 83" aria-hidden="true"><path fill-rule="evenodd" fill="#FFC94A" d="M55.196 6 L96.196 77 A6 6 0 0 1 91 86 L9 86 A6 6 0 0 1 3.804 77 L44.804 6 A6 6 0 0 1 55.196 6 Z M46.4 32 L53.6 32 L52 58 L48 58 Z M45.6 68 A4.4 4.4 0 1 0 54.4 68 A4.4 4.4 0 1 0 45.6 68 Z"/></svg><b>Halkvakt</b>Förslag till {{fullnamn}}</p>
+      <h1 style="--ord:{{langsta_ord}}">Nya däck, och <span class="gul">väglaget</span> på vägen hem</h1>
+      <p class="lead">Era kunder byter till vinterdäck nu, och nästa fråga är hur vägarna är. Rutan bredvid visar väglaget i {{lankort}} just nu, med {{genitiv}} namn. Länken längst ner går till er.</p>
+      <p class="lead" style="font-size:17px">Den är gratis och sköter sig själv. Läget räknas om var 30:e minut ur Trafikverkets öppna data. Tryck på flikarna för att se vägarna{{pendling_text}}.</p>
+    </div>
+    <div class="live">
+      <iframe src="/ruta.html?v=6&amp;lan={{lan}}&amp;tema=ljus{{strak_param}}&amp;namn={{namn_q}}&amp;lank={{lank}}&amp;lanktext={{lanktext_q}}" title="Väglaget i {{lankort}} just nu" loading="eager"></iframe>
+      <p class="not">Live från Trafikverkets öppna data</p>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap stack" style="gap:28px">
+    <p class="steg">1 · Två minuter</p>
+    <h2>En rad i bekräftelsen eller påminnelsen</h2>
+    <p class="lead">Skickar ni ett sms eller mejl när kunden bokar eller ska hämta bilen? Lägg till den här raden. Länken öppnar rutan med ert namn.</p>
+    <div class="kod"><button type="button" id="kopiera-rad">Kopiera</button><pre id="raden" style="white-space:pre-wrap">Kolla väglaget innan du kör: https://halkvakt.se/ruta/{{slug}}/</pre></div>
+    <p class="liten">Raden fungerar i alla bokningssystem som skickar text, och kunden behöver inte ladda ner något.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap stack" style="gap:28px">
+    <p class="steg">2 · På er sajt</p>
+    <h2>Rutan på startsidan, med länk till er bokning</h2>
+    <p class="lead">Den som sköter er sajt klistrar in länken eller koden, till exempel på startsidan. Raden längst ner i rutan, ”{{lanktext}}”, går till {{lank_visas}}.</p>
+    <p class="liten">Er egen adress till rutan, för verktyg som tar en länk:</p>
+    <div class="kod"><button type="button" id="kopiera-lank">Kopiera</button><pre id="lanken">https://halkvakt.se/ruta/{{slug}}/</pre></div>
+    <p class="liten">Eller koden, för verktyg som tar iframe (Wix: Bädda in kod, WordPress: blocket Anpassad HTML):</p>
+    <div class="kod"><button type="button" id="kopiera">Kopiera</button><pre id="koden">&lt;iframe src="https://halkvakt.se/ruta/{{slug}}/" width="100%" height="440" style="border:0;max-width:480px" title="Väglaget i {{lankort}} just nu" loading="lazy"&gt;&lt;/iframe&gt;</pre></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap tva" style="align-items:start">
+    <div class="stack">
+      <p class="steg">Villkoren</p>
+      <h2>Gratis, och ni kan sluta när ni vill</h2>
+    </div>
+    <ul class="lista">
+      <li><span>Gratis, utan konto och utan avtal.</span></li>
+      <li><span>Ingen reklam i rutan. Den bär ert namn och länkar till er.</span></li>
+      <li><span>Inga kakor och ingen spårning av era kunder.</span></li>
+      <li><span>Vill ni ta bort rutan tar ni bort raden eller koden. Inget mer.</span></li>
+      <li><span>Datan kommer från Trafikverkets öppna data. Halkvakt är fristående från Trafikverket.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap stack">
+    <p class="steg">Om Halkvakt</p>
+    <p class="lead">Halkvakt är en gratis app som varnar bilister med rösten när Trafikverket rapporterar halka på vägen framför dem. Den byggs av Axel och Bengt Lagerlöf i Malmö. Frågor, eller vill ni ha rutan i en annan färg:</p>
+    <p class="kontakt">hej@halkvakt.se</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Halkvakt · halkvakt.se · Data: Trafikverket (CC0). Fristående från myndigheterna.</div>
+</footer>
+
+<script>
+[["kopiera", "koden"], ["kopiera-lank", "lanken"], ["kopiera-rad", "raden"]].forEach(function (par) {
+  var knapp = document.getElementById(par[0]); if (!knapp) return;
+  knapp.addEventListener("click", async function () {
+    var b = this, el = document.getElementById(par[1]);
+    try { await navigator.clipboard.writeText(el.textContent); b.textContent = "Kopierat"; }
+    catch (e) { var r = document.createRange(); r.selectNodeContents(el); var s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = "Markerat"; }
+    setTimeout(function () { b.textContent = "Kopiera"; }, 1600);
+  });
+});
+</script>
+<script src="/assets/besok.js" defer></script>
+</body>
+</html>
