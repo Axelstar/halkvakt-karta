@@ -11,7 +11,8 @@
   "till": "boka@dackalen.se",
   "kommentar": "Första verkstadssidan (Axel 25/10): utan affisch, med raden till bekräftelsen, rutan på sajten och villkoren.",
   "plattform": "wix",
-  "kundkontakt": "mejl"
+  "kundkontakt": "mejl",
+  "start": "https://www.dackalen.com/"
  },
  {
   "slug": "lattkrangt",
@@ -26,7 +27,8 @@
   "till": "info@lattkrangt.se",
   "kommentar": "Verkstadssida (Axel 25/10), uppgifterna lästa på verkstadens egen sajt 25/10.",
   "strak": "varmland",
-  "bokning": "https://lattkrangt.se/boka/"
+  "bokning": "https://lattkrangt.se/boka/",
+  "start": "https://lattkrangt.se/"
  },
  {
   "slug": "partillebilringar",
@@ -41,7 +43,8 @@
   "till": "info@partillebilringar.se",
   "kommentar": "Verkstadssida (Axel 25/10), uppgifterna lästa på verkstadens egen sajt 25/10.",
   "strak": "varmland",
-  "bokning": "https://partillebilringar.compilator.com/public/cms?Id=1&CompanyId=6fc1a04a-d497-4281-b3af-9f43bd6884b0&branchId=1"
+  "bokning": "https://partillebilringar.compilator.com/public/cms?Id=1&CompanyId=6fc1a04a-d497-4281-b3af-9f43bd6884b0&branchId=1",
+  "start": "https://partillebilringar.se/"
  },
  {
   "slug": "rezasbilservice",
@@ -55,7 +58,8 @@
   "kundkontakt": "mejl",
   "till": "info@rezabilteknik.se",
   "kommentar": "Verkstadssida (Axel 25/10), uppgifterna lästa på verkstadens egen sajt 25/10.",
-  "strak": "varmland"
+  "strak": "varmland",
+  "start": "https://rezabilteknik.se/"
  },
  {
   "slug": "soltorpet",
@@ -68,7 +72,8 @@
   "plattform": "wordpress",
   "kundkontakt": "paminnelse",
   "till": "soltorpetmekotuning@hotmail.com",
-  "kommentar": "Verkstadssida (Axel 25/10), uppgifterna lästa på verkstadens egen sajt 25/10."
+  "kommentar": "Verkstadssida (Axel 25/10), uppgifterna lästa på verkstadens egen sajt 25/10.",
+  "start": "https://soltorpetmekotuning.se/"
  },
  {
   "slug": "niniverkstad",
@@ -83,7 +88,8 @@
   "till": "munir.sala1111@gmail.com",
   "kommentar": "Verkstadssida (Axel 25/10), uppgifterna lästa på verkstadens egen sajt 25/10.",
   "strak": "falun",
-  "bokning": "https://www.niniverkstad.se/kontakta-oss"
+  "bokning": "https://www.niniverkstad.se/kontakta-oss",
+  "start": "https://www.niniverkstad.se/"
  },
  {
   "slug": "falubm",
@@ -98,7 +104,8 @@
   "till": "INFO@FALUBM.SE",
   "kommentar": "Verkstadssida (Axel 25/10), uppgifterna lästa på verkstadens egen sajt 25/10.",
   "strak": "falun",
-  "bokning": "https://falubm.se/tjanster/boka-bilservice/"
+  "bokning": "https://falubm.se/tjanster/boka-bilservice/",
+  "start": "https://falubm.se/"
  },
  {
   "slug": "speedmek",
@@ -111,7 +118,8 @@
   "plattform": "annat",
   "kundkontakt": "mejl",
   "till": "info@speedmek.se",
-  "kommentar": "Verkstadssida (Axel 25/10), uppgifterna lästa på verkstadens egen sajt 25/10."
+  "kommentar": "Verkstadssida (Axel 25/10), uppgifterna lästa på verkstadens egen sajt 25/10.",
+  "start": "https://www.dalaspeedmek.se/"
  },
  {
   "slug": "heladinbil",
@@ -125,7 +133,8 @@
   "kundkontakt": "bokning",
   "till": "order@heladinbil.se",
   "kommentar": "Verkstadssida (Axel 25/10), uppgifterna lästa på verkstadens egen sajt 25/10.",
-  "bokning": "https://heladinbil.se/onlinebokning/"
+  "bokning": "https://heladinbil.se/onlinebokning/",
+  "start": "https://heladinbil.se/"
  },
  {
   "slug": "avestadackservice",
@@ -139,7 +148,8 @@
   "kundkontakt": "bokning",
   "till": "kundservice@avestadackservice.se",
   "kommentar": "Verkstadssida (Axel 25/10), uppgifterna lästa på verkstadens egen sajt 25/10.",
-  "bokning": "https://avestadackservice.se/boka-online/"
+  "bokning": "https://avestadackservice.se/boka-online/",
+  "start": "https://avestadackservice.se/"
  },
  {
   "slug": "hedemoradackservice",
@@ -153,7 +163,8 @@
   "kundkontakt": "bokning",
   "till": "kundservice@hedemoradackservice.se",
   "kommentar": "Verkstadssida (Axel 25/10), uppgifterna lästa på verkstadens egen sajt 25/10.",
-  "bokning": "https://hedemoradackservice.se/boka-online/"
+  "bokning": "https://hedemoradackservice.se/boka-online/",
+  "start": "https://hedemoradackservice.se/"
  },
  {
   "slug": "malungsnyavulk",
@@ -167,6 +178,7 @@
   "kundkontakt": "mejl",
   "till": "info@mnv.se",
   "kommentar": "Verkstadssida (Axel 25/10), uppgifterna lästa på verkstadens egen sajt 25/10.",
-  "bokning": "https://mnv.se/dackverkstad/"
+  "bokning": "https://mnv.se/dackverkstad/",
+  "start": "https://mnv.se/"
  }
 ]
