@@ -244,6 +244,25 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
   </div>
 </section>
 
+<section id="igang">
+  <div class="wrap stack" style="gap:28px">
+    <div class="stack" style="gap:14px">
+      <p class="etikett">Så kommer ni igång</p>
+      <h2>Två sätt att lägga in rutan</h2>
+    </div>
+    <div class="tre par">
+      <div class="kort"><small>I en nyhet om halka</small><h3>Reportern klistrar in en länk</h3><p>Länken nedan fungerar där ert publiceringsverktyg tar en länk eller en inbäddning. Prova gärna i en opublicerad testartikel först. Inget utvecklarjobb.</p></div>
+      <div class="kort"><small>Vid vädret</small><h3>Koden läggs in en gång</h3><p>Er webbutvecklare lägger in koden i mallen för vädersidan. Titlarna delar plattform, så det görs en gång och varje titel får sitt namn och sitt län genom adressen.</p></div>
+    </div>
+    <label class="valj"><span>Länk och kod för</span><select id="igang-titel"><optgroup label="Kalmar län"><option value="0">Barometern</option><option value="1">Ölandsbladet</option></optgroup><optgroup label="Kronoberg"><option value="2">Smålandsposten</option></optgroup><optgroup label="Blekinge"><option value="3">BLT</option><option value="4">Sydöstran</option></optgroup><optgroup label="Skåne"><option value="5">Kristianstadsbladet</option><option value="6">Ystads Allehanda</option><option value="7">Trelleborgs Allehanda</option><option value="8">Norra Skåne</option></optgroup><optgroup label="Västra Götaland"><option value="9">Borås Tidning</option><option value="10">Ulricehamns Tidning</option></optgroup></select></label>
+    <p class="etikett" style="margin-bottom:-16px">Länken, för en nyhet</p>
+    <div class="kod"><button type="button" id="kopiera-lank">Kopiera</button><pre id="lanken"></pre></div>
+    <p class="etikett" style="margin-bottom:-16px">Koden, för vädersidan</p>
+    <div class="kod"><button type="button" id="kopiera">Kopiera</button><pre id="koden"></pre></div>
+    <p class="lead" style="font-size:17px">Allt om titelns ruta, med fler inställningar, finns på <a id="igang-sida" href="barometern">halkvakt.se/barometern</a>. När ni har lagt in den ställer vi in länken till er vädersida och skickar visningarna.</p>
+  </div>
+</section>
+
 <section>
   <div class="wrap tva">
     <div class="stack">
@@ -255,7 +274,7 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
         <li><span><b>I en nyhet om halka:</b> nästa gång ni skriver om halkan lägger reportern in rutan med en länk.</span></li>
       </ul>
       <p class="lead" style="font-size:17px">Vi räknar visningarna och delar dem med er, så ni ser hur rutan används innan ni tar ställning till de andra titlarna.</p>
-      <p class="lead" style="font-size:17px">Varje titel har redan en egen sida med koden och en färdig länk, till exempel <a href="barometern">halkvakt.se/barometern</a>.</p>
+      <p class="lead" style="font-size:17px"><a href="#igang">Länken och koden för varje titel</a> finns ovanför.</p>
     </div>
     <div class="stack" style="gap:8px">
       <p class="etikett">Kontakt</p>
@@ -313,6 +332,29 @@ document.getElementById('titel').addEventListener('change', function () {
   });
   window.gaTillTitel = function (i) { spar.scrollTo({ left: i * spar.clientWidth }); visa(i); };
   visa(0);
+})();
+</script>
+<script>
+(function () {
+  var SIDOR = [{"slug": "barometern", "namn": "Barometern", "genitiv": "Barometerns", "kod": "<iframe src=\"https://halkvakt.se/ruta.html?lan=kalmar&tema=ljus&strak=kalmar&namn=Barometern&lank=https://www.barometern.se/\"\n  style=\"width:100%;max-width:480px;height:440px;border:0\"\n  title=\"Väglaget just nu\" loading=\"lazy\"></iframe>"}, {"slug": "olandsbladet", "namn": "Ölandsbladet", "genitiv": "Ölandsbladets", "kod": "<iframe src=\"https://halkvakt.se/ruta.html?lan=kalmar&tema=ljus&strak=borgholm&namn=%C3%96landsbladet&lank=https://www.olandsbladet.se/\"\n  style=\"width:100%;max-width:480px;height:440px;border:0\"\n  title=\"Väglaget just nu\" loading=\"lazy\"></iframe>"}, {"slug": "smp", "namn": "Smålandsposten", "genitiv": "Smålandspostens", "kod": "<iframe src=\"https://halkvakt.se/ruta.html?lan=kronoberg&tema=ljus&strak=vaxjo&namn=Sm%C3%A5landsposten&lank=https://www.smp.se/\"\n  style=\"width:100%;max-width:480px;height:440px;border:0\"\n  title=\"Väglaget just nu\" loading=\"lazy\"></iframe>"}, {"slug": "blt", "namn": "BLT", "genitiv": "BLT:s", "kod": "<iframe src=\"https://halkvakt.se/ruta.html?lan=blekinge&tema=ljus&strak=karlskrona&namn=BLT&lank=https://www.blt.se/\"\n  style=\"width:100%;max-width:480px;height:440px;border:0\"\n  title=\"Väglaget just nu\" loading=\"lazy\"></iframe>"}, {"slug": "sydostran", "namn": "Sydöstran", "genitiv": "Sydöstrans", "kod": "<iframe src=\"https://halkvakt.se/ruta.html?lan=blekinge&tema=ljus&strak=karlshamn&namn=Syd%C3%B6stran&lank=https://www.sydostran.se/\"\n  style=\"width:100%;max-width:480px;height:440px;border:0\"\n  title=\"Väglaget just nu\" loading=\"lazy\"></iframe>"}, {"slug": "kristianstadsbladet", "namn": "Kristianstadsbladet", "genitiv": "Kristianstadsbladets", "kod": "<iframe src=\"https://halkvakt.se/ruta.html?lan=skane&tema=ljus&strak=kristianstad&namn=Kristianstadsbladet&lank=https://www.kristianstadsbladet.se/\"\n  style=\"width:100%;max-width:480px;height:440px;border:0\"\n  title=\"Väglaget just nu\" loading=\"lazy\"></iframe>"}, {"slug": "ystadsallehanda", "namn": "Ystads Allehanda", "genitiv": "Ystads Allehandas", "kod": "<iframe src=\"https://halkvakt.se/ruta.html?lan=skane&tema=ljus&strak=ystad&namn=Ystads%20Allehanda&lank=https://www.ystadsallehanda.se/\"\n  style=\"width:100%;max-width:480px;height:440px;border:0\"\n  title=\"Väglaget just nu\" loading=\"lazy\"></iframe>"}, {"slug": "trelleborgsallehanda", "namn": "Trelleborgs Allehanda", "genitiv": "Trelleborgs Allehandas", "kod": "<iframe src=\"https://halkvakt.se/ruta.html?lan=skane&tema=ljus&strak=trelleborg&namn=Trelleborgs%20Allehanda&lank=https://www.trelleborgsallehanda.se/\"\n  style=\"width:100%;max-width:480px;height:440px;border:0\"\n  title=\"Väglaget just nu\" loading=\"lazy\"></iframe>"}, {"slug": "nsk", "namn": "Norra Skåne", "genitiv": "Norra Skånes", "kod": "<iframe src=\"https://halkvakt.se/ruta.html?lan=skane&tema=ljus&strak=hassleholm&namn=Norra%20Sk%C3%A5ne&lank=https://www.nsk.se/\"\n  style=\"width:100%;max-width:480px;height:440px;border:0\"\n  title=\"Väglaget just nu\" loading=\"lazy\"></iframe>"}, {"slug": "bt", "namn": "Borås Tidning", "genitiv": "Borås Tidnings", "kod": "<iframe src=\"https://halkvakt.se/ruta.html?lan=vastra-gotaland&tema=ljus&strak=boras&namn=Bor%C3%A5s%20Tidning&lank=https://www.bt.se/\"\n  style=\"width:100%;max-width:480px;height:440px;border:0\"\n  title=\"Väglaget just nu\" loading=\"lazy\"></iframe>"}, {"slug": "ut", "namn": "Ulricehamns Tidning", "genitiv": "Ulricehamns Tidnings", "kod": "<iframe src=\"https://halkvakt.se/ruta.html?lan=vastra-gotaland&tema=ljus&strak=ulricehamn&namn=Ulricehamns%20Tidning&lank=https://www.ut.se/\"\n  style=\"width:100%;max-width:480px;height:440px;border:0\"\n  title=\"Väglaget just nu\" loading=\"lazy\"></iframe>"}];
+  var val = document.getElementById('igang-titel');
+  function visa(i) {
+    var t = SIDOR[i]; val.value = String(i);
+    document.getElementById('lanken').textContent = 'https://halkvakt.se/ruta/' + t.slug + '/';
+    document.getElementById('koden').textContent = t.kod;
+    var a = document.getElementById('igang-sida'); a.href = t.slug; a.textContent = 'halkvakt.se/' + t.slug;
+  }
+  val.addEventListener('change', function () { visa(Number(val.value)); });
+  document.getElementById('titel').addEventListener('change', function () { visa(Number(this.value)); });
+  visa(0);
+  [["kopiera", "koden"], ["kopiera-lank", "lanken"]].forEach(function (par) {
+    document.getElementById(par[0]).addEventListener("click", async function () {
+      var b = this, el = document.getElementById(par[1]);
+      try { await navigator.clipboard.writeText(el.textContent); b.textContent = "Kopierat"; }
+      catch (e) { var r = document.createRange(); r.selectNodeContents(el); var sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); b.textContent = "Markerat"; }
+      setTimeout(function () { b.textContent = "Kopiera"; }, 1600);
+    });
+  });
 })();
 </script>
 <script src="/assets/besok.js" defer></script>
