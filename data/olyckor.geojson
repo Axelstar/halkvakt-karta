@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[25.827024026,63.103220329]},"properties":{"land":"FI","typ":"Olycka","msg":"Tie 4, Viitasaari. Ensitiedote liikenneonnettomuudesta.  · Onnettomuus","allvar":null,"road":null,"start":"2026-10-25T12:10:00.000Z"}}]}
