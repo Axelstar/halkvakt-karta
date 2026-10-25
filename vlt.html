@@ -25,6 +25,9 @@ section{padding-block:88px;border-top:1px solid var(--kant)}
 .etikett svg{width:18px;height:auto;flex:none}
 .etikett b{color:var(--text)}
 h1{font:700 clamp(40px,6.4vw,78px)/1.02 var(--sans);letter-spacing:-.025em;margin:0;text-wrap:balance}
+.hero .stack{container-type:inline-size}
+/* the longest word in the heading must fit the column: --ord is its length in characters */
+.hero h1{font-size:min(clamp(40px,6.4vw,78px),calc(100cqi / (var(--ord,10) * .6)))}
 h2{font:700 clamp(30px,4vw,48px)/1.08 var(--sans);letter-spacing:-.02em;margin:0;text-wrap:balance;max-width:22ch}
 h3{font:600 21px/1.25 var(--sans);margin:0}
 p{margin:0}
@@ -97,7 +100,7 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
   <div class="wrap tva">
     <div class="stack">
       <p class="etikett"><svg viewBox="3 3 94 83" aria-hidden="true"><path fill-rule="evenodd" fill="#FFC94A" d="M55.196 6 L96.196 77 A6 6 0 0 1 91 86 L9 86 A6 6 0 0 1 3.804 77 L44.804 6 A6 6 0 0 1 55.196 6 Z M46.4 32 L53.6 32 L52 58 L48 58 Z M45.6 68 A4.4 4.4 0 1 0 54.4 68 A4.4 4.4 0 1 0 45.6 68 Z"/></svg><b>Halkvakt</b>Förslag till Vestmanlands Läns Tidning</p>
-      <h1>Väglaget i Västmanland, <span class="gul">live</span> hos VLT</h1>
+      <h1 style="--ord:11">Väglaget i Västmanland, <span class="gul">live</span> hos VLT</h1>
       <p class="lead">En ruta för artiklar och liveblogg som visar läget på vägarna just nu: i Västmanland, på de stora vägarna och på pendlarvägarna från Västerås. Den läggs in med en rad kod och uppdaterar sig själv dygnet runt.</p>
       <p class="lead" style="font-size:17px"><b style="color:var(--text)">Rutan är er.</b> Den bär VLT:s namn och länkar till vlt.se. Raden överst är en annonsplats ni kan sälja till era annonsörer, och intäkten är er.</p>
       <p class="lead" style="font-size:17px">Rutan bredvid är den riktiga, med dagens siffror. Svep i sidled eller tryck på flikarna.</p>

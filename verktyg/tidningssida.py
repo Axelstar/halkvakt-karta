@@ -100,6 +100,7 @@ def fyll(t, mall, lanen, straken):
         'doman': t['doman'], 'lank': t['lank'], 'lan': t['lan'],
         'exempel_stracka': t['exempel_stracka'], 'kommentar': t['kommentar'],
         'lankort': lanen[t['lan']]['kort'],
+        'langsta_ord': str(max(len(w.strip(',')) for w in ('Väglaget i ' + lanen[t['lan']]['kort'] + ', live hos ' + t['namn']).split())),
         'vagavsnitt': str(lanen[t['lan']]['vagavsnitt']),
         'vagar_rubrik': (lista(e_vagar) if len(e_vagar) < 3 else ', '.join(e_vagar[:-1]) + ' och ' + e_vagar[-1]) + ' och riksvägarna',
         'antal_strackor': str(sum(n for _, n in vagar)),
