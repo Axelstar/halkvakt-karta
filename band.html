@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Väglaget just nu</title>
+<!-- Bandet (Axel 25/10): en smal rad överst på en verkstads sajt som rullar väglaget i länet, som en börstickers.
+     Parametrar: lan (slug ur data/lan.json), namn (verkstaden), lank (https, deras bokning eller sajt), lanktext,
+     ort (vägar genom orten först), tema=ljus för ljus botten. Kopplar läget till verkstadens affär: är vägbanan under noll eller halt frågar bandet
+     om sommardäcken. Rör sig långsamt, stannar under muspekaren och står stilla vid minskad rörelse. Inga kakor,
+     ingen spårning. Allt skrivs som text, aldrig som HTML. -->
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+  :root{--bg:#080B0D;--text:#E9EFF2;--text2:#A9B5BB;--dampad:#8FA0A9;--gul:#FFC94A;--kant:#1E282D;--etikett:#0F1518;
+    --sans:"Instrument Sans","Helvetica Neue",Arial,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+  :root[data-tema=ljus]{--bg:#FFFFFF;--text:#111719;--text2:#48555B;--dampad:#6b737a;--gul:#B07A00;--kant:#DCE2E5;--etikett:#111719}
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:var(--bg);overflow:hidden}
+  .band{display:flex;align-items:stretch;height:100%;min-height:36px;border-bottom:1px solid var(--kant);font:500 14px/1 var(--sans);color:var(--text)}
+  .etikett{flex:none;display:flex;align-items:center;gap:8px;padding:0 14px;background:var(--etikett);color:#E9EFF2;font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+  .etikett i{width:7px;height:7px;border-radius:50%;background:#FFC94A;animation:puls 2.4s ease-in-out infinite}
+  @keyframes puls{50%{opacity:.45;transform:scale(.8)}}
+  .etikett span{color:#8FA0A9}
+  .fonster{flex:1;overflow:hidden;position:relative;display:flex;align-items:center;-webkit-mask:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent);mask:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent)}
+  .rulle{display:flex;white-space:nowrap;will-change:transform;animation:rulla var(--tid,60s) linear infinite}
+  .fonster:hover .rulle{animation-play-state:paused}
+  @keyframes rulla{to{transform:translateX(-50%)}}
+  .post{display:inline-flex;align-items:center;gap:8px;padding:0 22px;color:var(--text)}
+  .post::after{content:"";width:4px;height:4px;border-radius:50%;background:var(--kant);margin-left:22px}
+  .post b{font:600 13px var(--mono);letter-spacing:.02em}
+  .post.halt b{color:var(--gul)}
+  .post .p{width:7px;height:7px;border-radius:50%;background:var(--gul)}
+  .post.dampad{color:var(--dampad);font-size:12px}
+  .post a{color:var(--text);font-weight:600;text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--gul)}
+  @media (max-width:520px){.etikett span{display:none}.post{padding:0 16px}}
+  @media (prefers-reduced-motion:reduce){.rulle{animation:none}.fonster{overflow-x:auto;-webkit-mask:none;mask:none}}
+</style>
+</head>
+<body>
+<div class="band" role="region" aria-label="Väglaget just nu">
+  <div class="etikett"><i aria-hidden="true"></i><b id="lan">Väglaget</b><span id="tid"></span></div>
+  <div class="fonster"><div class="rulle" id="rulle" aria-live="off"></div></div>
+</div>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search);
+  if (q.get('tema') === 'ljus') document.documentElement.setAttribute('data-tema', 'ljus');
+  var lanSlug = q.get('lan') || '', namn = (q.get('namn') || '').slice(0, 40), ort = (q.get('ort') || '').slice(0, 40);
+  var lank = /^https:\/\//.test(q.get('lank') || '') ? q.get('lank') : '';
+  var lanktext = (q.get('lanktext') || (namn ? 'Boka däckbyte hos ' + namn : '')).slice(0, 48);
+  var rulle = document.getElementById('rulle');
+  function minus(n) { return (n < 0 ? '−' : n > 0 ? '+' : '') + Math.abs(n).toFixed(1).replace('.', ','); }
+  function vag(v) { return v.replace(/^E (\d+)/, 'E$1').replace(/^Väg (\d+)/, 'väg $1'); }
+  function post(text, typ, fet) {
+    var s = document.createElement('span'); s.className = 'post' + (typ ? ' ' + typ : '');
+    if (typ === 'halt') { var p = document.createElement('i'); p.className = 'p'; s.appendChild(p); }
+    if (fet) { var b = document.createElement('b'); b.textContent = fet; s.appendChild(b); }
+    if (text) s.appendChild(document.createTextNode((fet ? ' ' : '') + text));
+    return s;
+  }
+  function cta(fraga) {
+    var s = post(fraga ? fraga + ' ' : '', '');
+    if (lank && lanktext) { var a = document.createElement('a'); a.href = lank; a.target = '_top'; a.textContent = lanktext + ' →'; s.appendChild(a); }
+    else if (lanktext) s.appendChild(document.createTextNode(lanktext));
+    return s;
+  }
+  function bygg(lan, str) {
+    var l = (lan.lan || []).filter(function (x) { return x.slug === lanSlug; })[0];
+    if (!l) { rulle.appendChild(post('Läget i alla län på halkvakt.se', 'dampad')); return; }
+    document.getElementById('lan').textContent = l.kort;
+    var t = new Date(lan.generated_at);
+    document.getElementById('tid').textContent = isNaN(t) ? '' : t.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Stockholm' });
+    var poster = [], kallt = l.halt > 0 || l.kalla > 0;
+    if (l.halt > 0) poster.push(post('vägavsnitt av ' + l.vagavsnitt + ' har halka just nu', 'halt', String(l.halt)));
+    else poster.push(post('Ingen halka rapporterad i ' + l.kort + ' just nu'));
+    var s = (str && str.lan || []).filter(function (x) { return x.slug === lanSlug; })[0];
+    if (s) {
+      var halka = [];
+      s.vagar.forEach(function (v) { v.strackor.forEach(function (k) { if (k.halt) halka.push([vag(v.vag), k.plats.replace(/ - /g, '–')]); }); });
+      // Vägar genom verkstadens egen ort först (&ort=Karlstad): det är dem kunderna kör hem på.
+      if (ort) halka.sort(function (a, b) { return (b[1].indexOf(ort) >= 0) - (a[1].indexOf(ort) >= 0); });
+      halka.slice(0, 6).forEach(function (h) { poster.push(post(h[1] + ': halka', 'halt', h[0])); });
+    }
+    if ((namn || lanktext) && poster.length > 3) poster.splice(3, 0, cta(kallt ? 'Kör du fortfarande på sommardäck?' : 'Inför vintern:'));
+    if (l.kalla > 0 && l.kallast) poster.push(post('på vägbanan vid ' + l.kallast.namn, '', minus(l.kallast.yta) + ' °C'));
+    if (l.kalla > 0) poster.push(post((l.kalla === 1 ? 'vägväderstation' : 'vägväderstationer') + ' visar vägbana under noll', '', String(l.kalla)));
+    if (l.olyckor > 0) poster.push(post(l.olyckor === 1 ? 'olycka eller hinder pågår' : 'olyckor eller hinder pågår', '', String(l.olyckor)));
+    if (namn || lanktext) poster.push(cta(kallt ? 'Kör du fortfarande på sommardäck?' : 'Inför vintern:'));
+    poster.push(post('Källa: Trafikverkets öppna data · Halkvakt', 'dampad'));
+    // Två varv i rad, så att rullningen går runt utan skarv.
+    [0, 1].forEach(function (n) { poster.forEach(function (p) { var c = p.cloneNode(true); if (n) c.setAttribute('aria-hidden', 'true'); rulle.appendChild(c); }); });
+    requestAnimationFrame(function () { rulle.style.setProperty('--tid', Math.max(20, rulle.scrollWidth / 2 / 45) + 's'); });   // cirka 45 px i sekunden
+  }
+  var json = function (u) { return fetch(u, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }); };
+  Promise.all([json('data/lan.json'), json('data/strackor.json').catch(function () { return null; })])
+    .then(function (d) { bygg(d[0], d[1]); })
+    .catch(function () { rulle.appendChild(post('Väglaget kunde inte hämtas just nu', 'dampad')); });
+})();
+</script>
+</body>
+</html>
