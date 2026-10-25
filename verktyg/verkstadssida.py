@@ -30,13 +30,13 @@ def main():
         if not v['lank'].startswith('https://'): sys.exit(f"{v['slug']}: lank måste börja med https://")
         if len(v['lanktext']) > 40: sys.exit(f"{v['slug']}: lanktext är längre än 40 tecken, rutan klipper den")
         strak = v.get('strak', '')
-        if strak and not re.search(r'\n\s*' + re.escape(strak) + r': \{ fran', ruta): sys.exit(f"{v['slug']}: stråket '{strak}' finns inte i STRAK i ruta.html")
+        if strak and not re.search(r'\n\s*' + re.escape(strak) + r': \{ (lan: [^,]+, )?fran', ruta): sys.exit(f"{v['slug']}: stråket '{strak}' finns inte i STRAK i ruta.html")
         for f in FORBJUDET:
             if any(f in str(v[k]) for k in FALT): sys.exit(f"{v['slug']}: förbjuden formulering '{f}'")
         kort = lanen[v['lan']]['kort']
         f = {
             'css': css, 'slug': v['slug'], 'namn': v['namn'], 'fullnamn': v['fullnamn'], 'genitiv': v['genitiv'],
-            'lan': v['lan'], 'lankort': kort, 'lank': v['lank'], 'lanktext': v['lanktext'], 'kommentar': v['kommentar'],
+            'lan': v['lan'], 'lankort': kort, 'lank': urllib.parse.quote(v['lank'], safe=':/'), 'lanktext': v['lanktext'], 'kommentar': v['kommentar'],
             'lank_visas': re.sub(r'^https://(www\.)?|/$', '', v['lank']),
             'namn_q': urllib.parse.quote(v['namn']), 'lanktext_q': urllib.parse.quote(v['lanktext']),
             'strak_param': '&amp;strak=' + strak if strak else '',
@@ -55,6 +55,7 @@ def main():
             'sms': ('En rad i sms:et till kunden', 'Skickar ni sms när kunden bokat eller kan hämta bilen? Lägg till den här raden.'),
             'bokning': ('En rad i bokningsbekräftelsen', 'Er bokning skickar en bekräftelse till kunden. Lägg till den här raden i texten.'),
             'mejl': ('En rad i mejlen till kunderna', 'Svarar ni kunderna på mejl? Lägg till den här raden i signaturen.'),
+            'paminnelse': ('En rad i påminnelsen inför säsongen', 'Ni påminner kunderna inför nästa säsong. Lägg till den här raden i påminnelsen.'),
         }[kk]
         ut = mall
         for k, val in f.items(): ut = ut.replace('{{' + k + '}}', val)

@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "type": "rich",
+  "title": "Nini Verkstad · Väglaget i Dalarna just nu",
+  "provider_name": "Halkvakt",
+  "provider_url": "https://halkvakt.se/",
+  "width": 480,
+  "height": 440,
+  "cache_age": 86400,
+  "thumbnail_url": "https://halkvakt.se/og.png",
+  "thumbnail_width": 1200,
+  "thumbnail_height": 630,
+  "html": "<iframe src=\"https://halkvakt.se/ruta/niniverkstad/\" width=\"480\" height=\"440\" style=\"border:0;width:100%;max-width:480px\" title=\"Väglaget i Dalarna just nu\" loading=\"lazy\"></iframe>"
+}

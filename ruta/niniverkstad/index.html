@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Nini Verkstad · Väglaget i Dalarna just nu</title>
+<!-- Byggd av verktyg/rutor.py, ändra där. Nini Verkstad:s egen adress till rutan (Axel 23/10): ett skal runt ruta.html med
+     tidningens inställningar, så rutan ändras på ett ställe. oEmbed och player-taggarna låter verktyg som bygger
+     inbäddningen själva ur länken hitta rätt storlek. -->
+<meta name="description" content="Väglaget i Dalarna just nu: länet, de stora vägarna och pendlarvägarna. Live ur Trafikverkets öppna data.">
+<link rel="canonical" href="https://halkvakt.se/ruta/niniverkstad/">
+<link rel="alternate" type="application/json+oembed" href="https://halkvakt.se/ruta/niniverkstad/oembed.json" title="Nini Verkstad · Väglaget i Dalarna just nu">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Halkvakt">
+<meta property="og:title" content="Nini Verkstad · Väglaget i Dalarna just nu">
+<meta property="og:description" content="Länet, de stora vägarna och pendlarvägarna. Live ur Trafikverkets öppna data.">
+<meta property="og:url" content="https://halkvakt.se/ruta/niniverkstad/">
+<meta property="og:image" content="https://halkvakt.se/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="player">
+<meta name="twitter:title" content="Nini Verkstad · Väglaget i Dalarna just nu">
+<meta name="twitter:image" content="https://halkvakt.se/og.png">
+<meta name="twitter:player" content="https://halkvakt.se/ruta/niniverkstad/">
+<meta name="twitter:player:width" content="480">
+<meta name="twitter:player:height" content="440">
+<link rel="icon" type="image/png" href="https://halkvakt.se/favicon.png">
+<style>
+  html, body { margin: 0; height: 100%; background: transparent; }
+  iframe { display: block; width: 100%; height: 100%; min-height: 440px; border: 0; }
+  /* Öppnas länken direkt i ett stort fönster visas rutan som i en artikel, 480 × 440. I en tidnings ram fyller den ramen. */
+  @media (min-width: 560px) and (min-height: 560px) {
+    body { display: grid; place-items: center; }
+    iframe { width: 480px; height: 440px; min-height: 0; border-radius: 16px; box-shadow: 0 20px 60px rgba(8, 11, 13, .18); }
+  }
+</style>
+</head>
+<body>
+<iframe id="ruta" src="https://halkvakt.se/ruta.html?v=6&amp;lan=dalarna&amp;strak=falun&amp;tema=ljus&amp;namn=Nini%20Verkstad&amp;lank=https://www.niniverkstad.se/kontakta-oss&amp;lanktext=Boka%20tid%20hos%20Nini%20Verkstad" title="Väglaget i Dalarna just nu" loading="eager"></iframe>
+<script>
+  // Tillval som går vidare till rutan: ?flik=lan|vagar|pendling, ?tema=auto|mork, ?sponsor=…, ?sponsorlank=…
+  (function () {
+    var in_ = new URLSearchParams(location.search), f = document.getElementById('ruta'), u = new URL(f.src);
+    ['flik', 'tema', 'sponsor', 'sponsorlank'].forEach(function (k) { var v = in_.get(k); if (v) u.searchParams.set(k, v); });
+    if (u.href !== f.src) f.src = u.href;
+  })();
+</script>
+<script src="/assets/ruta-besok.js" data-sida="/ruta/niniverkstad/"></script>
+</body>
+</html>
