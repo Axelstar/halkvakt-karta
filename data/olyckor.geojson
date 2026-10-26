@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[12.788072915,56.095720702]},"properties":{"land":"SE","typ":"Olycka","msg":"Singelolycka med lastbil på avfarten till trafikplats Kropp.\n","allvar":"Liten påverkan","road":"E6","start":"2026-10-26T03:53:00.000Z"}}]}
