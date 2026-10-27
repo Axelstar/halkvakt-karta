@@ -73,10 +73,11 @@
     </header>
 
     <div class="tal">
-      <div class="ruta"><span>I dag</span><b id="t-idag">–</b><small>sidvisningar</small></div>
-      <div class="ruta"><span>I går</span><b id="t-igar">–</b><small>sidvisningar</small></div>
-      <div class="ruta"><span>Senaste 7 dygnen</span><b id="t-sju">–</b><small>sidvisningar</small></div>
+      <div class="ruta"><span>I dag</span><b id="t-idag">–</b><small id="s-idag">sidvisningar</small></div>
+      <div class="ruta"><span>I går</span><b id="t-igar">–</b><small id="s-igar">sidvisningar</small></div>
+      <div class="ruta"><span>Senaste 7 dygnen</span><b id="t-sju">–</b><small id="s-sju">sidvisningar</small></div>
       <div class="ruta"><span id="t-perlabel">Besök in</span><b id="t-in">–</b><small>kom utifrån till sajten</small></div>
+      <div class="ruta"><span>Klick till appen</span><b id="t-app">–</b><small id="s-app">App Store och Play</small></div>
     </div>
 
     <div class="ruta">
@@ -91,6 +92,25 @@
       <div class="ruta"><h2>Mest lästa sidor</h2><table id="sidor"></table></div>
       <div class="ruta"><h2>Tid på dygnet</h2><div class="stapel" id="timmar" style="height:110px"></div><div class="axel"><span>00</span><span>06</span><span>12</span><span>18</span><span>23</span></div></div>
       <div class="ruta"><h2>Mobil eller dator</h2><table id="enheter"></table></div>
+    </div>
+
+    <div class="grid">
+      <div class="ruta"><h2>Klick till appen, varifrån</h2><table id="appkallor"></table>
+        <p class="forklaring">Källan är var besökaren kom in till sajten samma dygn. <span id="appmal"></span></p></div>
+      <div class="ruta"><h2>Klick till appen, från vilken sida</h2><table id="appsidor"></table></div>
+    </div>
+
+    <div class="ruta" style="margin-top:10px">
+      <h2>Flitigaste besökarna</h2>
+      <p class="forklaring" style="margin-top:0">En besökare är samma webbläsare samma dygn. Id:t är en hash som byts varje natt och inte går att följa bakåt eller koppla till en IP. Många visningar på dator mitt på dagen, rakt in utan källa, är ofta någon av oss som inte markerat enheten.</p>
+      <table id="tyngsta" class="lankar"></table>
+    </div>
+
+    <div class="ruta" style="margin-top:10px">
+      <h2>Den här enheten</h2>
+      <p class="forklaring" style="margin-top:0" id="oss-status"></p>
+      <p class="forklaring">På en annan telefon eller dator: öppna <code style="font:12px var(--mono)">https://halkvakt.se/?oss=1</code> en gång i den webbläsaren.</p>
+      <button type="button" id="oss-knapp" style="margin-top:6px;padding:8px 12px;background:var(--panel);color:var(--text);border:1px solid var(--kant);border-radius:8px;font:12px var(--mono);cursor:pointer"></button>
     </div>
 
     <div class="ruta" style="margin-top:10px">
@@ -135,7 +155,20 @@
   }
 
   function rita(d) {
-    $("genererad").textContent = "Uppdaterad " + new Date(d.genererad).toLocaleString("sv-SE", { dateStyle: "short", timeStyle: "short" }) + " · ingen IP, inga kakor";
+    $("genererad").textContent = "Uppdaterad " + new Date(d.genererad).toLocaleString("sv-SE", { dateStyle: "short", timeStyle: "short" }) + " · ingen IP sparas, inga kakor" + (d.oss ? " · " + fmt(d.oss) + " visningar från oss borträknade" : "");
+    var bes = function (n) { return n ? "sidvisningar · " + fmt(n) + " besökare" : "sidvisningar"; };
+    $("s-idag").textContent = bes(d.besokare_idag); $("s-igar").textContent = bes(d.besokare_igar); $("s-sju").textContent = bes(d.besokare_sju);
+    $("t-app").textContent = fmt(d.appklick || 0);
+    var mal = d.appklick_mal || {};
+    $("s-app").textContent = "App Store " + fmt(mal.ios || 0) + " · Play " + fmt(mal.android || 0);
+    $("appmal").textContent = "Räknas från 28 okt 2026.";
+    lista($("appkallor"), d.appklick_kallor || [], function (r) { return r.kalla; });
+    lista($("appsidor"), d.appklick_sidor || [], function (r) { return r.sida; });
+    var ty = d.tyngsta || [];
+    $("tyngsta").innerHTML = ty.length ? ty.map(function (r) {
+      return '<tr><td class="namn"><b>' + esc(r.dag.slice(5)) + " · " + esc(r.id) + '</b><br><span class="meta">' + esc(r.forst) + "–" + esc(r.sist) + " · " +
+        esc(r.enhet) + " · " + esc(r.kalla) + " · " + fmt(r.sidor) + (r.sidor === 1 ? " sida" : " sidor") + '</span></td><td class="n">' + fmt(r.visningar) + "</td></tr>";
+    }).join("") : '<tr><td class="tom">Räknas från 28 okt 2026.</td></tr>';
     $("t-idag").textContent = fmt(d.idag); $("t-igar").textContent = fmt(d.igar); $("t-sju").textContent = fmt(d.sju);
     $("t-in").textContent = fmt(d.ingangar); $("t-perlabel").textContent = "Besök in, " + dagar + " dygn";
 
@@ -204,9 +237,20 @@
   });
   $("las").addEventListener("submit", function (e) {
     e.preventDefault(); nyckel = $("nyckel").value.trim();
-    try { localStorage.setItem("hv-besok", nyckel); } catch (x) {}
-    ladda();
+    try { localStorage.setItem("hv-besok", nyckel); localStorage.setItem("hv-oss", "1"); } catch (x) {}
+    visaOss(); ladda();
   });
+  // Den här enheten: markerad som vår räknas inte i siffrorna (se assets/besok.js).
+  function visaOss() {
+    var ar = false; try { ar = localStorage.getItem("hv-oss") === "1"; } catch (e) {}
+    $("oss-status").textContent = ar ? "Den här webbläsaren är markerad som vår. Våra visningar och klick räknas inte." : "Den här webbläsaren räknas som en vanlig besökare.";
+    $("oss-knapp").textContent = ar ? "Räkna den här enheten igen" : "Markera den här enheten som vår";
+  }
+  $("oss-knapp").addEventListener("click", function () {
+    try { if (localStorage.getItem("hv-oss") === "1") localStorage.removeItem("hv-oss"); else localStorage.setItem("hv-oss", "1"); } catch (e) {}
+    visaOss();
+  });
+  visaOss();
   nyckel = hamtaNyckel();
   if (nyckel) ladda(); else $("las").hidden = false;
 })();

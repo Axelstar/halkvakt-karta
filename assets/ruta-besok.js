@@ -22,7 +22,9 @@
       kod = (new URLSearchParams(location.search).get("namn") || "halkvakt").slice(0, 40);
     }
     var r = !inramad ? "" : egen ? "(intern)" : (vard || "(inbaddad)");
-    var d = JSON.stringify({ p: sida, r: r, k: kod, m: /Mobi|Android|iPhone/i.test(navigator.userAgent) ? "m" : "d" });
+    var o = { p: sida, r: r, k: kod, m: /Mobi|Android|iPhone/i.test(navigator.userAgent) ? "m" : "d" };
+    try { if (localStorage.getItem("hv-oss") === "1") o.o = 1; } catch (e) {}   // våra egna enheter (se besok.js)
+    var d = JSON.stringify(o);
     var url = "https://xmpfztykhyvhmrzsnjrc.supabase.co/functions/v1/besok";
     if (!(navigator.sendBeacon && navigator.sendBeacon(url, d))) {
       fetch(url, { method: "POST", body: d, keepalive: true, mode: "no-cors" });
