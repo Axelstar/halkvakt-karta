@@ -147,3 +147,14 @@ p { margin: 0; }
   font: 400 24px/1 var(--sans); cursor: pointer; }
 .visare .stang:hover { border-color: var(--gul); }
 .visare-rad { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; font-size: 14px; color: var(--text2); }
+
+/* Fot: alla 21 län som vanliga länkar (27/10), för besökaren och för sökmotorerna */
+.fot .lanrad { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 22px; padding-top: 18px; border-top: 1px dashed var(--skilje);
+  grid-template-columns: none; }
+.fot .lanrad span { font: 500 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dampad2); }
+.fot .lanrad a { font-size: 13px; color: var(--dampad); text-decoration: none; }
+.fot .lanrad a:hover { color: var(--text); }
+.meny a[aria-current="page"] { color: var(--text); box-shadow: inset 0 -2px 0 var(--gul); }
+.fot .wrap { grid-template-columns: auto minmax(0, 1fr); }
+.fot nav[aria-label="Sidfot"] { grid-column: 1 / -1; }
+.fot .lanrad a { font: 400 13px var(--sans); letter-spacing: 0; text-transform: none; }
