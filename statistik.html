@@ -100,6 +100,20 @@
       <div class="ruta"><h2>Klick till appen, från vilken sida</h2><table id="appsidor"></table></div>
     </div>
 
+    <div class="ruta" style="margin-top:10px" id="aa">
+      <h2>Apple Ads</h2>
+      <p class="forklaring" style="margin-top:0" id="aa-meta"></p>
+      <table id="aa-tal" class="lankar"></table>
+      <div class="stapel" id="aa-dagar" style="height:90px;margin-top:10px"></div>
+      <div class="axel"><span id="aa-fran"></span><span id="aa-till"></span></div>
+      <div class="forklaring"><em style="background:var(--gul)"></em>installationer &nbsp; <em style="background:var(--gul2)"></em>visningar (skala för sig)</div>
+    </div>
+    <div class="grid">
+      <div class="ruta"><h2>Apple Ads, per nyckelord</h2><table id="aa-ord" class="lankar"></table></div>
+      <div class="ruta"><h2>Apple Ads, vad folk sökte på</h2><table id="aa-sok" class="lankar"></table>
+        <p class="forklaring">Söktermer med låg volym redovisar Apple inte ord för ord.</p></div>
+    </div>
+
     <div class="ruta" style="margin-top:10px">
       <h2>Flitigaste besökarna</h2>
       <p class="forklaring" style="margin-top:0">En besökare är samma webbläsare samma dygn. Id:t är en hash som byts varje natt och inte går att följa bakåt eller koppla till en IP. Många visningar på dator mitt på dagen, rakt in utan källa, är ofta någon av oss som inte markerat enheten.</p>
@@ -209,6 +223,8 @@
 
     // Rutorna hos tidningarna (Axel 23/10): per tidning, inbäddad hos dem respektive öppnad direkt.
     var rutor = d.rutor || [];
+    ritaAds(d.apple_ads);
+
     $("rutor").innerHTML = rutor.length ? rutor.map(function (r) {
       var sajter = (r.sajter || []).filter(function (x) { return x !== "(inbaddad)"; });
       var under = r.inbaddad
@@ -217,6 +233,36 @@
       return '<tr><td class="namn"><b>' + esc(r.tidning) + '</b><br><span class="meta">' + under + "</span></td>" +
         '<td class="n">' + (r.inbaddad ? fmt(r.inbaddad) : '<span class="meta">–</span>') + "</td></tr>";
     }).join("") : '<tr><td class="tom">Ingen ruta har visats än.</td></tr>';
+  }
+
+  // Apple Ads (DECISIONS #748 i appens repo): sökordsrapporten varje dygn ur Apples API, via besok_stat.apple_ads.
+  function ritaAds(a) {
+    if (!a || !a.period) { $("aa-meta").textContent = "Inga Apple Ads-siffror än."; return; }
+    var eur = function (n) { return Number(n).toLocaleString("sv-SE", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " " + (a.valuta || ""); };
+    $("aa-meta").textContent = "Ur Apples egen rapport" + (a.hamtad ? ", hämtad " + new Date(a.hamtad).toLocaleString("sv-SE", { dateStyle: "short", timeStyle: "short" }) : "") + ". Apple räknar i sin tidszon och kan justera de senaste dygnen.";
+    var rad = function (namn, p) {
+      return '<tr><td class="namn"><b>' + namn + '</b><br><span class="meta">' + fmt(p.visningar) + " visningar · " + fmt(p.tryck) + " tryck · " + eur(p.kostnad) +
+        (p.installationer ? " · " + eur(p.kostnad / p.installationer) + " per installation" : "") + '</span></td><td class="n">' + fmt(p.installationer) + '<br><span class="meta">inst.</span></td></tr>';
+    };
+    $("aa-tal").innerHTML = rad(dagar + " dygn", a.period) + rad("Senaste 7 dygnen", a.sju);
+    var per = {}; (a.per_dag || []).forEach(function (r) { per[r.dag] = r; });
+    var serie = [], idag = new Date(); idag.setHours(12, 0, 0, 0);
+    for (var i = dagar - 1; i >= 0; i--) { var t = new Date(idag); t.setDate(t.getDate() - i); var k = t.toLocaleDateString("sv-SE"); serie.push({ dag: k, r: per[k] || { visningar: 0, installationer: 0, tryck: 0, kostnad: 0 } }); }
+    var vmax = Math.max(1, Math.max.apply(null, serie.map(function (s) { return s.r.visningar; })));
+    var imax = Math.max(1, Math.max.apply(null, serie.map(function (s) { return s.r.installationer; })));
+    $("aa-dagar").innerHTML = serie.map(function (s) {
+      return '<div title="' + s.dag + ": " + s.r.visningar + " visningar, " + s.r.tryck + " tryck, " + s.r.installationer + " installationer, " + eur(s.r.kostnad) + '"><i class="b" style="height:' + (100 * s.r.visningar / vmax) + '%"></i><i style="height:' + (100 * s.r.installationer / imax) + '%"></i></div>';
+    }).join("");
+    $("aa-fran").textContent = serie[0].dag; $("aa-till").textContent = serie[serie.length - 1].dag;
+    var ord = a.nyckelord || [];
+    $("aa-ord").innerHTML = ord.length ? ord.slice(0, 15).map(function (r) {
+      return '<tr><td class="namn"><b>' + esc(r.nyckelord || "Search Match") + '</b> <span class="meta">' + esc(r.annonsgrupp) + '</span><br><span class="meta">' + fmt(r.visningar) + " visn. · " + fmt(r.tryck) + " tryck · " + eur(r.kostnad) +
+        " · 7 dygn: " + fmt(r.sju_visningar || 0) + " visn., " + fmt(r.sju_installationer || 0) + ' inst.</span></td><td class="n">' + fmt(r.installationer) + "</td></tr>";
+    }).join("") : '<tr><td class="tom">Inget ännu.</td></tr>';
+    var sok = a.soktermer || [];
+    $("aa-sok").innerHTML = sok.length ? sok.slice(0, 15).map(function (r) {
+      return '<tr><td class="namn"><b>' + esc(r.sokterm) + '</b><br><span class="meta">' + esc(r.nyckelord || "Search Match") + " · " + fmt(r.tryck) + " tryck · " + fmt(r.installationer) + ' inst.</span></td><td class="n">' + fmt(r.visningar) + "</td></tr>";
+    }).join("") : '<tr><td class="tom">Inget ännu.</td></tr>';
   }
 
   function ladda() {
