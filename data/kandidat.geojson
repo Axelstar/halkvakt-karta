@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"LineString","coordinates":[[19.76297,68.19792],[19.75795,68.20139],[19.75388,68.20683],[19.7507,68.20968],[19.74306,68.21407]]},"properties":{"segment_id":"10020","punkter":1,"km":2,"tid":"2026-10-29T13:00:00.000Z"}}]}
