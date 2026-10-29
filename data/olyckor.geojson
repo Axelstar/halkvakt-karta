@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[13.158868878,55.54178779]},"properties":{"land":"SE","typ":"Olycka","msg":"Singelolycka mellan trafikplatserna Oxie och Svedala V. ","allvar":"Stor påverkan","road":"E65","start":"2026-10-29T20:08:00.000Z"}}]}
