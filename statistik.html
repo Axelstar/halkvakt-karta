@@ -88,6 +88,7 @@
     </div>
 
     <div class="grid">
+      <div class="ruta"><h2>Kanaler</h2><table id="kanaler"></table><p class="forklaring">AI-sök räknas för sig: ChatGPT, Perplexity, Gemini, Copilot, Claude och liknande.</p></div>
       <div class="ruta"><h2>Varifrån de kom</h2><table id="kallor"></table></div>
       <div class="ruta"><h2>Mest lästa sidor</h2><table id="sidor"></table></div>
       <div class="ruta"><h2>Tid på dygnet</h2><div class="stapel" id="timmar" style="height:110px"></div><div class="axel"><span>00</span><span>06</span><span>12</span><span>18</span><span>23</span></div></div>
@@ -205,6 +206,18 @@
     var tim = ""; for (var j = 0; j < 24; j++) { var v = h[j] || 0; tim += '<div title="' + (j < 10 ? "0" : "") + j + ":00: " + v + '"><i style="height:' + (100 * v / hmax) + '%"></i></div>'; }
     $("timmar").innerHTML = tim;
 
+    // Kanaler (30/10): källorna i grupper, så att AI-sök syns för sig och inte drunknar bland Google och Bing.
+    var KANAL = [["AI-sök", /chatgpt|openai|perplexity|gemini\.google|bard\.google|copilot|claude\.ai|you\.com|phind|meta\.ai|grok|x\.ai|mistral|kagi/i],
+      ["Mejl", /mail|outlook|zoho/i],
+      ["Sökmotorer", /(^|\.)(google|bing|duckduckgo|ecosia|yahoo|yandex|startpage|qwant|brave)\./i],
+      ["Sociala medier", /facebook|instagram|threads|bsky|bluesky|twitter|(^|\.)x\.com|t\.co$|linkedin|reddit|flashback/i]];
+    var kan = {};
+    d.kallor.forEach(function (r) {
+      var k = (KANAL.filter(function (x) { return x[1].test(r.kalla); })[0] || [/direkt|okänd/i.test(r.kalla) ? "Direkt / okänd" : "Andra sajter"])[0];
+      kan[k] = (kan[k] || 0) + r.visningar;
+    });
+    if (!kan["AI-sök"]) kan["AI-sök"] = 0;
+    lista($("kanaler"), Object.keys(kan).map(function (k) { return { namn: k, visningar: kan[k] }; }).sort(function (a, b) { return b.visningar - a.visningar; }), function (r) { return r.namn; });
     lista($("kallor"), d.kallor, function (r) { return r.kalla; });
     lista($("sidor"), d.sidor, function (r) { return r.sida; });
     lista($("enheter"), Object.keys(d.enheter).map(function (k) { return { namn: k, visningar: d.enheter[k] }; }).sort(function (a, b) { return b.visningar - a.visningar; }), function (r) { return r.namn === "mobil" ? "Mobil" : "Dator"; });
