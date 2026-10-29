@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[25.597286945,60.893595146]},"properties":{"land":"FI","typ":"Olycka","msg":"Tie 4, Lahti, Orimattila. Ensitiedote liikenneonnettomuudesta.  · Onnettomuus","allvar":null,"road":null,"start":"2026-10-29T04:20:00.000Z"}}]}
