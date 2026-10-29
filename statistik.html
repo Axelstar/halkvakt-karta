@@ -101,6 +101,12 @@
     </div>
 
     <div class="ruta" style="margin-top:10px">
+      <h2>Appen på iPhone</h2>
+      <p class="forklaring" style="margin-top:0" id="app-forklaring">Anonym statistik från App Store-versionen, antal per dag (DECISIONS #746). En telefon skickar en rad per avslutat dygn, så telefondygn är ungefär antalet telefoner som användes per dag, summerat.</p>
+      <table id="appbruk" class="lankar"></table>
+    </div>
+
+    <div class="ruta" style="margin-top:10px">
       <h2>Flitigaste besökarna</h2>
       <p class="forklaring" style="margin-top:0">En besökare är samma webbläsare samma dygn. Id:t är en hash som byts varje natt och inte går att följa bakåt eller koppla till en IP. Många visningar på dator mitt på dagen, rakt in utan källa, är ofta någon av oss som inte markerat enheten.</p>
       <table id="tyngsta" class="lankar"></table>
@@ -219,7 +225,34 @@
     }).join("") : '<tr><td class="tom">Ingen ruta har visats än.</td></tr>';
   }
 
+  // Appstatistiken (DECISIONS #746): samma nyckel, egen funktion. Saknas den ännu står panelen med en rad om det.
+  var APPNAMN = { oppnad: "Öppnad", vakt_hand: "Start: för hand", vakt_siri: "Start: Siri eller genväg",
+    vakt_sjalv: "Start: av sig själv", resa: "Resor", varning_halka: "Varningar: halka", varning_frysrisk: "Varningar: frysrisk",
+    varning_olycka: "Varningar: olycka", varning_vilt: "Varningar: vilt", varning_kamera: "Varningar: fartkamera",
+    varning_kandidat: "Varningar: halka (beta)" };
+  var APPLAGE = { lage_alltid: "Platsen Alltid", lage_sjalvstart: "Självstarten på", lage_intro_klar: "Introduktionen klar",
+    av_halka: "Halka avslagen", av_frysrisk: "Frysrisk avslagen", av_olycka: "Olyckor avslagna", av_vilt: "Vilt avslaget", av_kamera: "Fartkameror avslagna" };
+  function ritaApp(a) {
+    if (!a || !a.telefondygn) { $("appbruk").innerHTML = '<tr><td class="tom">Inga dagar än.</td></tr>'; return; }
+    var rad = function (namn, n, sub) {
+      return '<tr><td class="namn"><b>' + esc(namn) + "</b>" + (sub ? '<br><span class="meta">' + esc(sub) + "</span>" : "") + '</td><td class="n">' + fmt(n) + "</td></tr>";
+    };
+    var ut = [rad("Telefondygn", a.telefondygn, Object.keys(a.versioner || {}).map(function (v) { return v + ": " + a.versioner[v]; }).join(" · "))];
+    Object.keys(APPNAMN).forEach(function (k) { if (a.summa[k]) ut.push(rad(APPNAMN[k], a.summa[k])); });
+    Object.keys(APPLAGE).forEach(function (k) {
+      if (a.telefoner_med[k]) ut.push(rad(APPLAGE[k], a.telefoner_med[k], Math.round(100 * a.telefoner_med[k] / a.telefondygn) + " % av telefondygnen"));
+    });
+    $("appbruk").innerHTML = ut.join("");
+  }
+  function laddaApp() {
+    fetch("https://xmpfztykhyvhmrzsnjrc.supabase.co/functions/v1/appbruk?dagar=" + dagar + "&nyckel=" + encodeURIComponent(nyckel), { cache: "no-store" })
+      .then(function (r) { if (!r.ok) throw new Error(String(r.status)); return r.json(); })
+      .then(ritaApp)
+      .catch(function () { $("appbruk").innerHTML = '<tr><td class="tom">Appstatistiken är inte igång än.</td></tr>'; });
+  }
+
   function ladda() {
+    laddaApp();
     fetch(API + "?dagar=" + dagar + "&nyckel=" + encodeURIComponent(nyckel), { cache: "no-store" })
       .then(function (r) { if (r.status === 401) throw new Error("nyckel"); return r.json(); })
       .then(function (d) { $("las").hidden = true; $("sida").hidden = false; rita(d); })
