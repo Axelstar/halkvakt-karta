@@ -14,6 +14,8 @@
 <meta name="apple-itunes-app" content="app-id=6806939784">
 <link rel="stylesheet" href="assets/fonts/fonts.css">
 <link rel="stylesheet" href="assets/hv.css?v=20261027">
+<!-- Inbäddat läge (?lan=<slug>&inbaddad=1, 31/10): länssidan öppnar samma karta på plats, utan topp och panel, låst till länet. -->
+<script>if (new URLSearchParams(location.search).get('inbaddad') === '1') document.documentElement.classList.add('inbaddad');</script>
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
 <style>
@@ -107,6 +109,19 @@
   .pop h3 { font: 600 11px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--dampad); margin-bottom: 6px; }
   .pop b { font-family: var(--mono); font-weight: 600; }
   .pop .k { color: var(--dampad); font-size: 13px; }
+  /* Inbäddat läge: bara kartan och lagerknapparna. Länssidan står för rubriken och texten runt omkring.
+     Källorna ligger bakom ⓘ, som på mobilen. Kartan tonar fram först när den står på länet. */
+  html.inbaddad .topp, html.inbaddad .rad, html.inbaddad .kalla-rad { display: none; }
+  html.inbaddad #map { opacity: 0; transition: opacity .25s; }
+  html.inbaddad.klar #map { opacity: 1; }
+  html.inbaddad .lager { left: 0; right: 0; bottom: 10px; padding: 0 10px; flex-wrap: nowrap; overflow-x: auto; pointer-events: auto;
+    scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent); }
+  html.inbaddad .lager::-webkit-scrollbar { display: none; }
+  html.inbaddad .lager::after { content: ""; flex: none; width: 16px; }
+  html.inbaddad .chip { flex: none; min-height: 36px; padding: 6px 12px; }
+  html.inbaddad .notis { bottom: 56px; }
+  html.inbaddad .maplibregl-ctrl-bottom-right { bottom: 54px; }
+  html.inbaddad .maplibregl-ctrl-top-right { top: 0; }
 </style>
 </head>
 <body>
@@ -164,20 +179,32 @@ for (const [slug, [, namn]] of Object.entries(LAN).sort((a, b) => a[1][1].locale
   const o = document.createElement('option'); o.value = slug; o.textContent = namn; $('#lanval').appendChild(o);
 }
 $('#lanval').value = lanVal ? lanVal.slug : '';
+const INBADDAD = document.documentElement.classList.contains('inbaddad');
+// Inbäddad i en sida som skrollar: ett finger skrollar sidan, två fingrar (eller Ctrl/⌘ och hjulet) flyttar kartan.
 const map = new maplibregl.Map({
   container: 'map', style: 'https://tiles.openfreemap.org/styles/dark',
-  center: [16.3, 62.6], zoom: 4.4, minZoom: 2.8, attributionControl: false
+  center: [16.3, 62.6], zoom: 4.4, minZoom: 2.8, attributionControl: false,
+  cooperativeGestures: INBADDAD,
+  locale: {
+    'CooperativeGesturesHandler.WindowsHelpText': 'Håll in Ctrl och skrolla för att zooma',
+    'CooperativeGesturesHandler.MacHelpText': 'Håll in ⌘ och skrolla för att zooma',
+    'CooperativeGesturesHandler.MobileHelpText': 'Använd två fingrar för att flytta kartan'
+  }
 });
 map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
 // Källraden längst ner får inte plats på mobilen. Där ligger källorna bakom kartans ⓘ i stället, så att licenserna (CC BY, ODbL) alltid syns.
-if (matchMedia('(max-width: 640px)').matches) {
+// Samma sak i inbäddat läge, där källraden är dold.
+if (INBADDAD || matchMedia('(max-width: 640px)').matches) {
   map.addControl(new maplibregl.AttributionControl({ compact: true, customAttribution: document.querySelector('.kalla-rad').innerHTML }), 'top-right');
 }
 map.addControl(new maplibregl.GeolocateControl({ trackUserLocation: false }), 'bottom-right');
+// Visa kartan ändå om datan dröjer, så att rutan på länssidan aldrig blir tom.
+if (INBADDAD) setTimeout(() => document.documentElement.classList.add('klar'), 4000);
 // Kartans fria yta: det som inte ligger under panelen, lagerknapparna eller toppen. Räknas om vid varje inzoomning.
 function kanter() {
   const st = document.querySelector('.status').getBoundingClientRect(), la = document.querySelector('.lager').getBoundingClientRect();
   const nere = Math.max(24, Math.round(innerHeight - la.top) + 16);
+  if (INBADDAD) return { top: 20, bottom: nere, left: 20, right: 20 };
   if (innerWidth > 900) return { top: Math.round(st.top) + 8, bottom: nere, left: Math.round(st.right) + 32, right: 64 };
   return { top: Math.round(st.bottom) + 16, bottom: nere, left: 20, right: 20 };
 }
@@ -238,7 +265,7 @@ map.on('load', async () => {
   const visaLan = (val, flyg) => {
     lanVal = val;
     $('#lanval').value = val ? val.slug : '';
-    history.replaceState(null, '', val ? `karta.html?lan=${val.slug}` : 'karta.html');
+    if (!INBADDAD) history.replaceState(null, '', val ? `karta.html?lan=${val.slug}` : 'karta.html');
     map.setFilter('lan-kant', ['==', ['get', 'slug'], val ? val.slug : '']);
     map.setPaintProperty('lan-fyll', 'fill-opacity', val ? ['case', ['==', ['get', 'slug'], val.slug], 0.07, 0.02] : 0.02);
     const fit = { padding: kanter(), maxZoom: 9, duration: flyg ? 900 : 0 };
@@ -246,6 +273,12 @@ map.on('load', async () => {
       const omr = d.lan.features.find(f => f.properties.slug === val.slug);
       const segs = d.vaglag.features.filter(f => f.properties.lan === val.kod);
       if (omr) map.fitBounds(granser(omr), fit);
+      // Inbäddat: kartan stannar vid länet. Man kan dra och zooma, men inte längre bort än en halv vy utanför det man ser från början.
+      // Räknat på vyn, inte på länet, så att låset aldrig tvingar kartan närmare än länet får plats.
+      if (omr && INBADDAD) {
+        const b = map.getBounds(), dx = (b.getEast() - b.getWest()) * .5, dy = (b.getNorth() - b.getSouth()) * .5;
+        map.setMaxBounds([[b.getWest() - dx, b.getSouth() - dy], [b.getEast() + dx, b.getNorth() + dy]]);
+      }
       const hala = segs.filter(f => f.properties.code > 1).length;
       $('#rubrik').textContent = `Väglaget i ${val.namn} just nu`;
       $('#rader').innerHTML = `${esc(halkMening(hala, segs.length, 'länets'))} <a href="lan/${val.slug}/">Läget i ${esc(val.namn)}</a>`;
@@ -297,6 +330,7 @@ map.on('load', async () => {
     dl.hidden = !rader.length; $('#mer').hidden = !rader.length;
   }
   visaLan(lanVal, false);
+  document.documentElement.classList.add('klar');
   const panelHojd = () => document.documentElement.style.setProperty('--panelhojd', Math.round(document.querySelector('.status').getBoundingClientRect().height + 8) + 'px');
   panelHojd(); new ResizeObserver(panelHojd).observe(document.querySelector('.status'));
   // ⓘ börjar stängd så att källorna inte täcker kartan; ett tryck öppnar dem.
@@ -333,7 +367,7 @@ map.on('load', async () => {
       <div class="k">Vägytan beräknad${p.tid ? ' för kl. ' + fmtTid(p.tid) : ''} ur MET Nordic och vägväderstationerna runt omkring.</div>`); });
   map.on('click', 'kameror', e => { const p = e.features[0].properties;
     pop(e, `<h3>Fartkamera</h3><div>${esc(p.name)}</div><div class="k">${esc(p.road ?? '')}</div>`); });
-  map.on('click', 'lan-fyll', e => { if (under(e, ['vaglag', 'kandidat', 'vader', 'vader-ovr', 'olyckor', 'kameror'])) return;
+  map.on('click', 'lan-fyll', e => { if (INBADDAD || under(e, ['vaglag', 'kandidat', 'vader', 'vader-ovr', 'olyckor', 'kameror'])) return;
     const slug = e.features[0].properties.slug; if (!lanVal || lanVal.slug !== slug) visaLan(lanAv(slug), true); });
   for (const l of ['vader', 'vader-ovr', 'vaglag', 'kandidat', 'olyckor', 'kameror']) {
     map.on('mouseenter', l, () => map.getCanvas().style.cursor = 'pointer');
@@ -357,6 +391,7 @@ document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () =
   lagerAv(c.dataset.layer).forEach(l => map.setLayoutProperty(l, 'visibility', pa ? 'visible' : 'none'));
 }));
 </script>
-<script src="/assets/besok.js" defer></script>
+<!-- Inbäddat räknas inte: besöket räknas redan på länssidan. -->
+<script>if (!INBADDAD) { const s = document.createElement('script'); s.src = '/assets/besok.js'; s.defer = true; document.body.appendChild(s); }</script>
 </body>
 </html>
