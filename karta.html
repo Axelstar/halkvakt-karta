@@ -140,7 +140,7 @@
   <button class="chip" data-layer="olyckor" aria-pressed="true"><i style="background:#FFC94A;box-shadow:0 0 0 2px #080B0D,0 0 0 3px #FFC94A"></i>Olyckor</button>
   <button class="chip" data-layer="vader" aria-pressed="true"><i style="background:#E9EFF2"></i>Vägväder</button>
   <button class="chip" data-layer="kameror" aria-pressed="false"><i style="background:#6F7C83"></i>Fartkameror</button>
-  <button class="chip" data-layer="kandidat" aria-pressed="false" title="Modellerat, inte uppmätt — beta till mars"><i class="linje" style="background:repeating-linear-gradient(90deg,#FF8F6B 0 4px,transparent 4px 7px)"></i>Halkvakt tror · beta</button>
+  <button class="chip" data-layer="kandidat" aria-pressed="false" title="Halka framöver enligt Halkvakts prognos. Modellerat, inte uppmätt."><i class="linje" style="background:repeating-linear-gradient(90deg,#FF8F6B 0 4px,transparent 4px 7px)"></i>Prognos</button>
 </div>
 <p class="notis" id="notis" role="status" hidden></p>
 <p class="kalla-rad">Data: <a href="https://www.trafikverket.se" rel="noopener">Trafikverket</a> (CC0) · <a href="https://www.digitraffic.fi" rel="noopener">Fintraffic</a> (CC BY 4.0) · <a href="https://www.met.no" rel="noopener">MET Norway</a> (CC BY 4.0) · <a href="https://www.dmi.dk/friedata" rel="noopener">DMI</a> (<a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>) · Karta: <a href="https://openfreemap.org" rel="noopener">OpenFreeMap</a> © OpenStreetMap · Länsgränser: Natural Earth</p>
@@ -204,7 +204,7 @@ map.on('load', async () => {
     paint: { 'line-width': ['case', ['>', ['get', 'code'], 1], 4, 1.2],
              'line-color': ['case', ['>', ['get', 'code'], 1], '#FFC94A', '#4A5A63'],
              'line-opacity': ['case', ['>', ['get', 'code'], 1], .95, .55] } }, forstaText());
-  // Halkvakt tror · beta (DECISIONS #579): kandidatens bitar av vägen — modellerat, inte uppmätt. Avslaget från början, och tomt när
+  // Prognos (DECISIONS #579; hette "Halkvakt tror · beta" till 31/10): kandidatens bitar av vägen — modellerat, inte uppmätt. Avslaget från början, och tomt när
   // brytaren är av (#578). Streckat så att det inte förväxlas med Trafikverkets rapporterade halka under.
   map.addSource('kandidat', { type: 'geojson', data: d.kandidat });
   map.addLayer({ id: 'kandidat', type: 'line', source: 'kandidat', layout: { visibility: 'none', 'line-cap': 'round' },
@@ -310,7 +310,7 @@ map.on('load', async () => {
   // Brytaren (#578): avstängd kandidat ⇒ knappen säger det och går inte att slå på.
   if (m && m.kandidat && m.kandidat.pa === false) {
     const c = document.querySelector('.chip[data-layer="kandidat"]');
-    c.lastChild.textContent = 'Halkvakt tror · avstängd'; c.setAttribute('aria-disabled', 'true'); c.title = 'Avstängd just nu';
+    c.lastChild.textContent = 'Prognos · avstängd'; c.setAttribute('aria-disabled', 'true'); c.title = 'Avstängd just nu';
   }
 
   const pop = (e, html) => new maplibregl.Popup({ closeButton: false }).setLngLat(e.lngLat).setHTML(`<div class="pop">${html}</div>`).addTo(map);
@@ -329,8 +329,8 @@ map.on('load', async () => {
   map.on('click', 'olyckor', e => { const p = e.features[0].properties;
     pop(e, `<h3>${esc(p.typ)}${p.road ? ' · ' + esc(p.road) : ''}</h3><div>${esc(p.msg)}</div><div class="k">${esc(p.allvar ?? '')}</div>`); });
   map.on('click', 'kandidat', e => { if (under(e, ['vader', 'vader-ovr', 'olyckor', 'kameror'])) return; const p = e.features[0].properties;
-    pop(e, `<h3>Halkvakt tror · beta</h3><div><b>Halka framöver</b> — modellerat, inte uppmätt</div>
-      <div class="k">Vägytan beräknad${p.tid ? ' för kl. ' + fmtTid(p.tid) : ''} ur MET Nordic och vägväderstationerna runt omkring. Prövas mot verkligheten till mars.</div>`); });
+    pop(e, `<h3>Prognos</h3><div><b>Halka framöver</b></div><div>Modellerat, inte uppmätt</div>
+      <div class="k">Vägytan beräknad${p.tid ? ' för kl. ' + fmtTid(p.tid) : ''} ur MET Nordic och vägväderstationerna runt omkring.</div>`); });
   map.on('click', 'kameror', e => { const p = e.features[0].properties;
     pop(e, `<h3>Fartkamera</h3><div>${esc(p.name)}</div><div class="k">${esc(p.road ?? '')}</div>`); });
   map.on('click', 'lan-fyll', e => { if (under(e, ['vaglag', 'kandidat', 'vader', 'vader-ovr', 'olyckor', 'kameror'])) return;
@@ -349,7 +349,7 @@ function notis(rubrik, text) {
 document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {
   // Avstängt lager (brytaren, #578): knappen går att trycka på men säger bara varför inget visas.
   if (c.getAttribute('aria-disabled') === 'true') {
-    notis('Halkvakt tror · avstängd', 'Modellen är avstängd just nu, så ingen beräknad halka visas. Trafikverkets rapporterade halka syns som vanligt.');
+    notis('Prognos · avstängd', 'Prognosen är avstängd just nu, så ingen beräknad halka visas. Trafikverkets rapporterade halka syns som vanligt.');
     return;
   }
   const pa = c.getAttribute('aria-pressed') !== 'true';
