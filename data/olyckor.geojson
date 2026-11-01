@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[15.277337462,59.441924241]},"properties":{"land":"SE","typ":"Olycka","msg":"Singelolycka personbil i höjd med Avdala. Risk för begränsad framkomlighet.","allvar":"Stor påverkan","road":"Väg 831","start":"2026-11-01T11:18:00.000Z"}}]}
