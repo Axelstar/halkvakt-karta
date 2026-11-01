@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[23.746390189,61.461644874]},"properties":{"land":"FI","typ":"Olycka","msg":"Tie 3, Tampere. Liikennetiedote onnettomuudesta.  · Onnettomuus · Ajokaista suljettu liikenteeltä","allvar":null,"road":null,"start":"2026-11-01T01:56:00.000Z"}}]}
