@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[25.378773337,65.386229622]},"properties":{"land":"FI","typ":"Olycka","msg":"Tie 4, eli Kemintie, Ii. Ensitiedote liikenneonnettomuudesta.  · Onnettomuus","allvar":null,"road":null,"start":"2026-11-01T13:22:00.000Z"}}]}
