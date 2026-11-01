@@ -115,6 +115,12 @@
         <p class="forklaring">Söktermer med låg volym redovisar Apple inte ord för ord.</p></div>
     </div>
 
+    <div class="ruta" style="margin-top:10px" id="app">
+      <h2>Appen</h2>
+      <p class="forklaring" style="margin-top:0">Appens anonyma räknare (från 0.3.15): ett ord per händelse, en rad per dygn — inget om vem. Behörigheten räknas en gång per telefon och värde, så de första dygnen bär också dem som redan hade appen. Vaktens starter räknas varje gång.</p>
+      <table id="app-tal" class="lankar"></table>
+    </div>
+
     <div class="ruta" style="margin-top:10px">
       <h2>Flitigaste besökarna</h2>
       <p class="forklaring" style="margin-top:0">En besökare är samma webbläsare samma dygn. Id:t är en hash som byts varje natt och inte går att följa bakåt eller koppla till en IP. Många visningar på dator mitt på dagen, rakt in utan källa, är ofta någon av oss som inte markerat enheten.</p>
@@ -237,6 +243,7 @@
     // Rutorna hos tidningarna (Axel 23/10): per tidning, inbäddad hos dem respektive öppnad direkt.
     var rutor = d.rutor || [];
     ritaAds(d.apple_ads);
+    ritaAppen(d.appen);
 
     $("rutor").innerHTML = rutor.length ? rutor.map(function (r) {
       var sajter = (r.sajter || []).filter(function (x) { return x !== "(inbaddad)"; });
@@ -246,6 +253,36 @@
       return '<tr><td class="namn"><b>' + esc(r.tidning) + '</b><br><span class="meta">' + under + "</span></td>" +
         '<td class="n">' + (r.inbaddad ? fmt(r.inbaddad) : '<span class="meta">–</span>') + "</td></tr>";
     }).join("") : '<tr><td class="tom">Ingen ruta har visats än.</td></tr>';
+  }
+
+  // Appens räknare (DECISIONS #772 i appens repo): app_raknare_stat via besok_stat.appen — rader per händelse, värde och app.
+  function ritaAppen(a) {
+    var rader = (a && a.rader) || [];
+    if (!rader.length) { $("app-tal").innerHTML = '<tr><td class="tom">Inget räknat än.</td></tr>'; return; }
+    var NAMN = [
+      ["onboarding_klar", "", "Introduktionen klar", "bara iPhone"],
+      ["behorighet", "alltid", "Behörighet: Alltid", "vakten kan starta själv"],
+      ["behorighet", "nar", "Behörighet: När appen används", ""],
+      ["behorighet", "nekad", "Behörighet: nekad", ""],
+      ["vakt_startad", "hand", "Vakten startad för hand", "varje start"],
+      ["vakt_startad", "sjalv", "Vakten startade själv", "varje start"],
+      ["forsta_varningen", "", "Första varningen", "en gång per telefon"]
+    ];
+    var app = function (h, v, f) {
+      var ios = 0, and = 0, sju = 0, idag = 0;
+      rader.forEach(function (r) {
+        if (r.handelse !== h || r.varde !== v) return;
+        if (r.app === "ios") ios += r.period; else and += r.period;
+        sju += r.sju; idag += r.idag;
+      });
+      return { n: ios + and, ios: ios, and: and, sju: sju, idag: idag };
+    };
+    $("app-tal").innerHTML = NAMN.map(function (x) {
+      var t = app(x[0], x[1]);
+      return '<tr><td class="namn"><b>' + x[2] + '</b>' + (x[3] ? ' <span class="meta">' + x[3] + '</span>' : '') +
+        '<br><span class="meta">iPhone ' + fmt(t.ios) + " · Android " + fmt(t.and) + " · 7 dygn " + fmt(t.sju) + " · i dag " + fmt(t.idag) +
+        '</span></td><td class="n">' + fmt(t.n) + "</td></tr>";
+    }).join("");
   }
 
   // Apple Ads (DECISIONS #748 i appens repo): sökordsrapporten varje dygn ur Apples API, via besok_stat.apple_ads.

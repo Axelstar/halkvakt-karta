@@ -31,12 +31,13 @@
 <main class="wrap">
 <div class="dok">
 <h1>Integritetspolicy</h1>
-<div class="datum">GÄLLER FRÅN 2026-10-20 · FÖREGÅENDE VERSION 2026-10-19</div>
+<div class="datum">GÄLLER FRÅN 2026-11-01 · FÖREGÅENDE VERSION 2026-10-20</div>
 
-<div class="lofte"><b>Kärnlöftet:</b> ingen position lämnar telefonen av sig själv. All jämförelse mellan var du är och vad som finns på vägen sker i appen. Det enda som någonsin skickas är betatestets facitsvar, och bara om du själv slår på det och trycker.</div>
+<div class="lofte"><b>Kärnlöftet:</b> ingen position lämnar telefonen av sig själv. All jämförelse mellan var du är och vad som finns på vägen sker i appen. Det som skickas är betatestets facitsvar, bara om du själv slår på det och trycker, och en anonym räkning av hur appen används — ett ord i taget, aldrig var du är eller vem du är.</div>
 
 <h2>Vad vi samlar in</h2>
-<p><b>Normalt ingenting.</b> Halkvakt har inga konton, ingen inloggning, ingen annonsering och inga analys- eller spårningsverktyg från tredje part. Appen skickar aldrig din position, dina resor eller något annat om dig av sig själv.</p>
+<p><b>Nästan ingenting.</b> Halkvakt har inga konton, ingen inloggning, ingen annonsering och inga analys- eller spårningsverktyg från tredje part. Appen skickar aldrig din position, dina resor eller något annat om dig av sig själv.</p>
+<p><b>En anonym räkning.</b> Appen räknar hur många som går igenom introduktionen, vilken platsbehörighet som väljs (<i>Alltid</i>, <i>När appen används</i> eller nekad), att vakten startar (för hand eller av sig själv) och att en första varning sägs. Det som skickas är ett ord per händelse, till exempel <i>behörighet: alltid</i>, och om appen är för Android eller iPhone. Servern lägger ihop det till en rad per dag och händelse. Inget id, ingen IP-adress, inget klockslag och ingen position skickas eller sparas, så talen kan inte kopplas till dig — de säger hur många, aldrig vem. Räkningen är alltid på, skickas bara när appen är öppen eller bilen står stilla, och används bara för att se om appen går att komma igång med.</p>
 <p><b>Undantaget: betatestets facitsvar.</b> Slår du på <i>Betatest</i> i inställningarna kan du svara <i>Stämde</i> eller <i>Stämde inte</i> på en varning. Varje svar kräver ett tryck. Då skickas:</p>
 <ul>
   <li>varningens id, till exempel en viss mätstation eller vägsträcka, och klockslaget då rösten talade. <b>Det säger ungefär var du var och när.</b></li>
@@ -65,7 +66,7 @@
 <p>För att veta om tio sidvisningar är tio personer eller en räknar servern fram ett anonymt id för dygnet: en kontrollsumma av IP-adressen och webbläsarens namn tillsammans med ett slumptal som byts ut och raderas varje natt. Bara kontrollsumman sparas. IP-adressen sparas aldrig, och eftersom slumptalet är borta dagen efter kan id:t inte kopplas till dig, till en IP-adress eller till dina besök andra dagar. Siffrorna används bara för att se hur många som hittar hit och varifrån.</p>
 
 <h2>Teknisk nödvändighet</h2>
-<p>När appen hämtar vägdata eller skickar ett facitsvar sker vanlig internettrafik. Din IP-adress passerar då, som vid all webbtrafik, våra leverantörers standardloggar (GitHub Pages och Supabase). Vi läser inte, sparar inte och kopplar aldrig sådana loggar till någon person.</p>
+<p>När appen hämtar vägdata, skickar ett facitsvar eller ett ord till räkningen sker vanlig internettrafik. Din IP-adress passerar då, som vid all webbtrafik, våra leverantörers standardloggar (GitHub Pages och Supabase). Vi läser inte, sparar inte och kopplar aldrig sådana loggar till någon person.</p>
 
 <h2>Datakällor</h2>
 <p>Vägdatat kommer från Trafikverkets öppna data (CC0). Det är data om vägar och väder, aldrig om dig.</p>
