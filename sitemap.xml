@@ -84,4 +84,5 @@
   <url><loc>https://halkvakt.se/ort/lulea/</loc><changefreq>hourly</changefreq><priority>0.6</priority></url>
   <url><loc>https://halkvakt.se/ort/pitea/</loc><changefreq>hourly</changefreq><priority>0.6</priority></url>
   <url><loc>https://halkvakt.se/ort/kiruna/</loc><changefreq>hourly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://halkvakt.se/varningar/</loc><changefreq>hourly</changefreq><priority>0.6</priority></url>
 </urlset>
