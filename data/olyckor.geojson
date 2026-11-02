@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[13.51727973,55.493511015]},"properties":{"land":"SE","typ":"Olycka","msg":"Singelolycka med personbil i höjd med Skurup.","allvar":"Stor påverkan","road":"E65","start":"2026-11-02T03:18:00.000Z"}}]}
