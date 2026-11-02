@@ -364,7 +364,7 @@ map.on('load', async () => {
     pop(e, `<h3>${esc(p.typ)}${p.road ? ' · ' + esc(p.road) : ''}</h3><div>${esc(p.msg)}</div><div class="k">${esc(p.allvar ?? '')}</div>`); });
   map.on('click', 'kandidat', e => { if (under(e, ['vader', 'vader-ovr', 'olyckor', 'kameror'])) return; const p = e.features[0].properties;
     pop(e, `<h3>Prognos</h3><div><b>Halka framöver</b></div><div>Modellerat, inte uppmätt</div>
-      <div class="k">Vägytan beräknad${p.tid ? ' för kl. ' + fmtTid(p.tid) : ''} ur MET Nordic och vägväderstationerna runt omkring.</div>`); });
+      <div class="k">Vägytan beräknad ur MET Nordic och vägväderstationerna runt omkring.</div>`); });
   map.on('click', 'kameror', e => { const p = e.features[0].properties;
     pop(e, `<h3>Fartkamera</h3><div>${esc(p.name)}</div><div class="k">${esc(p.road ?? '')}</div>`); });
   map.on('click', 'lan-fyll', e => { if (INBADDAD || under(e, ['vaglag', 'kandidat', 'vader', 'vader-ovr', 'olyckor', 'kameror'])) return;
