@@ -72,7 +72,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gul);outline-offset
 .dw-kort small{font:600 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dampad)}
 .dw-kort h3{margin:0;font-size:18px}
 .dw-vit{background:#fff;border-radius:10px;padding:14px}
-.dw-kort iframe{display:block;width:100%;min-width:100%;height:420px;border:0}
+.dw-hero{width:100%;max-width:520px;border-radius:16px;padding:18px;box-shadow:0 30px 90px rgba(0,0,0,.5)}
+.dw-vit iframe{display:block;width:100%;min-width:100%;height:420px;border:0}
 .dw-lank{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .dw-lank code{font:500 13px var(--mono);color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .dw-lank button{font:600 13px var(--sans);background:var(--gul);color:#111719;border:0;border-radius:999px;padding:7px 13px;cursor:pointer;flex:0 0 auto}
@@ -87,6 +88,8 @@ th,td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--kant);vert
 th{font:600 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dampad)}
 td code{font:500 14px var(--mono);color:var(--gul);white-space:nowrap}
 .tabell{overflow-x:auto}
+.tabell td code{white-space:normal;word-break:break-all}
+#koden{white-space:pre-wrap;word-break:break-all;max-height:220px;overflow:auto}
 
 .tal{font:600 clamp(40px,5vw,60px)/1 var(--mono);color:var(--gul);letter-spacing:-.02em}
 .sociala{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
@@ -110,12 +113,12 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
     <div class="stack">
       <p class="etikett"><svg viewBox="3 3 94 83" aria-hidden="true"><path fill-rule="evenodd" fill="#FFC94A" d="M55.196 6 L96.196 77 A6 6 0 0 1 91 86 L9 86 A6 6 0 0 1 3.804 77 L44.804 6 A6 6 0 0 1 55.196 6 Z M46.4 32 L53.6 32 L52 58 L48 58 Z M45.6 68 A4.4 4.4 0 1 0 54.4 68 A4.4 4.4 0 1 0 45.6 68 Z"/></svg><b>Halkvakt</b>Förslag till Nya Wermlands-Tidningen</p>
       <h1>Väglaget i Värmland, <span class="gul">live</span> hos NWT</h1>
-      <p class="lead">En ruta för artiklar och liveblogg som visar läget på Värmlands vägar just nu: i länet, på de stora vägarna och på pendlarvägarna från Karlstad. Den läggs in med en rad kod och uppdaterar sig själv dygnet runt.</p>
-      <p class="lead" style="font-size:17px">Nytt: tre <a href="#datawrapper">Datawrapper-tabeller</a> som går att bädda in på nwt.se redan i dag. Rutan bredvid är den riktiga, med dagens siffror.</p>
+      <p class="lead">Tre Datawrapper-tabeller för artiklar och liveblogg som visar läget på Värmlands vägar just nu: i länet, på de stora vägarna och på pendlarvägarna från Karlstad. De bäddas in som all annan Datawrapper-grafik och uppdaterar sig själva dygnet runt.</p>
+      <p class="lead" style="font-size:17px">Tabellen bredvid är den riktiga, med dagens siffror. <a href="#datawrapper">Alla tre finns längre ned.</a></p>
     </div>
     <div class="live">
-      <iframe src="ruta.html?v=3&amp;lan=varmland&amp;tema=ljus&amp;namn=NWT&amp;lank=https://www.nwt.se/&amp;lanktext=Mer%20trafik%20p%C3%A5%20nwt.se" title="Väglaget i Värmland just nu" loading="eager"></iframe>
-      <p class="not">Live från Trafikverkets öppna data</p>
+      <div class="dw-vit dw-hero"><iframe src="https://datawrapper.dwcdn.net/3tNYn/" title="Väglaget i Värmland just nu" loading="eager" scrolling="no" data-external="1"></iframe></div>
+      <p class="not">Live från Trafikverkets öppna data, i Datawrapper</p>
     </div>
   </div>
 </header>
@@ -159,14 +162,14 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
 <section>
   <div class="wrap stack" style="gap:36px">
     <div class="stack">
-      <p class="etikett">Rutan</p>
+      <p class="etikett">Tabellerna</p>
       <h2>Tre vyer, byggda för Värmland</h2>
-      <p class="lead">Läsaren sveper mellan vyerna som bland bilderna i ett inlägg. Ni väljer vilken som syns först.</p>
+      <p class="lead">Välj den som passar artikeln, eller använd hela läget som samlar alla tre.</p>
     </div>
     <div class="tre">
       <div class="kort"><small>Länet</small><h3>Läget i en blick</h3><p>Hur många av länets 52 vägavsnitt Trafikverket rapporterar med halka, hur många vägväderstationer som visar vägbana under noll, och var det är kallast just nu.</p></div>
       <div class="kort"><small>Vägarna</small><h3>E18, E45, E16 och riksvägarna</h3><p>De 33 sträckorna på 26, 61, 62, 63 och E-vägarna, med halka markerad sträcka för sträcka med Trafikverkets egna namn, till exempel Torsby–Sunne.</p></div>
-      <div class="kort"><small>Pendling</small><h3>Från Karlstad</h3><p>Sex stråk som läsarna kör varje dag: till Kristinehamn, Arvika, Säffle, Sunne och Torsby, Filipstad och Årjäng. Rutan visar vilken del som har halka.</p></div>
+      <div class="kort"><small>Pendling</small><h3>Från Karlstad</h3><p>Sex stråk som läsarna kör varje dag: till Kristinehamn, Arvika, Säffle, Sunne och Torsby, Filipstad och Årjäng. Tabellen visar vilken del som har halka.</p></div>
     </div>
   </div>
 </section>
@@ -185,43 +188,32 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
 <section>
   <div class="wrap tva" style="align-items:start">
     <div class="stack">
-      <p class="etikett">Rutan, när halkvakt.se är godkänd</p>
-      <h2>En rad kod. Inget konto.</h2>
-      <p class="lead" style="font-size:17px">Rutan med flikar går att lägga in när halkvakt.se finns bland de tjänster Bonnier har godkänt för inbäddning. Den har inga kakor och ingen spårning, och vi berättar gärna mer för den som beslutar om det.</p>
+      <p class="etikett">Tekniken</p>
+      <h2>Som all annan Datawrapper-grafik.</h2>
       <ul class="lista">
-        <li><span><b>En egen adress till er ruta:</b> <code>halkvakt.se/ruta/nwt</code>. Klistra in den där ert verktyg tar en länk, i artikel, liveblogg eller temasida.</span></li>
-        <li><span><b>Eller en rad iframe-kod</b>, där ni kan bädda in kod.</span></li>
-        <li><span><b>Hämtar läget igen var femte minut</b> och när läsaren kommer tillbaka till fliken. Läget räknas om var 30:e minut.</span></li>
-        <li><span><b>Inga kakor, ingen spårning och ingen reklam</b> i rutan. Allt hämtas från halkvakt.se, även typsnitten, så läsarnas webbläsare kontaktar ingen tredje part.</span></li>
-        <li><span><b>Liten:</b> en sida på ett tiotal kB och två datafiler.</span></li>
+        <li><span><b>Klistra in länken</b> där ni brukar lägga Datawrapper-grafik, i artikel, liveblogg eller temasida.</span></li>
+        <li><span><b>Eller Datawrappers inbäddningskod</b>, som anpassar höjden efter innehållet.</span></li>
+        <li><span><b>Uppdateras var 30:e minut</b> med Trafikverkets senaste rapport, och klockslaget står i ingressen.</span></li>
+        <li><span><b>Fasta länkar.</b> Länkarna ändras aldrig, så en inbäddad tabell fortsätter att visa dagens läge hela vintern.</span></li>
+        <li><span><b>I ert eget utseende:</b> har ni ett eget Datawrapper-konto kan ni koppla samma data dit. Tabellerna läser <code>halkvakt.se/data/datawrapper/</code>, och vi hjälper gärna till.</span></li>
       </ul>
     </div>
     <div class="stack" style="gap:16px">
-      <div class="kod">
-        <button type="button" id="kopiera-lank">Kopiera</button>
-<pre id="lanken">https://halkvakt.se/ruta/nwt/</pre>
-      </div>
-      <p class="not" style="margin-top:-4px">Bara en länk? Den här räcker. Rekommenderad höjd 440 px.</p>
-      <div class="kod">
-        <button type="button" id="kopiera">Kopiera</button>
-<pre id="koden"><span class="k">&lt;iframe</span> src="https://halkvakt.se/ruta.html?lan=varmland&amp;tema=ljus&amp;namn=NWT&amp;lank=https://www.nwt.se/"
-  width="100%" height="440"
-  style="border:0;max-width:480px"
-  title="Väglaget i Värmland just nu" loading="lazy"<span class="k">&gt;&lt;/iframe&gt;</span></pre>
-      </div>
       <div class="tabell">
         <table>
-          <thead><tr><th>Lägg till</th><th>Vad det gör</th></tr></thead>
+          <thead><tr><th>Tabell</th><th>Länk</th></tr></thead>
           <tbody>
-            <tr><td><code>&amp;flik=vagar</code></td><td>Öppnar på de stora vägarna</td></tr>
-            <tr><td><code>&amp;flik=pendling</code></td><td>Öppnar på pendlarvägarna</td></tr>
-            <tr><td><code>&amp;tema=auto</code></td><td>Följer läsarens ljusa eller mörka läge</td></tr>
-            <tr><td><code>&amp;namn=NWT</code></td><td>Rutan heter NWT · Väglaget, utan Halkvakts märke</td></tr>
-            <tr><td><code>&amp;lank=…</code></td><td>Länken i foten går till er egen sida</td></tr>
-            <tr><td><code>&amp;sponsor=…</code></td><td>Raden "Presenteras av" överst, för er annonsör</td></tr>
+            <tr><td>Hela läget</td><td><code>datawrapper.dwcdn.net/3tNYn</code></td></tr>
+            <tr><td>Pendlarvägarna</td><td><code>datawrapper.dwcdn.net/xusoT</code></td></tr>
+            <tr><td>Länets stora vägar</td><td><code>datawrapper.dwcdn.net/mo9OV</code></td></tr>
           </tbody>
         </table>
       </div>
+      <div class="kod">
+        <button type="button" id="kopiera">Kopiera</button>
+<pre id="koden">&lt;iframe title=&quot;Väglaget i Värmland just nu&quot; aria-label=&quot;Table&quot; id=&quot;datawrapper-chart-3tNYn&quot; src=&quot;https://datawrapper.dwcdn.net/3tNYn/&quot; scrolling=&quot;no&quot; frameborder=&quot;0&quot; style=&quot;width: 0; min-width: 100% !important; border: none;&quot; height=&quot;636&quot; data-external=&quot;1&quot;&gt;&lt;/iframe&gt;&lt;script type=&quot;text/javascript&quot;&gt;(function(){function e(){window.addEventListener(`message`,function(e){if(e.data[`datawrapper-height`]!==void 0){var t=document.querySelectorAll(`iframe`);for(var n in e.data[`datawrapper-height`])for(var r=0,i;i=t[r];r++)if(i.contentWindow===e.source){var a=e.data[`datawrapper-height`][n]+`px`;i.style.height=a}}})}e()})();&lt;/script&gt;</pre>
+      </div>
+      <p class="not" style="margin-top:-4px">Inbäddningskoden för hela läget. För de andra byts 3tNYn mot xusoT eller mo9OV.</p>
     </div>
   </div>
 </section>
@@ -229,8 +221,9 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
 <section>
   <div class="wrap tva" style="align-items:start">
     <div class="stack">
-      <p class="etikett">Er ruta</p>
-      <h2>NWT:s väglagsruta, och en plats ni kan sälja</h2>
+      <p class="etikett">Senare, om ni vill</p>
+      <h2>NWT:s egen väglagsruta, och en plats ni kan sälja</h2>
+      <p class="lead" style="font-size:17px">Vi har också en ruta med flikar i ert namn. Den går att lägga in när halkvakt.se finns bland de tjänster Bonnier har godkänt för inbäddning. Rutan har inga kakor och ingen spårning, och vi berättar gärna mer för den som beslutar om det.</p>
       <ul class="lista">
         <li><span><b>Ert namn överst:</b> rutan heter NWT · Väglaget. Halkvakt står bara som en rad i foten: <i>Data: Trafikverket · Teknik: Halkvakt</i>.</span></li>
         <li><span><b>Läsarna stannar hos er:</b> länken i rutan går till er egen trafiksida. Det enda som pekar mot oss öppnas i en ny flik.</span></li>
@@ -239,7 +232,7 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
     </div>
     <div class="live">
       <iframe src="ruta.html?v=3&amp;lan=varmland&amp;tema=ljus&amp;namn=NWT&amp;lank=https://www.nwt.se/&amp;lanktext=Mer%20trafik%20p%C3%A5%20nwt.se&amp;sponsor=Er%20annons%C3%B6r%20h%C3%A4r" title="NWT:s väglagsruta med sponsorrad" loading="lazy"></iframe>
-      <p class="not">Live, med sponsorraden ifylld som exempel.</p>
+      <p class="not">Så ser rutan ut, med sponsorraden ifylld som exempel. Den fungerar här men inte på nwt.se ännu.</p>
     </div>
   </div>
 </section>
@@ -337,7 +330,7 @@ document.querySelectorAll("[data-kopiera]").forEach(function (b) {
     setTimeout(function () { b.textContent = "Kopiera"; }, 1600);
   });
 });
-[["kopiera", "koden"], ["kopiera-lank", "lanken"]].forEach(function (par) {
+[["kopiera", "koden"]].forEach(function (par) {
   document.getElementById(par[0]).addEventListener("click", async function () {
     var b = this, el = document.getElementById(par[1]);
     try { await navigator.clipboard.writeText(el.textContent); b.textContent = "Kopierat"; }
