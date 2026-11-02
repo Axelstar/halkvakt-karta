@@ -49,6 +49,10 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gul);outline-offset
 /* hero */
 .hero{padding-block:72px 96px;border-top:0}
 .hero .tva{align-items:start}
+.hero-text{max-width:860px}
+.hero-bild img{border-radius:20px;box-shadow:0 30px 90px rgba(0,0,0,.5)}
+.hero-bild figcaption{margin-top:14px}
+.hero-bild figcaption a{color:var(--gul)}
 .live{display:grid;gap:12px;justify-items:start}
 .live iframe{display:block;width:100%;max-width:480px;height:440px;border:0;border-radius:16px;box-shadow:0 30px 90px rgba(0,0,0,.5)}
 .live .not::before{content:"● ";color:var(--gul)}
@@ -72,7 +76,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gul);outline-offset
 .dw-kort small{font:600 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dampad)}
 .dw-kort h3{margin:0;font-size:18px}
 .dw-vit{background:#fff;border-radius:10px;padding:14px}
-.dw-hero{width:100%;max-width:520px;border-radius:16px;padding:18px;box-shadow:0 30px 90px rgba(0,0,0,.5)}
 .dw-vit iframe{display:block;width:100%;min-width:100%;height:420px;border:0}
 .dw-lank{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .dw-lank code{font:500 13px var(--mono);color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -105,21 +108,25 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
 }
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
 </style>
+<script>
+// Datawrapper's own resize: each table reports its height, and the matching iframe follows (as in their embed code).
+window.addEventListener("message", function (e) {
+  var h = e.data && e.data["datawrapper-height"]; if (!h) return;
+  document.querySelectorAll("iframe").forEach(function (f) { if (f.contentWindow === e.source) for (var k in h) f.style.height = h[k] + "px"; });
+});
+</script>
 </head>
 <body>
 
 <header class="hero">
-  <div class="wrap tva">
-    <div class="stack">
+  <div class="wrap stack" style="gap:40px">
+    <div class="stack hero-text">
       <p class="etikett"><svg viewBox="3 3 94 83" aria-hidden="true"><path fill-rule="evenodd" fill="#FFC94A" d="M55.196 6 L96.196 77 A6 6 0 0 1 91 86 L9 86 A6 6 0 0 1 3.804 77 L44.804 6 A6 6 0 0 1 55.196 6 Z M46.4 32 L53.6 32 L52 58 L48 58 Z M45.6 68 A4.4 4.4 0 1 0 54.4 68 A4.4 4.4 0 1 0 45.6 68 Z"/></svg><b>Halkvakt</b>Förslag till Nya Wermlands-Tidningen</p>
       <h1>Väglaget i Värmland, <span class="gul">live</span> hos NWT</h1>
       <p class="lead">Tre Datawrapper-tabeller för artiklar och liveblogg som visar läget på Värmlands vägar just nu: i länet, på de stora vägarna och på pendlarvägarna från Karlstad. De bäddas in som all annan Datawrapper-grafik och uppdaterar sig själva dygnet runt.</p>
-      <p class="lead" style="font-size:17px">Tabellen bredvid är den riktiga, med dagens siffror. <a href="#datawrapper">Alla tre finns längre ned.</a></p>
     </div>
-    <div class="live">
-      <div class="dw-vit dw-hero"><iframe src="https://datawrapper.dwcdn.net/3tNYn/" title="Väglaget i Värmland just nu" loading="eager" scrolling="no" data-external="1"></iframe></div>
-      <p class="not">Live från Trafikverkets öppna data, i Datawrapper</p>
-    </div>
+    <figure class="montage hero-bild"><a href="press/nwt-pendling-montage.jpg?v=1" target="_blank" rel="noopener"><img src="press/nwt-pendling-montage.jpg?v=1" width="2400" height="1800" alt="Exempel: en morgonartikel, Halt på pendlarvägarna i morse, på dator och mobil, med Datawrapper-tabellen över pendlarvägarna från Karlstad efter första stycket. Två stråk har halka och står överst med gul etikett." loading="eager"></a>
+      <figcaption class="not">Så kan det se ut en morgon med halka. Exempel med påhittad halka i en neutral tidningsmall. <a href="#datawrapper">Tabellerna live, med dagens läge</a></figcaption></figure>
   </div>
 </header>
 
@@ -155,7 +162,7 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
         <div class="dw-vit"><iframe src="https://datawrapper.dwcdn.net/mo9OV/" title="Länets stora vägar just nu" loading="lazy" scrolling="no" data-external="1"></iframe></div>
         <div class="dw-lank"><code>datawrapper.dwcdn.net/mo9OV</code><button type="button" data-kopiera="https://datawrapper.dwcdn.net/mo9OV/">Kopiera</button></div></div>
     </div>
-    <p class="not">Live. En lugn dag visar tabellerna bara en rad om att det inte är halt. Bilderna nedan visar en morgon med halka.</p>
+    <p class="not">Live, med dagens läge. En lugn dag visar tabellerna bara en rad om att det inte är halt; bilden överst visar en morgon med halka.</p>
   </div>
 </section>
 
@@ -174,16 +181,6 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
   </div>
 </section>
 
-<section>
-  <div class="wrap stack" style="gap:28px">
-    <div class="stack">
-      <p class="etikett">I en artikel</p>
-      <h2>Så kan det se ut en morgon med halka</h2>
-    </div>
-    <figure class="montage"><a href="press/nwt-pendling-montage.jpg?v=1" target="_blank" rel="noopener"><img src="press/nwt-pendling-montage.jpg?v=1" width="2400" height="1800" alt="Exempel: en morgonartikel, Halt på pendlarvägarna i morse, på dator och mobil. Datawrapper-tabellen över pendlarvägarna från Karlstad ligger efter första stycket. Två stråk har halka och står överst med gul etikett, övriga ligger bakom knappen Visa övriga stråk." loading="lazy"></a></figure>
-    <p class="not">Exempel med påhittad halka, i en neutral tidningsmall: pendlingstabellen i en artikel på dator och mobil. Bilden på vägen är en illustration och citatet är påhittat. Tryck på en bild för full storlek.</p>
-  </div>
-</section>
 
 <section>
   <div class="wrap tva" style="align-items:start">
@@ -218,24 +215,6 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
   </div>
 </section>
 
-<section>
-  <div class="wrap tva" style="align-items:start">
-    <div class="stack">
-      <p class="etikett">Senare, om ni vill</p>
-      <h2>NWT:s egen väglagsruta, och en plats ni kan sälja</h2>
-      <p class="lead" style="font-size:17px">Vi har också en ruta med flikar i ert namn. Den går att lägga in när halkvakt.se finns bland de tjänster Bonnier har godkänt för inbäddning. Rutan har inga kakor och ingen spårning, och vi berättar gärna mer för den som beslutar om det.</p>
-      <ul class="lista">
-        <li><span><b>Ert namn överst:</b> rutan heter NWT · Väglaget. Halkvakt står bara som en rad i foten: <i>Data: Trafikverket · Teknik: Halkvakt</i>.</span></li>
-        <li><span><b>Läsarna stannar hos er:</b> länken i rutan går till er egen trafiksida. Det enda som pekar mot oss öppnas i en ny flik.</span></li>
-        <li><span><b>En sponsorrad</b> överst, till exempel <i>Presenteras av</i> en däckfirma eller bilhandlare i Värmland. Annonsplatsen är er, och intäkten också. Vi tar inget betalt.</span></li>
-      </ul>
-    </div>
-    <div class="live">
-      <iframe src="ruta.html?v=3&amp;lan=varmland&amp;tema=ljus&amp;namn=NWT&amp;lank=https://www.nwt.se/&amp;lanktext=Mer%20trafik%20p%C3%A5%20nwt.se&amp;sponsor=Er%20annons%C3%B6r%20h%C3%A4r" title="NWT:s väglagsruta med sponsorrad" loading="lazy"></iframe>
-      <p class="not">Så ser rutan ut, med sponsorraden ifylld som exempel. Den fungerar här men inte på nwt.se ännu.</p>
-    </div>
-  </div>
-</section>
 
 <section>
   <div class="wrap stack" style="gap:36px">
@@ -319,11 +298,6 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
 </footer>
 
 <script>
-// Datawrapper's own resize: each table reports its height, and the matching iframe follows (as in their embed code).
-window.addEventListener("message", function (e) {
-  var h = e.data && e.data["datawrapper-height"]; if (!h) return;
-  document.querySelectorAll("iframe").forEach(function (f) { if (f.contentWindow === e.source) for (var k in h) f.style.height = h[k] + "px"; });
-});
 document.querySelectorAll("[data-kopiera]").forEach(function (b) {
   b.addEventListener("click", async function () {
     try { await navigator.clipboard.writeText(b.dataset.kopiera); b.textContent = "Kopierat"; } catch (e) { b.textContent = b.dataset.kopiera; }
