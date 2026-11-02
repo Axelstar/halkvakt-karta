@@ -209,7 +209,7 @@ function kanter() {
   return { top: Math.round(st.bottom) + 16, bottom: nere, left: 20, right: 20 };
 }
 // En knapp kan styra flera lager (vägvädret ligger i två: de kalla stationerna och resten).
-const lagerAv = id => [id, id + '-ovr'].filter(l => map.getLayer(l));
+const lagerAv = id => [id, id + '-ovr', id + '-traff', id + '-lys'].filter(l => map.getLayer(l));
 const forstaText = () => (map.getStyle().layers.find(x => x.type === 'symbol') || {}).id;
 map.on('load', async () => {
   const d = {};
@@ -236,6 +236,18 @@ map.on('load', async () => {
   map.addSource('kandidat', { type: 'geojson', data: d.kandidat });
   map.addLayer({ id: 'kandidat', type: 'line', source: 'kandidat', layout: { visibility: 'none', 'line-cap': 'round' },
     paint: { 'line-width': 4, 'line-color': '#FF8F6B', 'line-dasharray': [1.4, 1], 'line-opacity': .95 } }, forstaText());
+  // Träffytorna (Axel 2/11): de hala sträckorna och Prognos är 4 px breda och svåra att träffa utzoomat. En osynlig, 20 px bred kopia
+  // tar klicket, och en svag glöd under linjen visar vilken sträcka pekaren är nära. De grå sträckorna får ingen träffyta, så att
+  // länet fortfarande går att välja mellan vägarna.
+  const ingen = ['==', ['get', 'segment_id'], ''];
+  map.addLayer({ id: 'vaglag-lys', type: 'line', source: 'vaglag', filter: ingen, layout: { 'line-cap': 'round', 'line-join': 'round' },
+    paint: { 'line-width': 12, 'line-color': '#FFC94A', 'line-opacity': .35, 'line-blur': 2 } }, 'vaglag');
+  map.addLayer({ id: 'kandidat-lys', type: 'line', source: 'kandidat', filter: ingen, layout: { visibility: 'none', 'line-cap': 'round', 'line-join': 'round' },
+    paint: { 'line-width': 12, 'line-color': '#FF8F6B', 'line-opacity': .35, 'line-blur': 2 } }, 'kandidat');
+  map.addLayer({ id: 'vaglag-traff', type: 'line', source: 'vaglag', filter: ['>', ['get', 'code'], 1],
+    layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-width': 20, 'line-opacity': 0 } });
+  map.addLayer({ id: 'kandidat-traff', type: 'line', source: 'kandidat', layout: { visibility: 'none', 'line-cap': 'round', 'line-join': 'round' },
+    paint: { 'line-width': 20, 'line-opacity': 0 } });
   // Vägväder: stationerna är mätpunkter, inte faror. De ligger under de gula sträckorna och hålls små. Utzoomat syns bara de
   // som visar 0 °C eller kallare; alla stationer kommer fram från zoom 7. Grannländernas stationer är svagare än Sveriges.
   map.addSource('vader', { type: 'geojson', data: d.vader });
@@ -357,19 +369,26 @@ map.on('load', async () => {
       <div class="k">Mätt ${fmtTid(p.t)}</div>`); });
   // Kandidaten (#579) ligger ovanpå väglagslinjen: där den syns går dess ruta före väglagets, och punkterna går före båda (16/10: en station på en väg gav två rutor).
   const under = (e, lager) => map.queryRenderedFeatures(e.point, { layers: lager.filter(l => map.getLayer(l)) }).length > 0;
-  map.on('click', 'vaglag', e => { if (under(e, ['kandidat', 'vader', 'vader-ovr', 'olyckor', 'kameror'])) return; const p = e.features[0].properties; let info = [];
+  const vaglagKlick = e => { if (under(e, ['kandidat-traff', 'vader', 'vader-ovr', 'olyckor', 'kameror'])) return;
+    const p = (e.features.find(f => f.properties.code > 1) ?? e.features[0]).properties; let info = [];
     try { info = JSON.parse(p.info || '[]'); } catch {}
-    pop(e, `<h3>${esc(p.road ?? 'Vägsträcka')}</h3><div><b>${esc(p.text)}</b></div><div class="k">${esc(info.join(', '))}</div>`); });
+    pop(e, `<h3>${esc(p.road ?? 'Vägsträcka')}</h3><div><b>${esc(p.text)}</b></div><div class="k">${esc(info.join(', '))}</div>`); };
+  map.on('click', 'vaglag-traff', vaglagKlick);
+  map.on('click', 'vaglag', e => { if (!under(e, ['vaglag-traff'])) vaglagKlick(e); });
   map.on('click', 'olyckor', e => { const p = e.features[0].properties;
     pop(e, `<h3>${esc(p.typ)}${p.road ? ' · ' + esc(p.road) : ''}</h3><div>${esc(p.msg)}</div><div class="k">${esc(p.allvar ?? '')}</div>`); });
-  map.on('click', 'kandidat', e => { if (under(e, ['vader', 'vader-ovr', 'olyckor', 'kameror'])) return; const p = e.features[0].properties;
+  map.on('click', 'kandidat-traff', e => { if (under(e, ['vader', 'vader-ovr', 'olyckor', 'kameror'])) return; const p = e.features[0].properties;
     pop(e, `<h3>Prognos</h3><div><b>Halka framöver</b></div><div>Modellerat, inte uppmätt</div>
       <div class="k">Vägytan beräknad ur MET Nordic och vägväderstationerna runt omkring.</div>`); });
   map.on('click', 'kameror', e => { const p = e.features[0].properties;
     pop(e, `<h3>Fartkamera</h3><div>${esc(p.name)}</div><div class="k">${esc(p.road ?? '')}</div>`); });
-  map.on('click', 'lan-fyll', e => { if (INBADDAD || under(e, ['vaglag', 'kandidat', 'vader', 'vader-ovr', 'olyckor', 'kameror'])) return;
+  map.on('click', 'lan-fyll', e => { if (INBADDAD || under(e, ['vaglag', 'vaglag-traff', 'kandidat-traff', 'vader', 'vader-ovr', 'olyckor', 'kameror'])) return;
     const slug = e.features[0].properties.slug; if (!lanVal || lanVal.slug !== slug) visaLan(lanAv(slug), true); });
-  for (const l of ['vader', 'vader-ovr', 'vaglag', 'kandidat', 'olyckor', 'kameror']) {
+  for (const id of ['vaglag', 'kandidat']) {
+    map.on('mousemove', id + '-traff', e => map.setFilter(id + '-lys', ['==', ['get', 'segment_id'], e.features[0].properties.segment_id]));
+    map.on('mouseleave', id + '-traff', () => map.setFilter(id + '-lys', ingen));
+  }
+  for (const l of ['vader', 'vader-ovr', 'vaglag', 'vaglag-traff', 'kandidat-traff', 'olyckor', 'kameror']) {
     map.on('mouseenter', l, () => map.getCanvas().style.cursor = 'pointer');
     map.on('mouseleave', l, () => map.getCanvas().style.cursor = '');
   }
