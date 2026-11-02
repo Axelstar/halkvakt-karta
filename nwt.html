@@ -66,6 +66,17 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gul);outline-offset
 .montage{margin:0}
 .montage img{display:block;width:100%;height:auto;border-radius:18px}
 
+/* Datawrapper tables (white, as on nwt.se) */
+.dw-tre{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:start}
+.dw-kort{display:grid;gap:10px;background:var(--panel);border:1px solid var(--kant);border-radius:16px;padding:16px}
+.dw-kort small{font:600 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dampad)}
+.dw-kort h3{margin:0;font-size:18px}
+.dw-vit{background:#fff;border-radius:10px;padding:14px}
+.dw-kort iframe{display:block;width:100%;min-width:100%;height:420px;border:0}
+.dw-lank{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.dw-lank code{font:500 13px var(--mono);color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dw-lank button{font:600 13px var(--sans);background:var(--gul);color:#111719;border:0;border-radius:999px;padding:7px 13px;cursor:pointer;flex:0 0 auto}
+
 /* code */
 .kod{position:relative;background:var(--panel);border:1px solid var(--kant);border-radius:16px;overflow:hidden}
 .kod pre{margin:0;padding:58px 22px 20px;font:500 14px/1.65 var(--mono);color:var(--text);overflow-x:auto;white-space:pre}
@@ -86,7 +97,7 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
 
 @media (max-width:900px){
   .tva{grid-template-columns:1fr;gap:36px}
-  .tre,.tre.par{grid-template-columns:1fr}
+  .tre,.tre.par,.dw-tre{grid-template-columns:1fr}
   section{padding-block:64px}
 }
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
@@ -100,7 +111,7 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
       <p class="etikett"><svg viewBox="3 3 94 83" aria-hidden="true"><path fill-rule="evenodd" fill="#FFC94A" d="M55.196 6 L96.196 77 A6 6 0 0 1 91 86 L9 86 A6 6 0 0 1 3.804 77 L44.804 6 A6 6 0 0 1 55.196 6 Z M46.4 32 L53.6 32 L52 58 L48 58 Z M45.6 68 A4.4 4.4 0 1 0 54.4 68 A4.4 4.4 0 1 0 45.6 68 Z"/></svg><b>Halkvakt</b>Förslag till Nya Wermlands-Tidningen</p>
       <h1>Väglaget i Värmland, <span class="gul">live</span> hos NWT</h1>
       <p class="lead">En ruta för artiklar och liveblogg som visar läget på Värmlands vägar just nu: i länet, på de stora vägarna och på pendlarvägarna från Karlstad. Den läggs in med en rad kod och uppdaterar sig själv dygnet runt.</p>
-      <p class="lead" style="font-size:17px">Rutan bredvid är den riktiga, med dagens siffror. Svep i sidled eller tryck på flikarna.</p>
+      <p class="lead" style="font-size:17px">Nytt: tre <a href="#datawrapper">Datawrapper-tabeller</a> som går att bädda in på nwt.se redan i dag. Rutan bredvid är den riktiga, med dagens siffror.</p>
     </div>
     <div class="live">
       <iframe src="ruta.html?v=3&amp;lan=varmland&amp;tema=ljus&amp;namn=NWT&amp;lank=https://www.nwt.se/&amp;lanktext=Mer%20trafik%20p%C3%A5%20nwt.se" title="Väglaget i Värmland just nu" loading="eager"></iframe>
@@ -120,6 +131,28 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
       <div class="kort"><small>Redaktionen</small><h3>Svaret ändras hela tiden</h3><p>En text om halka är gammal efter en timme, och någon måste hålla den aktuell mitt i natten.</p></div>
       <div class="kort"><small>Datan</small><h3>Finns, men är svår att läsa</h3><p>Trafikverket publicerar väglag och vägtemperatur öppet, men som rådata för hela landet.</p></div>
     </div>
+  </div>
+</section>
+
+<section id="datawrapper">
+  <div class="wrap stack" style="gap:36px">
+    <div class="stack">
+      <p class="etikett">Klart att bädda in i dag</p>
+      <h2>Tre tabeller i Datawrapper, <span class="gul">som nwt.se redan tar emot</span></h2>
+      <p class="lead">nwt.se bäddar bara in tjänster som Bonnier har godkänt, och Datawrapper är en av dem. Därför finns läget också som tre Datawrapper-tabeller. De uppdaterar sig själva var 30:e minut och visar bara det som är halt. Resten ligger bakom en knapp, så de tar lite plats en lugn dag.</p>
+    </div>
+    <div class="dw-tre">
+      <div class="dw-kort"><small>1 · Hela läget</small><h3>Länet, pendlarvägarna och de stora vägarna</h3>
+        <div class="dw-vit"><iframe src="https://datawrapper.dwcdn.net/3tNYn/" title="Väglaget i Värmland just nu" loading="lazy" scrolling="no" data-external="1"></iframe></div>
+        <div class="dw-lank"><code>datawrapper.dwcdn.net/3tNYn</code><button type="button" data-kopiera="https://datawrapper.dwcdn.net/3tNYn/">Kopiera</button></div></div>
+      <div class="dw-kort"><small>2 · Pendling</small><h3>Pendlarvägarna från Karlstad</h3>
+        <div class="dw-vit"><iframe src="https://datawrapper.dwcdn.net/xusoT/" title="Pendlarvägarna från Karlstad just nu" loading="lazy" scrolling="no" data-external="1"></iframe></div>
+        <div class="dw-lank"><code>datawrapper.dwcdn.net/xusoT</code><button type="button" data-kopiera="https://datawrapper.dwcdn.net/xusoT/">Kopiera</button></div></div>
+      <div class="dw-kort"><small>3 · Vägarna</small><h3>E16, E18, E45 och riksvägarna</h3>
+        <div class="dw-vit"><iframe src="https://datawrapper.dwcdn.net/mo9OV/" title="Länets stora vägar just nu" loading="lazy" scrolling="no" data-external="1"></iframe></div>
+        <div class="dw-lank"><code>datawrapper.dwcdn.net/mo9OV</code><button type="button" data-kopiera="https://datawrapper.dwcdn.net/mo9OV/">Kopiera</button></div></div>
+    </div>
+    <p class="not">Live. En lugn dag visar tabellerna bara en rad om att det inte är halt. Bilderna nedan visar en morgon med halka.</p>
   </div>
 </section>
 
@@ -144,18 +177,17 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
       <p class="etikett">I en artikel</p>
       <h2>Så kan det se ut en morgon med halka</h2>
     </div>
-    <figure class="montage">
-      <a href="press/nwt-artikel.jpg?v=3" target="_blank" rel="noopener"><img src="press/nwt-artikel.jpg?v=3" width="2400" height="1638" alt="Bildmontage: en artikel på nwt.se, Halt på vägarna i Värmland i morse, med Halkvakts ruta efter ingressen. På datorn visar rutan fliken Vägarna, på mobilen fliken Pendling." loading="lazy"></a>
-    </figure>
-    <p class="not">Bildmontage med exempelsiffror: så kan rutan se ut i en artikel hos er, på dator och mobil. Tryck på bilden för full storlek. Rutan överst på sidan är live.</p>
+    <figure class="montage"><a href="press/nwt-pendling-montage.jpg?v=1" target="_blank" rel="noopener"><img src="press/nwt-pendling-montage.jpg?v=1" width="2400" height="1800" alt="Exempel: en morgonartikel, Halt på pendlarvägarna i morse, på dator och mobil. Datawrapper-tabellen över pendlarvägarna från Karlstad ligger efter första stycket. Två stråk har halka och står överst med gul etikett, övriga ligger bakom knappen Visa övriga stråk." loading="lazy"></a></figure>
+    <p class="not">Exempel med påhittad halka, i en neutral tidningsmall: pendlingstabellen i en artikel på dator och mobil. Bilden på vägen är en illustration och citatet är påhittat. Tryck på en bild för full storlek.</p>
   </div>
 </section>
 
 <section>
   <div class="wrap tva" style="align-items:start">
     <div class="stack">
-      <p class="etikett">Tekniken</p>
+      <p class="etikett">Rutan, när halkvakt.se är godkänd</p>
       <h2>En rad kod. Inget konto.</h2>
+      <p class="lead" style="font-size:17px">Rutan med flikar går att lägga in när halkvakt.se finns bland de tjänster Bonnier har godkänt för inbäddning. Den har inga kakor och ingen spårning, och vi berättar gärna mer för den som beslutar om det.</p>
       <ul class="lista">
         <li><span><b>En egen adress till er ruta:</b> <code>halkvakt.se/ruta/nwt</code>. Klistra in den där ert verktyg tar en länk, i artikel, liveblogg eller temasida.</span></li>
         <li><span><b>Eller en rad iframe-kod</b>, där ni kan bädda in kod.</span></li>
@@ -294,6 +326,17 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
 </footer>
 
 <script>
+// Datawrapper's own resize: each table reports its height, and the matching iframe follows (as in their embed code).
+window.addEventListener("message", function (e) {
+  var h = e.data && e.data["datawrapper-height"]; if (!h) return;
+  document.querySelectorAll("iframe").forEach(function (f) { if (f.contentWindow === e.source) for (var k in h) f.style.height = h[k] + "px"; });
+});
+document.querySelectorAll("[data-kopiera]").forEach(function (b) {
+  b.addEventListener("click", async function () {
+    try { await navigator.clipboard.writeText(b.dataset.kopiera); b.textContent = "Kopierat"; } catch (e) { b.textContent = b.dataset.kopiera; }
+    setTimeout(function () { b.textContent = "Kopiera"; }, 1600);
+  });
+});
 [["kopiera", "koden"], ["kopiera-lank", "lanken"]].forEach(function (par) {
   document.getElementById(par[0]).addEventListener("click", async function () {
     var b = this, el = document.getElementById(par[1]);
