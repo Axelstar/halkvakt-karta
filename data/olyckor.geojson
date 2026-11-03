@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[24.980604,60.28889]},"properties":{"land":"FI","typ":"Olycka","msg":"Tie 45, eli Tuusulanväylä, Vantaa. Liikennetiedote onnettomuudesta.  · Onnettomuus · Ajokaista suljettu liikenteeltä","allvar":null,"road":null,"start":"2026-11-03T05:10:00.000Z"}}]}
