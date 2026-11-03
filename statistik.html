@@ -117,8 +117,19 @@
 
     <div class="ruta" style="margin-top:10px" id="app">
       <h2>Appen</h2>
-      <p class="forklaring" style="margin-top:0">Appens anonyma räknare (från 0.3.15): ett ord per händelse, en rad per dygn — inget om vem. Behörigheten räknas en gång per telefon och värde, så de första dygnen bär också dem som redan hade appen. Vaktens starter räknas varje gång.</p>
+      <p class="forklaring" style="margin-top:0">Appens anonyma räknare: ett ord per händelse, en rad per dygn, inget om vem. Från nästa version bär varje ord appens version och om telefonen är <b>ny</b> (installerad efter räknaren) eller <b>befintlig</b>. Vägen in räknas en gång per telefon och värde. Rader från 0.3.15 saknar kohort och står under <i>okänd</i>.</p>
+      <h3 class="meta" style="margin:14px 0 4px">VÄGEN IN</h3>
       <table id="app-tal" class="lankar"></table>
+      <h3 class="meta" style="margin:14px 0 4px">AKTIVA FÖRARE</h3>
+      <table id="app-aktiva" class="lankar"></table>
+      <h3 class="meta" style="margin:14px 0 4px">VAKTPASSEN</h3>
+      <table id="app-pass" class="lankar"></table>
+      <h3 class="meta" style="margin:14px 0 4px">VARNINGARNA</h3>
+      <table id="app-varningar" class="lankar"></table>
+      <h3 class="meta" style="margin:14px 0 4px">INSTÄLLNINGAR SOM ÄNDRATS</h3>
+      <table id="app-installningar" class="lankar"></table>
+      <h3 class="meta" style="margin:14px 0 4px">FEL, PER VERSION</h3>
+      <table id="app-fel" class="lankar"></table>
     </div>
 
     <div class="ruta" style="margin-top:10px">
@@ -255,34 +266,83 @@
     }).join("") : '<tr><td class="tom">Ingen ruta har visats än.</td></tr>';
   }
 
-  // Appens räknare (DECISIONS #772 i appens repo): app_raknare_stat via besok_stat.appen — rader per händelse, värde och app.
+  // Appens räknare (DECISIONS #772, #787 i appens repo): app_raknare_stat via besok_stat.appen — rader per händelse, värde, app,
+  // version och kohort ('' för 0.3.15, som inte skickar dem).
   function ritaAppen(a) {
     var rader = (a && a.rader) || [];
-    if (!rader.length) { $("app-tal").innerHTML = '<tr><td class="tom">Inget räknat än.</td></tr>'; return; }
-    var NAMN = [
-      ["onboarding_klar", "", "Introduktionen klar", "bara iPhone"],
-      ["behorighet", "alltid", "Behörighet: Alltid", "vakten kan starta själv"],
-      ["behorighet", "nar", "Behörighet: När appen används", ""],
-      ["behorighet", "nekad", "Behörighet: nekad", ""],
-      ["vakt_startad", "hand", "Vakten startad för hand", "varje start"],
-      ["vakt_startad", "sjalv", "Vakten startade själv", "varje start"],
-      ["forsta_varningen", "", "Första varningen", "en gång per telefon"]
-    ];
-    var app = function (h, v, f) {
-      var ios = 0, and = 0, sju = 0, idag = 0;
+    var tomt = '<tr><td class="tom">Inget räknat än.</td></tr>';
+    if (!rader.length) { ["app-tal", "app-aktiva", "app-pass", "app-varningar", "app-installningar", "app-fel"].forEach(function (id) { $(id).innerHTML = tomt; }); return; }
+    var summa = function (pred) {
+      var t = { n: 0, ios: 0, and: 0, sju: 0, idag: 0, ny: 0, bef: 0, okand: 0 };
       rader.forEach(function (r) {
-        if (r.handelse !== h || r.varde !== v) return;
-        if (r.app === "ios") ios += r.period; else and += r.period;
-        sju += r.sju; idag += r.idag;
+        if (!pred(r)) return;
+        t.n += r.period; t.sju += r.sju || 0; t.idag += r.idag || 0;
+        if (r.app === "ios") t.ios += r.period; else t.and += r.period;
+        if (r.kohort === "ny") t.ny += r.period; else if (r.kohort === "befintlig") t.bef += r.period; else t.okand += r.period;
       });
-      return { n: ios + and, ios: ios, and: and, sju: sju, idag: idag };
+      return t;
     };
-    $("app-tal").innerHTML = NAMN.map(function (x) {
-      var t = app(x[0], x[1]);
-      return '<tr><td class="namn"><b>' + x[2] + '</b>' + (x[3] ? ' <span class="meta">' + x[3] + '</span>' : '') +
-        '<br><span class="meta">iPhone ' + fmt(t.ios) + " · Android " + fmt(t.and) + " · 7 dygn " + fmt(t.sju) + " · i dag " + fmt(t.idag) +
+    var rad = function (namn, meta, t, extra) {
+      return '<tr><td class="namn"><b>' + namn + '</b>' + (meta ? ' <span class="meta">' + meta + '</span>' : '') +
+        '<br><span class="meta">ny ' + fmt(t.ny) + " · befintlig " + fmt(t.bef) + (t.okand ? " · okänd " + fmt(t.okand) : "") +
+        " · iPhone " + fmt(t.ios) + " · Android " + fmt(t.and) + " · 7 dygn " + fmt(t.sju) + " · i dag " + fmt(t.idag) + (extra || "") +
         '</span></td><td class="n">' + fmt(t.n) + "</td></tr>";
-    }).join("");
+    };
+    var ar = function (h, v) { return function (r) { return r.handelse === h && (v === undefined || r.varde === v); }; };
+    var tabell = function (id, rows) { $(id).innerHTML = rows.length ? rows.join("") : tomt; };
+
+    // 1 · Vägen in. Kolumnen "ny" är tratten: telefoner som installerades efter räknaren.
+    tabell("app-tal", [
+      ["onboarding_klar", "", "Introduktionen klar", "bara iPhone"],
+      ["behorighet", "nar", "Behörighet: När appen används", ""],
+      ["behorighet", "alltid", "Behörighet: Alltid", "vakten kan starta själv"],
+      ["behorighet", "nekad", "Behörighet: nekad", ""],
+      ["notiser", "pa", "Notiser på", "bannern över kartappen"],
+      ["notiser", "nekad", "Notiser nekade", ""],
+      ["forsta_starten", "", "Första starten", "en gång per telefon"],
+      ["forsta_varningen", "", "Första varningen", "en gång per telefon"]
+    ].map(function (x) { return rad(x[2], x[3], summa(ar(x[0], x[1]))); }));
+
+    // 2 · Aktiva förare: aktiv_dag räknas en gång per telefon och dygn, så dygnets tal är dygnets aktiva förare.
+    var perDag = {}; ((a && a.per_dag) || []).forEach(function (r) { if (r.handelse === "aktiv_dag") perDag[r.dag] = (perDag[r.dag] || 0) + r.antal; });
+    var dagarna = Object.keys(perDag).sort(), sju = dagarna.slice(-7), snitt = sju.length ? sju.reduce(function (s, d) { return s + perDag[d]; }, 0) / sju.length : 0;
+    tabell("app-aktiva", [rad("Förardygn", "en per telefon och dygn som vakten gick", summa(ar("aktiv_dag")),
+      " · snitt per dygn, senaste 7 med data " + snitt.toLocaleString("sv-SE", { maximumFractionDigits: 1 }))].concat(
+      [["0", "Första dygnet"], ["1-7", "Dag 1–7"], ["8-30", "Dag 8–30"], ["over30", "Efter 30 dagar"]].map(function (x) {
+        return rad(x[1], "dagar sedan telefonen började räkna", summa(ar("aktiv_dag", x[0])));
+      })));
+
+    // 3 · Vaktpassen: resa_slut = start:längd:slut. Korta självstarter är det som ska ses.
+    var pass = function (del, varde) { return function (r) { return r.handelse === "resa_slut" && r.varde.split(":")[del] === varde; }; };
+    var korta = function (r) { var p = r.varde.split(":"); return r.handelse === "resa_slut" && p[0] === "sjalv" && p[1] === "under3"; };
+    tabell("app-pass", [rad("Avslutade pass", "", summa(ar("resa_slut"))), rad("Självstart, under 3 min", "trolig falsk start", summa(korta))].concat(
+      [[0, "sjalv", "Start: själv"], [0, "knapp", "Start: knappen"], [0, "intent", "Start: Siri, Genvägar, automation"],
+       [1, "under3", "Längd under 3 min"], [1, "3-15", "Längd 3–15 min"], [1, "15-45", "Längd 15–45 min"], [1, "over45", "Längd över 45 min"],
+       [2, "parkerad", "Slut: parkerad en kvart"], [2, "sjalv", "Slut: autostarten stängde"], [2, "hand", "Slut: för hand"],
+       [2, "avbruten", "Slut: appen dog under passet"]].map(function (x) { return rad(x[2], "", summa(pass(x[0], x[1]))); })));
+
+    // 4 · Varningarna: per fara, kort som byttes ut och bannern.
+    var FARA = { accident: "Olycka", slippery_segment: "Halka", icing_point: "Frysrisk", wildlife: "Vilt", camera: "Fartkamera", kandidat: "Prognos" };
+    tabell("app-varningar", Object.keys(FARA).map(function (k) {
+      return rad(FARA[k], "", summa(function (r) { return r.handelse === "varning" && r.varde.split(":")[0] === k; }),
+        " · kortet utbytt " + fmt(summa(ar("varning_ersatt", k)).n));
+    }).concat([rad("Bannern tillåten", "", summa(ar("banner", "visad"))), rad("Bannern avstängd", "", summa(ar("banner", "tyst")))]));
+
+    // 5 · Inställningarna, varje värde för sig.
+    var inst = {}; rader.forEach(function (r) { if (r.handelse === "installning") inst[r.varde] = 1; });
+    tabell("app-installningar", Object.keys(inst).sort().map(function (v) {
+      var p = v.split(":"); return rad((FARA[p[0]] || p[0]) + ": " + p[1], "", summa(ar("installning", v)));
+    }));
+
+    // 6 · Felen per version, och passen som appen dog i.
+    var versioner = {}; rader.forEach(function (r) { if (r.handelse === "fel" || (r.handelse === "resa_slut" && /:avbruten$/.test(r.varde))) versioner[r.version || "0.3.15"] = 1; });
+    tabell("app-fel", Object.keys(versioner).sort().reverse().map(function (ver) {
+      var iv = function (r) { return (r.version || "0.3.15") === ver; };
+      var t = function (v) { return fmt(summa(function (r) { return iv(r) && r.handelse === "fel" && r.varde === v; }).n); };
+      var avbr = fmt(summa(function (r) { return iv(r) && r.handelse === "resa_slut" && /:avbruten$/.test(r.varde); }).n);
+      return rad("Version " + ver, "", summa(function (r) { return iv(r) && r.handelse === "fel"; }),
+        " · plats borta " + t("plats_borta") + " · gammal data " + t("gammal_data") + " · hämtning " + t("hamtning_fel") + " · appen dog " + avbr);
+    }));
   }
 
   // Apple Ads (DECISIONS #748 i appens repo): sökordsrapporten varje dygn ur Apples API, via besok_stat.apple_ads.
