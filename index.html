@@ -223,6 +223,8 @@
   .lofte-rad { margin-top: clamp(48px, 7vw, 88px); padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; }
   .lofte-text { font-size: 20px; font-weight: 500; margin-top: 4px; }
   @media (max-width: 640px) { .vad { padding: 16px 18px; } .valjlan { gap: 14px; } .lofte-text { font-size: 18px; } }
+.hv-lankar{list-style:none;padding:0;margin:24px 0 0;columns:2 320px;column-gap:40px}.hv-lankar li{break-inside:avoid;padding:7px 0;border-top:1px dashed var(--kant);color:var(--dampad);font-size:15px;line-height:1.7}
+.hv-lankar a,.hv-lankar-vagar a{color:var(--text2)}.hv-lankar b{color:var(--text)}.hv-lankar-vagar{color:var(--dampad);font-size:15px;line-height:1.9;margin:20px 0 0}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://halkvakt.se/#org","name":"Halkvakt","url":"https://halkvakt.se/","logo":"https://halkvakt.se/logo-512.png","email":"hej@halkvakt.se","sameAs":["https://www.instagram.com/halkvakt/","https://www.facebook.com/profile.php?id=61595485615603","https://apps.apple.com/se/app/halkvakt/id6806939784"]},{"@type":"WebSite","@id":"https://halkvakt.se/#site","name":"Halkvakt","url":"https://halkvakt.se/","inLanguage":"sv-SE","publisher":{"@id":"https://halkvakt.se/#org"}},{"@type":"MobileApplication","name":"Halkvakt","operatingSystem":"iOS","applicationCategory":"TravelApplication","inLanguage":"sv-SE","url":"https://halkvakt.se/","installUrl":"https://apps.apple.com/se/app/halkvakt/id6806939784","description":"Varnar med rösten för halka, frysrisk, olyckor, vilt och fartkameror innan du är där. Trafikverkets data i realtid.","offers":{"@type":"Offer","price":"0","priceCurrency":"SEK"},"publisher":{"@id":"https://halkvakt.se/#org"}}]}</script>
 </head>
@@ -348,6 +350,39 @@
         <div><p class="etikett">Löftet</p><p class="lofte-text">Din position lämnar inte telefonen av sig själv.</p></div>
         <a class="lank-mono" href="integritet.html">Läs integritetspolicyn →</a>
       </div>
+    </div>
+  </section>
+  <section class="sektion" id="orter">
+    <div class="wrap">
+      <p class="etikett">Län, orter och vägar</p>
+      <h2 class="rubrik">Halka och väglag där du kör</h2>
+<!-- hv:lankar -->
+<ul class="hv-lankar">
+<li><a href="lan/stockholm/"><b>Stockholms län</b></a> · <a href="ort/stockholm/">Stockholm</a> · <a href="ort/sodertalje/">Södertälje</a></li>
+<li><a href="lan/uppsala/"><b>Uppsala län</b></a> · <a href="ort/uppsala/">Uppsala</a></li>
+<li><a href="lan/sodermanland/"><b>Södermanland</b></a> · <a href="ort/eskilstuna/">Eskilstuna</a> · <a href="ort/nykoping/">Nyköping</a></li>
+<li><a href="lan/ostergotland/"><b>Östergötland</b></a> · <a href="ort/linkoping/">Linköping</a> · <a href="ort/norrkoping/">Norrköping</a> · <a href="ort/motala/">Motala</a></li>
+<li><a href="lan/jonkoping/"><b>Jönköpings län</b></a> · <a href="ort/jonkoping/">Jönköping</a></li>
+<li><a href="lan/kronoberg/"><b>Kronoberg</b></a> · <a href="ort/vaxjo/">Växjö</a></li>
+<li><a href="lan/kalmar/"><b>Kalmar län</b></a> · <a href="ort/kalmar/">Kalmar</a></li>
+<li><a href="lan/gotland/"><b>Gotland</b></a> · <a href="ort/visby/">Visby</a></li>
+<li><a href="lan/blekinge/"><b>Blekinge</b></a> · <a href="ort/karlskrona/">Karlskrona</a></li>
+<li><a href="lan/skane/"><b>Skåne</b></a> · <a href="ort/malmo/">Malmö</a> · <a href="ort/helsingborg/">Helsingborg</a> · <a href="ort/lund/">Lund</a> · <a href="ort/kristianstad/">Kristianstad</a></li>
+<li><a href="lan/halland/"><b>Halland</b></a> · <a href="ort/halmstad/">Halmstad</a> · <a href="ort/varberg/">Varberg</a></li>
+<li><a href="lan/vastra-gotaland/"><b>Västra Götaland</b></a> · <a href="ort/goteborg/">Göteborg</a> · <a href="ort/boras/">Borås</a> · <a href="ort/trollhattan/">Trollhättan</a> · <a href="ort/skovde/">Skövde</a> · <a href="ort/uddevalla/">Uddevalla</a></li>
+<li><a href="lan/varmland/"><b>Värmland</b></a> · <a href="ort/karlstad/">Karlstad</a> · <a href="ort/arvika/">Arvika</a></li>
+<li><a href="lan/orebro/"><b>Örebro län</b></a> · <a href="ort/orebro/">Örebro</a></li>
+<li><a href="lan/vastmanland/"><b>Västmanland</b></a> · <a href="ort/vasteras/">Västerås</a></li>
+<li><a href="lan/dalarna/"><b>Dalarna</b></a> · <a href="ort/falun/">Falun</a> · <a href="ort/borlange/">Borlänge</a> · <a href="ort/mora/">Mora</a> · <a href="ort/salen/">Sälen</a> · <a href="ort/alvdalen/">Älvdalen</a></li>
+<li><a href="lan/gavleborg/"><b>Gävleborg</b></a> · <a href="ort/gavle/">Gävle</a> · <a href="ort/hudiksvall/">Hudiksvall</a></li>
+<li><a href="lan/vasternorrland/"><b>Västernorrland</b></a> · <a href="ort/sundsvall/">Sundsvall</a> · <a href="ort/ornskoldsvik/">Örnsköldsvik</a> · <a href="ort/harnosand/">Härnösand</a> · <a href="ort/solleftea/">Sollefteå</a></li>
+<li><a href="lan/jamtland/"><b>Jämtland</b></a> · <a href="ort/ostersund/">Östersund</a></li>
+<li><a href="lan/vasterbotten/"><b>Västerbotten</b></a> · <a href="ort/umea/">Umeå</a> · <a href="ort/skelleftea/">Skellefteå</a> · <a href="ort/lycksele/">Lycksele</a> · <a href="ort/vilhelmina/">Vilhelmina</a></li>
+<li><a href="lan/norrbotten/"><b>Norrbotten</b></a> · <a href="ort/lulea/">Luleå</a> · <a href="ort/pitea/">Piteå</a> · <a href="ort/kiruna/">Kiruna</a></li>
+</ul>
+<p class="hv-lankar-vagar"><b>Stora vägar:</b> <a href="vag/e4/">E4</a> · <a href="vag/e6/">E6</a> · <a href="vag/e18/">E18</a> · <a href="vag/e20/">E20</a> · <a href="vag/e22/">E22</a> · <a href="vag/rv40/">Riksväg 40</a></p>
+<p class="hv-lankar-vagar"><a href="varningar/">Halkvarning idag: SMHI:s varningar</a> · <a href="nar-blir-det-halt.html">När blir det halt?</a> · <a href="app-som-varnar-for-halka.html">App som varnar för halka</a></p>
+<!-- /hv:lankar -->
     </div>
   </section>
 </main>
