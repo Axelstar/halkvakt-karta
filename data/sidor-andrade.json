@@ -1,7 +1,7 @@
 {
  "https://halkvakt.se/lan/": {
-  "lage": "halka eller vinterväglag i 5 av 21 län, kallast −2,6 °C vid Limingojärvi. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-04T19:30:20+00:00"
+  "lage": "halka eller vinterväglag i 5 av 21 län, kallast −2,7 °C vid Limingojärvi. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-04T20:00:00+00:00"
  },
  "https://halkvakt.se/varningar/": {
   "lage": "har SMHI ingen varning för snöfall, underkylt regn eller is. Trafikverkets väglag län för län, uppdaterat var 30:e minut.",
@@ -24,8 +24,8 @@
   "andrad": "2026-11-04T08:00:00+00:00"
  },
  "https://halkvakt.se/lan/jonkoping/": {
-  "lage": "ingen halka på 52 vägavsnitt i Jönköpings län, kallast 0,0 °C vid 639 N Sandsjö Fjärryta. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-04T19:30:20+00:00"
+  "lage": "ingen halka på 52 vägavsnitt i Jönköpings län, ingen mätstation under noll. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-04T20:00:00+00:00"
  },
  "https://halkvakt.se/lan/kronoberg/": {
   "lage": "ingen halka på 28 vägavsnitt i Kronobergs län, ingen mätstation under noll. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
@@ -52,28 +52,28 @@
   "andrad": "2026-11-04T19:00:00+00:00"
  },
  "https://halkvakt.se/lan/vastra-gotaland/": {
-  "lage": "ingen halka på 133 vägavsnitt i Västra Götalands län, kallast −1,4 °C vid Äspekärr. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-04T19:30:20+00:00"
+  "lage": "ingen halka på 133 vägavsnitt i Västra Götalands län, kallast −1,5 °C vid Äspekärr. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-04T20:00:00+00:00"
  },
  "https://halkvakt.se/lan/varmland/": {
   "lage": "halka eller vinterväglag på 13 av 52 vägavsnitt i Värmlands län, kallast −2,3 °C vid Storberget. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
   "andrad": "2026-11-04T19:00:00+00:00"
  },
  "https://halkvakt.se/lan/orebro/": {
-  "lage": "ingen halka på 26 vägavsnitt i Örebro län, kallast −0,2 °C vid Kopparberg. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-04T19:30:20+00:00"
+  "lage": "ingen halka på 26 vägavsnitt i Örebro län, kallast −0,5 °C vid Kopparberg. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-04T20:00:00+00:00"
  },
  "https://halkvakt.se/lan/vastmanland/": {
   "lage": "ingen halka på 24 vägavsnitt i Västmanlands län, ingen mätstation under noll. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
   "andrad": "2026-11-03T21:30:00+00:00"
  },
  "https://halkvakt.se/lan/dalarna/": {
-  "lage": "halka eller vinterväglag på 14 av 38 vägavsnitt i Dalarnas län, kallast −2,5 °C vid Sörsjön. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-04T19:30:20+00:00"
+  "lage": "halka eller vinterväglag på 14 av 38 vägavsnitt i Dalarnas län, kallast −2,6 °C vid Sörsjön. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-04T20:00:00+00:00"
  },
  "https://halkvakt.se/lan/gavleborg/": {
-  "lage": "ingen halka på 27 vägavsnitt i Gävleborgs län, ingen mätstation under noll. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-04T16:00:01+00:00"
+  "lage": "ingen halka på 27 vägavsnitt i Gävleborgs län, kallast 0,0 °C vid Kårböle 2. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-04T20:00:00+00:00"
  },
  "https://halkvakt.se/lan/vasternorrland/": {
   "lage": "halka eller vinterväglag på 6 av 22 vägavsnitt i Västernorrlands län, ingen mätstation under noll. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
@@ -84,12 +84,12 @@
   "andrad": "2026-11-04T14:30:16+00:00"
  },
  "https://halkvakt.se/lan/vasterbotten/": {
-  "lage": "halka eller vinterväglag på 29 av 44 vägavsnitt i Västerbottens län, kallast −0,6 °C vid Giltjaur. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-04T19:30:20+00:00"
+  "lage": "halka eller vinterväglag på 29 av 44 vägavsnitt i Västerbottens län, kallast −1,0 °C vid Giltjaur. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-04T20:00:00+00:00"
  },
  "https://halkvakt.se/lan/norrbotten/": {
-  "lage": "halka eller vinterväglag på 31 av 58 vägavsnitt i Norrbottens län, kallast −2,6 °C vid Limingojärvi. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-04T19:30:20+00:00"
+  "lage": "halka eller vinterväglag på 31 av 58 vägavsnitt i Norrbottens län, kallast −2,7 °C vid Limingojärvi. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-04T20:00:00+00:00"
  },
  "https://halkvakt.se/vag/e4/": {
   "lage": "halka eller vinterväglag på 7 av 53 vägavsnitt på E4, ingen mätstation under noll. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
@@ -100,8 +100,8 @@
   "andrad": "2026-11-04T08:30:00+00:00"
  },
  "https://halkvakt.se/vag/e18/": {
-  "lage": "halka eller vinterväglag på 2 av 20 vägavsnitt på E18, kallast −1,2 °C vid Årjäng. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-04T19:00:00+00:00"
+  "lage": "halka eller vinterväglag på 2 av 20 vägavsnitt på E18, kallast −1,5 °C vid 1733 Årjäng Fjärryta. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-04T20:00:00+00:00"
  },
  "https://halkvakt.se/vag/e20/": {
   "lage": "ingen halka på 19 vägavsnitt på E20, ingen mätstation under noll. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
