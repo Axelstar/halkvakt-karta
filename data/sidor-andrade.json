@@ -1,7 +1,7 @@
 {
  "https://halkvakt.se/lan/": {
-  "lage": "halka eller vinterväglag i 8 av 21 län, kallast −0,8 °C vid Sörsjön. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-04T12:00:00+00:00"
+  "lage": "halka eller vinterväglag i 8 av 21 län, kallast −0,7 °C vid Sörsjön. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-04T13:00:13+00:00"
  },
  "https://halkvakt.se/varningar/": {
   "lage": "har SMHI ingen varning för snöfall, underkylt regn eller is. Trafikverkets väglag län för län, uppdaterat var 30:e minut.",
@@ -56,8 +56,8 @@
   "andrad": "2026-11-04T11:30:13+00:00"
  },
  "https://halkvakt.se/lan/varmland/": {
-  "lage": "halka eller vinterväglag på 1 av 52 vägavsnitt i Värmlands län, kallast 0,0 °C vid Bogen. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-04T12:30:00+00:00"
+  "lage": "halka eller vinterväglag på 1 av 52 vägavsnitt i Värmlands län, kallast −0,1 °C vid Bogen. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-04T13:00:13+00:00"
  },
  "https://halkvakt.se/lan/orebro/": {
   "lage": "ingen halka på 26 vägavsnitt i Örebro län, ingen mätstation under noll. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
@@ -68,8 +68,8 @@
   "andrad": "2026-11-03T21:30:00+00:00"
  },
  "https://halkvakt.se/lan/dalarna/": {
-  "lage": "halka eller vinterväglag på 3 av 38 vägavsnitt i Dalarnas län, kallast −0,8 °C vid Sörsjön. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-04T12:00:00+00:00"
+  "lage": "halka eller vinterväglag på 3 av 38 vägavsnitt i Dalarnas län, kallast −0,7 °C vid Sörsjön. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-04T13:00:13+00:00"
  },
  "https://halkvakt.se/lan/gavleborg/": {
   "lage": "halka eller vinterväglag på 1 av 27 vägavsnitt i Gävleborgs län, ingen mätstation under noll. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
@@ -88,8 +88,8 @@
   "andrad": "2026-11-04T09:30:20+00:00"
  },
  "https://halkvakt.se/lan/norrbotten/": {
-  "lage": "halka eller vinterväglag på 36 av 58 vägavsnitt i Norrbottens län, kallast −0,5 °C vid Nedre Soppero. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-04T12:30:00+00:00"
+  "lage": "halka eller vinterväglag på 36 av 58 vägavsnitt i Norrbottens län, kallast −0,6 °C vid Nedre Soppero. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-04T13:00:13+00:00"
  },
  "https://halkvakt.se/vag/e4/": {
   "lage": "halka eller vinterväglag på 5 av 53 vägavsnitt på E4, ingen mätstation under noll. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
