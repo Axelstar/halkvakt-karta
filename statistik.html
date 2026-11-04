@@ -21,6 +21,8 @@
   .val { display:flex; gap:6px; align-items:center; }
   .val .meta { margin-right:4px; }
   .val button { background:var(--panel); color:var(--text2); border:1px solid var(--kant); border-radius:6px; padding:8px 12px; font:12px var(--mono); cursor:pointer; min-height:36px; }
+  .val button { white-space:nowrap; }
+  @media (max-width:520px) { .val button { padding:8px 9px; } .val .meta { display:none; } }
   .val button[aria-pressed="true"] { border-color:var(--gul); color:var(--gul); }
 
   .ruta { background:var(--panel); border:1px solid var(--kant); border-radius:14px; padding:16px 18px; }
@@ -116,7 +118,7 @@
       </div>
       <div class="val" role="group" aria-label="Period">
         <span class="meta">PERIOD</span>
-        <button data-d="7">7 dygn</button><button data-d="30" aria-pressed="true">30 dygn</button><button data-d="90">90 dygn</button>
+        <button data-d="1">1 dygn</button><button data-d="7">7 dygn</button><button data-d="30" aria-pressed="true">30 dygn</button><button data-d="90">90 dygn</button>
       </div>
     </header>
 
@@ -148,10 +150,10 @@
       <p class="ingress">Hur många som besöker halkvakt.se, hur de hittar dit och om de går vidare till appen.</p>
 
       <div class="ruta">
-        <h2>Besök per dygn</h2>
+        <h2 id="dagar-rubrik">Besök per dygn</h2>
         <div class="stapel" id="dagar"></div>
         <div class="axel"><span id="ax-fran"></span><span id="ax-till"></span></div>
-        <div class="forklaring"><em style="background:var(--gul)"></em>kom in utifrån &nbsp; <em style="background:var(--gul2)"></em>klickade vidare till fler sidor</div>
+        <div class="forklaring" id="dagar-forklaring"><em style="background:var(--gul)"></em>kom in utifrån &nbsp; <em style="background:var(--gul2)"></em>klickade vidare till fler sidor</div>
       </div>
 
       <div class="grid">
@@ -298,9 +300,12 @@
   }
 
   // Dygnsserie med tomma dygn ifyllda, så att staplarna står på en riktig tidsaxel.
+  // Vid 1 dygn (de senaste 24 timmarna) visas i går och i dag, så att staplarna har något att jämföra med.
+  var periodText = function () { return dagar === 1 ? "senaste dygnet (24 timmar)" : "senaste " + dagar + " dygnen"; };
+  var periodKort = function () { return dagar === 1 ? "24 timmar" : dagar + " dygn"; };
   function dygnsserie(per, tom) {
     var serie = [], idag = new Date(); idag.setHours(12, 0, 0, 0);
-    for (var i = dagar - 1; i >= 0; i--) {
+    for (var i = Math.max(dagar, 2) - 1; i >= 0; i--) {
       var t = new Date(idag); t.setDate(t.getDate() - i);
       var k = t.toLocaleDateString("sv-SE"); serie.push({ dag: k, r: per[k] || tom });
     }
@@ -311,7 +316,7 @@
   // Det som summeras överst. Fylls av rita, ritaAppen och ritaAds.
   var korthet = {};
   function ritaKorthet() {
-    $("korthet-rubrik").textContent = "I korthet, senaste " + dagar + " dygnen";
+    $("korthet-rubrik").textContent = "I korthet, " + periodText();
     var rader = [korthet.sajten, korthet.appen, korthet.annonser, korthet.tidningar].filter(Boolean);
     $("korthet").innerHTML = rader.map(function (r) { return "<li>" + r + "</li>"; }).join("");
   }
@@ -323,7 +328,7 @@
     // Nyckeltalen
     $("t-idag").textContent = fmt(d.besokare_idag || d.idag);
     $("s-idag").textContent = (d.besokare_idag ? fmt(d.idag) + " sidvisningar" : "sidvisningar") + " · i går " + fmt(d.besokare_igar || d.igar);
-    $("t-in").textContent = fmt(d.ingangar); $("t-perlabel").textContent = "Besök in, " + dagar + " dygn";
+    $("t-in").textContent = fmt(d.ingangar); $("t-perlabel").textContent = "Besök in, " + periodKort();
     $("t-app").textContent = fmt(d.appklick || 0);
     var mal = d.appklick_mal || {};
     $("s-app").textContent = "App Store " + fmt(mal.ios || 0) + " · Play " + fmt(mal.android || 0);
@@ -349,6 +354,20 @@
       return '<div title="' + kortDag(s.dag) + ": " + s.in + " kom in, " + s.inom + ' fler sidor"><i class="b" style="height:' + (100 * s.inom / max) + '%"></i><i style="height:' + (100 * s.in / max) + '%"></i></div>';
     }).join("");
     $("ax-fran").textContent = kortDag(serie[0].dag); $("ax-till").textContent = kortDag(serie[serie.length - 1].dag);
+    $("dagar-rubrik").textContent = "Besök per dygn";
+    $("dagar-forklaring").hidden = false;
+    if (dagar === 1) {
+      // Senaste 24 timmarna, timme för timme, med den pågående timmen längst till höger.
+      var ht = {}; (d.per_timme || []).forEach(function (r) { ht[r.timme] = r.visningar; });
+      var nu = new Date().getHours(), tt = [];
+      for (var q = 23; q >= 0; q--) { var hh = (nu - q + 24) % 24; tt.push({ h: hh, v: ht[hh] || 0 }); }
+      var tmax = Math.max(1, Math.max.apply(null, tt.map(function (x) { return x.v; })));
+      $("dagar").innerHTML = tt.map(function (x) { return '<div title="' + (x.h < 10 ? "0" : "") + x.h + ":00: " + x.v + ' visningar"><i style="height:' + (100 * x.v / tmax) + '%"></i></div>'; }).join("");
+      var hfmt = function (x) { return (x < 10 ? "0" : "") + x + ":00"; };
+      $("ax-fran").textContent = hfmt(tt[0].h); $("ax-till").textContent = hfmt(tt[23].h);
+      $("dagar-rubrik").textContent = "Sidvisningar per timme, senaste 24 timmarna";
+      $("dagar-forklaring").hidden = true;
+    }
 
     var h = {}; (d.per_timme || []).forEach(function (r) { h[r.timme] = r.visningar; });
     var hmax = Math.max(1, Math.max.apply(null, (d.per_timme || []).map(function (r) { return r.visningar; }).concat([0])));
@@ -527,7 +546,7 @@
       return '<tr><td class="namn"><b>' + namn + '</b><br><span class="meta">' + fmt(p.visningar) + " visningar · " + fmt(p.tryck) + " tryck · " + eur(p.kostnad) +
         (p.installationer ? " · " + eur(p.kostnad / p.installationer) + " per installation" : "") + '</span></td><td class="n">' + fmt(p.installationer) + '<br><span class="meta">inst.</span></td></tr>';
     };
-    $("aa-tal").innerHTML = rad(dagar + " dygn", a.period) + rad("Senaste 7 dygnen", a.sju);
+    $("aa-tal").innerHTML = rad(dagar === 1 ? "Senaste 24 timmarna" : dagar + " dygn", a.period) + rad("Senaste 7 dygnen", a.sju);
     var p = a.period;
     korthet.annonser = "Apple Ads kostade <b>" + eur(p.kostnad) + "</b> och gav <b>" + fmt(p.installationer) + "</b> " + (p.installationer === 1 ? "installation" : "installationer") +
       (p.installationer ? ", " + eur(p.kostnad / p.installationer) + " styck." : ".");
