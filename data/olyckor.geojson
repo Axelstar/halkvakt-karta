@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[17.632208802,59.322883007]},"properties":{"land":"SE","typ":"Olycka","msg":"Flera fordon. Räddningstjänst på plats.","allvar":null,"road":"Väg 816","start":"2026-11-04T08:15:48.000Z"}}]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[12.948784967,55.593607373]},"properties":{"land":"SE","typ":"Olycka","msg":"Singelolycka med personbil.","allvar":null,"road":null,"start":"2026-11-04T08:48:00.000Z"}}]}
