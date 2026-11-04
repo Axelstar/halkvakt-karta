@@ -8,53 +8,100 @@
 <link rel="icon" href="favicon.png">
 <link rel="stylesheet" href="assets/fonts/fonts.css">
 <style>
-  :root { --mark:#080B0D; --panel:#0F1518; --kant:#1E282D; --skilje:#253036; --text:#E9EFF2; --text2:#A9B5BB; --dampad:#8FA0A9;
-    --gul:#FFC94A; --gul2:rgba(255,201,74,.28); --sans:"Instrument Sans","Helvetica Neue",Arial,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace; color-scheme:dark; }
+  :root { --mark:#080B0D; --panel:#0F1518; --upp:#1A2327; --kant:#1E282D; --skilje:#253036; --text:#E9EFF2; --text2:#A9B5BB; --dampad:#8FA0A9; --dampad2:#6F7C83;
+    --gul:#FFC94A; --gul2:rgba(255,201,74,.28); --gron:#1FB25A;
+    --sans:"Instrument Sans","Helvetica Neue",Arial,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace; color-scheme:dark; }
   * { box-sizing:border-box; }
   body { margin:0; background:var(--mark); color:var(--text); font:15px/1.5 var(--sans); }
   .wrap { max-width:960px; margin:0 auto; padding:24px 16px 64px; }
-  header { display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:20px; }
-  h1 { font-size:22px; margin:0; letter-spacing:-.01em; }
-  h1 b { font-family:var(--mono); font-weight:600; letter-spacing:.06em; }
+  header { display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:18px; }
+  h1 { font-size:24px; margin:0; letter-spacing:-.015em; font-weight:600; }
+  h1 b { font-family:var(--mono); font-weight:600; letter-spacing:.12em; font-size:14px; display:block; color:var(--dampad); margin-bottom:4px; }
   .meta { font:12px var(--mono); color:var(--dampad); }
-  .val { display:flex; gap:6px; }
-  .val button { background:var(--panel); color:var(--text2); border:1px solid var(--kant); border-radius:6px; padding:6px 10px; font:12px var(--mono); cursor:pointer; }
+  .val { display:flex; gap:6px; align-items:center; }
+  .val .meta { margin-right:4px; }
+  .val button { background:var(--panel); color:var(--text2); border:1px solid var(--kant); border-radius:6px; padding:8px 12px; font:12px var(--mono); cursor:pointer; min-height:36px; }
   .val button[aria-pressed="true"] { border-color:var(--gul); color:var(--gul); }
-  .tal { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:10px; margin-bottom:14px; }
-  .ruta { background:var(--panel); border:1px solid var(--kant); border-radius:10px; padding:14px 16px; }
-  .tal .ruta span { display:block; font:11px var(--mono); color:var(--dampad); text-transform:uppercase; letter-spacing:.06em; }
-  .tal .ruta b { display:block; font:600 30px/1.2 var(--mono); margin-top:4px; }
-  .tal .ruta small { color:var(--text2); font-size:12px; }
-  h2 { font:600 11px var(--mono); color:var(--dampad); text-transform:uppercase; letter-spacing:.08em; margin:0 0 12px; }
-  .grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px; }
+
+  .ruta { background:var(--panel); border:1px solid var(--kant); border-radius:14px; padding:16px 18px; }
+  .ruta + .ruta, .grid + .ruta, .ruta + .grid, .grid + .grid, details + .ruta, .ruta + details { margin-top:10px; }
+
+  /* I korthet */
+  .korthet { padding:20px 22px; }
+  .korthet h2 { margin-bottom:10px; }
+  .korthet ul { margin:0; padding:0; list-style:none; }
+  .korthet li { font-size:17px; line-height:1.45; padding:8px 0; border-top:1px dashed var(--skilje); }
+  .korthet li:first-child { border-top:0; padding-top:0; }
+  .korthet li b { font-family:var(--mono); font-weight:600; }
+
+  .tal { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:10px; }
+  @media (max-width:760px) { .tal { grid-template-columns:1fr 1fr; } }
+  .tal .ruta { margin:0; }
+  .tal span { display:block; font:11px var(--mono); color:var(--dampad); text-transform:uppercase; letter-spacing:.1em; }
+  .tal b { display:block; font:600 34px/1.15 var(--mono); margin-top:6px; letter-spacing:-.02em; }
+  .tal small { display:block; color:var(--text2); font-size:13px; line-height:1.35; margin-top:4px; }
+
+  /* Flikar */
+  nav.flikar { display:flex; gap:4px; margin:22px 0 12px; padding:4px; background:var(--panel); border:1px solid var(--kant); border-radius:28px; overflow-x:auto; position:sticky; top:8px; z-index:2; }
+  nav.flikar button { flex:1; white-space:nowrap; background:none; border:0; color:var(--text2); font:500 15px var(--sans); padding:10px 14px; border-radius:24px; cursor:pointer; min-height:44px; }
+  nav.flikar button[aria-selected="true"] { background:var(--upp); color:var(--text); }
+  @media (max-width:520px) { nav.flikar button { padding:10px 8px; font-size:14px; } }
+  .flik[hidden] { display:none; }
+  .ingress { color:var(--text2); font-size:15px; margin:0 2px 12px; max-width:70ch; }
+
+  h2 { font:600 11px var(--mono); color:var(--dampad); text-transform:uppercase; letter-spacing:.12em; margin:0 0 12px; }
+  h3 { font:600 17px var(--sans); margin:0 0 4px; letter-spacing:-.01em; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .grid > .ruta { margin:0; }
   @media (max-width:700px) { .grid { grid-template-columns:1fr; } }
+
   .stapel { display:flex; align-items:flex-end; gap:3px; height:160px; padding-top:8px; }
   .stapel div { flex:1; position:relative; display:flex; flex-direction:column; justify-content:flex-end; min-width:0; height:100%; }
   .stapel i { display:block; background:var(--gul); border-radius:2px 2px 0 0; min-height:1px; }
   .stapel i.b { background:var(--gul2); }
+  .stapel i.g { background:var(--gron); }
   .stapel div:hover i { outline:1px solid var(--text); }
   .axel { display:flex; justify-content:space-between; font:11px var(--mono); color:var(--dampad); margin-top:6px; }
-  .forklaring { font-size:12px; color:var(--text2); margin-top:8px; }
+  .forklaring { font-size:13px; color:var(--text2); margin:8px 0 0; }
   .forklaring em { display:inline-block; width:10px; height:10px; border-radius:2px; vertical-align:-1px; margin-right:4px; }
+  .forklaring code, .lankar code { font:12px var(--mono); color:var(--text); background:var(--mark); border:1px solid var(--kant); border-radius:4px; padding:2px 6px; word-break:break-all; }
+
   table { width:100%; border-collapse:collapse; font-size:14px; }
-  td { padding:6px 0; border-top:1px solid var(--skilje); vertical-align:middle; }
+  td { padding:7px 0; border-top:1px dashed var(--skilje); vertical-align:middle; }
   tr:first-child td { border-top:0; }
-  td.n { text-align:right; font-family:var(--mono); width:56px; white-space:nowrap; padding-left:8px; }
-  td.namn { word-break:break-all; padding-right:10px; }
+  td.n { text-align:right; font-family:var(--mono); width:64px; white-space:nowrap; padding-left:8px; }
+  td.namn { word-break:break-word; padding-right:10px; }
   .bar { height:4px; background:var(--gul); border-radius:2px; margin-top:4px; opacity:.85; }
+  .bar.g { background:var(--gron); }
   .tom { color:var(--dampad); font-size:13px; }
-  .lankar code { font:12px var(--mono); color:var(--text); background:var(--mark); border:1px solid var(--kant); border-radius:4px; padding:2px 6px; word-break:break-all; }
-  .lankar td { padding:8px 0; }
+  .lankar td { padding:9px 0; }
+
+  /* Tratten */
+  .tratt td.namn { font-size:15px; }
+  .tratt td.n { font-size:18px; font-weight:600; }
+  .tratt .bar { height:8px; border-radius:4px; }
+
+  /* Hopfällda detaljer */
+  details.mer { margin-top:10px; border:1px dashed var(--skilje); border-radius:14px; }
+  details.mer > summary { cursor:pointer; list-style:none; padding:14px 18px; font:500 12px var(--mono); letter-spacing:.12em; text-transform:uppercase; color:var(--dampad); min-height:44px; }
+  details.mer > summary::-webkit-details-marker { display:none; }
+  details.mer > summary::before { content:"+ "; color:var(--text2); }
+  details.mer[open] > summary::before { content:"− "; }
+  details.mer > .innehall { padding:0 10px 10px; }
+  details.mer > .innehall > .ruta, details.mer > .innehall > .grid { margin-top:10px; }
+  details.mer > .innehall > :first-child { margin-top:0; }
+
   #las { max-width:360px; margin:15vh auto; }
   #las input { width:100%; padding:10px 12px; background:var(--panel); color:var(--text); border:1px solid var(--kant); border-radius:8px; font:14px var(--mono); }
   #las button { margin-top:10px; padding:10px 14px; background:var(--gul); color:var(--mark); border:0; border-radius:8px; font:600 14px var(--sans); cursor:pointer; }
   .fel { color:#FF8A7A; font-size:13px; margin-top:8px; }
+  .knapp { margin-top:8px; padding:10px 14px; background:var(--panel); color:var(--text); border:1px solid var(--kant); border-radius:8px; font:12px var(--mono); cursor:pointer; min-height:44px; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <form id="las" hidden>
-    <h1><b>HALKVAKT</b> · besök</h1>
+    <h1><b>HALKVAKT</b>Statistik</h1>
     <p class="meta">Skriv in nyckeln för att se statistiken.</p>
     <input id="nyckel" type="password" autocomplete="current-password" placeholder="Nyckel">
     <button type="submit">Visa</button>
@@ -64,97 +111,159 @@
   <div id="sida" hidden>
     <header>
       <div>
-        <h1><b>HALKVAKT</b> · besök på halkvakt.se</h1>
+        <h1><b>HALKVAKT</b>Statistik</h1>
         <div class="meta" id="genererad"></div>
       </div>
       <div class="val" role="group" aria-label="Period">
+        <span class="meta">PERIOD</span>
         <button data-d="7">7 dygn</button><button data-d="30" aria-pressed="true">30 dygn</button><button data-d="90">90 dygn</button>
       </div>
     </header>
 
+    <!-- 1 · Det viktigaste, i klartext -->
+    <div class="ruta korthet">
+      <h2 id="korthet-rubrik">I korthet</h2>
+      <ul id="korthet"></ul>
+    </div>
+
+    <!-- 2 · Fyra tal -->
     <div class="tal">
-      <div class="ruta"><span>I dag</span><b id="t-idag">–</b><small id="s-idag">sidvisningar</small></div>
-      <div class="ruta"><span>I går</span><b id="t-igar">–</b><small id="s-igar">sidvisningar</small></div>
-      <div class="ruta"><span>Senaste 7 dygnen</span><b id="t-sju">–</b><small id="s-sju">sidvisningar</small></div>
-      <div class="ruta"><span id="t-perlabel">Besök in</span><b id="t-in">–</b><small>kom utifrån till sajten</small></div>
+      <div class="ruta"><span>Besökare i dag</span><b id="t-idag">–</b><small id="s-idag">på halkvakt.se</small></div>
+      <div class="ruta"><span id="t-perlabel">Besök in</span><b id="t-in">–</b><small>kom till sajten utifrån, t.ex. från Google eller ett mejl</small></div>
       <div class="ruta"><span>Klick till appen</span><b id="t-app">–</b><small id="s-app">App Store och Play</small></div>
+      <div class="ruta"><span>Förare per dygn</span><b id="t-forare">–</b><small>som hade vakten igång, snitt senaste 7 dygnen</small></div>
     </div>
 
-    <div class="ruta">
-      <h2>Per dygn</h2>
-      <div class="stapel" id="dagar"></div>
-      <div class="axel"><span id="ax-fran"></span><span id="ax-till"></span></div>
-      <div class="forklaring"><em style="background:var(--gul)"></em>besök in utifrån &nbsp; <em style="background:var(--gul2)"></em>klick vidare inom sajten</div>
-    </div>
+    <!-- 3 · Flikarna -->
+    <nav class="flikar" role="tablist" aria-label="Område">
+      <button role="tab" data-flik="sajten" aria-selected="true">Sajten</button>
+      <button role="tab" data-flik="appen">Appen</button>
+      <button role="tab" data-flik="annonser">Annonser</button>
+      <button role="tab" data-flik="tidningar">Tidningar</button>
+      <button role="tab" data-flik="mer">Övrigt</button>
+    </nav>
 
-    <div class="grid">
-      <div class="ruta"><h2>Kanaler</h2><table id="kanaler"></table><p class="forklaring">AI-sök räknas för sig: ChatGPT, Perplexity, Gemini, Copilot, Claude och liknande.</p></div>
-      <div class="ruta"><h2>Varifrån de kom</h2><table id="kallor"></table></div>
-      <div class="ruta"><h2>Mest lästa sidor</h2><table id="sidor"></table></div>
-      <div class="ruta"><h2>Tid på dygnet</h2><div class="stapel" id="timmar" style="height:110px"></div><div class="axel"><span>00</span><span>06</span><span>12</span><span>18</span><span>23</span></div></div>
-      <div class="ruta"><h2>Mobil eller dator</h2><table id="enheter"></table></div>
-    </div>
+    <!-- SAJTEN -->
+    <section class="flik" id="flik-sajten" role="tabpanel">
+      <p class="ingress">Hur många som besöker halkvakt.se, hur de hittar dit och om de går vidare till appen.</p>
 
-    <div class="grid">
-      <div class="ruta"><h2>Klick till appen, varifrån</h2><table id="appkallor"></table>
-        <p class="forklaring">Källan är var besökaren kom in till sajten samma dygn. <span id="appmal"></span></p></div>
-      <div class="ruta"><h2>Klick till appen, från vilken sida</h2><table id="appsidor"></table></div>
-    </div>
+      <div class="ruta">
+        <h2>Besök per dygn</h2>
+        <div class="stapel" id="dagar"></div>
+        <div class="axel"><span id="ax-fran"></span><span id="ax-till"></span></div>
+        <div class="forklaring"><em style="background:var(--gul)"></em>kom in utifrån &nbsp; <em style="background:var(--gul2)"></em>klickade vidare till fler sidor</div>
+      </div>
 
-    <div class="ruta" style="margin-top:10px" id="aa">
-      <h2>Apple Ads</h2>
-      <p class="forklaring" style="margin-top:0" id="aa-meta"></p>
-      <table id="aa-tal" class="lankar"></table>
-      <div class="stapel" id="aa-dagar" style="height:90px;margin-top:10px"></div>
-      <div class="axel"><span id="aa-fran"></span><span id="aa-till"></span></div>
-      <div class="forklaring"><em style="background:var(--gul)"></em>installationer &nbsp; <em style="background:var(--gul2)"></em>visningar (skala för sig)</div>
-    </div>
-    <div class="grid">
-      <div class="ruta"><h2>Apple Ads, per nyckelord</h2><table id="aa-ord" class="lankar"></table></div>
-      <div class="ruta"><h2>Apple Ads, vad folk sökte på</h2><table id="aa-sok" class="lankar"></table>
-        <p class="forklaring">Söktermer med låg volym redovisar Apple inte ord för ord.</p></div>
-    </div>
+      <div class="grid">
+        <div class="ruta"><h2>Hur de hittade hit</h2><table id="kanaler"></table>
+          <p class="forklaring">Direkt / okänd är oftast någon som skrivit in adressen eller kommit från en app som inte berättar var länken fanns.</p></div>
+        <div class="ruta"><h2>Mest lästa sidor</h2><table id="sidor"></table></div>
+      </div>
 
-    <div class="ruta" style="margin-top:10px" id="app">
-      <h2>Appen</h2>
-      <p class="forklaring" style="margin-top:0">Appens anonyma räknare: ett ord per händelse, en rad per dygn, inget om vem. Från nästa version bär varje ord appens version och om telefonen är <b>ny</b> (installerad efter räknaren) eller <b>befintlig</b>. Vägen in räknas en gång per telefon och värde. Rader från 0.3.15 saknar kohort och står under <i>okänd</i>.</p>
-      <h3 class="meta" style="margin:14px 0 4px">VÄGEN IN</h3>
-      <table id="app-tal" class="lankar"></table>
-      <h3 class="meta" style="margin:14px 0 4px">AKTIVA FÖRARE</h3>
-      <table id="app-aktiva" class="lankar"></table>
-      <h3 class="meta" style="margin:14px 0 4px">VAKTPASSEN</h3>
-      <table id="app-pass" class="lankar"></table>
-      <h3 class="meta" style="margin:14px 0 4px">VARNINGARNA</h3>
-      <table id="app-varningar" class="lankar"></table>
-      <h3 class="meta" style="margin:14px 0 4px">INSTÄLLNINGAR SOM ÄNDRATS</h3>
-      <table id="app-installningar" class="lankar"></table>
-      <h3 class="meta" style="margin:14px 0 4px">FEL, PER VERSION</h3>
-      <table id="app-fel" class="lankar"></table>
-    </div>
+      <div class="grid">
+        <div class="ruta"><h2>Klick till appen, varifrån</h2><table id="appkallor"></table>
+          <p class="forklaring">Var besökaren kom in samma dygn. <span id="appmal"></span></p></div>
+        <div class="ruta"><h2>Klick till appen, från vilken sida</h2><table id="appsidor"></table></div>
+      </div>
 
-    <div class="ruta" style="margin-top:10px">
-      <h2>Flitigaste besökarna</h2>
-      <p class="forklaring" style="margin-top:0">En besökare är samma webbläsare samma dygn. Id:t är en hash som byts varje natt och inte går att följa bakåt eller koppla till en IP. Många visningar på dator mitt på dagen, rakt in utan källa, är ofta någon av oss som inte markerat enheten.</p>
-      <table id="tyngsta" class="lankar"></table>
-    </div>
+      <details class="mer">
+        <summary>Fler detaljer om sajten</summary>
+        <div class="innehall">
+          <div class="grid">
+            <div class="ruta"><h2>Varifrån, sajt för sajt</h2><table id="kallor"></table></div>
+            <div class="ruta"><h2>Tid på dygnet</h2><div class="stapel" id="timmar" style="height:110px"></div><div class="axel"><span>00</span><span>06</span><span>12</span><span>18</span><span>23</span></div>
+              <h2 style="margin-top:20px">Mobil eller dator</h2><table id="enheter"></table></div>
+          </div>
+        </div>
+      </details>
+    </section>
 
-    <div class="ruta" style="margin-top:10px">
-      <h2>Den här enheten</h2>
-      <p class="forklaring" style="margin-top:0" id="oss-status"></p>
-      <p class="forklaring">På en annan telefon eller dator: öppna <code style="font:12px var(--mono)">https://halkvakt.se/?oss=1</code> en gång i den webbläsaren.</p>
-      <button type="button" id="oss-knapp" style="margin-top:6px;padding:8px 12px;background:var(--panel);color:var(--text);border:1px solid var(--kant);border-radius:8px;font:12px var(--mono);cursor:pointer"></button>
-    </div>
+    <!-- APPEN -->
+    <section class="flik" id="flik-appen" role="tabpanel" hidden>
+      <p class="ingress">Appen räknar anonymt: ett ord per händelse och en rad per dygn, inget om vem. Talen gäller vald period.</p>
 
-    <div class="ruta" style="margin-top:10px">
-      <h2>Spårlänkar</h2>
-      <p class="forklaring" style="margin-top:0">Lägg till <code style="font:12px var(--mono)">?r=namn</code> på en länk du skickar, så syns här när den öppnas.</p>
-      <table id="koder" class="lankar"></table>
-    </div>
-    <div class="ruta" style="margin-top:10px">
-      <h2>Rutorna hos tidningarna</h2>
-      <p class="forklaring" style="margin-top:0">Visningar av väglagsrutan inbäddad på tidningarnas sajter, räknade för sig och inte med i siffrorna ovan. Öppnad direkt = någon har öppnat länken, till exempel för att testa.</p>
-      <table id="rutor" class="lankar"></table>
-    </div>
+      <div class="ruta">
+        <h2>Från nedladdad till i bruk</h2>
+        <p class="forklaring" style="margin:-4px 0 10px">Hur många telefoner som tagit sig igenom varje steg. Ju längre staplar längre ner, desto bättre.</p>
+        <table id="app-tratt" class="tratt"></table>
+      </div>
+
+      <div class="grid">
+        <div class="ruta">
+          <h2>Förare med vakten igång, per dygn</h2>
+          <div class="stapel" id="app-dagar" style="height:110px"></div>
+          <div class="axel"><span id="app-fran"></span><span id="app-till"></span></div>
+          <p class="forklaring" id="app-dagar-text"></p>
+        </div>
+        <div class="ruta"><h2>Varningar som gått ut</h2><table id="app-varningar-kort"></table></div>
+      </div>
+
+      <details class="mer">
+        <summary>Detaljer om appen</summary>
+        <div class="innehall">
+          <p class="forklaring" style="margin:0 8px 10px">Varje rad visar också om telefonen är <b>ny</b> (installerad efter räknaren) eller <b>befintlig</b>. Rader från version 0.3.15 saknar det och står som <i>okänd</i>.</p>
+          <div class="ruta"><h2>Vägen in, alla steg</h2><table id="app-tal" class="lankar"></table></div>
+          <div class="ruta"><h2>Förare som kommer tillbaka</h2><table id="app-aktiva" class="lankar"></table></div>
+          <div class="ruta"><h2>Vaktpassen</h2><table id="app-pass" class="lankar"></table></div>
+          <div class="ruta"><h2>Varningarna, i detalj</h2><table id="app-varningar" class="lankar"></table></div>
+          <div class="ruta"><h2>Inställningar som ändrats</h2><table id="app-installningar" class="lankar"></table></div>
+          <div class="ruta"><h2>Fel, per version</h2><table id="app-fel" class="lankar"></table></div>
+        </div>
+      </details>
+    </section>
+
+    <!-- ANNONSER -->
+    <section class="flik" id="flik-annonser" role="tabpanel" hidden>
+      <p class="ingress">Apple Ads, annonserna i App Store: vad de kostar och hur många som installerar appen.</p>
+      <div class="ruta" id="aa">
+        <h2>Apple Ads</h2>
+        <table id="aa-tal" class="lankar"></table>
+        <div class="stapel" id="aa-dagar" style="height:90px;margin-top:10px"></div>
+        <div class="axel"><span id="aa-fran"></span><span id="aa-till"></span></div>
+        <div class="forklaring"><em style="background:var(--gul)"></em>installationer &nbsp; <em style="background:var(--gul2)"></em>visningar (egen skala)</div>
+        <p class="forklaring" id="aa-meta"></p>
+      </div>
+      <details class="mer">
+        <summary>Sökord och söktermer</summary>
+        <div class="innehall">
+          <div class="grid">
+            <div class="ruta"><h2>Per nyckelord</h2><table id="aa-ord" class="lankar"></table></div>
+            <div class="ruta"><h2>Vad folk sökte på</h2><table id="aa-sok" class="lankar"></table>
+              <p class="forklaring">Söktermer med låg volym redovisar Apple inte ord för ord.</p></div>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- TIDNINGAR -->
+    <section class="flik" id="flik-tidningar" role="tabpanel" hidden>
+      <p class="ingress">Väglagsrutan som tidningarna bäddar in, och länkarna vi skickat till dem.</p>
+      <div class="ruta">
+        <h2>Rutorna hos tidningarna</h2>
+        <p class="forklaring" style="margin:-4px 0 10px">Talet till höger är visningar inbäddad på tidningens egen sajt. Räknas för sig och ingår inte i besöken på halkvakt.se. <i>Öppnad direkt</i> betyder att någon öppnat länken, till exempel för att prova.</p>
+        <table id="rutor" class="lankar"></table>
+      </div>
+      <div class="ruta">
+        <h2>Spårlänkar</h2>
+        <p class="forklaring" style="margin:-4px 0 10px">Lägg till <code>?r=namn</code> på en länk du skickar, så syns här när den öppnas.</p>
+        <table id="koder" class="lankar"></table>
+      </div>
+    </section>
+
+    <!-- ÖVRIGT -->
+    <section class="flik" id="flik-mer" role="tabpanel" hidden>
+      <div class="ruta">
+        <h2>Den här enheten</h2>
+        <p class="forklaring" style="margin-top:0" id="oss-status"></p>
+        <button type="button" class="knapp" id="oss-knapp"></button>
+        <p class="forklaring">På en annan telefon eller dator: öppna <code>https://halkvakt.se/?oss=1</code> en gång i den webbläsaren, så räknas inte dina egna besök.</p>
+      </div>
+      <div class="ruta">
+        <h2>Flitigaste besökarna</h2>
+        <p class="forklaring" style="margin:-4px 0 10px">En besökare är samma webbläsare samma dygn. Id:t är en hash som byts varje natt och inte går att följa bakåt eller koppla till en IP. Många visningar på dator mitt på dagen, rakt in utan källa, är ofta någon av oss som inte markerat enheten.</p>
+        <table id="tyngsta" class="lankar"></table>
+      </div>
+    </section>
   </div>
 </div>
 
@@ -175,87 +284,108 @@
     try { return localStorage.getItem("hv-besok") || ""; } catch (e) { return ""; }
   }
   var $ = function (id) { return document.getElementById(id); };
-  var fmt = function (n) { return Number(n).toLocaleString("sv-SE"); };
+  var fmt = function (n) { return Number(n || 0).toLocaleString("sv-SE"); };
+  var dec = function (n) { return Number(n || 0).toLocaleString("sv-SE", { maximumFractionDigits: 1 }); };
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+  var tomRad = function (txt) { return '<tr><td class="tom">' + (txt || "Inget ännu.") + "</td></tr>"; };
 
-  function lista(el, rader, namn) {
-    if (!rader.length) { el.innerHTML = '<tr><td class="tom">Inget ännu.</td></tr>'; return; }
-    var max = Math.max.apply(null, rader.map(function (r) { return r.visningar; }));
+  function lista(el, rader, namn, gron) {
+    if (!rader.length) { el.innerHTML = tomRad(); return; }
+    var max = Math.max(1, Math.max.apply(null, rader.map(function (r) { return r.visningar; })));
     el.innerHTML = rader.slice(0, 12).map(function (r) {
-      return '<tr><td class="namn">' + esc(namn(r)) + '<div class="bar" style="width:' + (100 * r.visningar / max) + '%"></div></td><td class="n">' + fmt(r.visningar) + "</td></tr>";
+      return '<tr><td class="namn">' + esc(namn(r)) + '<div class="bar' + (gron ? " g" : "") + '" style="width:' + (100 * r.visningar / max) + '%"></div></td><td class="n">' + fmt(r.visningar) + "</td></tr>";
     }).join("");
   }
 
+  // Dygnsserie med tomma dygn ifyllda, så att staplarna står på en riktig tidsaxel.
+  function dygnsserie(per, tom) {
+    var serie = [], idag = new Date(); idag.setHours(12, 0, 0, 0);
+    for (var i = dagar - 1; i >= 0; i--) {
+      var t = new Date(idag); t.setDate(t.getDate() - i);
+      var k = t.toLocaleDateString("sv-SE"); serie.push({ dag: k, r: per[k] || tom });
+    }
+    return serie;
+  }
+  var kortDag = function (k) { var p = k.split("-"); return Number(p[2]) + " " + ["JAN", "FEB", "MAR", "APR", "MAJ", "JUN", "JUL", "AUG", "SEP", "OKT", "NOV", "DEC"][Number(p[1]) - 1]; };
+
+  // Det som summeras överst. Fylls av rita, ritaAppen och ritaAds.
+  var korthet = {};
+  function ritaKorthet() {
+    $("korthet-rubrik").textContent = "I korthet, senaste " + dagar + " dygnen";
+    var rader = [korthet.sajten, korthet.appen, korthet.annonser, korthet.tidningar].filter(Boolean);
+    $("korthet").innerHTML = rader.map(function (r) { return "<li>" + r + "</li>"; }).join("");
+  }
+
   function rita(d) {
+    korthet = {};
     $("genererad").textContent = "Uppdaterad " + new Date(d.genererad).toLocaleString("sv-SE", { dateStyle: "short", timeStyle: "short" }) + " · ingen IP sparas, inga kakor" + (d.oss ? " · " + fmt(d.oss) + " visningar från oss borträknade" : "");
-    var bes = function (n) { return n ? "sidvisningar · " + fmt(n) + " besökare" : "sidvisningar"; };
-    $("s-idag").textContent = bes(d.besokare_idag); $("s-igar").textContent = bes(d.besokare_igar); $("s-sju").textContent = bes(d.besokare_sju);
+
+    // Nyckeltalen
+    $("t-idag").textContent = fmt(d.besokare_idag || d.idag);
+    $("s-idag").textContent = (d.besokare_idag ? fmt(d.idag) + " sidvisningar" : "sidvisningar") + " · i går " + fmt(d.besokare_igar || d.igar);
+    $("t-in").textContent = fmt(d.ingangar); $("t-perlabel").textContent = "Besök in, " + dagar + " dygn";
     $("t-app").textContent = fmt(d.appklick || 0);
     var mal = d.appklick_mal || {};
     $("s-app").textContent = "App Store " + fmt(mal.ios || 0) + " · Play " + fmt(mal.android || 0);
+
+    korthet.sajten = "<b>" + fmt(d.ingangar) + "</b> besök kom in till halkvakt.se, och <b>" + fmt(d.appklick || 0) + "</b> klick gick vidare till App Store eller Play." +
+      (d.sju !== undefined ? " Senaste veckan: " + fmt(d.besokare_sju || d.sju) + (d.besokare_sju ? " besökare." : " sidvisningar.") : "");
+
     $("appmal").textContent = "Räknas från 28 okt 2026.";
     lista($("appkallor"), d.appklick_kallor || [], function (r) { return r.kalla; });
     lista($("appsidor"), d.appklick_sidor || [], function (r) { return r.sida; });
+
     var ty = d.tyngsta || [];
     $("tyngsta").innerHTML = ty.length ? ty.map(function (r) {
       return '<tr><td class="namn"><b>' + esc(r.dag.slice(5)) + " · " + esc(r.id) + '</b><br><span class="meta">' + esc(r.forst) + "–" + esc(r.sist) + " · " +
         esc(r.enhet) + " · " + esc(r.kalla) + " · " + fmt(r.sidor) + (r.sidor === 1 ? " sida" : " sidor") + '</span></td><td class="n">' + fmt(r.visningar) + "</td></tr>";
-    }).join("") : '<tr><td class="tom">Räknas från 28 okt 2026.</td></tr>';
-    $("t-idag").textContent = fmt(d.idag); $("t-igar").textContent = fmt(d.igar); $("t-sju").textContent = fmt(d.sju);
-    $("t-in").textContent = fmt(d.ingangar); $("t-perlabel").textContent = "Besök in, " + dagar + " dygn";
+    }).join("") : tomRad("Räknas från 28 okt 2026.");
 
-    // Fyll i tomma dygn så att staplarna står på en riktig tidsaxel.
-    var per = {}; d.per_dag.forEach(function (r) { per[r.dag] = r; });
-    var serie = [], idag = new Date(); idag.setHours(12, 0, 0, 0);
-    for (var i = dagar - 1; i >= 0; i--) {
-      var t = new Date(idag); t.setDate(t.getDate() - i);
-      var k = t.toLocaleDateString("sv-SE"); var r = per[k] || { visningar: 0, ingangar: 0 };
-      serie.push({ dag: k, in: r.ingangar, inom: r.visningar - r.ingangar });
-    }
+    // Besök per dygn
+    var per = {}; (d.per_dag || []).forEach(function (r) { per[r.dag] = r; });
+    var serie = dygnsserie(per, { visningar: 0, ingangar: 0 }).map(function (s) { return { dag: s.dag, in: s.r.ingangar, inom: s.r.visningar - s.r.ingangar }; });
     var max = Math.max(1, Math.max.apply(null, serie.map(function (s) { return s.in + s.inom; })));
     $("dagar").innerHTML = serie.map(function (s) {
-      return '<div title="' + s.dag + ": " + s.in + " in, " + s.inom + ' inom sajten"><i class="b" style="height:' + (100 * s.inom / max) + '%"></i><i style="height:' + (100 * s.in / max) + '%"></i></div>';
+      return '<div title="' + kortDag(s.dag) + ": " + s.in + " kom in, " + s.inom + ' fler sidor"><i class="b" style="height:' + (100 * s.inom / max) + '%"></i><i style="height:' + (100 * s.in / max) + '%"></i></div>';
     }).join("");
-    $("ax-fran").textContent = serie[0].dag; $("ax-till").textContent = serie[serie.length - 1].dag;
+    $("ax-fran").textContent = kortDag(serie[0].dag); $("ax-till").textContent = kortDag(serie[serie.length - 1].dag);
 
-    var h = {}; d.per_timme.forEach(function (r) { h[r.timme] = r.visningar; });
-    var hmax = Math.max(1, Math.max.apply(null, d.per_timme.map(function (r) { return r.visningar; }).concat([0])));
+    var h = {}; (d.per_timme || []).forEach(function (r) { h[r.timme] = r.visningar; });
+    var hmax = Math.max(1, Math.max.apply(null, (d.per_timme || []).map(function (r) { return r.visningar; }).concat([0])));
     var tim = ""; for (var j = 0; j < 24; j++) { var v = h[j] || 0; tim += '<div title="' + (j < 10 ? "0" : "") + j + ":00: " + v + '"><i style="height:' + (100 * v / hmax) + '%"></i></div>'; }
     $("timmar").innerHTML = tim;
 
-    // Kanaler (30/10): källorna i grupper, så att AI-sök syns för sig och inte drunknar bland Google och Bing.
-    var KANAL = [["AI-sök", /chatgpt|openai|perplexity|gemini\.google|bard\.google|copilot|claude\.ai|you\.com|phind|meta\.ai|grok|x\.ai|mistral|kagi/i],
+    // Hur de hittade hit (30/10): källorna i grupper, så att AI-sök syns för sig och inte drunknar bland Google och Bing.
+    var KANAL = [["AI-sök (ChatGPT m.fl.)", /chatgpt|openai|perplexity|gemini\.google|bard\.google|copilot|claude\.ai|you\.com|phind|meta\.ai|grok|x\.ai|mistral|kagi/i],
       ["Mejl", /mail|outlook|zoho/i],
-      ["Sökmotorer", /(^|\.)(google|bing|duckduckgo|ecosia|yahoo|yandex|startpage|qwant|brave)\./i],
+      ["Sökmotorer (Google m.fl.)", /(^|\.)(google|bing|duckduckgo|ecosia|yahoo|yandex|startpage|qwant|brave)\./i],
       ["Sociala medier", /facebook|instagram|threads|bsky|bluesky|twitter|(^|\.)x\.com|t\.co$|linkedin|reddit|flashback/i]];
     var kan = {};
-    d.kallor.forEach(function (r) {
+    (d.kallor || []).forEach(function (r) {
       var k = (KANAL.filter(function (x) { return x[1].test(r.kalla); })[0] || [/direkt|okänd/i.test(r.kalla) ? "Direkt / okänd" : "Andra sajter"])[0];
       kan[k] = (kan[k] || 0) + r.visningar;
     });
-    if (!kan["AI-sök"]) kan["AI-sök"] = 0;
+    if (!kan[KANAL[0][0]]) kan[KANAL[0][0]] = 0;
     lista($("kanaler"), Object.keys(kan).map(function (k) { return { namn: k, visningar: kan[k] }; }).sort(function (a, b) { return b.visningar - a.visningar; }), function (r) { return r.namn; });
-    lista($("kallor"), d.kallor, function (r) { return r.kalla; });
-    lista($("sidor"), d.sidor, function (r) { return r.sida; });
-    lista($("enheter"), Object.keys(d.enheter).map(function (k) { return { namn: k, visningar: d.enheter[k] }; }).sort(function (a, b) { return b.visningar - a.visningar; }), function (r) { return r.namn === "mobil" ? "Mobil" : "Dator"; });
+    lista($("kallor"), d.kallor || [], function (r) { return r.kalla; });
+    lista($("sidor"), d.sidor || [], function (r) { return r.sida; });
+    lista($("enheter"), Object.keys(d.enheter || {}).map(function (k) { return { namn: k, visningar: d.enheter[k] }; }).sort(function (a, b) { return b.visningar - a.visningar; }), function (r) { return r.namn === "mobil" ? "Mobil" : "Dator"; });
 
-    var kod = {}; d.koder.forEach(function (r) { kod[r.kod] = r; });
+    // Spårlänkar
+    var kod = {}; (d.koder || []).forEach(function (r) { kod[r.kod] = r; });
     var kanda = LANKAR.map(function (l) { return l[0]; });
     var rader = LANKAR.map(function (l) {
       var r = kod[l[0]];
-      return "<tr><td class=\"namn\"><b>" + esc(l[1]) + "</b><br><code>" + esc(l[2]) + "</code></td><td class=\"n\">" +
+      return '<tr><td class="namn"><b>' + esc(l[1]) + "</b><br><code>" + esc(l[2]) + '</code></td><td class="n">' +
         (r ? fmt(r.visningar) + '<br><span class="meta">' + esc(r.senast.slice(5, 16).replace("T", " ")) + "</span>" : '<span class="meta">ej öppnad</span>') + "</td></tr>";
     });
-    d.koder.filter(function (r) { return kanda.indexOf(r.kod) < 0; }).forEach(function (r) {
+    (d.koder || []).filter(function (r) { return kanda.indexOf(r.kod) < 0; }).forEach(function (r) {
       rader.push('<tr><td class="namn"><b>?r=' + esc(r.kod) + '</b></td><td class="n">' + fmt(r.visningar) + "</td></tr>");
     });
     $("koder").innerHTML = rader.join("");
 
     // Rutorna hos tidningarna (Axel 23/10): per tidning, inbäddad hos dem respektive öppnad direkt.
     var rutor = d.rutor || [];
-    ritaAds(d.apple_ads);
-    ritaAppen(d.appen);
-
     $("rutor").innerHTML = rutor.length ? rutor.map(function (r) {
       var sajter = (r.sajter || []).filter(function (x) { return x !== "(inbaddad)"; });
       var under = r.inbaddad
@@ -263,15 +393,28 @@
         : "inte inbäddad än" + (r.direkt ? " · öppnad direkt " + fmt(r.direkt) + " gånger" : "");
       return '<tr><td class="namn"><b>' + esc(r.tidning) + '</b><br><span class="meta">' + under + "</span></td>" +
         '<td class="n">' + (r.inbaddad ? fmt(r.inbaddad) : '<span class="meta">–</span>') + "</td></tr>";
-    }).join("") : '<tr><td class="tom">Ingen ruta har visats än.</td></tr>';
+    }).join("") : tomRad("Ingen ruta har visats än.");
+    var inbaddade = rutor.filter(function (r) { return r.inbaddad; });
+    if (rutor.length) korthet.tidningar = inbaddade.length
+      ? "Väglagsrutan visades <b>" + fmt(inbaddade.reduce(function (s, r) { return s + (r.inbaddad || 0); }, 0)) + "</b> gånger hos " + inbaddade.length + (inbaddade.length === 1 ? " tidning" : " tidningar") + " (" + inbaddade.map(function (r) { return esc(r.tidning); }).join(", ") + ")."
+      : "Ingen tidning har bäddat in rutan på sin sajt än.";
+
+    ritaAds(d.apple_ads);
+    ritaAppen(d.appen);
+    ritaKorthet();
   }
 
   // Appens räknare (DECISIONS #772, #787 i appens repo): app_raknare_stat via besok_stat.appen — rader per händelse, värde, app,
   // version och kohort ('' för 0.3.15, som inte skickar dem).
   function ritaAppen(a) {
     var rader = (a && a.rader) || [];
-    var tomt = '<tr><td class="tom">Inget räknat än.</td></tr>';
-    if (!rader.length) { ["app-tal", "app-aktiva", "app-pass", "app-varningar", "app-installningar", "app-fel"].forEach(function (id) { $(id).innerHTML = tomt; }); return; }
+    var tomt = tomRad("Inget räknat än.");
+    var alla = ["app-tratt", "app-varningar-kort", "app-tal", "app-aktiva", "app-pass", "app-varningar", "app-installningar", "app-fel"];
+    if (!rader.length) {
+      alla.forEach(function (id) { $(id).innerHTML = tomt; });
+      $("t-forare").textContent = "–"; $("app-dagar").innerHTML = ""; $("app-dagar-text").textContent = "";
+      return;
+    }
     var summa = function (pred) {
       var t = { n: 0, ios: 0, and: 0, sju: 0, idag: 0, ny: 0, bef: 0, okand: 0 };
       rader.forEach(function (r) {
@@ -291,7 +434,41 @@
     var ar = function (h, v) { return function (r) { return r.handelse === h && (v === undefined || r.varde === v); }; };
     var tabell = function (id, rows) { $(id).innerHTML = rows.length ? rows.join("") : tomt; };
 
-    // 1 · Vägen in. Kolumnen "ny" är tratten: telefoner som installerades efter räknaren.
+    // Tratten, enkel: fyra steg, en stapel var.
+    var steg = [
+      ["Gick igenom introduktionen", "räknas bara på iPhone", summa(ar("onboarding_klar"))],
+      ["Gav appen platsen Alltid", "då startar vakten själv i bilen", summa(ar("behorighet", "alltid"))],
+      ["Startade vakten första gången", "", summa(ar("forsta_starten"))],
+      ["Fick sin första varning", "", summa(ar("forsta_varningen"))]
+    ];
+    var smax = Math.max(1, Math.max.apply(null, steg.map(function (s) { return s[2].n; })));
+    $("app-tratt").innerHTML = steg.map(function (s) {
+      return '<tr><td class="namn">' + s[0] + (s[1] ? ' <span class="meta">' + s[1] + "</span>" : "") +
+        '<div class="bar g" style="width:' + (100 * s[2].n / smax) + '%"></div></td><td class="n">' + fmt(s[2].n) + "</td></tr>";
+    }).join("");
+
+    // Aktiva förare: aktiv_dag räknas en gång per telefon och dygn, så dygnets tal är dygnets aktiva förare.
+    var perDag = {}; ((a && a.per_dag) || []).forEach(function (r) { if (r.handelse === "aktiv_dag") perDag[r.dag] = (perDag[r.dag] || 0) + r.antal; });
+    var dagarna = Object.keys(perDag).sort(), sju = dagarna.slice(-7), snitt = sju.length ? sju.reduce(function (s, d) { return s + perDag[d]; }, 0) / sju.length : 0;
+    $("t-forare").textContent = sju.length ? dec(snitt) : "–";
+    var serie = dygnsserie(perDag, 0), fmax = Math.max(1, Math.max.apply(null, serie.map(function (s) { return s.r; })));
+    $("app-dagar").innerHTML = serie.map(function (s) { return '<div title="' + kortDag(s.dag) + ": " + s.r + ' förare"><i class="g" style="height:' + (100 * s.r / fmax) + '%"></i></div>'; }).join("");
+    $("app-fran").textContent = kortDag(serie[0].dag); $("app-till").textContent = kortDag(serie[serie.length - 1].dag);
+    var hogst = dagarna.reduce(function (b, d) { return perDag[d] > (perDag[b] || 0) ? d : b; }, "");
+    $("app-dagar-text").textContent = "En stapel är antalet telefoner där vakten gick det dygnet." + (hogst ? " Flest: " + fmt(perDag[hogst]) + " den " + kortDag(hogst).toLowerCase() + "." : "");
+
+    // Varningar, kort: per fara.
+    var FARA = { accident: "Olycka", slippery_segment: "Halka", icing_point: "Frysrisk", wildlife: "Vilt", camera: "Fartkamera", kandidat: "Prognos" };
+    var varn = Object.keys(FARA).map(function (k) { return { namn: FARA[k], visningar: summa(function (r) { return r.handelse === "varning" && r.varde.split(":")[0] === k; }).n }; })
+      .sort(function (x, y) { return y.visningar - x.visningar; });
+    var varnSumma = varn.reduce(function (s, v) { return s + v.visningar; }, 0);
+    if (varnSumma) lista($("app-varningar-kort"), varn, function (r) { return r.namn; }); else $("app-varningar-kort").innerHTML = tomRad("Inga varningar än.");
+
+    var forsta = summa(ar("forsta_varningen")).n;
+    korthet.appen = (sju.length ? "Vakten var igång hos i snitt <b>" + dec(snitt) + "</b> förare per dygn senaste veckan. " : "") +
+      "Appen sa <b>" + fmt(varnSumma) + "</b> varningar" + (forsta ? ", och " + fmt(forsta) + (forsta === 1 ? " telefon fick" : " telefoner fick") + " sin första." : ".");
+
+    // --- Detaljerna ---
     tabell("app-tal", [
       ["onboarding_klar", "", "Introduktionen klar", "bara iPhone"],
       ["behorighet", "nar", "Behörighet: När appen används", ""],
@@ -303,16 +480,13 @@
       ["forsta_varningen", "", "Första varningen", "en gång per telefon"]
     ].map(function (x) { return rad(x[2], x[3], summa(ar(x[0], x[1]))); }));
 
-    // 2 · Aktiva förare: aktiv_dag räknas en gång per telefon och dygn, så dygnets tal är dygnets aktiva förare.
-    var perDag = {}; ((a && a.per_dag) || []).forEach(function (r) { if (r.handelse === "aktiv_dag") perDag[r.dag] = (perDag[r.dag] || 0) + r.antal; });
-    var dagarna = Object.keys(perDag).sort(), sju = dagarna.slice(-7), snitt = sju.length ? sju.reduce(function (s, d) { return s + perDag[d]; }, 0) / sju.length : 0;
     tabell("app-aktiva", [rad("Förardygn", "en per telefon och dygn som vakten gick", summa(ar("aktiv_dag")),
-      " · snitt per dygn, senaste 7 med data " + snitt.toLocaleString("sv-SE", { maximumFractionDigits: 1 }))].concat(
+      " · snitt per dygn, senaste 7 med data " + dec(snitt))].concat(
       [["0", "Första dygnet"], ["1-7", "Dag 1–7"], ["8-30", "Dag 8–30"], ["over30", "Efter 30 dagar"]].map(function (x) {
         return rad(x[1], "dagar sedan telefonen började räkna", summa(ar("aktiv_dag", x[0])));
       })));
 
-    // 3 · Vaktpassen: resa_slut = start:längd:slut. Korta självstarter är det som ska ses.
+    // Vaktpassen: resa_slut = start:längd:slut. Korta självstarter är det som ska ses.
     var pass = function (del, varde) { return function (r) { return r.handelse === "resa_slut" && r.varde.split(":")[del] === varde; }; };
     var korta = function (r) { var p = r.varde.split(":"); return r.handelse === "resa_slut" && p[0] === "sjalv" && p[1] === "under3"; };
     tabell("app-pass", [rad("Avslutade pass", "", summa(ar("resa_slut"))), rad("Självstart, under 3 min", "trolig falsk start", summa(korta))].concat(
@@ -321,20 +495,16 @@
        [2, "parkerad", "Slut: parkerad en kvart"], [2, "sjalv", "Slut: autostarten stängde"], [2, "hand", "Slut: för hand"],
        [2, "avbruten", "Slut: appen dog under passet"]].map(function (x) { return rad(x[2], "", summa(pass(x[0], x[1]))); })));
 
-    // 4 · Varningarna: per fara, kort som byttes ut och bannern.
-    var FARA = { accident: "Olycka", slippery_segment: "Halka", icing_point: "Frysrisk", wildlife: "Vilt", camera: "Fartkamera", kandidat: "Prognos" };
     tabell("app-varningar", Object.keys(FARA).map(function (k) {
       return rad(FARA[k], "", summa(function (r) { return r.handelse === "varning" && r.varde.split(":")[0] === k; }),
         " · kortet utbytt " + fmt(summa(ar("varning_ersatt", k)).n));
     }).concat([rad("Bannern tillåten", "", summa(ar("banner", "visad"))), rad("Bannern avstängd", "", summa(ar("banner", "tyst")))]));
 
-    // 5 · Inställningarna, varje värde för sig.
     var inst = {}; rader.forEach(function (r) { if (r.handelse === "installning") inst[r.varde] = 1; });
     tabell("app-installningar", Object.keys(inst).sort().map(function (v) {
       var p = v.split(":"); return rad((FARA[p[0]] || p[0]) + ": " + p[1], "", summa(ar("installning", v)));
     }));
 
-    // 6 · Felen per version, och passen som appen dog i.
     var versioner = {}; rader.forEach(function (r) { if (r.handelse === "fel" || (r.handelse === "resa_slut" && /:avbruten$/.test(r.varde))) versioner[r.version || "0.3.15"] = 1; });
     tabell("app-fel", Object.keys(versioner).sort().reverse().map(function (ver) {
       var iv = function (r) { return (r.version || "0.3.15") === ver; };
@@ -347,7 +517,10 @@
 
   // Apple Ads (DECISIONS #748 i appens repo): sökordsrapporten varje dygn ur Apples API, via besok_stat.apple_ads.
   function ritaAds(a) {
-    if (!a || !a.period) { $("aa-meta").textContent = "Inga Apple Ads-siffror än."; return; }
+    if (!a || !a.period) {
+      $("aa-meta").textContent = "Inga Apple Ads-siffror än."; $("aa-tal").innerHTML = ""; $("aa-dagar").innerHTML = "";
+      $("aa-ord").innerHTML = tomRad(); $("aa-sok").innerHTML = tomRad(); return;
+    }
     var eur = function (n) { return Number(n).toLocaleString("sv-SE", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " " + (a.valuta || ""); };
     $("aa-meta").textContent = "Ur Apples egen rapport" + (a.hamtad ? ", hämtad " + new Date(a.hamtad).toLocaleString("sv-SE", { dateStyle: "short", timeStyle: "short" }) : "") + ". Apple räknar i sin tidszon och kan justera de senaste dygnen.";
     var rad = function (namn, p) {
@@ -355,24 +528,26 @@
         (p.installationer ? " · " + eur(p.kostnad / p.installationer) + " per installation" : "") + '</span></td><td class="n">' + fmt(p.installationer) + '<br><span class="meta">inst.</span></td></tr>';
     };
     $("aa-tal").innerHTML = rad(dagar + " dygn", a.period) + rad("Senaste 7 dygnen", a.sju);
+    var p = a.period;
+    korthet.annonser = "Apple Ads kostade <b>" + eur(p.kostnad) + "</b> och gav <b>" + fmt(p.installationer) + "</b> " + (p.installationer === 1 ? "installation" : "installationer") +
+      (p.installationer ? ", " + eur(p.kostnad / p.installationer) + " styck." : ".");
     var per = {}; (a.per_dag || []).forEach(function (r) { per[r.dag] = r; });
-    var serie = [], idag = new Date(); idag.setHours(12, 0, 0, 0);
-    for (var i = dagar - 1; i >= 0; i--) { var t = new Date(idag); t.setDate(t.getDate() - i); var k = t.toLocaleDateString("sv-SE"); serie.push({ dag: k, r: per[k] || { visningar: 0, installationer: 0, tryck: 0, kostnad: 0 } }); }
+    var serie = dygnsserie(per, { visningar: 0, installationer: 0, tryck: 0, kostnad: 0 });
     var vmax = Math.max(1, Math.max.apply(null, serie.map(function (s) { return s.r.visningar; })));
     var imax = Math.max(1, Math.max.apply(null, serie.map(function (s) { return s.r.installationer; })));
     $("aa-dagar").innerHTML = serie.map(function (s) {
-      return '<div title="' + s.dag + ": " + s.r.visningar + " visningar, " + s.r.tryck + " tryck, " + s.r.installationer + " installationer, " + eur(s.r.kostnad) + '"><i class="b" style="height:' + (100 * s.r.visningar / vmax) + '%"></i><i style="height:' + (100 * s.r.installationer / imax) + '%"></i></div>';
+      return '<div title="' + kortDag(s.dag) + ": " + s.r.visningar + " visningar, " + s.r.tryck + " tryck, " + s.r.installationer + " installationer, " + eur(s.r.kostnad) + '"><i class="b" style="height:' + (100 * s.r.visningar / vmax) + '%"></i><i style="height:' + (100 * s.r.installationer / imax) + '%"></i></div>';
     }).join("");
-    $("aa-fran").textContent = serie[0].dag; $("aa-till").textContent = serie[serie.length - 1].dag;
+    $("aa-fran").textContent = kortDag(serie[0].dag); $("aa-till").textContent = kortDag(serie[serie.length - 1].dag);
     var ord = a.nyckelord || [];
     $("aa-ord").innerHTML = ord.length ? ord.slice(0, 15).map(function (r) {
       return '<tr><td class="namn"><b>' + esc(r.nyckelord || "Search Match") + '</b> <span class="meta">' + esc(r.annonsgrupp) + '</span><br><span class="meta">' + fmt(r.visningar) + " visn. · " + fmt(r.tryck) + " tryck · " + eur(r.kostnad) +
         " · 7 dygn: " + fmt(r.sju_visningar || 0) + " visn., " + fmt(r.sju_installationer || 0) + ' inst.</span></td><td class="n">' + fmt(r.installationer) + "</td></tr>";
-    }).join("") : '<tr><td class="tom">Inget ännu.</td></tr>';
+    }).join("") : tomRad();
     var sok = a.soktermer || [];
     $("aa-sok").innerHTML = sok.length ? sok.slice(0, 15).map(function (r) {
       return '<tr><td class="namn"><b>' + esc(r.sokterm) + '</b><br><span class="meta">' + esc(r.nyckelord || "Search Match") + " · " + fmt(r.tryck) + " tryck · " + fmt(r.installationer) + ' inst.</span></td><td class="n">' + fmt(r.visningar) + "</td></tr>";
-    }).join("") : '<tr><td class="tom">Inget ännu.</td></tr>';
+    }).join("") : tomRad();
   }
 
   function ladda() {
@@ -381,9 +556,18 @@
       .then(function (d) { $("las").hidden = true; $("sida").hidden = false; rita(d); })
       .catch(function (e) {
         if (e.message === "nyckel") { try { localStorage.removeItem("hv-besok"); } catch (x) {} $("sida").hidden = true; $("las").hidden = false; $("lasfel").textContent = nyckel ? "Fel nyckel." : ""; }
-        else { $("genererad").textContent = "Kunde inte hämta siffrorna just nu."; }
+        else { $("sida").hidden = false; $("genererad").textContent = "Kunde inte hämta siffrorna just nu."; }
       });
   }
+
+  // Flikarna. Senast valda flik minns i den här webbläsaren.
+  function visaFlik(namn) {
+    document.querySelectorAll("nav.flikar button").forEach(function (b) { b.setAttribute("aria-selected", b.dataset.flik === namn ? "true" : "false"); });
+    document.querySelectorAll(".flik").forEach(function (s) { s.hidden = s.id !== "flik-" + namn; });
+    try { localStorage.setItem("hv-statflik", namn); } catch (e) {}
+  }
+  document.querySelectorAll("nav.flikar button").forEach(function (b) { b.addEventListener("click", function () { visaFlik(b.dataset.flik); }); });
+  try { var f = localStorage.getItem("hv-statflik"); if (f && $("flik-" + f)) visaFlik(f); } catch (e) {}
 
   document.querySelectorAll(".val button").forEach(function (b) {
     b.addEventListener("click", function () {
