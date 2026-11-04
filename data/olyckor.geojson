@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[29.111258588,61.326760971]},"properties":{"land":"FI","typ":"Olycka","msg":"Tie 6, Rautjärvi. Liikennetiedote onnettomuudesta.  · Onnettomuus · Onnettomuuspaikan pelastus- ja raivaustyöt käynnissä · Ajokaista suljettu liikenteeltä","allvar":null,"road":null,"start":"2026-11-04T01:26:00.000Z"}}]}
