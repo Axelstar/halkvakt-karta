@@ -24,16 +24,16 @@
   "andrad": "2026-11-04T08:00:00+00:00"
  },
  "https://halkvakt.se/lan/jonkoping/": {
-  "lage": "ingen halka på 52 vägavsnitt i Jönköpings län, kallast 0,0 °C vid 639 N Sandsjö Fjärryta. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-04T20:30:01+00:00"
+  "lage": "ingen halka på 52 vägavsnitt i Jönköpings län, kallast −0,4 °C vid 639 N Sandsjö Fjärryta. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-04T21:00:20+00:00"
  },
  "https://halkvakt.se/lan/kronoberg/": {
   "lage": "ingen halka på 28 vägavsnitt i Kronobergs län, ingen mätstation under noll. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
   "andrad": "2026-11-04T08:00:00+00:00"
  },
  "https://halkvakt.se/lan/kalmar/": {
-  "lage": "ingen halka på 35 vägavsnitt i Kalmar län, ingen mätstation under noll. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-04T08:30:00+00:00"
+  "lage": "ingen halka på 35 vägavsnitt i Kalmar län, kallast −0,1 °C vid Mariannelund. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-04T21:00:20+00:00"
  },
  "https://halkvakt.se/lan/gotland/": {
   "lage": "ingen halka på 10 vägavsnitt i Gotlands län, ingen mätstation under noll. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
@@ -44,24 +44,24 @@
   "andrad": "2026-11-04T08:30:00+00:00"
  },
  "https://halkvakt.se/lan/skane/": {
-  "lage": "ingen halka på 88 vägavsnitt i Skåne län, ingen mätstation under noll. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-04T08:30:00+00:00"
+  "lage": "ingen halka på 88 vägavsnitt i Skåne län, kallast 0,0 °C vid Källstorp. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-04T21:00:20+00:00"
  },
  "https://halkvakt.se/lan/halland/": {
-  "lage": "ingen halka på 23 vägavsnitt i Hallands län, kallast −0,3 °C vid Reaskäl. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-04T20:30:01+00:00"
+  "lage": "ingen halka på 23 vägavsnitt i Hallands län, kallast 0,0 °C vid Reaskäl. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-04T21:00:20+00:00"
  },
  "https://halkvakt.se/lan/vastra-gotaland/": {
-  "lage": "ingen halka på 133 vägavsnitt i Västra Götalands län, kallast −1,6 °C vid Äspekärr. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-04T20:30:01+00:00"
+  "lage": "ingen halka på 133 vägavsnitt i Västra Götalands län, kallast −1,7 °C vid Äspekärr. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-04T21:00:20+00:00"
  },
  "https://halkvakt.se/lan/varmland/": {
-  "lage": "halka eller vinterväglag på 13 av 52 vägavsnitt i Värmlands län, kallast −2,1 °C vid Storberget. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-04T20:30:01+00:00"
+  "lage": "halka eller vinterväglag på 23 av 52 vägavsnitt i Värmlands län, kallast −2,3 °C vid Storberget. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-04T21:00:20+00:00"
  },
  "https://halkvakt.se/lan/orebro/": {
-  "lage": "ingen halka på 26 vägavsnitt i Örebro län, kallast −0,7 °C vid Kopparberg. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-04T20:30:01+00:00"
+  "lage": "ingen halka på 26 vägavsnitt i Örebro län, kallast −0,7 °C vid Sirsjön. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-04T21:00:20+00:00"
  },
  "https://halkvakt.se/lan/vastmanland/": {
   "lage": "ingen halka på 24 vägavsnitt i Västmanlands län, ingen mätstation under noll. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
@@ -72,8 +72,8 @@
   "andrad": "2026-11-04T20:30:01+00:00"
  },
  "https://halkvakt.se/lan/gavleborg/": {
-  "lage": "ingen halka på 27 vägavsnitt i Gävleborgs län, kallast −0,2 °C vid Kårböle 2. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-04T20:30:01+00:00"
+  "lage": "ingen halka på 27 vägavsnitt i Gävleborgs län, kallast −0,1 °C vid Södra Flät. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-04T21:00:20+00:00"
  },
  "https://halkvakt.se/lan/vasternorrland/": {
   "lage": "halka eller vinterväglag på 6 av 22 vägavsnitt i Västernorrlands län, ingen mätstation under noll. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
@@ -84,24 +84,24 @@
   "andrad": "2026-11-04T14:30:16+00:00"
  },
  "https://halkvakt.se/lan/vasterbotten/": {
-  "lage": "halka eller vinterväglag på 29 av 44 vägavsnitt i Västerbottens län, kallast −0,9 °C vid Giltjaur. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-04T20:30:01+00:00"
+  "lage": "halka eller vinterväglag på 29 av 44 vägavsnitt i Västerbottens län, kallast −1,2 °C vid Missenträsk. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-04T21:00:20+00:00"
  },
  "https://halkvakt.se/lan/norrbotten/": {
   "lage": "halka eller vinterväglag på 31 av 58 vägavsnitt i Norrbottens län, kallast −2,5 °C vid Limingojärvi. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
   "andrad": "2026-11-04T20:30:01+00:00"
  },
  "https://halkvakt.se/vag/e4/": {
-  "lage": "halka eller vinterväglag på 7 av 53 vägavsnitt på E4, kallast 0,0 °C vid Råneå. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-04T20:30:01+00:00"
+  "lage": "halka eller vinterväglag på 7 av 53 vägavsnitt på E4, ingen mätstation under noll. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-04T21:00:20+00:00"
  },
  "https://halkvakt.se/vag/e6/": {
   "lage": "ingen halka på 24 vägavsnitt på E6, ingen mätstation under noll. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
   "andrad": "2026-11-04T08:30:00+00:00"
  },
  "https://halkvakt.se/vag/e18/": {
-  "lage": "halka eller vinterväglag på 2 av 20 vägavsnitt på E18, kallast −1,6 °C vid 1733 Årjäng Fjärryta. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-04T20:30:01+00:00"
+  "lage": "halka eller vinterväglag på 2 av 20 vägavsnitt på E18, kallast −1,7 °C vid 1733 Årjäng Fjärryta. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-04T21:00:20+00:00"
  },
  "https://halkvakt.se/vag/e20/": {
   "lage": "ingen halka på 19 vägavsnitt på E20, ingen mätstation under noll. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
@@ -112,8 +112,8 @@
   "andrad": "2026-11-04T07:00:20+00:00"
  },
  "https://halkvakt.se/vag/rv40/": {
-  "lage": "ingen halka på 12 vägavsnitt på riksväg 40, ingen mätstation under noll. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-04T09:00:20+00:00"
+  "lage": "ingen halka på 12 vägavsnitt på riksväg 40, kallast −0,1 °C vid Mariannelund. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-04T21:00:20+00:00"
  },
  "https://halkvakt.se/ort/stockholm/": {
   "lage": "ingen halka på 3 vägavsnitt till och från Stockholm. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
