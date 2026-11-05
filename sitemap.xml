@@ -22,18 +22,18 @@
   <url><loc>https://halkvakt.se/lan/skane/</loc><lastmod>2026-11-05T08:30:00+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
   <url><loc>https://halkvakt.se/lan/halland/</loc><lastmod>2026-11-05T07:30:20+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
   <url><loc>https://halkvakt.se/lan/vastra-gotaland/</loc><lastmod>2026-11-05T11:00:18+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://halkvakt.se/lan/varmland/</loc><lastmod>2026-11-05T16:00:01+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://halkvakt.se/lan/orebro/</loc><lastmod>2026-11-05T16:00:01+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://halkvakt.se/lan/varmland/</loc><lastmod>2026-11-05T16:30:20+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://halkvakt.se/lan/orebro/</loc><lastmod>2026-11-05T16:30:20+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
   <url><loc>https://halkvakt.se/lan/vastmanland/</loc><lastmod>2026-11-05T10:00:20+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://halkvakt.se/lan/dalarna/</loc><lastmod>2026-11-05T16:00:01+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://halkvakt.se/lan/gavleborg/</loc><lastmod>2026-11-05T16:00:01+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://halkvakt.se/lan/dalarna/</loc><lastmod>2026-11-05T16:30:20+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://halkvakt.se/lan/gavleborg/</loc><lastmod>2026-11-05T16:30:20+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
   <url><loc>https://halkvakt.se/lan/vasternorrland/</loc><lastmod>2026-11-05T10:00:20+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://halkvakt.se/lan/jamtland/</loc><lastmod>2026-11-05T15:30:01+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://halkvakt.se/lan/vasterbotten/</loc><lastmod>2026-11-05T16:00:01+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://halkvakt.se/lan/jamtland/</loc><lastmod>2026-11-05T16:30:20+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://halkvakt.se/lan/vasterbotten/</loc><lastmod>2026-11-05T16:30:20+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
   <url><loc>https://halkvakt.se/lan/norrbotten/</loc><lastmod>2026-11-05T16:00:01+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://halkvakt.se/vag/e4/</loc><lastmod>2026-11-05T16:00:01+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://halkvakt.se/vag/e4/</loc><lastmod>2026-11-05T16:30:20+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
   <url><loc>https://halkvakt.se/vag/e6/</loc><lastmod>2026-11-05T09:30:02+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://halkvakt.se/vag/e18/</loc><lastmod>2026-11-05T16:00:01+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://halkvakt.se/vag/e18/</loc><lastmod>2026-11-05T16:30:20+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
   <url><loc>https://halkvakt.se/vag/e20/</loc><lastmod>2026-11-05T08:00:00+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
   <url><loc>https://halkvakt.se/vag/e22/</loc><lastmod>2026-11-05T05:30:20+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
   <url><loc>https://halkvakt.se/vag/rv40/</loc><lastmod>2026-11-05T05:30:20+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
@@ -65,11 +65,11 @@
   <url><loc>https://halkvakt.se/ort/arvika/</loc><lastmod>2026-11-05T08:00:00+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
   <url><loc>https://halkvakt.se/ort/orebro/</loc><lastmod>2026-11-03T21:30:00+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
   <url><loc>https://halkvakt.se/ort/vasteras/</loc><lastmod>2026-11-03T21:30:00+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://halkvakt.se/ort/falun/</loc><lastmod>2026-11-05T10:00:20+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://halkvakt.se/ort/borlange/</loc><lastmod>2026-11-05T06:00:20+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://halkvakt.se/ort/mora/</loc><lastmod>2026-11-05T06:00:20+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://halkvakt.se/ort/falun/</loc><lastmod>2026-11-05T16:30:20+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://halkvakt.se/ort/borlange/</loc><lastmod>2026-11-05T16:30:20+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://halkvakt.se/ort/mora/</loc><lastmod>2026-11-05T16:30:20+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
   <url><loc>https://halkvakt.se/ort/salen/</loc><lastmod>2026-11-05T00:30:20+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://halkvakt.se/ort/alvdalen/</loc><lastmod>2026-11-05T05:30:20+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://halkvakt.se/ort/alvdalen/</loc><lastmod>2026-11-05T16:30:20+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
   <url><loc>https://halkvakt.se/ort/gavle/</loc><lastmod>2026-11-03T21:30:00+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
   <url><loc>https://halkvakt.se/ort/hudiksvall/</loc><lastmod>2026-11-03T21:30:00+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
   <url><loc>https://halkvakt.se/ort/sundsvall/</loc><lastmod>2026-11-03T21:30:00+00:00</lastmod><changefreq>hourly</changefreq><priority>0.6</priority></url>
