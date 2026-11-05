@@ -1,7 +1,7 @@
 {
  "https://halkvakt.se/lan/": {
-  "lage": "halka eller vinterväglag i 8 av 21 län, kallast −2,8 °C vid Kätkesuando. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-05T13:00:02+00:00"
+  "lage": "halka eller vinterväglag i 8 av 21 län, kallast −3,1 °C vid Avvakko. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-05T13:30:17+00:00"
  },
  "https://halkvakt.se/varningar/": {
   "lage": "har SMHI ingen varning för snöfall, underkylt regn eller is. Trafikverkets väglag län för län, uppdaterat var 30:e minut.",
@@ -56,8 +56,8 @@
   "andrad": "2026-11-05T11:00:18+00:00"
  },
  "https://halkvakt.se/lan/varmland/": {
-  "lage": "halka eller vinterväglag på 8 av 52 vägavsnitt i Värmlands län, kallast −1,8 °C vid Gumhöjden. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-05T13:00:02+00:00"
+  "lage": "halka eller vinterväglag på 8 av 52 vägavsnitt i Värmlands län, kallast −1,7 °C vid Gumhöjden. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-05T13:30:17+00:00"
  },
  "https://halkvakt.se/lan/orebro/": {
   "lage": "ingen halka på 26 vägavsnitt i Örebro län, ingen mätstation under noll. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
@@ -80,20 +80,20 @@
   "andrad": "2026-11-05T10:00:20+00:00"
  },
  "https://halkvakt.se/lan/jamtland/": {
-  "lage": "halka eller vinterväglag på 6 av 17 vägavsnitt i Jämtlands län, kallast 0,0 °C vid Vemdalsskalet. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-05T11:30:01+00:00"
+  "lage": "halka eller vinterväglag på 6 av 17 vägavsnitt i Jämtlands län, kallast −0,1 °C vid Vemdalsskalet. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-05T13:30:17+00:00"
  },
  "https://halkvakt.se/lan/vasterbotten/": {
-  "lage": "halka eller vinterväglag på 23 av 44 vägavsnitt i Västerbottens län, kallast −0,2 °C vid Bjurträsk. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-05T13:00:02+00:00"
+  "lage": "halka eller vinterväglag på 23 av 44 vägavsnitt i Västerbottens län, kallast −0,5 °C vid Bjurträsk. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-05T13:30:17+00:00"
  },
  "https://halkvakt.se/lan/norrbotten/": {
-  "lage": "halka eller vinterväglag på 21 av 58 vägavsnitt i Norrbottens län, kallast −2,8 °C vid Kätkesuando. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-05T13:00:02+00:00"
+  "lage": "halka eller vinterväglag på 21 av 58 vägavsnitt i Norrbottens län, kallast −3,1 °C vid Avvakko. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-05T13:30:17+00:00"
  },
  "https://halkvakt.se/vag/e4/": {
-  "lage": "halka eller vinterväglag på 7 av 53 vägavsnitt på E4, kallast −0,7 °C vid Råneå. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-05T13:00:02+00:00"
+  "lage": "halka eller vinterväglag på 7 av 53 vägavsnitt på E4, kallast −1,0 °C vid Råneå. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-05T13:30:17+00:00"
  },
  "https://halkvakt.se/vag/e6/": {
   "lage": "ingen halka på 24 vägavsnitt på E6, ingen mätstation under noll. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
