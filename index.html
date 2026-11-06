@@ -505,6 +505,8 @@
     const halt = d.lan.filter(l => l.halt > 0).sort((a, b) => b.halt - a.halt);
     const lista = document.getElementById('halt-lista');
     const alla = lista.querySelector('.lank-mono');
+    // Länen står redan i HTML:en sedan publicera skrev dem (6/11, DECISIONS #806); här byts de mot de färska.
+    lista.querySelectorAll('.lan-halt, .lugnt').forEach(e => e.remove());
     if (halt.length) {
       halt.forEach(l => { const a = document.createElement('a'); a.className = 'lan-halt'; a.href = 'lan/' + l.slug + '/';
         a.textContent = l.kort + ' · ' + l.halt; a.title = 'Halka eller vinterväglag på ' + l.halt + ' av ' + l.vagavsnitt + ' vägavsnitt'; lista.insertBefore(a, alla); });
