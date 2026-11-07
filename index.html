@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Halkvakt · Säger till när det är halt</title>
-<meta name="description" content="Halkvakt varnar med rösten för halka, frysrisk, olyckor, vilt och fartkameror innan du är där. Trafikverkets data i realtid. Gratis för iPhone.">
+<title>Halka idag och väglaget just nu i hela Sverige | Halkvakt</title>
+<meta name="description" content="Är det halt där du ska köra? Sök ort, län eller väg och se Trafikverkets väglag och vägbanans temperatur just nu, uppdaterat var 30:e minut. Appen Halkvakt säger till med rösten när det är halt. Gratis för iPhone.">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="logo-512.png">
 <link rel="canonical" href="https://halkvakt.se/">
@@ -225,8 +225,66 @@
   @media (max-width: 640px) { .vad { padding: 16px 18px; } .valjlan { gap: 14px; } .lofte-text { font-size: 18px; } }
 .hv-lankar{list-style:none;padding:0;margin:24px 0 0;columns:2 320px;column-gap:40px}.hv-lankar li{break-inside:avoid;padding:7px 0;border-top:1px dashed var(--kant);color:var(--dampad);font-size:15px;line-height:1.7}
 .hv-lankar a,.hv-lankar-vagar a{color:var(--text2)}.hv-lankar b{color:var(--text)}.hv-lankar-vagar{color:var(--dampad);font-size:15px;line-height:1.9;margin:20px 0 0}
+/* 7/11: startsidan B1, sök först (Axel, DECISIONS #820). */
+.hero.sok { text-align: center; padding-block: clamp(48px, 7vw, 96px) clamp(40px, 6vw, 72px); }
+.hero.sok .etikett { justify-content: center; display: flex; align-items: center; }
+.hero.sok .jatte { max-width: 15ch; margin-inline: auto; }
+.hero.sok .nu-mening { margin: 22px auto 0; max-width: 62ch; font-size: clamp(17px, 1.5vw, 20px); font-weight: 400; line-height: 1.5; color: var(--text2); letter-spacing: 0; }
+.sokruta { position: relative; max-width: 760px; margin: 30px auto 0; text-align: left; }
+.sokruta form { display: flex; align-items: center; gap: 12px; background: var(--panel); border: 1px solid #34424A; border-radius: 999px; padding: 8px 8px 8px 24px; }
+.sokruta form:focus-within { border-color: var(--gul); }
+.sokruta svg.lupp { width: 22px; height: 22px; flex: none; color: var(--dampad); }
+.sokruta input { flex: 1; min-width: 0; background: transparent; border: 0; color: var(--text); font: 400 19px var(--sans); height: 52px; outline: none; }
+.sokruta button { flex: none; min-height: 52px; border: 0; border-radius: 28px; padding: 0 26px; background: var(--gul); color: var(--mark); font: 600 17px var(--sans); cursor: pointer; }
+.forslag { position: absolute; left: 0; right: 0; top: calc(100% + 6px); z-index: 5; list-style: none; margin: 0; padding: 6px 0; background: var(--panel); border: 1px solid var(--kant); border-radius: 20px; box-shadow: 0 18px 40px rgba(0,0,0,.6); }
+.forslag[hidden] { display: none; }
+.forslag a { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 12px 24px; color: var(--text); text-decoration: none; font-size: 17px; }
+.forslag a:hover, .forslag a[aria-selected="true"] { background: var(--upp); }
+.forslag i { font: 500 11px var(--mono); font-style: normal; letter-spacing: .14em; color: var(--dampad); text-transform: uppercase; }
+.forslag .tom { padding: 12px 24px; color: var(--text2); font-size: 15px; }
+.snabb { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px; margin-top: 18px; }
+.snabb a { text-decoration: none; color: var(--text); background: var(--panel); border: 1px solid var(--kant); border-radius: 999px; padding: 9px 16px; font-size: 15px; font-weight: 500; }
+.snabb a:hover { border-color: var(--gul); }
+.hero.sok .definition { margin: 26px auto 0; max-width: 60ch; color: var(--dampad); font-size: 15px; line-height: 1.5; }
+.hero.sok .definition a { color: var(--text2); }
+.rubrikrad { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 24px; }
+.rubrikrad h2 { font-size: clamp(28px, 3vw, 40px); letter-spacing: -.025em; }
+.stader { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+@media (max-width: 860px) { .stader { grid-template-columns: 1fr; } }
+.stad { display: grid; gap: 14px; align-content: start; padding: 24px 26px; text-decoration: none; color: var(--text); }
+.stad:hover { border-color: var(--gul); }
+.stad b { font-size: 30px; font-weight: 600; letter-spacing: -.025em; }
+.stad p { margin: 0; color: var(--text2); font-size: 15px; line-height: 1.45; }
+.stad .lan { font: 500 12px var(--mono); letter-spacing: .08em; color: var(--text); border-top: 1px dashed var(--skilje); padding-top: 12px; }
+.stad .till { font: 600 12px var(--mono); letter-spacing: .14em; text-transform: uppercase; }
+.sidokolumn .lanpanel { padding: 20px 24px; display: grid; gap: 12px; }
+.lanpanel select { appearance: none; -webkit-appearance: none; min-height: 48px; padding: 0 44px 0 16px; border-radius: 14px; border: 1px solid #34424A;
+  background: var(--mark) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23FFC94A' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 16px center;
+  color: var(--text); font: 500 16px var(--sans); cursor: pointer; width: 100%; }
+.halt-lista.rader { display: grid; gap: 0; }
+.halt-lista.rader .lan-halt { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 10px; padding: 10px 0; border: 0; border-bottom: 1px dashed var(--skilje); border-radius: 0; color: var(--text); font-size: 15px; font-weight: 500; }
+.halt-lista.rader .lan-halt::before { display: none; }
+.halt-lista.rader .lan-halt em { font: 500 12px var(--mono); font-style: normal; color: var(--text2); }
+.halt-lista.rader .lan-halt s { grid-column: 1 / 3; height: 5px; border-radius: 3px; background: var(--upp); text-decoration: none; position: relative; overflow: hidden; }
+.halt-lista.rader .lan-halt s u { position: absolute; inset: 0 auto 0 0; background: var(--gul); border-radius: 3px; }
+.halt-lista.rader .lugnt { padding-top: 12px; font-size: 14px; line-height: 1.7; }
+.halt-lista.rader .lugnt a { color: var(--text2); }
+.halt-lista.rader .lank-mono { margin-top: 14px; justify-self: start; }
+.vagar6 { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 1000px) { .vagar6 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .vagar6 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.vagkort { display: grid; gap: 10px; padding: 18px; text-decoration: none; color: var(--text); }
+.vagkort:hover { border-color: var(--gul); }
+.vagkort .nr { justify-self: start; background: var(--upp); border: 1px solid var(--kant); border-radius: 9px; padding: 4px 10px; font: 600 15px var(--mono); }
+.vagkort span { color: var(--text2); font-size: 13px; }
+.vagkort em { font: 500 13px var(--mono); font-style: normal; }
+.fragor { max-width: 900px; }
+.fragor h3 { font-size: 19px; margin: 0 0 8px; }
+.fragor div { padding: 20px 0; border-top: 1px dashed var(--skilje); }
+.dold { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.fragor p { margin: 0; color: var(--text2); font-size: 16px; line-height: 1.55; }
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://halkvakt.se/#org","name":"Halkvakt","url":"https://halkvakt.se/","logo":"https://halkvakt.se/logo-512.png","email":"hej@halkvakt.se","sameAs":["https://www.instagram.com/halkvakt/","https://www.facebook.com/profile.php?id=61595485615603","https://apps.apple.com/se/app/halkvakt/id6806939784"]},{"@type":"WebSite","@id":"https://halkvakt.se/#site","name":"Halkvakt","url":"https://halkvakt.se/","inLanguage":"sv-SE","publisher":{"@id":"https://halkvakt.se/#org"}},{"@type":"MobileApplication","name":"Halkvakt","operatingSystem":"iOS","applicationCategory":"TravelApplication","inLanguage":"sv-SE","url":"https://halkvakt.se/","installUrl":"https://apps.apple.com/se/app/halkvakt/id6806939784","description":"Varnar med rösten för halka, frysrisk, olyckor, vilt och fartkameror innan du är där. Trafikverkets data i realtid.","offers":{"@type":"Offer","price":"0","priceCurrency":"SEK"},"publisher":{"@id":"https://halkvakt.se/#org"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://halkvakt.se/#org","name":"Halkvakt","url":"https://halkvakt.se/","logo":"https://halkvakt.se/logo-512.png","email":"hej@halkvakt.se","sameAs":["https://www.instagram.com/halkvakt/","https://www.facebook.com/profile.php?id=61595485615603","https://apps.apple.com/se/app/halkvakt/id6806939784"]},{"@type":"WebSite","@id":"https://halkvakt.se/#site","name":"Halkvakt","url":"https://halkvakt.se/","inLanguage":"sv-SE","publisher":{"@id":"https://halkvakt.se/#org"}},{"@type":"MobileApplication","name":"Halkvakt","operatingSystem":"iOS","applicationCategory":"TravelApplication","inLanguage":"sv-SE","url":"https://halkvakt.se/","installUrl":"https://apps.apple.com/se/app/halkvakt/id6806939784","description":"Varnar med rösten för halka, frysrisk, olyckor, vilt och fartkameror innan du är där. Trafikverkets data i realtid.","offers":{"@type":"Offer","price":"0","priceCurrency":"SEK"},"publisher":{"@id":"https://halkvakt.se/#org"}},{"@type":"FAQPage","mainEntity":[{"@type": "Question", "name": "Hur ofta uppdateras väglaget?", "acceptedAnswer": {"@type": "Answer", "text": "Var 30:e minut, med Trafikverkets väglag och vägväderstationer och SMHI:s varningar."}},{"@type": "Question", "name": "När blir det halt på vägarna?", "acceptedAnswer": {"@type": "Answer", "text": "Oftast när vägbanan är 0 °C eller kallare och det finns fukt, till exempel klara nätter efter regn. Broar fryser före vägen runt omkring."}},{"@type": "Question", "name": "Vad betyder Prognos på kartan?", "acceptedAnswer": {"@type": "Answer", "text": "Prognos är Halkvakts egen beräkning av var vägen kan bli hal framöver, också mellan mätstationerna. Den är modellerad, inte uppmätt, och Trafikverkets rapporterade halka går alltid först."}},{"@type": "Question", "name": "Finns det en app som varnar för halka?", "acceptedAnswer": {"@type": "Answer", "text": "Ja. Halkvakt säger till med rösten när det är halt där du kör. Appen är gratis för iPhone, och Android kommer i vinter."}},{"@type": "Question", "name": "Var kommer uppgifterna ifrån?", "acceptedAnswer": {"@type": "Answer", "text": "Från Trafikverkets öppna data och SMHI. Halkvakt är fristående från myndigheterna."}}]}]}</script>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -245,7 +303,9 @@
     <a class="logo" href="./" aria-label="Halkvakt, till startsidan"><svg viewBox="3 3 94 83" aria-hidden="true"><path fill-rule="evenodd" fill="#FFC94A" d="M55.196 6 L96.196 77 A6 6 0 0 1 91 86 L9 86 A6 6 0 0 1 3.804 77 L44.804 6 A6 6 0 0 1 55.196 6 Z M46.4 32 L53.6 32 L52 58 L48 58 Z M45.6 68 A4.4 4.4 0 1 0 54.4 68 A4.4 4.4 0 1 0 45.6 68 Z"/></svg><b>HALKVAKT</b></a>
     <nav class="meny" aria-label="Huvudmeny">
       <a href="karta.html">Livekartan</a>
+      <a href="./#storstader">Storstäderna</a>
       <a href="lan/">Länen</a>
+      <a href="./#vagar">Vägar</a>
       <a href="./#appen">Appen</a>
       <a href="om-halkvakt.html">Om Halkvakt</a>
     </nav>
@@ -254,32 +314,39 @@
 </header>
 
 <main>
-  <section class="hero">
+  <section class="hero sok">
     <div class="wrap">
-      <p class="etikett"><span class="ljus" aria-hidden="true"></span><span id="h-tid">Just nu · lördag 7 nov · 13:00</span></p>
-      <h1 class="jatte">Kolla halkan innan du kör.</h1>
-
-      <div class="panel vad">
-        <h2>Vad är Halkvakt?</h2>
-        <p><b>Hemsidan</b> visar läget på vägarna just nu. Titta här innan du åker.<br><b>Appen</b> följer med i bilen och säger till med rösten innan du är framme vid halka eller en olycka.</p>
-        <div class="vad-val"><a class="knapp" href="https://apps.apple.com/se/app/halkvakt/id6806939784?ct=ruta">Hämta appen för iPhone</a><a class="vad-las" href="om-halkvakt.html">Läs mer om Halkvakt →</a><span class="etikett">Båda är gratis</span></div>
+      <p class="etikett"><span class="ljus" aria-hidden="true"></span><span id="h-tid">Just nu</span></p>
+      <h1 class="jatte">Är det halt där du ska köra?</h1>
+      <p class="nu-mening" id="l-mening">Halka eller vinterväglag på 204 sträckor, i Norrbotten, Västerbotten, Dalarna, Västra Götaland, Gävleborg, Stockholms län, Gotland, Västernorrland, Jämtland, Jönköpings län, Västmanland, Uppsala län och Värmland. 93 stationer under noll. Kallast vid Storberget.</p>
+      <div class="sokruta">
+        <form action="sok/" method="get" role="search" id="sok">
+          <svg class="lupp" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+          <label for="q" class="dold">Ort, län eller väg</label>
+          <input id="q" name="q" type="search" autocomplete="off" placeholder="Ort, län eller väg, till exempel Umeå eller E4" role="combobox" aria-expanded="false" aria-controls="forslag" aria-autocomplete="list">
+          <button type="submit">Visa läget</button>
+        </form>
+        <ul class="forslag" id="forslag" role="listbox" hidden></ul>
       </div>
+      <nav class="snabb" aria-label="Vanligast"><span class="etikett">Vanligast</span><a href="ort/stockholm/">Stockholm</a><a href="ort/goteborg/">Göteborg</a><a href="ort/malmo/">Malmö</a><a href="ort/uppsala/">Uppsala</a><a href="ort/umea/">Umeå</a><a href="ort/lulea/">Luleå</a><a href="vag/e4/">E4</a></nav>
+      <p class="definition">Halkvakt visar Trafikverkets väglag och vägbanans temperatur, uppdaterat var 30:e minut. Appen Halkvakt är gratis för iPhone och säger till med rösten när det är halt där du kör. <a href="om-halkvakt.html">Om Halkvakt</a></p>
+    </div>
+  </section>
 
-      <div class="panel valjlan">
-        <label class="valjlan-val"><span>Är det halt i ditt län?</span>
-          <select id="lanval" aria-label="Välj län"><option value="">Välj län</option></select></label>
-        <div class="halt-nu">
-          <p class="etikett">Halka just nu</p>
-          <div class="halt-lista" id="halt-lista"><a class="lan-halt" href="lan/norrbotten/" title="Halka eller vinterväglag på 38 av 58 vägavsnitt">Norrbotten · 38</a><a class="lan-halt" href="lan/vasterbotten/" title="Halka eller vinterväglag på 34 av 44 vägavsnitt">Västerbotten · 34</a><a class="lan-halt" href="lan/dalarna/" title="Halka eller vinterväglag på 31 av 38 vägavsnitt">Dalarna · 31</a><a class="lan-halt" href="lan/vastra-gotaland/" title="Halka eller vinterväglag på 24 av 133 vägavsnitt">Västra Götaland · 24</a><a class="lan-halt" href="lan/gavleborg/" title="Halka eller vinterväglag på 14 av 27 vägavsnitt">Gävleborg · 14</a><a class="lan-halt" href="lan/stockholm/" title="Halka eller vinterväglag på 12 av 44 vägavsnitt">Stockholms län · 12</a><a class="lan-halt" href="lan/gotland/" title="Halka eller vinterväglag på 10 av 10 vägavsnitt">Gotland · 10</a><a class="lan-halt" href="lan/vasternorrland/" title="Halka eller vinterväglag på 10 av 22 vägavsnitt">Västernorrland · 10</a><a class="lan-halt" href="lan/jamtland/" title="Halka eller vinterväglag på 9 av 17 vägavsnitt">Jämtland · 9</a><a class="lan-halt" href="lan/jonkoping/" title="Halka eller vinterväglag på 7 av 52 vägavsnitt">Jönköpings län · 7</a><a class="lan-halt" href="lan/vastmanland/" title="Halka eller vinterväglag på 6 av 24 vägavsnitt">Västmanland · 6</a><a class="lan-halt" href="lan/uppsala/" title="Halka eller vinterväglag på 5 av 25 vägavsnitt">Uppsala län · 5</a><a class="lan-halt" href="lan/varmland/" title="Halka eller vinterväglag på 4 av 52 vägavsnitt">Värmland · 4</a><a class="lank-mono" href="lan/">Alla 21 län →</a></div>
-        </div>
+  <section class="sektion" id="storstader">
+    <div class="wrap">
+      <div class="rubrikrad"><h2>Halka i Stockholm, Göteborg och Malmö</h2><span class="etikett">Vägarna in till staden och vägbanan runt den</span></div>
+      <div class="stader">
+        <a class="panel stad" href="ort/stockholm/"><b>Stockholm</b><p>Väglaget på vägarna till och från Stockholm, vägbanan vid stationerna runt staden och olyckor just nu.</p><span class="lan" id="s-stockholm">–</span><span class="till">Se Stockholm →</span></a>
+        <a class="panel stad" href="ort/goteborg/"><b>Göteborg</b><p>Väglaget på vägarna till och från Göteborg, vägbanan vid stationerna runt staden och olyckor just nu.</p><span class="lan" id="s-goteborg">–</span><span class="till">Se Göteborg →</span></a>
+        <a class="panel stad" href="ort/malmo/"><b>Malmö</b><p>Väglaget på vägarna till och från Malmö, vägbanan vid stationerna runt staden och olyckor just nu.</p><span class="lan" id="s-malmo">–</span><span class="till">Se Malmö →</span></a>
       </div>
     </div>
   </section>
 
   <section class="sektion landet" id="lage">
     <div class="wrap">
-      <p class="etikett"><span class="ljus" aria-hidden="true"></span><span id="t-tid">Hela landet · 13:00</span></p>
-      <p class="nu-mening" id="l-mening">Halka eller vinterväglag på 204 sträckor, i Norrbotten, Västerbotten, Dalarna, Västra Götaland, Gävleborg, Stockholms län, Gotland, Västernorrland, Jämtland, Jönköpings län, Västmanland, Uppsala län och Värmland. 93 stationer under noll. Kallast vid Storberget.</p>
+      <div class="rubrikrad"><h2>Läget län för län</h2><p class="etikett"><span class="ljus" aria-hidden="true"></span><span id="t-tid">Hela landet</span></p></div>
       <div class="lage">
         <div class="kartruta panel">
           <a class="kartlank" href="karta.html" aria-label="Öppna livekartan"></a>
@@ -289,16 +356,39 @@
           <div class="forklaring">
             <span><i style="background:var(--gul)"></i>Halka rapporterad · <b id="k-halka">204</b> sträckor</span>
             <span><i style="background:#E9EFF2"></i>Vägbana under noll · <b id="k-kalla">93</b></span>
+            <span><i style="background:#FF8F6B;border-radius:1px;height:3px;width:12px;vertical-align:3px"></i>Prognos · halka framöver, modellerad</span>
             <span><i style="background:#34424A"></i>Över noll · <b id="k-varma">700</b></span>
           </div>
         </div>
-        <div class="panel tal">
+        <div class="sidokolumn">
+          <div class="panel tal">
           <dl class="kvitto">
             <div><dt>Halka rapporterad</dt><dd class="stort"><b id="t-halka">204</b><span>sträckor</span></dd></div>
             <div><dt>Vägbana under noll</dt><dd class="stort"><b id="t-kalla">93</b><span id="t-av">av 793 stationer</span></dd></div>
             <div><dt>Kallaste station</dt><dd class="stort"><b id="t-kallast">−5,5 °C</b><span id="t-plats">vid Storberget</span></dd></div>
           </dl>
         </div>
+          <div class="panel lanpanel">
+            <label class="dold" for="lanval">Välj län</label>
+            <select id="lanval" aria-label="Välj län"><option value="">Välj län</option></select>
+            <p class="etikett">Hala vägavsnitt av alla i länet</p>
+            <div class="halt-lista rader" id="halt-lista"><a class="lan-halt" href="lan/norrbotten/" title="Halka eller vinterväglag på 38 av 58 vägavsnitt">Norrbotten · 38</a><a class="lan-halt" href="lan/vasterbotten/" title="Halka eller vinterväglag på 34 av 44 vägavsnitt">Västerbotten · 34</a><a class="lan-halt" href="lan/dalarna/" title="Halka eller vinterväglag på 31 av 38 vägavsnitt">Dalarna · 31</a><a class="lan-halt" href="lan/vastra-gotaland/" title="Halka eller vinterväglag på 24 av 133 vägavsnitt">Västra Götaland · 24</a><a class="lan-halt" href="lan/gavleborg/" title="Halka eller vinterväglag på 14 av 27 vägavsnitt">Gävleborg · 14</a><a class="lan-halt" href="lan/stockholm/" title="Halka eller vinterväglag på 12 av 44 vägavsnitt">Stockholms län · 12</a><a class="lan-halt" href="lan/gotland/" title="Halka eller vinterväglag på 10 av 10 vägavsnitt">Gotland · 10</a><a class="lan-halt" href="lan/vasternorrland/" title="Halka eller vinterväglag på 10 av 22 vägavsnitt">Västernorrland · 10</a><a class="lan-halt" href="lan/jamtland/" title="Halka eller vinterväglag på 9 av 17 vägavsnitt">Jämtland · 9</a><a class="lan-halt" href="lan/jonkoping/" title="Halka eller vinterväglag på 7 av 52 vägavsnitt">Jönköpings län · 7</a><a class="lan-halt" href="lan/vastmanland/" title="Halka eller vinterväglag på 6 av 24 vägavsnitt">Västmanland · 6</a><a class="lan-halt" href="lan/uppsala/" title="Halka eller vinterväglag på 5 av 25 vägavsnitt">Uppsala län · 5</a><a class="lan-halt" href="lan/varmland/" title="Halka eller vinterväglag på 4 av 52 vägavsnitt">Värmland · 4</a><a class="lank-mono" href="lan/">Alla 21 län →</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sektion" id="vagar">
+    <div class="wrap">
+      <div class="rubrikrad"><h2>Stora vägar</h2><span class="etikett">Hala vägavsnitt längs vägen</span></div>
+      <div class="vagar6">
+        <a class="panel vagkort" href="vag/e4/"><b class="nr">E4</b><span>Helsingborg–Haparanda</span><em id="v-e4">–</em></a>
+        <a class="panel vagkort" href="vag/e6/"><b class="nr">E6</b><span>Trelleborg–Svinesund</span><em id="v-e6">–</em></a>
+        <a class="panel vagkort" href="vag/e18/"><b class="nr">E18</b><span>Värmland–Kapellskär</span><em id="v-e18">–</em></a>
+        <a class="panel vagkort" href="vag/e20/"><b class="nr">E20</b><span>Malmö–Stockholm</span><em id="v-e20">–</em></a>
+        <a class="panel vagkort" href="vag/e22/"><b class="nr">E22</b><span>Trelleborg–Norrköping</span><em id="v-e22">–</em></a>
+        <a class="panel vagkort" href="vag/rv40/"><b class="nr">Riksväg 40</b><span>Göteborg–Västervik</span><em id="v-rv40">–</em></a>
       </div>
     </div>
   </section>
@@ -349,6 +439,18 @@
       <div class="panel lofte-rad">
         <div><p class="etikett">Löftet</p><p class="lofte-text">Din position lämnar inte telefonen av sig själv.</p></div>
         <a class="lank-mono" href="integritet.html">Läs integritetspolicyn →</a>
+      </div>
+    </div>
+  </section>
+  <section class="sektion" id="fragor">
+    <div class="wrap">
+      <div class="rubrikrad"><h2>Vanliga frågor</h2><a class="lank-mono" href="om.html">Fler frågor →</a></div>
+      <div class="fragor">
+        <div><h3>Hur ofta uppdateras väglaget?</h3><p>Var 30:e minut, med Trafikverkets väglag och vägväderstationer och SMHI:s varningar.</p></div>
+        <div><h3>När blir det halt på vägarna?</h3><p>Oftast när vägbanan är 0 °C eller kallare och det finns fukt, till exempel klara nätter efter regn. Broar fryser före vägen runt omkring.</p></div>
+        <div><h3>Vad betyder Prognos på kartan?</h3><p>Prognos är Halkvakts egen beräkning av var vägen kan bli hal framöver, också mellan mätstationerna. Den är modellerad, inte uppmätt, och Trafikverkets rapporterade halka går alltid först.</p></div>
+        <div><h3>Finns det en app som varnar för halka?</h3><p>Ja. Halkvakt säger till med rösten när det är halt där du kör. Appen är gratis för iPhone, och Android kommer i vinter.</p></div>
+        <div><h3>Var kommer uppgifterna ifrån?</h3><p>Från Trafikverkets öppna data och SMHI. Halkvakt är fristående från myndigheterna.</p></div>
       </div>
     </div>
   </section>
@@ -409,6 +511,38 @@
   }
   val.addEventListener('change', () => { if (val.value) location.href = 'lan/' + val.value + '/'; });
 
+  // ---- Sökrutan (DECISIONS #820): ort, län eller väg, ur sidans egna länkar i blocket nedan (publicera skriver det), så att
+  //      listan alltid är densamma som sajtens sidor. Allt sker i webbläsaren; inget skickas någonstans.
+  const norm = t => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+  const STAD = { 'ort/stockholm/': 1, 'ort/goteborg/': 1, 'ort/malmo/': 1 };
+  const sidor = [...document.querySelectorAll('.hv-lankar a, .hv-lankar-vagar a')].map(a => {
+    const href = a.getAttribute('href'), typ = STAD[href] ? 'Stad' : href.startsWith('ort/') ? 'Ort' : href.startsWith('lan/') ? 'Län' : href.startsWith('vag/') ? 'Väg' : 'Sida';
+    return { namn: a.textContent.trim(), href, typ, n: norm(a.textContent), rang: { Stad: 0, Ort: 1, 'Län': 2, 'Väg': 3, Sida: 4 }[typ] };
+  }).filter((x, i, a) => a.findIndex(y => y.href === x.href) === i);
+  const q = document.getElementById('q'), ul = document.getElementById('forslag');
+  let traffar = [], vald = -1;
+  const sok = t => { const n = norm(t); if (!n) return [];
+    return sidor.filter(x => x.n.startsWith(n) || x.n.split(/[\s–-]+/).some(w => w.startsWith(n)))
+      .sort((a, b) => (b.n.startsWith(n) - a.n.startsWith(n)) || a.rang - b.rang || a.namn.localeCompare(b.namn, 'sv')).slice(0, 7); };
+  const visaForslag = () => {
+    traffar = sok(q.value); vald = traffar.length ? 0 : -1; ul.innerHTML = '';
+    if (!q.value.trim()) { ul.hidden = true; q.setAttribute('aria-expanded', 'false'); return; }
+    traffar.forEach((x, i) => { const li = document.createElement('li'), a = document.createElement('a');
+      a.href = x.href; a.setAttribute('role', 'option'); a.setAttribute('aria-selected', String(i === vald));
+      a.append(x.namn); const t = document.createElement('i'); t.textContent = x.typ; a.append(t); li.append(a); ul.append(li); });
+    if (!traffar.length) { const li = document.createElement('li'); li.className = 'tom';
+      li.textContent = 'Ingen egen sida för ”' + q.value.trim() + '” än. Prova kommunen, en större ort i närheten eller välj län under kartan.'; ul.append(li); }
+    ul.hidden = false; q.setAttribute('aria-expanded', 'true');
+  };
+  q.addEventListener('input', visaForslag);
+  q.addEventListener('keydown', e => {
+    if (!traffar.length || !['ArrowDown', 'ArrowUp'].includes(e.key)) return;
+    e.preventDefault(); vald = (vald + (e.key === 'ArrowDown' ? 1 : traffar.length - 1)) % traffar.length;
+    ul.querySelectorAll('a').forEach((a, i) => a.setAttribute('aria-selected', String(i === vald)));
+  });
+  document.getElementById('sok').addEventListener('submit', e => { e.preventDefault(); visaForslag(); if (vald >= 0) location.href = traffar[vald].href; });
+  document.addEventListener('click', e => { if (!e.target.closest('.sokruta')) { ul.hidden = true; q.setAttribute('aria-expanded', 'false'); } });
+
   // ---- Varningskorten (repliker ordagrant från motorn, engine/src/texts.ts) ----
   const KORT = {
     halka:  { ikon: 'i-halka',  titel: 'Halka',      avstand: '<span class="text">FRAMFÖR DIG</span>', replik: 'Varning: halka rapporterad på vägen framför dig.' },
@@ -449,12 +583,13 @@
   visa('halka');
 
   // ---- Läget just nu, ur samma data som livekartan ----
-  const DAGAR = ['söndag', 'måndag', 'tisdag', 'onsdag', 'torsdag', 'fredag', 'lördag'];
   const MAN = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'];
+  const MANAD = ['januari', 'februari', 'mars', 'april', 'maj', 'juni', 'juli', 'augusti', 'september', 'oktober', 'november', 'december'];
   function sthlm(d) {
     const f = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Stockholm', weekday: 'long', day: 'numeric', month: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false });
     const p = Object.fromEntries(f.formatToParts(d).map(x => [x.type, x.value]));
-    return { dag: p.weekday, datum: p.day + ' ' + MAN[+p.month - 1], tid: p.hour + ':' + p.minute };
+    return { dag: p.weekday, datum: p.day + ' ' + MAN[+p.month - 1], tid: p.hour + ':' + p.minute,
+      nar: p.weekday.charAt(0).toUpperCase() + p.weekday.slice(1) + ' ' + p.day + ' ' + MANAD[+p.month - 1] + ' kl. ' + p.hour + ':' + p.minute };
   }
   const grad = v => (v < 0 ? '−' : '') + Math.abs(v).toFixed(1).replace('.', ',') + ' °C';
   const ren = n => n.replace(/^\d+\s*/, '').replace(/\s+(Fjärryta|Yta|Vägyta)$/i, '').trim();
@@ -471,7 +606,10 @@
     fetch('data/vader.geojson' + bust).then(r => r.json()),
     fetch('data/vaglag.geojson' + bust).then(r => r.json()),
     fetch('assets/norden.json').then(r => r.json()).catch(() => ({})),
-  ]).then(([meta, vader, vaglag, norden]) => {
+    fetch('data/kandidat.geojson' + bust).then(r => r.json()).catch(() => ({ features: [] })),
+  ]).then(([meta, vader, vaglag, norden, kandidat]) => {
+    // Prognos syns från början på alla kartor sedan 7/11 (Axel och Bengt, DECISIONS #819); tom när brytaren är av (#578).
+    const prognos = meta.kandidat && meta.kandidat.pa === false ? [] : kandidat.features;
     const n = sthlm(new Date(meta.generated_at));
     const stat = vader.features.filter(f => f.properties.land === 'SE' && rimlig(f.properties));
     const kalla = stat.filter(f => f.properties.yta < 0);
@@ -482,10 +620,11 @@
     satt('h-tid', 'Just nu · ' + n.dag + ' ' + n.datum + ' · ' + n.tid);
     satt('k-tid', 'Livekartan · uppdaterad ' + n.tid);
     satt('t-tid', 'Hela landet · ' + n.tid);
-    const rubrik = kalla.length
-      ? kalla.length + (kalla.length === 1 ? ' station' : ' stationer') + ' under noll. Kallast vid ' + plats + '.'
-      : 'Ingen station under noll. Kallast vid ' + plats + ', ' + grad(kallast.properties.yta) + '.';
-    stationer = rubrik;
+    // Svarsmeningen (DECISIONS #820): datum och klockslag först, temperaturen med. Samma text skriver publicera i HTML:en (lsStartsida).
+    nar = n.nar;
+    stationer = !kallast ? '' : kalla.length
+      ? 'Vägbanan är under noll vid ' + kalla.length + ' av ' + stat.length + ' stationer, kallast ' + grad(kallast.properties.yta) + ' vid ' + plats + '.'
+      : 'Ingen station visar vägbana under noll. Kallast ' + grad(kallast.properties.yta) + ' vid ' + plats + '.';
     mening();
     satt('t-kalla', kalla.length);
     satt('t-av', 'av ' + stat.length + ' stationer');
@@ -494,35 +633,43 @@
     satt('k-halka', halt.length);
     satt('k-kalla', kalla.length);
     satt('k-varma', stat.length - kalla.length);
-    rita(stat, halt, norden);
-    addEventListener('resize', () => rita(stat, halt, norden));
+    rita(stat, halt, norden, prognos);
+    addEventListener('resize', () => rita(stat, halt, norden, prognos));
   }).catch(() => { satt('h-tid', 'Just nu'); });
 
   // ---- Halka per län, ur samma fil som länssidorna (data/lan.json) ----
-  let stationer = '', lanText = '';
-  function mening() { const t = [lanText, stationer].filter(Boolean).join(' '); if (t) satt('l-mening', t); }
+  let stationer = '', lanText = '', nar = '';
+  function mening() { if (!nar || !lanText) return; satt('l-mening', [nar + ' rapporterar Trafikverket ' + lanText, stationer].filter(Boolean).join(' ')); }
   fetch('data/lan.json' + bust).then(r => r.json()).then(d => {
     const halt = d.lan.filter(l => l.halt > 0).sort((a, b) => b.halt - a.halt);
     const lista = document.getElementById('halt-lista');
     const alla = lista.querySelector('.lank-mono');
     // Länen står redan i HTML:en sedan publicera skrev dem (6/11, DECISIONS #806); här byts de mot de färska.
     lista.querySelectorAll('.lan-halt, .lugnt').forEach(e => e.remove());
-    if (halt.length) {
-      halt.forEach(l => { const a = document.createElement('a'); a.className = 'lan-halt'; a.href = 'lan/' + l.slug + '/';
-        a.textContent = l.kort + ' · ' + l.halt; a.title = 'Halka eller vinterväglag på ' + l.halt + ' av ' + l.vagavsnitt + ' vägavsnitt'; lista.insertBefore(a, alla); });
-      const summa = halt.reduce((s, l) => s + l.halt, 0);
-      const namn = halt.map(l => l.kort);
-      lanText = 'Halka eller vinterväglag på ' + summa + (summa === 1 ? ' sträcka' : ' sträckor') + ', i ' +
-        (namn.length > 1 ? namn.slice(0, -1).join(', ') + ' och ' + namn[namn.length - 1] : namn[0]) + '.';
-    } else {
-      const p = document.createElement('span'); p.className = 'lugnt'; p.textContent = 'Ingen halka rapporterad just nu.'; lista.insertBefore(p, alla);
-      lanText = 'Trafikverket rapporterar ingen halka just nu.';
+    // Raderna (DECISIONS #820): hala vägavsnitt av alla i länet, med stapel. Samma rader skriver publicera i HTML:en.
+    halt.forEach(l => { const a = document.createElement('a'); a.className = 'lan-halt'; a.href = 'lan/' + l.slug + '/';
+      a.title = 'Halka eller vinterväglag på ' + l.halt + ' av ' + l.vagavsnitt + ' vägavsnitt';
+      a.innerHTML = '<span></span><em></em><s><u></u></s>'; a.firstChild.textContent = l.kort; a.children[1].textContent = l.halt + ' av ' + l.vagavsnitt;
+      a.querySelector('u').style.width = Math.max(3, Math.round(100 * l.halt / Math.max(1, l.vagavsnitt))) + '%'; lista.insertBefore(a, alla); });
+    const lugna = d.lan.filter(l => !l.halt);
+    if (lugna.length) { const p = document.createElement('p'); p.className = 'lugnt';
+      p.append(halt.length ? 'Ingen halka rapporterad i ' : 'Ingen halka rapporterad just nu i något län. ');
+      if (halt.length) { lugna.forEach((l, i) => { const a = document.createElement('a'); a.href = 'lan/' + l.slug + '/'; a.textContent = l.kort;
+        p.append(a, i < lugna.length - 2 ? ', ' : i === lugna.length - 2 ? ' och ' : '.'); }); }
+      lista.insertBefore(p, alla); }
+    const summa = halt.reduce((s, l) => s + l.halt, 0);
+    lanText = halt.length ? 'halka eller vinterväglag på ' + summa + ' vägavsnitt i ' + halt.length + ' län.' : 'ingen halka på Sveriges vägar.';
+    // Storstäderna och de stora vägarna: länets och vägens tal ur samma fil.
+    const avsnitt = (h, n) => h ? 'halka på ' + h + ' av ' + n + ' vägavsnitt' : 'ingen halka på ' + n + ' vägavsnitt';
+    for (const [stad, slug] of [['stockholm', 'stockholm'], ['goteborg', 'vastra-gotaland'], ['malmo', 'skane']]) {
+      const l = d.lan.find(x => x.slug === slug); if (l) satt('s-' + stad, l.kort + ': ' + avsnitt(l.halt, l.vagavsnitt));
     }
+    (d.vag || []).forEach(v => satt('v-' + v.slug, v.vagavsnitt ? v.halt + ' av ' + v.vagavsnitt + ' hala' : '–'));
     mening();
   }).catch(() => {});
 
   // ---- Kartan: stationer och hala sträckor, Sverige, enkel projektion ----
-  function rita(stat, halt, norden) {
+  function rita(stat, halt, norden, prognos) {
     const cv = document.getElementById('karta');
     const box = cv.getBoundingClientRect();
     const dpr = Math.min(2, devicePixelRatio || 1);
@@ -553,6 +700,13 @@
       const g = f.geometry; const linjer = g.type === 'MultiLineString' ? g.coordinates : g.type === 'LineString' ? [g.coordinates] : [];
       linjer.forEach(l => { c.beginPath(); l.forEach((p, i) => { const [x, y] = xy(p); i ? c.lineTo(x, y) : c.moveTo(x, y); }); c.stroke(); });
     });
+    // Prognos: Halkvakts beräknade halka framöver, streckad och i egen färg så att den inte förväxlas med Trafikverkets rapporterade.
+    c.shadowBlur = 0; c.strokeStyle = '#FF8F6B'; c.lineWidth = 2; c.setLineDash([4, 3]);
+    (prognos || []).forEach(f => {
+      const g = f.geometry; const linjer = !g ? [] : g.type === 'MultiLineString' ? g.coordinates : g.type === 'LineString' ? [g.coordinates] : [];
+      linjer.forEach(l => { c.beginPath(); l.forEach((p, i) => { const [x, y] = xy(p); i ? c.lineTo(x, y) : c.moveTo(x, y); }); c.stroke(); });
+    });
+    c.setLineDash([]);
     // Stationer under noll
     c.shadowColor = 'rgba(233,239,242,.5)'; c.shadowBlur = 6; c.fillStyle = '#E9EFF2';
     stat.forEach(f => { if (f.properties.yta < 0) { const [x, y] = xy(f.geometry.coordinates); c.beginPath(); c.arc(x, y, 2.2, 0, Math.PI * 2); c.fill(); } });

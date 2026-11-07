@@ -155,7 +155,7 @@
   <button class="chip" data-layer="olyckor" aria-pressed="true"><i style="background:#FFC94A;box-shadow:0 0 0 2px #080B0D,0 0 0 3px #FFC94A"></i>Olyckor</button>
   <button class="chip" data-layer="vader" aria-pressed="true"><i style="background:#E9EFF2"></i>Vägväder</button>
   <button class="chip" data-layer="kameror" aria-pressed="false"><i style="background:#6F7C83"></i>Fartkameror</button>
-  <button class="chip" data-layer="kandidat" aria-pressed="false" title="Halka framöver enligt Halkvakts prognos. Modellerat, inte uppmätt."><i class="linje" style="background:repeating-linear-gradient(90deg,#FF8F6B 0 4px,transparent 4px 7px)"></i>Prognos</button>
+  <button class="chip" data-layer="kandidat" aria-pressed="true" title="Halka framöver enligt Halkvakts prognos. Modellerat, inte uppmätt."><i class="linje" style="background:repeating-linear-gradient(90deg,#FF8F6B 0 4px,transparent 4px 7px)"></i>Prognos</button>
 </div>
 <p class="notis" id="notis" role="status" hidden></p>
 <p class="kalla-rad">Data: <a href="https://www.trafikverket.se" rel="noopener">Trafikverket</a> (CC0) · <a href="https://www.digitraffic.fi" rel="noopener">Fintraffic</a> (CC BY 4.0) · <a href="https://www.met.no" rel="noopener">MET Norway</a> (CC BY 4.0) · <a href="https://www.dmi.dk/friedata" rel="noopener">DMI</a> (<a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>) · Karta: <a href="https://openfreemap.org" rel="noopener">OpenFreeMap</a> © OpenStreetMap · Länsgränser: Natural Earth</p>
@@ -231,10 +231,10 @@ map.on('load', async () => {
     paint: { 'line-width': ['case', ['>', ['get', 'code'], 1], 4, 1.2],
              'line-color': ['case', ['>', ['get', 'code'], 1], '#FFC94A', '#4A5A63'],
              'line-opacity': ['case', ['>', ['get', 'code'], 1], .95, .55] } }, forstaText());
-  // Prognos (DECISIONS #579; hette "Halkvakt tror · beta" till 31/10): kandidatens bitar av vägen — modellerat, inte uppmätt. Avslaget från början, och tomt när
-  // brytaren är av (#578). Streckat så att det inte förväxlas med Trafikverkets rapporterade halka under.
+  // Prognos (DECISIONS #579; hette "Halkvakt tror · beta" till 31/10): kandidatens bitar av vägen — modellerat, inte uppmätt. Påslaget från början
+  // sedan 7/11 (Axel och Bengt, DECISIONS #819), och tomt när brytaren är av (#578). Streckat så att det inte förväxlas med Trafikverkets rapporterade halka under.
   map.addSource('kandidat', { type: 'geojson', data: d.kandidat });
-  map.addLayer({ id: 'kandidat', type: 'line', source: 'kandidat', layout: { visibility: 'none', 'line-cap': 'round' },
+  map.addLayer({ id: 'kandidat', type: 'line', source: 'kandidat', layout: { visibility: 'visible', 'line-cap': 'round' },
     paint: { 'line-width': 4, 'line-color': '#FF8F6B', 'line-dasharray': [1.4, 1], 'line-opacity': .95 } }, forstaText());
   // Träffytorna (Axel 2/11): de hala sträckorna och Prognos är 4 px breda och svåra att träffa utzoomat. En osynlig, 20 px bred kopia
   // tar klicket, och en svag glöd under linjen visar vilken sträcka pekaren är nära. De grå sträckorna får ingen träffyta, så att
@@ -242,11 +242,11 @@ map.on('load', async () => {
   const ingen = ['==', ['get', 'segment_id'], ''];
   map.addLayer({ id: 'vaglag-lys', type: 'line', source: 'vaglag', filter: ingen, layout: { 'line-cap': 'round', 'line-join': 'round' },
     paint: { 'line-width': 12, 'line-color': '#FFC94A', 'line-opacity': .35, 'line-blur': 2 } }, 'vaglag');
-  map.addLayer({ id: 'kandidat-lys', type: 'line', source: 'kandidat', filter: ingen, layout: { visibility: 'none', 'line-cap': 'round', 'line-join': 'round' },
+  map.addLayer({ id: 'kandidat-lys', type: 'line', source: 'kandidat', filter: ingen, layout: { visibility: 'visible', 'line-cap': 'round', 'line-join': 'round' },
     paint: { 'line-width': 12, 'line-color': '#FF8F6B', 'line-opacity': .35, 'line-blur': 2 } }, 'kandidat');
   map.addLayer({ id: 'vaglag-traff', type: 'line', source: 'vaglag', filter: ['>', ['get', 'code'], 1],
     layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-width': 20, 'line-opacity': 0 } });
-  map.addLayer({ id: 'kandidat-traff', type: 'line', source: 'kandidat', layout: { visibility: 'none', 'line-cap': 'round', 'line-join': 'round' },
+  map.addLayer({ id: 'kandidat-traff', type: 'line', source: 'kandidat', layout: { visibility: 'visible', 'line-cap': 'round', 'line-join': 'round' },
     paint: { 'line-width': 20, 'line-opacity': 0 } });
   // Vägväder: stationerna är mätpunkter, inte faror. De ligger under de gula sträckorna och hålls små. Utzoomat syns bara de
   // som visar 0 °C eller kallare; alla stationer kommer fram från zoom 7. Grannländernas stationer är svagare än Sveriges.
@@ -356,7 +356,7 @@ map.on('load', async () => {
   // Brytaren (#578): avstängd kandidat ⇒ knappen säger det och går inte att slå på.
   if (m && m.kandidat && m.kandidat.pa === false) {
     const c = document.querySelector('.chip[data-layer="kandidat"]');
-    c.lastChild.textContent = 'Prognos · avstängd'; c.setAttribute('aria-disabled', 'true'); c.title = 'Avstängd just nu';
+    c.lastChild.textContent = 'Prognos · avstängd'; c.setAttribute('aria-disabled', 'true'); c.setAttribute('aria-pressed', 'false'); c.title = 'Avstängd just nu';
   }
 
   const pop = (e, html) => new maplibregl.Popup({ closeButton: false }).setLngLat(e.lngLat).setHTML(`<div class="pop">${html}</div>`).addTo(map);
