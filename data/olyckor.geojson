@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[15.119166603,59.178127744]},"properties":{"land":"SE","typ":"Olycka","msg":"Olycka mellan två personbilar. Vägen är avstängd under räddningsinsatsen. ","allvar":"Mycket stor påverkan","road":"E20","start":"2026-11-07T00:59:00.000Z"}}]}
