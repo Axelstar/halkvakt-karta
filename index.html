@@ -281,6 +281,22 @@
 .fragor { max-width: 900px; }
 .fragor h3 { font-size: 19px; margin: 0 0 8px; }
 .fragor div { padding: 20px 0; border-top: 1px dashed var(--skilje); }
+
+/* 7/11: kartan mindre och länen i två kolumner, som mockupen (Axel: "Kartan på live är allt för stor"). */
+.landet .tal-rad { margin-top: 8px; }
+.landet .tal-rad .kvitto { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.landet .tal-rad .kvitto > div { border-top: 0; border-left: 1px dashed var(--skilje); padding: 18px 24px; }
+.landet .tal-rad .kvitto > div:first-child { border-left: 0; }
+@media (max-width: 760px) { .landet .tal-rad .kvitto { grid-template-columns: 1fr; } .landet .tal-rad .kvitto > div { border-left: 0; border-top: 1px dashed var(--skilje); } .landet .tal-rad .kvitto > div:first-child { border-top: 0; } }
+.landet .lage { grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); margin-top: 14px; }
+@media (max-width: 960px) { .landet .lage { grid-template-columns: 1fr; } }
+.landet .kartruta { min-height: 560px; }
+@media (max-width: 640px) { .landet .kartruta { min-height: 440px; } }
+.landet .sidokolumn { align-content: stretch; }
+.halt-lista.rader { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 36px; align-content: start; }
+@media (max-width: 560px) { .halt-lista.rader { grid-template-columns: 1fr; } }
+.halt-lista.rader .lugnt, .halt-lista.rader .lank-mono { grid-column: 1 / -1; }
+.lanpanel select { max-width: 320px; }
 .dold { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .fragor p { margin: 0; color: var(--text2); font-size: 16px; line-height: 1.55; }
 </style>
@@ -347,6 +363,13 @@
   <section class="sektion landet" id="lage">
     <div class="wrap">
       <div class="rubrikrad"><h2>Läget län för län</h2><p class="etikett"><span class="ljus" aria-hidden="true"></span><span id="t-tid">Hela landet · 14:30</span></p></div>
+      <div class="panel tal tal-rad">
+        <dl class="kvitto">
+            <div><dt>Halka rapporterad</dt><dd class="stort"><b id="t-halka">205</b><span>sträckor</span></dd></div>
+            <div><dt>Vägbana under noll</dt><dd class="stort"><b id="t-kalla">104</b><span id="t-av">av 793 stationer</span></dd></div>
+            <div><dt>Kallaste station</dt><dd class="stort"><b id="t-kallast">−5,3 °C</b><span id="t-plats">vid Storberget</span></dd></div>
+          </dl>
+      </div>
       <div class="lage">
         <div class="kartruta panel">
           <a class="kartlank" href="karta.html" aria-label="Öppna livekartan"></a>
@@ -361,13 +384,6 @@
           </div>
         </div>
         <div class="sidokolumn">
-          <div class="panel tal">
-          <dl class="kvitto">
-            <div><dt>Halka rapporterad</dt><dd class="stort"><b id="t-halka">205</b><span>sträckor</span></dd></div>
-            <div><dt>Vägbana under noll</dt><dd class="stort"><b id="t-kalla">104</b><span id="t-av">av 793 stationer</span></dd></div>
-            <div><dt>Kallaste station</dt><dd class="stort"><b id="t-kallast">−5,3 °C</b><span id="t-plats">vid Storberget</span></dd></div>
-          </dl>
-        </div>
           <div class="panel lanpanel">
             <label class="dold" for="lanval">Välj län</label>
             <select id="lanval" aria-label="Välj län"><option value="">Välj län</option></select>
