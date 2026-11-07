@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[22.106519856,60.464383196]},"properties":{"land":"FI","typ":"Olycka","msg":"Tie 40, eli Turun kehätie, Raisio. Liikennetiedote onnettomuudesta.  · Onnettomuus · Ajokaista suljettu liikenteeltä","allvar":null,"road":null,"start":"2026-11-07T02:45:00.000Z"}}]}
