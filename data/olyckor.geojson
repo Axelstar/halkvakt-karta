@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[17.686900975,59.881365016]},"properties":{"land":"SE","typ":"Olycka","msg":"Singelolycka, personbil. Räddningstjänst på plats.","allvar":"Stor påverkan","road":"E4","start":"2026-11-08T03:43:30.000Z"}}]}
