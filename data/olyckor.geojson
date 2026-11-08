@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[22.309860205,66.561058028]},"properties":{"land":"SE","typ":"Olycka","msg":"Singelolycka med personbil i höjd med infarten mot Naisjärv, risk för begränsad framkomlighet. Bärgare inväntas, prognos på ankomst ca kl 07:30.","allvar":"Liten påverkan","road":"E10","start":"2026-11-08T04:34:00.000Z"}}]}
