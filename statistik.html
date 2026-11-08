@@ -133,7 +133,7 @@
       <div class="ruta"><span>Besökare i dag</span><b id="t-idag">–</b><small id="s-idag">på halkvakt.se</small></div>
       <div class="ruta"><span id="t-perlabel">Besök in</span><b id="t-in">–</b><small>kom till sajten utifrån, t.ex. från Google eller ett mejl</small></div>
       <div class="ruta"><span>Klick till appen</span><b id="t-app">–</b><small id="s-app">App Store och Play</small></div>
-      <div class="ruta"><span>Förare per dygn</span><b id="t-forare">–</b><small>som hade vakten igång, snitt senaste 7 dygnen</small></div>
+      <div class="ruta"><span id="t-forare-rubrik">Förare per dygn</span><b id="t-forare">–</b><small id="s-forare">som hade vakten igång, snitt senaste 7 dygnen</small></div>
     </div>
 
     <!-- 3 · Flikarna -->
@@ -470,6 +470,9 @@
     var perDag = {}; ((a && a.per_dag) || []).forEach(function (r) { if (r.handelse === "aktiv_dag") perDag[r.dag] = (perDag[r.dag] || 0) + r.antal; });
     var dagarna = Object.keys(perDag).sort(), sju = dagarna.slice(-7), snitt = sju.length ? sju.reduce(function (s, d) { return s + perDag[d]; }, 0) / sju.length : 0;
     $("t-forare").textContent = sju.length ? dec(snitt) : "–";
+    // Vid 1 dygn finns bara dagens rad, så kortet visar dagens förare i stället för ett snitt.
+    $("t-forare-rubrik").textContent = dagar === 1 ? "Förare i dag" : "Förare per dygn";
+    $("s-forare").textContent = dagar === 1 ? "som har haft vakten igång i dag" : "som hade vakten igång, snitt senaste 7 dygnen";
     var serie = dygnsserie(perDag, 0), fmax = Math.max(1, Math.max.apply(null, serie.map(function (s) { return s.r; })));
     $("app-dagar").innerHTML = serie.map(function (s) { return '<div title="' + kortDag(s.dag) + ": " + s.r + ' förare"><i class="g" style="height:' + (100 * s.r / fmax) + '%"></i></div>'; }).join("");
     $("app-fran").textContent = kortDag(serie[0].dag); $("app-till").textContent = kortDag(serie[serie.length - 1].dag);
@@ -610,6 +613,9 @@
     visaOss();
   });
   visaOss();
+  // Siffrorna hämtas om varje minut medan sidan är öppen, och direkt när man byter tillbaka till fliken.
+  setInterval(function () { if (nyckel && !document.hidden) ladda(); }, 60000);
+  document.addEventListener("visibilitychange", function () { if (nyckel && !document.hidden) ladda(); });
   nyckel = hamtaNyckel();
   if (nyckel) ladda(); else $("las").hidden = false;
 })();
