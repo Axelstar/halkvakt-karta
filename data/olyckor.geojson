@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[11.840280342,58.025154883]},"properties":{"land":"SE","typ":"Olycka","msg":"Kollision, två personbilar. Står i vägkanten. Riktning oklar.","allvar":"Liten påverkan","road":"Väg 160","start":"2026-11-09T14:25:01.000Z"}}]}
