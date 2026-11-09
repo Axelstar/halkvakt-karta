@@ -533,13 +533,17 @@
   const STAD = { 'ort/stockholm/': 1, 'ort/goteborg/': 1, 'ort/malmo/': 1 };
   const sidor = [...document.querySelectorAll('.hv-lankar a, .hv-lankar-vagar a')].map(a => {
     const href = a.getAttribute('href'), typ = STAD[href] ? 'Stad' : href.startsWith('ort/') ? 'Ort' : href.startsWith('lan/') ? 'Län' : href.startsWith('vag/') ? 'Väg' : 'Sida';
-    return { namn: a.textContent.trim(), href, typ, n: norm(a.textContent), rang: { Stad: 0, Ort: 1, 'Län': 2, 'Väg': 3, Sida: 4 }[typ] };
+    // data-alias (9/11): kommunens centralort när den heter något annat, så att Åkersberga hittar Österåker.
+    const alias = a.dataset.alias || '';
+    return { namn: a.textContent.trim(), alias, href, typ, n: norm(a.textContent), na: norm(alias), rang: { Stad: 0, Ort: 1, 'Län': 2, 'Väg': 3, Sida: 4 }[typ] };
   }).filter((x, i, a) => a.findIndex(y => y.href === x.href) === i);
+  const passar = (t, n) => t && (t.startsWith(n) || t.split(/[\s–-]+/).some(w => w.startsWith(n)));
   const q = document.getElementById('q'), ul = document.getElementById('forslag');
   let traffar = [], vald = -1;
   const sok = t => { const n = norm(t); if (!n) return [];
-    return sidor.filter(x => x.n.startsWith(n) || x.n.split(/[\s–-]+/).some(w => w.startsWith(n)))
-      .sort((a, b) => (b.n.startsWith(n) - a.n.startsWith(n)) || a.rang - b.rang || a.namn.localeCompare(b.namn, 'sv')).slice(0, 7); };
+    return sidor.filter(x => passar(x.n, n) || passar(x.na, n))
+      .sort((a, b) => (b.n.startsWith(n) - a.n.startsWith(n)) || a.rang - b.rang || a.namn.localeCompare(b.namn, 'sv')).slice(0, 7)
+      .map(x => passar(x.n, n) ? x : { ...x, namn: x.namn + ' (' + x.alias + ')' }); };
   const visaForslag = () => {
     traffar = sok(q.value); vald = traffar.length ? 0 : -1; ul.innerHTML = '';
     if (!q.value.trim()) { ul.hidden = true; q.setAttribute('aria-expanded', 'false'); return; }
