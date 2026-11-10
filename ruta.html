@@ -408,6 +408,7 @@
 
   if (egetNamn) {
     $('namn').textContent = egetNamn + ' · Väglaget'; document.querySelector('.etikett svg').style.display = 'none';
+    if (q.get('rubrik') === '0') $('namn').hidden = true;   // &rubrik=0: utan överrubriken med tidningens namn, Uppdaterad står kvar (Jämtlands Tidning 10/11)
     var k = $('kalla'); k.textContent = 'Data: Trafikverket · Teknik: '; k.className = 'teknik';
     var h = document.createElement('a'); h.href = 'https://halkvakt.se/'; h.target = '_blank'; h.rel = 'noopener'; h.textContent = 'Halkvakt'; k.appendChild(h);
   }

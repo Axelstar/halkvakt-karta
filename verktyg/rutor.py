@@ -26,13 +26,15 @@ EXTRA = {
     'ljusdalsposten': dict(lan='gavleborg', strak='ljusdal', namn='Ljusdals-Posten', lank='https://www.ljusdalsposten.se/', lanktext='Mer trafik på ljusdalsposten.se', klick='1'),
     # Jämtlands Tidning med pendlarflik (Axel 10/11): en ny adress bredvid /ruta/jamtlandstidning/, som ligger
     # ute på deras sajt och inte får ändras. Stråken från Östersund tills chefredaktören sagt vilka han vill ha.
-    'jamtlandstidning-pendling': dict(lan='jamtland', strak='ostersund', namn='Jämtlands Tidning', lank='https://www.jamtlandstidning.se/', lanktext='Mer trafik på jamtlandstidning.se', klick='1'),
+    'jamtlandstidning-pendling': dict(lan='jamtland', strak='ostersund', namn='Jämtlands Tidning', lank='https://www.jamtlandstidning.se/', lanktext='Mer trafik på jamtlandstidning.se', klick='1', rubrik='0'),
 }
 HOPPA = {'halsingland'}   # sidor som täcks av EXTRA
 # Adresser som ligger ute hos en tidning och inte får ändras utan att tidningen vet. Jämtlands Tidning har
-# /ruta/jamtlandstidning/ på startsidan sedan 7/11; den förblir som den är (utan klick), pendlingsversionen är egen adress.
-LAST = {'jamtlandstidning': ['klick']}
-ORDNING = ['lan', 'strak', 'tema', 'namn', 'lank', 'lanktext', 'klick']   # klick=1: klickbara rader (Axel 10/11), alla tidningar från 10/11
+# /ruta/jamtlandstidning/ på startsidan sedan 7/11. Chefredaktören bad 10/11 om att överrubriken tas bort, och Axel
+# ville samtidigt ha klickbara rader där. Pendlarfliken väntar tills han har gett förslag.
+LAST = {}
+TILLAGG = {'jamtlandstidning': dict(klick='1', rubrik='0')}
+ORDNING = ['lan', 'strak', 'tema', 'namn', 'lank', 'lanktext', 'klick', 'rubrik']   # klick=1: klickbara rader (Axel 10/11), alla tidningar från 10/11
 # Rutan eller widgeten: sidan som skalet bäddar in, dess version, höjd, tillval som går vidare och beskrivning.
 SORT = {
     'ruta': dict(sida='ruta.html', v='6', hojd=440, tillval=['flik', 'tema', 'sponsor', 'sponsorlank'],
@@ -57,6 +59,8 @@ def tidningar():
         if m.group(1) == 'widget': ut[slug]['sort'] = 'widget'
     for slug, bort in LAST.items():
         for k in bort: ut.get(slug, {}).pop(k, None)
+    for slug, extra in TILLAGG.items():
+        if slug in ut: ut[slug].update(extra)
     ut.update(EXTRA)
     return ut
 
