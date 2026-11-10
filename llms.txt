@@ -22,5 +22,6 @@
 - [Appen](https://halkvakt.se/)
 - [Finns det en app som varnar för halka?](https://halkvakt.se/app-som-varnar-for-halka.html): Halkvakt, gratis för iPhone, varnar med rösten när Trafikverket rapporterar halka på vägen framför föraren
 - [Integritet](https://halkvakt.se/integritet.html): positionen lämnar inte telefonen av sig själv
+- [Ansvar och källor](https://halkvakt.se/ansvar.html): ett stöd, inte en garanti; alla datakällor med licens
 - [Press och redaktioner](https://halkvakt.se/press.html)
 - Kontakt: hej@halkvakt.se
