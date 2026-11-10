@@ -108,6 +108,11 @@
 (function () {
   var BAS = 'https://halkvakt.se/';
   var q = new URLSearchParams(location.search);
+  // Tidningar som bäddat in ruta.html direkt med den gamla iframe-koden: deras önskemål läggs på här, eftersom vi inte
+  // kan ändra koden hos dem. Gäller bara när parametern saknas i adressen. Jämtlands Tidning (chefredaktören 10/11):
+  // ingen överrubrik, klickbara rader (Axel). Pendlarfliken väntar tills han gett förslag.
+  var TIDNING = { 'Jämtlands Tidning': { klick: '1', rubrik: '0' } };
+  var egna = TIDNING[q.get('namn')]; if (egna) Object.keys(egna).forEach(function (k) { if (!q.has(k)) q.set(k, egna[k]); });
   var lanSlug = q.get('lan') || 'varmland';
   var tema = q.get('tema');
   // Tidningens egen ruta (Axel 17/10): &namn= ersätter Halkvakt i rubriken, &lank= och &lanktext= styr länken i foten (bara https),
