@@ -20,16 +20,19 @@ BAS = 'https://halkvakt.se/'
 
 # Tidningar som inte har en egen förslagssida (de delar halsingland.html).
 EXTRA = {
-    'ht': dict(lan='gavleborg', strak='halsingland', namn='HT', lank='https://www.ht.se/', lanktext='Mer trafik på ht.se'),
-    'ljusnan': dict(lan='gavleborg', strak='ljusnan', namn='Ljusnan', lank='https://www.ljusnan.se/', lanktext='Mer trafik på ljusnan.se'),
-    'soderhamnskuriren': dict(lan='gavleborg', strak='soderhamn', namn='Söderhamns-Kuriren', lank='https://www.soderhamnskuriren.se/', lanktext='Mer trafik på soderhamnskuriren.se'),
-    'ljusdalsposten': dict(lan='gavleborg', strak='ljusdal', namn='Ljusdals-Posten', lank='https://www.ljusdalsposten.se/', lanktext='Mer trafik på ljusdalsposten.se'),
+    'ht': dict(lan='gavleborg', strak='halsingland', namn='HT', lank='https://www.ht.se/', lanktext='Mer trafik på ht.se', klick='1'),
+    'ljusnan': dict(lan='gavleborg', strak='ljusnan', namn='Ljusnan', lank='https://www.ljusnan.se/', lanktext='Mer trafik på ljusnan.se', klick='1'),
+    'soderhamnskuriren': dict(lan='gavleborg', strak='soderhamn', namn='Söderhamns-Kuriren', lank='https://www.soderhamnskuriren.se/', lanktext='Mer trafik på soderhamnskuriren.se', klick='1'),
+    'ljusdalsposten': dict(lan='gavleborg', strak='ljusdal', namn='Ljusdals-Posten', lank='https://www.ljusdalsposten.se/', lanktext='Mer trafik på ljusdalsposten.se', klick='1'),
     # Jämtlands Tidning med pendlarflik (Axel 10/11): en ny adress bredvid /ruta/jamtlandstidning/, som ligger
     # ute på deras sajt och inte får ändras. Stråken från Östersund tills chefredaktören sagt vilka han vill ha.
     'jamtlandstidning-pendling': dict(lan='jamtland', strak='ostersund', namn='Jämtlands Tidning', lank='https://www.jamtlandstidning.se/', lanktext='Mer trafik på jamtlandstidning.se', klick='1'),
 }
 HOPPA = {'halsingland'}   # sidor som täcks av EXTRA
-ORDNING = ['lan', 'strak', 'tema', 'namn', 'lank', 'lanktext', 'klick']   # klick=1: klickbara rader (Axel 10/11)
+# Adresser som ligger ute hos en tidning och inte får ändras utan att tidningen vet. Jämtlands Tidning har
+# /ruta/jamtlandstidning/ på startsidan sedan 7/11; den förblir som den är (utan klick), pendlingsversionen är egen adress.
+LAST = {'jamtlandstidning': ['klick']}
+ORDNING = ['lan', 'strak', 'tema', 'namn', 'lank', 'lanktext', 'klick']   # klick=1: klickbara rader (Axel 10/11), alla tidningar från 10/11
 # Rutan eller widgeten: sidan som skalet bäddar in, dess version, höjd, tillval som går vidare och beskrivning.
 SORT = {
     'ruta': dict(sida='ruta.html', v='6', hojd=440, tillval=['flik', 'tema', 'sponsor', 'sponsorlank'],
@@ -52,6 +55,8 @@ def tidningar():
         slug = os.path.basename(f)[:-5]
         ut[slug] = {k: q[k] for k in ORDNING if k in q}
         if m.group(1) == 'widget': ut[slug]['sort'] = 'widget'
+    for slug, bort in LAST.items():
+        for k in bort: ut.get(slug, {}).pop(k, None)
     ut.update(EXTRA)
     return ut
 
