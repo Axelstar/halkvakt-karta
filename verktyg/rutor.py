@@ -24,6 +24,9 @@ EXTRA = {
     'ljusnan': dict(lan='gavleborg', strak='ljusnan', namn='Ljusnan', lank='https://www.ljusnan.se/', lanktext='Mer trafik på ljusnan.se'),
     'soderhamnskuriren': dict(lan='gavleborg', strak='soderhamn', namn='Söderhamns-Kuriren', lank='https://www.soderhamnskuriren.se/', lanktext='Mer trafik på soderhamnskuriren.se'),
     'ljusdalsposten': dict(lan='gavleborg', strak='ljusdal', namn='Ljusdals-Posten', lank='https://www.ljusdalsposten.se/', lanktext='Mer trafik på ljusdalsposten.se'),
+    # Jämtlands Tidning med pendlarflik (Axel 10/11): en ny adress bredvid /ruta/jamtlandstidning/, som ligger
+    # ute på deras sajt och inte får ändras. Stråken från Östersund tills chefredaktören sagt vilka han vill ha.
+    'jamtlandstidning-pendling': dict(lan='jamtland', strak='ostersund', namn='Jämtlands Tidning', lank='https://www.jamtlandstidning.se/', lanktext='Mer trafik på jamtlandstidning.se'),
 }
 HOPPA = {'halsingland'}   # sidor som täcks av EXTRA
 ORDNING = ['lan', 'strak', 'tema', 'namn', 'lank', 'lanktext']
