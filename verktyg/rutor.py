@@ -26,10 +26,10 @@ EXTRA = {
     'ljusdalsposten': dict(lan='gavleborg', strak='ljusdal', namn='Ljusdals-Posten', lank='https://www.ljusdalsposten.se/', lanktext='Mer trafik på ljusdalsposten.se'),
     # Jämtlands Tidning med pendlarflik (Axel 10/11): en ny adress bredvid /ruta/jamtlandstidning/, som ligger
     # ute på deras sajt och inte får ändras. Stråken från Östersund tills chefredaktören sagt vilka han vill ha.
-    'jamtlandstidning-pendling': dict(lan='jamtland', strak='ostersund', namn='Jämtlands Tidning', lank='https://www.jamtlandstidning.se/', lanktext='Mer trafik på jamtlandstidning.se'),
+    'jamtlandstidning-pendling': dict(lan='jamtland', strak='ostersund', namn='Jämtlands Tidning', lank='https://www.jamtlandstidning.se/', lanktext='Mer trafik på jamtlandstidning.se', klick='1'),
 }
 HOPPA = {'halsingland'}   # sidor som täcks av EXTRA
-ORDNING = ['lan', 'strak', 'tema', 'namn', 'lank', 'lanktext']
+ORDNING = ['lan', 'strak', 'tema', 'namn', 'lank', 'lanktext', 'klick']   # klick=1: klickbara rader (Axel 10/11)
 # Rutan eller widgeten: sidan som skalet bäddar in, dess version, höjd, tillval som går vidare och beskrivning.
 SORT = {
     'ruta': dict(sida='ruta.html', v='6', hojd=440, tillval=['flik', 'tema', 'sponsor', 'sponsorlank'],
