@@ -59,6 +59,14 @@
   .prickar i { width: 6px; height: 6px; border-radius: 50%; background: var(--skilje); }
   .prickar i.pa { background: var(--gul); }
   @media (prefers-reduced-motion: reduce) { .spar { scroll-behavior: auto; } }
+  /* Klickbara rader (Axel 10/11), bara med &klick=1: raden öppnar vägen, orten eller länet på halkvakt.se i ny flik. */
+  li > a.rad { display: contents; color: inherit; text-decoration: none; }
+  li.klick { position: relative; isolation: isolate; cursor: pointer; padding-right: 22px; }
+  li.klick::before { content: ""; position: absolute; inset: 2px -10px; border-radius: 8px; background: var(--skilje); opacity: 0; transition: opacity .15s; z-index: -1; }
+  li.klick::after { content: "›"; position: absolute; right: 2px; top: 50%; transform: translateY(-50%); font: 600 18px var(--sans); color: var(--dampad); transition: transform .15s, color .15s; }
+  li.klick:hover::before { opacity: 1; }
+  li.klick:hover::after { color: var(--text); transform: translate(3px, -50%); }
+  li.klick:focus-within::before { opacity: 1; outline: 2px solid var(--gul); }
 </style>
 </head>
 <body>
@@ -346,6 +354,20 @@
       { till: 'Limmared', delar: [['Väg 157', 'Ulricehamn - Gällstad'], ['Väg 157', 'Gällstad - Limmared']] }
     ] }
   };
+  // Klickbara rader (Axel 10/11): bara med &klick=1, så rutor som redan ligger ute hos tidningar är oförändrade.
+  var KLICK = q.get('klick') === '1';
+  var ORTER = ["ale", "alingsas", "almhult", "alvdalen", "alvesta", "alvkarleby", "alvsbyn", "amal", "aneby", "ange", "angelholm", "arboga", "are", "arjang", "arjeplog", "arvidsjaur", "arvika", "asele", "askersund", "astorp", "atvidaberg", "avesta", "bastad", "bengtsfors", "berg", "bjurholm", "bjuv", "boden", "bollebygd", "bollnas", "boras", "borgholm", "borlange", "botkyrka", "boxholm", "bracke", "bromolla", "burlov", "dals-ed", "danderyd", "degerfors", "dorotea", "eda", "ekero", "eksjo", "emmaboda", "enkoping", "eskilstuna", "eslov", "essunga", "fagersta", "falkenberg", "falkoping", "falun", "fargelanda", "filipstad", "finspang", "flen", "forshaga", "gagnef", "gallivare", "gavle", "gislaved", "gnesta", "gnosjo", "goteborg", "gotene", "grastorp", "grums", "gullspang", "habo", "habo-balsta", "hagfors", "hallefors", "hallsberg", "hallstahammar", "halmstad", "hammaro", "haninge", "haparanda", "harjedalen", "harnosand", "harryda", "hassleholm", "heby", "hedemora", "helsingborg", "herrljunga", "hjo", "hofors", "hoganas", "hogsby", "hoor", "horby", "huddinge", "hudiksvall", "hultsfred", "hylte", "jarfalla", "jokkmokk", "jonkoping", "kalix", "kalmar", "karlsborg", "karlshamn", "karlskoga", "karlskrona", "karlstad", "katrineholm", "kavlinge", "kil", "kinda", "kiruna", "klippan", "knivsta", "koping", "kramfors", "kristianstad", "kristinehamn", "krokom", "kumla", "kungalv", "kungsbacka", "kungsor", "laholm", "landskrona", "laxa", "lekeberg", "leksand", "lerum", "lessebo", "lidingo", "lidkoping", "lilla-edet", "lindesberg", "linkoping", "ljungby", "ljusdal", "ljusnarsberg", "lomma", "ludvika", "lulea", "lund", "lycksele", "lysekil", "mala", "malmo", "malung-salen", "mariestad", "mark", "markaryd", "mellerud", "mjolby", "molndal", "monsteras", "mora", "morbylanga", "motala", "mullsjo", "munkedal", "munkfors", "nacka", "nassjo", "nora", "norberg", "nordanstig", "nordmaling", "norrkoping", "norrtalje", "norsjo", "nybro", "nykoping", "nykvarn", "nynashamn", "ockelbo", "ockero", "odeshog", "olofstrom", "orebro", "orkelljunga", "ornskoldsvik", "orsa", "orust", "osby", "oskarshamn", "osteraker", "ostersund", "osthammar", "ostra-goinge", "ovanaker", "overkalix", "overtornea", "oxelosund", "pajala", "partille", "perstorp", "pitea", "ragunda", "rattvik", "robertsfors", "ronneby", "saffle", "sala", "salem", "salen", "sandviken", "sater", "savsjo", "sigtuna", "simrishamn", "sjobo", "skara", "skelleftea", "skinnskatteberg", "skovde", "skurup", "smedjebacken", "soderhamn", "soderkoping", "sodertalje", "solleftea", "sollentuna", "solna", "solvesborg", "sorsele", "sotenas", "staffanstorp", "stenungsund", "stockholm", "storfors", "storuman", "strangnas", "stromstad", "stromsund", "sundbyberg", "sundsvall", "sunne", "surahammar", "svalov", "svedala", "svenljunga", "taby", "tanum", "tibro", "tidaholm", "tierp", "timra", "tingsryd", "tjorn", "tomelilla", "toreboda", "torsas", "torsby", "tranas", "tranemo", "trelleborg", "trollhattan", "trosa", "tyreso", "uddevalla", "ulricehamn", "umea", "upplands-bro", "upplands-vasby", "uppsala", "uppvidinge", "vadstena", "vaggeryd", "valdemarsvik", "vallentuna", "vanersborg", "vannas", "vansbro", "vara", "varberg", "vargarda", "varmdo", "varnamo", "vasteras", "vastervik", "vaxholm", "vaxjo", "vellinge", "vetlanda", "vilhelmina", "vimmerby", "vindeln", "vingaker", "visby", "ydre", "ystad"];
+  var VAGSIDOR = ["e18", "e20", "e22", "e4", "e6", "rv40"];
+  var slugga = function (t) { return t.toLowerCase().replace(/[åä]/g, 'a').replace(/ö/g, 'o').replace(/é/g, 'e').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); };
+  function klickbar(li, url, etikett) {
+    if (!KLICK || !url) return li;
+    var a = document.createElement('a'); a.className = 'rad'; a.href = url + (url.indexOf('?') < 0 ? '?' : '&') + 'utm_source=ruta&utm_medium=' + encodeURIComponent(q.get('namn') || 'halkvakt');
+    a.target = '_blank'; a.rel = 'noopener'; a.setAttribute('aria-label', etikett + ' på halkvakt.se');
+    while (li.firstChild) a.appendChild(li.firstChild);
+    li.appendChild(a); li.classList.add('klick');
+    li.addEventListener('click', function (e) { if (e.target.closest('a')) return; a.click(); });
+    return li;
+  }
   var strakNyckel = q.get('strak') || lanSlug, PEND = STRAK[strakNyckel];
   if (PEND && (PEND.lan || strakNyckel) !== lanSlug) PEND = null;
 
@@ -410,6 +432,7 @@
       : 'Ingen halka rapporterad och ingen vägväderstation under noll just nu.';
     if (l.olyckor) t += ' ' + l.olyckor + (l.olyckor === 1 ? ' olycka eller hinder pågår.' : ' olyckor eller hinder pågår.');
     $('lan-text').textContent = t;
+    if (KLICK && !visaLan.klar) { visaLan.klar = true; [].forEach.call(document.querySelectorAll('.lan-lista li'), function (li) { klickbar(li, BAS + 'lan/' + l.slug + '/', 'Läget i ' + l.kort); }); }
     $('lank').href = BAS + 'lan/' + l.slug + '/'; $('lank').textContent = 'Läget i ' + l.kort + ' på halkvakt.se';
     if (egenLank) { $('lank').href = egenLank; $('lank').target = '_top'; $('lank').textContent = (q.get('lanktext') || 'Mer om trafiken').slice(0, 40); }
     else { $('lank').target = '_blank'; }   // halkvakt.se i ny flik: läsaren ska aldrig lämna tidningens artikel för oss
@@ -428,6 +451,8 @@
       li.appendChild(el('span', 'lage' + (halt.length ? ' halt' : ''), halt.length ? 'Halka på ' + halt.length + ' av ' + v.strackor.length + strackOrd(v.strackor.length) : 'Ingen halka rapporterad'));
       if (v.kallast) li.appendChild(el('span', 'sub', 'Kallast vid vägen: ' + minus(v.kallast.yta) + ' °C vid ' + v.kallast.namn));
       if (halt.length) li.appendChild(chips(halt));
+      var vs = slugga(kortVag(v.vag).replace(/\u00a0/g, ''));
+      klickbar(li, BAS + (VAGSIDOR.indexOf(vs) >= 0 ? 'vag/' + vs + '/' : 'lan/' + l.slug + '/'), kortVag(v.vag) + ' i ' + l.kort);
       lista.appendChild(li);
     });
     $('vagar-text').textContent = nHalt ? 'Trafikverket rapporterar halka på ' + nHalt + ' av länets ' + n + ' stora vägar.' : 'Trafikverket rapporterar ingen halka på länets stora vägar just nu.';
@@ -447,6 +472,8 @@
       li.appendChild(el('span', 'vag', vagar.map(function (x) { return x.replace(' ', '\u00a0'); }).join('/\u200b')));
       li.appendChild(el('span', 'lage' + (halt.length ? ' halt' : ''), (s.fran || p.fran) + '–' + s.till + ': ' + (halt.length ? 'halka på ' + halt.length + ' av ' + delar.length + strackOrd(delar.length) : 'ingen halka rapporterad')));
       if (halt.length) li.appendChild(chips(halt));
+      var mal = [s.till, s.fran || p.fran].map(slugga).filter(function (o) { return ORTER.indexOf(o) >= 0; })[0];
+      klickbar(li, BAS + (mal ? 'ort/' + mal + '/' : 'lan/' + l.slug + '/'), (s.fran || p.fran) + '–' + s.till);
       pl.appendChild(li);
     });
     $('pendling-text').textContent = mHalt ? 'Trafikverket rapporterar halka på ' + mHalt + ' av ' + m + ' stråk.' : 'Trafikverket rapporterar ingen halka på stråken just nu.';
