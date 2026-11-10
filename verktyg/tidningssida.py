@@ -124,9 +124,27 @@ def fyll(t, mall, lanen, straken):
         v.update({'ort': '', 'strak_param': '', 'lead_vagar': f"i {v['lankort']} och på länets stora vägar",
                   'lasarfraga': 'på vägen', 'antal_vyer': 'Två', 'pendling_kort': '', 'pendling_rad': ''})
     v['montage'] = montage(t, v)
+    # Bonnier News Locals tidningar lägger in rutan med en länk (deras verktyg tar inte iframe-kod, NWT 23/10);
+    # alla andra får koden först, som Jämtlands Tidning använder på sin startsida (Axel 10/11).
+    LANK = '      <div class="kod">\n        <button type="button" id="kopiera-lank">Kopiera</button>\n<pre id="lanken">https://halkvakt.se/ruta/{{slug}}/</pre>\n      </div>\n'
+    KOD = '      <div class="kod">\n        <button type="button" id="kopiera">Kopiera</button>\n<pre id="koden"><span class="k">&lt;iframe</span> src="https://halkvakt.se/ruta.html?lan={{lan}}&amp;tema=ljus{{strak_param}}&amp;namn={{namn_q}}&amp;lank={{lank}}&amp;klick=1"\n  width="100%" height="440"\n  style="border:0;max-width:480px"\n  title="Väglaget i {{lankort}} just nu" loading="lazy"<span class="k">&gt;&lt;/iframe&gt;</span>\n<span class="k">&lt;p</span> style="margin:6px 0 0;font:13px sans-serif"<span class="k">&gt;&lt;a</span> href="https://halkvakt.se/lan/{{lan}}/"<span class="k">&gt;</span>Halka och väglag i {{lankort}} just nu<span class="k">&lt;/a&gt;</span> · Halkvakt<span class="k">&lt;/p&gt;</span></pre>\n      </div>\n'
+    if t.get('koncern') == 'Bonnier News Local':
+        v['teknik_rader'] = ('        <li><span><b>En egen adress till er ruta:</b> <code>halkvakt.se/ruta/' + t['slug'] + '</code>. Klistra in den där ert verktyg tar en länk, i artikel, liveblogg eller temasida.</span></li>\n'
+                             '        <li><span><b>Eller en rad iframe-kod</b>, där ni kan bädda in kod.</span></li>\n')
+        v['kodblock'] = (LANK + '      <p class="not" style="margin-top:-4px">Klistra in länken där ert verktyg tar en länk. Rekommenderad höjd 440 px.</p>\n'
+                         + KOD + '      <p class="not" style="margin-top:-4px">Bäddar ni in kod någonstans går den här också.</p>\n')
+    else:
+        v['teknik_rader'] = ('        <li><span><b>En rad iframe-kod</b> där ni bäddar in HTML, i artikel, liveblogg, temasida eller på startsidan.</span></li>\n'
+                             '        <li><span><b>Eller en egen adress till er ruta:</b> <code>halkvakt.se/ruta/' + t['slug'] + '</code>, där ert verktyg bara tar en länk.</span></li>\n')
+        v['kodblock'] = (KOD + '      <p class="not" style="margin-top:-4px">Klistra in koden där ni bäddar in HTML. Rekommenderad höjd 440 px.</p>\n'
+                         + LANK + '      <p class="not" style="margin-top:-4px">Tar ert verktyg bara en länk? Den här räcker.</p>\n')
+    v['jt_rad'] = '' if t['slug'].startswith('jamtlandstidning') else (
+        '      <p class="lead" style="font-size:17px"><b style="color:var(--text)">Jämtlands Tidning har nu rutan på sin startsida.</b> '
+        '<a href="https://www.jamtlandstidning.se/" target="_blank" rel="noopener">Se hur den ser ut hos dem</a>.</p>\n')
     ut = mall
-    for k, val in v.items():
-        ut = ut.replace('{{' + k + '}}', val)
+    for _ in range(2):   # två varv: kodblocket och raderna innehåller själva fält
+        for k, val in v.items():
+            ut = ut.replace('{{' + k + '}}', val)
     kvar = re.findall(r'\{\{[a-z_]+\}\}', ut)
     if kvar:
         raise SystemExit(f"{t['slug']}: tomma fält kvar i mallen: {kvar}")

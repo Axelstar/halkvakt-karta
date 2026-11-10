@@ -104,6 +104,7 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
       <p class="lead">En ruta för artiklar och liveblogg som visar läget på vägarna just nu: i Norrbotten, på de stora vägarna och på pendlarvägarna från Luleå. Den läggs in med en rad kod och uppdaterar sig själv dygnet runt.</p>
       <p class="lead" style="font-size:17px"><b style="color:var(--text)">Rutan är er.</b> Den bär NSD:s namn och länkar till nsd.se. Raden överst är en annonsplats ni kan sälja till era annonsörer, och intäkten är er.</p>
       <p class="lead" style="font-size:17px">Rutan bredvid är den riktiga, med dagens siffror. Svep i sidled eller tryck på flikarna.</p>
+      <p class="lead" style="font-size:17px"><b style="color:var(--text)">Jämtlands Tidning har nu rutan på sin startsida.</b> <a href="https://www.jamtlandstidning.se/" target="_blank" rel="noopener">Se hur den ser ut hos dem</a>.</p>
     </div>
     <div class="live">
       <iframe src="ruta.html?v=5&amp;lan=norrbotten&amp;tema=ljus&amp;strak=lulea&amp;namn=NSD&amp;lank=https://www.nsd.se/&amp;lanktext=Mer%20trafik%20p%C3%A5%20nsd.se&amp;klick=1" title="Väglaget i Norrbotten just nu" loading="eager"></iframe>
@@ -160,19 +161,14 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
       <p class="etikett">Tekniken</p>
       <h2>En rad kod. Inget konto.</h2>
       <ul class="lista">
-        <li><span><b>En egen adress till er ruta:</b> <code>halkvakt.se/ruta/nsd</code>. Klistra in den där ert verktyg tar en länk, i artikel, liveblogg eller temasida.</span></li>
-        <li><span><b>Eller en rad iframe-kod</b>, där ni kan bädda in kod.</span></li>
+        <li><span><b>En rad iframe-kod</b> där ni bäddar in HTML, i artikel, liveblogg, temasida eller på startsidan.</span></li>
+        <li><span><b>Eller en egen adress till er ruta:</b> <code>halkvakt.se/ruta/nsd</code>, där ert verktyg bara tar en länk.</span></li>
         <li><span><b>Hämtar läget igen var femte minut</b> och när läsaren kommer tillbaka till fliken. Läget räknas om var 30:e minut.</span></li>
         <li><span><b>Inga kakor, ingen spårning och ingen reklam</b> i rutan. Allt hämtas från halkvakt.se, även typsnitten, så läsarnas webbläsare kontaktar ingen tredje part.</span></li>
         <li><span><b>Liten:</b> en sida på ett tiotal kB och två datafiler.</span></li>
       </ul>
     </div>
     <div class="stack" style="gap:16px">
-      <div class="kod">
-        <button type="button" id="kopiera-lank">Kopiera</button>
-<pre id="lanken">https://halkvakt.se/ruta/nsd/</pre>
-      </div>
-      <p class="not" style="margin-top:-4px">Bara en länk? Den här räcker. Rekommenderad höjd 440 px.</p>
       <div class="kod">
         <button type="button" id="kopiera">Kopiera</button>
 <pre id="koden"><span class="k">&lt;iframe</span> src="https://halkvakt.se/ruta.html?lan=norrbotten&amp;tema=ljus&amp;strak=lulea&amp;namn=NSD&amp;lank=https://www.nsd.se/&amp;klick=1"
@@ -181,6 +177,12 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
   title="Väglaget i Norrbotten just nu" loading="lazy"<span class="k">&gt;&lt;/iframe&gt;</span>
 <span class="k">&lt;p</span> style="margin:6px 0 0;font:13px sans-serif"<span class="k">&gt;&lt;a</span> href="https://halkvakt.se/lan/norrbotten/"<span class="k">&gt;</span>Halka och väglag i Norrbotten just nu<span class="k">&lt;/a&gt;</span> · Halkvakt<span class="k">&lt;/p&gt;</span></pre>
       </div>
+      <p class="not" style="margin-top:-4px">Klistra in koden där ni bäddar in HTML. Rekommenderad höjd 440 px.</p>
+      <div class="kod">
+        <button type="button" id="kopiera-lank">Kopiera</button>
+<pre id="lanken">https://halkvakt.se/ruta/nsd/</pre>
+      </div>
+      <p class="not" style="margin-top:-4px">Tar ert verktyg bara en länk? Den här räcker.</p>
       <div class="tabell">
         <table>
           <thead><tr><th>Lägg till</th><th>Vad det gör</th></tr></thead>
@@ -205,7 +207,7 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
       <h2>NSD:s väglagsruta, och en plats ni kan sälja</h2>
       <ul class="lista">
         <li><span><b>Ert namn överst:</b> rutan heter NSD · Väglaget. Halkvakt står bara som en rad i foten: <i>Data: Trafikverket · Teknik: Halkvakt</i>.</span></li>
-        <li><span><b>Läsarna stannar hos er:</b> länken i rutan går till er egen trafiksida. Det enda som pekar mot oss öppnas i en ny flik.</span></li>
+        <li><span><b>Läsarna stannar hos er:</b> länken i foten går till er egen trafiksida. Raderna i rutan går att trycka på och öppnar vägen eller orten på halkvakt.se i en ny flik, så er sida ligger kvar.</span></li>
         <li><span><b>En sponsorrad</b> överst, till exempel <i>Presenteras av</i> en däckfirma eller bilhandlare i Norrbotten. Annonsplatsen är er, ni sätter priset, och intäkten är er. Halkvakt tar ingen del av den.</span></li>
       </ul>
     </div>

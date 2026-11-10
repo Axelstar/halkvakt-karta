@@ -13,7 +13,8 @@
    "lasarort": "Husum",
    "exempel_stracka": "Sundsvall Trafikplats Skönsmon–Gnarp",
    "montage": "egen",
-   "kommentar": "Förslaget till Allehanda (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
+   "kommentar": "Förslaget till Allehanda (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
+   "koncern": "Bonnier News Local"
   },
   {
    "slug": "angermanland",
@@ -27,7 +28,8 @@
    "lasarort": "Sundsvall",
    "exempel_stracka": "Sundsvall Trafikplats Skönsmon–Gnarp",
    "montage": "egen",
-   "kommentar": "Förslaget till Tidningen Ångermanland (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
+   "kommentar": "Förslaget till Tidningen Ångermanland (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
+   "koncern": "Bonnier News Local"
   },
   {
    "slug": "arbetarbladet",
@@ -41,7 +43,8 @@
    "lasarort": "Hofors",
    "exempel_stracka": "Gävle–Hyttön",
    "montage": "egen",
-   "kommentar": "Förslaget till Arbetarbladet (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
+   "kommentar": "Förslaget till Arbetarbladet (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
+   "koncern": "Bonnier News Local"
   },
   {
    "slug": "dalademokraten",
@@ -55,7 +58,8 @@
    "lasarort": "Rättvik",
    "exempel_stracka": "Falun–Borlänge",
    "montage": "egen",
-   "kommentar": "Förslaget till Dala-Demokraten (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
+   "kommentar": "Förslaget till Dala-Demokraten (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
+   "koncern": "Bonnier News Local"
   },
   {
    "slug": "dt",
@@ -69,7 +73,8 @@
    "lasarort": "Borlänge",
    "exempel_stracka": "Falun–Borlänge",
    "montage": "neutral",
-   "kommentar": "Förslaget till DT (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
+   "kommentar": "Förslaget till DT (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
+   "koncern": "Bonnier News Local"
   },
   {
    "slug": "ekuriren",
@@ -125,7 +130,8 @@
    "lasarort": "Söderhamn",
    "exempel_stracka": "Gävle–Hyttön",
    "montage": "egen",
-   "kommentar": "Förslaget till GD (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
+   "kommentar": "Förslaget till GD (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
+   "koncern": "Bonnier News Local"
   },
   {
    "slug": "haparandabladet",
@@ -153,7 +159,8 @@
    "lasarort": "Hede",
    "exempel_stracka": "Gevsjön–Järpen",
    "montage": "egen",
-   "kommentar": "Förslaget till Tidningen Härjedalen (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
+   "kommentar": "Förslaget till Tidningen Härjedalen (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
+   "koncern": "Bonnier News Local"
   },
   {
    "slug": "jamtlandstidning",
@@ -195,7 +202,8 @@
    "lasarort": "Brunflo",
    "exempel_stracka": "Gevsjön–Järpen",
    "montage": "egen",
-   "kommentar": "Förslaget till LT (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
+   "kommentar": "Förslaget till LT (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
+   "koncern": "Bonnier News Local"
   },
   {
    "slug": "na",
@@ -209,7 +217,8 @@
    "lasarort": "Lindesberg",
    "exempel_stracka": "Trafikplats Adolfsberg–Länsgräns Västmanland/Örebro län",
    "montage": "egen",
-   "kommentar": "Förslaget till NA (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
+   "kommentar": "Förslaget till NA (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
+   "koncern": "Bonnier News Local"
   },
   {
    "slug": "norran",
@@ -251,7 +260,8 @@
    "lasarort": "Krokom",
    "exempel_stracka": "Gevsjön–Järpen",
    "montage": "egen",
-   "kommentar": "Förslaget till ÖP (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
+   "kommentar": "Förslaget till ÖP (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
+   "koncern": "Bonnier News Local"
   },
   {
    "slug": "pt",
@@ -279,7 +289,8 @@
    "lasarort": "Avesta",
    "exempel_stracka": "Västerås–Enköping",
    "montage": "egen",
-   "kommentar": "Förslaget till Sala Allehanda (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
+   "kommentar": "Förslaget till Sala Allehanda (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
+   "koncern": "Bonnier News Local"
   },
   {
    "slug": "sn",
@@ -307,7 +318,8 @@
    "lasarort": "Härnösand",
    "exempel_stracka": "Sundsvall Trafikplats Skönsmon–Gnarp",
    "montage": "egen",
-   "kommentar": "Förslaget till ST (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
+   "kommentar": "Förslaget till ST (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
+   "koncern": "Bonnier News Local"
   },
   {
    "slug": "unt",
@@ -363,7 +375,8 @@
    "lasarort": "Köping",
    "exempel_stracka": "Västerås–Enköping",
    "montage": "egen",
-   "kommentar": "Förslaget till VLT (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
+   "kommentar": "Förslaget till VLT (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
+   "koncern": "Bonnier News Local"
   },
   {
    "slug": "barometern",

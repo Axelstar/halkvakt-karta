@@ -104,7 +104,7 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
       <p class="lead">En ruta för artiklar och liveblogg som visar läget på vägarna just nu: {{lead_vagar}}. Den läggs in med en rad kod och uppdaterar sig själv dygnet runt.</p>
       <p class="lead" style="font-size:17px"><b style="color:var(--text)">Rutan är er.</b> Den bär {{genitiv}} namn och länkar till {{doman}}. Raden överst är en annonsplats ni kan sälja till era annonsörer, och intäkten är er.</p>
       <p class="lead" style="font-size:17px">Rutan bredvid är den riktiga, med dagens siffror. Svep i sidled eller tryck på flikarna.</p>
-    </div>
+{{jt_rad}}    </div>
     <div class="live">
       <iframe src="ruta.html?v=5&amp;lan={{lan}}&amp;tema=ljus{{strak_param}}&amp;namn={{namn_q}}&amp;lank={{lank}}&amp;lanktext={{lanktext_q}}&amp;klick=1" title="Väglaget i {{lankort}} just nu" loading="eager"></iframe>
       <p class="not">Live från Trafikverkets öppna data</p>
@@ -147,28 +147,13 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
       <p class="etikett">Tekniken</p>
       <h2>En rad kod. Inget konto.</h2>
       <ul class="lista">
-        <li><span><b>En egen adress till er ruta:</b> <code>halkvakt.se/ruta/{{slug}}</code>. Klistra in den där ert verktyg tar en länk, i artikel, liveblogg eller temasida.</span></li>
-        <li><span><b>Eller en rad iframe-kod</b>, där ni kan bädda in kod.</span></li>
-        <li><span><b>Hämtar läget igen var femte minut</b> och när läsaren kommer tillbaka till fliken. Läget räknas om var 30:e minut.</span></li>
+{{teknik_rader}}        <li><span><b>Hämtar läget igen var femte minut</b> och när läsaren kommer tillbaka till fliken. Läget räknas om var 30:e minut.</span></li>
         <li><span><b>Inga kakor, ingen spårning och ingen reklam</b> i rutan. Allt hämtas från halkvakt.se, även typsnitten, så läsarnas webbläsare kontaktar ingen tredje part.</span></li>
         <li><span><b>Liten:</b> en sida på ett tiotal kB och två datafiler.</span></li>
       </ul>
     </div>
     <div class="stack" style="gap:16px">
-      <div class="kod">
-        <button type="button" id="kopiera-lank">Kopiera</button>
-<pre id="lanken">https://halkvakt.se/ruta/{{slug}}/</pre>
-      </div>
-      <p class="not" style="margin-top:-4px">Bara en länk? Den här räcker. Rekommenderad höjd 440 px.</p>
-      <div class="kod">
-        <button type="button" id="kopiera">Kopiera</button>
-<pre id="koden"><span class="k">&lt;iframe</span> src="https://halkvakt.se/ruta.html?lan={{lan}}&amp;tema=ljus{{strak_param}}&amp;namn={{namn_q}}&amp;lank={{lank}}&amp;klick=1"
-  width="100%" height="440"
-  style="border:0;max-width:480px"
-  title="Väglaget i {{lankort}} just nu" loading="lazy"<span class="k">&gt;&lt;/iframe&gt;</span>
-<span class="k">&lt;p</span> style="margin:6px 0 0;font:13px sans-serif"<span class="k">&gt;&lt;a</span> href="https://halkvakt.se/lan/{{lan}}/"<span class="k">&gt;</span>Halka och väglag i {{lankort}} just nu<span class="k">&lt;/a&gt;</span> · Halkvakt<span class="k">&lt;/p&gt;</span></pre>
-      </div>
-      <div class="tabell">
+{{kodblock}}      <div class="tabell">
         <table>
           <thead><tr><th>Lägg till</th><th>Vad det gör</th></tr></thead>
           <tbody>
@@ -192,7 +177,7 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
       <h2>{{genitiv}} väglagsruta, och en plats ni kan sälja</h2>
       <ul class="lista">
         <li><span><b>Ert namn överst:</b> rutan heter {{namn}} · Väglaget. Halkvakt står bara som en rad i foten: <i>Data: Trafikverket · Teknik: Halkvakt</i>.</span></li>
-        <li><span><b>Läsarna stannar hos er:</b> länken i rutan går till er egen trafiksida. Det enda som pekar mot oss öppnas i en ny flik.</span></li>
+        <li><span><b>Läsarna stannar hos er:</b> länken i foten går till er egen trafiksida. Raderna i rutan går att trycka på och öppnar vägen eller orten på halkvakt.se i en ny flik, så er sida ligger kvar.</span></li>
         <li><span><b>En sponsorrad</b> överst, till exempel <i>Presenteras av</i> en däckfirma eller bilhandlare i {{lankort}}. Annonsplatsen är er, ni sätter priset, och intäkten är er. Halkvakt tar ingen del av den.</span></li>
       </ul>
     </div>
