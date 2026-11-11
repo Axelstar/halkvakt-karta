@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[28.562192387,64.692092393]},"properties":{"land":"FI","typ":"Olycka","msg":"Tie 5, Hyrynsalmi. Ensitiedote liikenneonnettomuudesta.  · Onnettomuus","allvar":null,"road":null,"start":"2026-11-11T22:12:00.000Z"}}]}
