@@ -1,11 +1,11 @@
 {
  "https://halkvakt.se/lan/": {
-  "lage": "halka eller vinterväglag i 9 av 21 län, kallast −14,7 °C vid Kätkesuando. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag i 10 av 21 län, kallast −14,7 °C vid Kätkesuando. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/varningar/": {
-  "lage": "SMHI varnar i 5 områden. Trafikverket: halka eller vinterväglag på 205 av 258 vägavsnitt där. Uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T16:30:01+00:00"
+  "lage": "SMHI varnar i 5 områden. Trafikverket: halka eller vinterväglag på 202 av 258 vägavsnitt där. Uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/lan/stockholm/": {
   "lage": "ingen halka på 44 vägavsnitt i Stockholms län, ingen mätstation under noll. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
@@ -52,36 +52,36 @@
   "andrad": "2026-11-08T04:30:00+00:00"
  },
  "https://halkvakt.se/lan/vastra-gotaland/": {
-  "lage": "halka eller vinterväglag på 11 av 133 vägavsnitt i Västra Götalands län, kallast −0,4 °C vid Edsleskog. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 11 av 133 vägavsnitt i Västra Götalands län, kallast −0,5 °C vid 1552 Gustavsfors Fjärryta. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/lan/varmland/": {
-  "lage": "halka eller vinterväglag på 33 av 52 vägavsnitt i Värmlands län, kallast −1,6 °C vid Lönnhöjden. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 33 av 52 vägavsnitt i Värmlands län, kallast −1,2 °C vid Mon. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/lan/orebro/": {
-  "lage": "ingen halka på 26 vägavsnitt i Örebro län, kallast 0,0 °C vid Basttjärn. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 10 av 26 vägavsnitt i Örebro län, kallast −0,2 °C vid Lohällen. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/lan/vastmanland/": {
   "lage": "ingen halka på 24 vägavsnitt i Västmanlands län, ingen mätstation under noll. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
   "andrad": "2026-11-11T21:30:20+00:00"
  },
  "https://halkvakt.se/lan/dalarna/": {
-  "lage": "halka eller vinterväglag på 35 av 38 vägavsnitt i Dalarnas län, kallast −3,3 °C vid Ryggen. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 32 av 38 vägavsnitt i Dalarnas län, kallast −3,4 °C vid Ryggen. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/lan/gavleborg/": {
-  "lage": "halka eller vinterväglag på 13 av 27 vägavsnitt i Gävleborgs län, kallast −0,6 °C vid Kårböle 2. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T16:30:01+00:00"
+  "lage": "halka eller vinterväglag på 13 av 27 vägavsnitt i Gävleborgs län, kallast −0,7 °C vid Furuberg. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/lan/vasternorrland/": {
   "lage": "halka eller vinterväglag på 22 av 22 vägavsnitt i Västernorrlands län, kallast −1,7 °C vid Lillkrog. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
   "andrad": "2026-11-12T17:00:02+00:00"
  },
  "https://halkvakt.se/lan/jamtland/": {
-  "lage": "halka eller vinterväglag på 17 av 17 vägavsnitt i Jämtlands län, kallast −2,9 °C vid Fjällnäs. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 17 av 17 vägavsnitt i Jämtlands län, kallast −3,0 °C vid Fjällnäs. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/lan/vasterbotten/": {
   "lage": "halka eller vinterväglag på 44 av 44 vägavsnitt i Västerbottens län, kallast −5,1 °C vid Missenträsk. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
@@ -92,20 +92,20 @@
   "andrad": "2026-11-12T17:00:02+00:00"
  },
  "https://halkvakt.se/vag/e4/": {
-  "lage": "halka eller vinterväglag på 16 av 53 vägavsnitt på E4, kallast −7,9 °C vid Töre. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 16 av 53 vägavsnitt på E4, kallast −7,7 °C vid Töre. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/vag/e6/": {
   "lage": "ingen halka på 24 vägavsnitt på E6, ingen mätstation under noll. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
   "andrad": "2026-11-12T02:30:01+00:00"
  },
  "https://halkvakt.se/vag/e18/": {
-  "lage": "halka eller vinterväglag på 3 av 20 vägavsnitt på E18, kallast −1,0 °C vid Mon. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 6 av 20 vägavsnitt på E18, kallast −1,2 °C vid Mon. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/vag/e20/": {
-  "lage": "ingen halka på 19 vägavsnitt på E20, ingen mätstation under noll. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-09T06:30:00+00:00"
+  "lage": "halka eller vinterväglag på 2 av 19 vägavsnitt på E20, ingen mätstation under noll. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/vag/e22/": {
   "lage": "ingen halka på 19 vägavsnitt på E22, ingen mätstation under noll. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
@@ -200,52 +200,52 @@
   "andrad": "2026-11-07T11:00:01+00:00"
  },
  "https://halkvakt.se/ort/trollhattan/": {
-  "lage": "ingen halka på 3 vägavsnitt till och från Trollhättan. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "ingen halka på 3 vägavsnitt till och från Trollhättan, vägbanan −0,1 °C vid 1523 Torpabron Fjärryta. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/skovde/": {
   "lage": "ingen halka på 6 vägavsnitt till och från Skövde. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
   "andrad": "2026-11-07T08:30:01+00:00"
  },
  "https://halkvakt.se/ort/uddevalla/": {
-  "lage": "ingen halka på 5 vägavsnitt till och från Uddevalla. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "ingen halka på 5 vägavsnitt till och från Uddevalla, vägbanan −0,1 °C vid 1523 Torpabron Fjärryta. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/karlstad/": {
-  "lage": "halka eller vinterväglag på 6 av 6 vägavsnitt till och från Karlstad, vägbanan −1,0 °C vid Mon. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 6 av 6 vägavsnitt till och från Karlstad, vägbanan −1,2 °C vid Mon. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/arvika/": {
-  "lage": "ingen halka på 4 vägavsnitt till och från Arvika, vägbanan −0,2 °C vid Slorud. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "ingen halka på 4 vägavsnitt till och från Arvika, vägbanan −0,5 °C vid Slorud. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/orebro/": {
-  "lage": "ingen halka på 3 vägavsnitt till och från Örebro. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-09T08:30:20+00:00"
+  "lage": "halka eller vinterväglag på 1 av 3 vägavsnitt till och från Örebro. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/vasteras/": {
   "lage": "ingen halka på 5 vägavsnitt till och från Västerås. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
   "andrad": "2026-11-09T08:00:02+00:00"
  },
  "https://halkvakt.se/ort/falun/": {
-  "lage": "halka eller vinterväglag på 4 av 6 vägavsnitt till och från Falun, vägbanan −3,3 °C vid Ryggen. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 4 av 6 vägavsnitt till och från Falun, vägbanan −3,4 °C vid Ryggen. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/borlange/": {
-  "lage": "halka eller vinterväglag på 3 av 4 vägavsnitt till och från Borlänge, vägbanan −0,1 °C vid Gagnbro. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 2 av 4 vägavsnitt till och från Borlänge, vägbanan −0,2 °C vid Gagnbro. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/mora/": {
-  "lage": "halka eller vinterväglag på 4 av 4 vägavsnitt till och från Mora, vägbanan −0,7 °C vid Gruvorna. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T16:30:01+00:00"
+  "lage": "halka eller vinterväglag på 4 av 4 vägavsnitt till och från Mora, vägbanan −0,6 °C vid Gruvorna. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/salen/": {
   "lage": "halka eller vinterväglag på 3 av 3 vägavsnitt till och från Sälen, vägbanan −2,1 °C vid Högfjällshotellet. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
   "andrad": "2026-11-12T17:00:02+00:00"
  },
  "https://halkvakt.se/ort/alvdalen/": {
-  "lage": "halka eller vinterväglag på 3 av 3 vägavsnitt till och från Älvdalen, vägbanan −0,8 °C vid Mångsbodarna. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T16:00:01+00:00"
+  "lage": "halka eller vinterväglag på 3 av 3 vägavsnitt till och från Älvdalen, vägbanan −0,9 °C vid Mångsbodarna. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/gavle/": {
   "lage": "ingen halka på 4 vägavsnitt till och från Gävle. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
@@ -256,8 +256,8 @@
   "andrad": "2026-11-12T16:00:01+00:00"
  },
  "https://halkvakt.se/ort/sundsvall/": {
-  "lage": "halka eller vinterväglag på 4 av 4 vägavsnitt till och från Sundsvall. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 4 av 4 vägavsnitt till och från Sundsvall, vägbanan 0,0 °C vid Kävstabron. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/ornskoldsvik/": {
   "lage": "halka eller vinterväglag på 3 av 3 vägavsnitt till och från Örnsköldsvik, vägbanan −1,1 °C vid Mellansel. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
@@ -268,12 +268,12 @@
   "andrad": "2026-11-12T09:00:20+00:00"
  },
  "https://halkvakt.se/ort/solleftea/": {
-  "lage": "halka eller vinterväglag på 4 av 4 vägavsnitt till och från Sollefteå, vägbanan −0,5 °C vid Gammbodarna. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 4 av 4 vägavsnitt till och från Sollefteå, vägbanan −0,6 °C vid Gammbodarna. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/ostersund/": {
-  "lage": "halka eller vinterväglag på 2 av 2 vägavsnitt till och från Östersund, vägbanan −1,4 °C vid Österböle. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 2 av 2 vägavsnitt till och från Östersund, vägbanan −1,3 °C vid Österböle. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/umea/": {
   "lage": "halka eller vinterväglag på 6 av 6 vägavsnitt till och från Umeå, vägbanan −0,9 °C vid Brattby. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
@@ -284,24 +284,24 @@
   "andrad": "2026-11-12T15:30:20+00:00"
  },
  "https://halkvakt.se/ort/lycksele/": {
-  "lage": "halka eller vinterväglag på 5 av 5 vägavsnitt till och från Lycksele, vägbanan −3,6 °C vid Ruskträsk. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T16:00:01+00:00"
+  "lage": "halka eller vinterväglag på 5 av 5 vägavsnitt till och från Lycksele, vägbanan −3,5 °C vid Ruskträsk. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/vilhelmina/": {
   "lage": "halka eller vinterväglag på 3 av 3 vägavsnitt till och från Vilhelmina, vägbanan −1,9 °C vid Meselefors. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
   "andrad": "2026-11-12T16:30:01+00:00"
  },
  "https://halkvakt.se/ort/lulea/": {
-  "lage": "halka eller vinterväglag på 3 av 3 vägavsnitt till och från Luleå, vägbanan −6,5 °C vid N Sunderbyn. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 3 av 3 vägavsnitt till och från Luleå, vägbanan −6,4 °C vid Persön. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/pitea/": {
-  "lage": "halka eller vinterväglag på 4 av 4 vägavsnitt till och från Piteå, vägbanan −4,6 °C vid Ersnäs. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T16:00:01+00:00"
+  "lage": "halka eller vinterväglag på 4 av 4 vägavsnitt till och från Piteå, vägbanan −4,5 °C vid Bertnäs. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/kiruna/": {
-  "lage": "halka eller vinterväglag på 2 av 2 vägavsnitt till och från Kiruna, vägbanan −9,3 °C vid Kiruna. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T16:30:01+00:00"
+  "lage": "halka eller vinterväglag på 2 av 2 vägavsnitt till och från Kiruna, vägbanan −9,2 °C vid Kiruna. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/botkyrka/": {
   "lage": "ingen halka på 8 vägavsnitt inom 10 km från Botkyrka. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
@@ -772,8 +772,8 @@
   "andrad": "2026-11-09T22:30:00+00:00"
  },
  "https://halkvakt.se/ort/bengtsfors/": {
-  "lage": "halka eller vinterväglag på 2 av 3 vägavsnitt till och från Bengtsfors, vägbanan −0,4 °C vid Edsleskog. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 2 av 3 vägavsnitt till och från Bengtsfors, vägbanan −0,5 °C vid 1552 Gustavsfors Fjärryta. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/bollebygd/": {
   "lage": "ingen halka på 2 vägavsnitt till och från Bollebygd. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
@@ -836,8 +836,8 @@
   "andrad": "2026-11-09T22:30:00+00:00"
  },
  "https://halkvakt.se/ort/lilla-edet/": {
-  "lage": "ingen halka på 3 vägavsnitt till och från Lilla Edet. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "ingen halka på 3 vägavsnitt till och från Lilla Edet, vägbanan −0,1 °C vid 1523 Torpabron Fjärryta. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/lysekil/": {
   "lage": "ingen halka på 2 vägavsnitt till och från Lysekil. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
@@ -864,8 +864,8 @@
   "andrad": "2026-11-09T22:30:00+00:00"
  },
  "https://halkvakt.se/ort/orust/": {
-  "lage": "ingen halka på 2 vägavsnitt inom 10 km från Orust. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "ingen halka på 2 vägavsnitt inom 10 km från Orust, vägbanan −0,1 °C vid 1523 Torpabron Fjärryta. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/partille/": {
   "lage": "ingen halka på 8 vägavsnitt inom 10 km från Partille. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
@@ -880,8 +880,8 @@
   "andrad": "2026-11-09T22:30:00+00:00"
  },
  "https://halkvakt.se/ort/stenungsund/": {
-  "lage": "ingen halka på 8 vägavsnitt inom 10 km från Stenungsund. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "ingen halka på 8 vägavsnitt inom 10 km från Stenungsund, vägbanan −0,1 °C vid 1523 Torpabron Fjärryta. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/stromstad/": {
   "lage": "ingen halka på 3 vägavsnitt inom 10 km från Strömstad. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
@@ -924,120 +924,120 @@
   "andrad": "2026-11-09T22:30:00+00:00"
  },
  "https://halkvakt.se/ort/vanersborg/": {
-  "lage": "ingen halka på 5 vägavsnitt inom 10 km från Vänersborg. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "ingen halka på 5 vägavsnitt inom 10 km från Vänersborg, vägbanan −0,1 °C vid 1523 Torpabron Fjärryta. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/vargarda/": {
   "lage": "ingen halka på 5 vägavsnitt till och från Vårgårda. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
   "andrad": "2026-11-09T22:30:00+00:00"
  },
  "https://halkvakt.se/ort/amal/": {
-  "lage": "halka eller vinterväglag på 2 av 2 vägavsnitt till och från Åmål, vägbanan −0,4 °C vid Edsleskog. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 2 av 2 vägavsnitt till och från Åmål, vägbanan −0,6 °C vid Valnäs. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/ockero/": {
   "lage": "ingen halka på 1 vägavsnitt inom 10 km från Öckerö. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
   "andrad": "2026-11-09T22:30:00+00:00"
  },
  "https://halkvakt.se/ort/eda/": {
-  "lage": "ingen halka på 1 vägavsnitt inom 10 km från Eda, vägbanan −0,2 °C vid Bogen. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "ingen halka på 1 vägavsnitt inom 10 km från Eda, vägbanan −0,1 °C vid Bogen. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/filipstad/": {
-  "lage": "halka eller vinterväglag på 5 av 5 vägavsnitt till och från Filipstad, vägbanan −0,1 °C vid Högåsen. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 5 av 5 vägavsnitt till och från Filipstad, vägbanan −0,5 °C vid Högåsen. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/forshaga/": {
-  "lage": "halka eller vinterväglag på 3 av 3 vägavsnitt inom 10 km från Forshaga, vägbanan −1,0 °C vid Mon. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 3 av 3 vägavsnitt inom 10 km från Forshaga, vägbanan −1,2 °C vid Mon. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/grums/": {
-  "lage": "halka eller vinterväglag på 2 av 3 vägavsnitt till och från Grums, vägbanan −1,0 °C vid Mon. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 2 av 3 vägavsnitt till och från Grums, vägbanan −1,2 °C vid Mon. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/hagfors/": {
-  "lage": "halka eller vinterväglag på 4 av 4 vägavsnitt inom 10 km från Hagfors, vägbanan −1,6 °C vid Lönnhöjden. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 4 av 4 vägavsnitt inom 10 km från Hagfors, vägbanan −1,1 °C vid Lönnhöjden. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/hammaro/": {
-  "lage": "halka eller vinterväglag på 5 av 5 vägavsnitt inom 10 km från Hammarö, vägbanan −1,0 °C vid Mon. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 5 av 5 vägavsnitt inom 10 km från Hammarö, vägbanan −1,2 °C vid Mon. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/kil/": {
-  "lage": "halka eller vinterväglag på 2 av 2 vägavsnitt till och från Kil, vägbanan −1,0 °C vid Mon. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 2 av 2 vägavsnitt till och från Kil, vägbanan −1,2 °C vid Mon. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/kristinehamn/": {
-  "lage": "halka eller vinterväglag på 4 av 4 vägavsnitt till och från Kristinehamn, vägbanan −0,4 °C vid Alster. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 4 av 4 vägavsnitt till och från Kristinehamn, vägbanan −0,7 °C vid Alster. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/munkfors/": {
-  "lage": "halka eller vinterväglag på 3 av 3 vägavsnitt inom 10 km från Munkfors, vägbanan −0,4 °C vid S Berga. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 3 av 3 vägavsnitt inom 10 km från Munkfors, vägbanan −0,5 °C vid Högåsen. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/storfors/": {
-  "lage": "halka eller vinterväglag på 3 av 3 vägavsnitt till och från Storfors, vägbanan −0,1 °C vid Högåsen. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 3 av 3 vägavsnitt till och från Storfors, vägbanan −0,5 °C vid Högåsen. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/sunne/": {
-  "lage": "halka eller vinterväglag på 2 av 3 vägavsnitt till och från Sunne, vägbanan −0,4 °C vid S Berga. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 2 av 3 vägavsnitt till och från Sunne, vägbanan −0,5 °C vid Slorud. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/saffle/": {
-  "lage": "ingen halka på 3 vägavsnitt till och från Säffle, vägbanan −0,4 °C vid Edsleskog. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "ingen halka på 3 vägavsnitt till och från Säffle, vägbanan −0,6 °C vid Valnäs. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/torsby/": {
   "lage": "halka eller vinterväglag på 3 av 4 vägavsnitt till och från Torsby, vägbanan −1,2 °C vid Knappåsen. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
   "andrad": "2026-11-12T17:00:02+00:00"
  },
  "https://halkvakt.se/ort/arjang/": {
-  "lage": "ingen halka på 4 vägavsnitt till och från Årjäng. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T15:30:20+00:00"
+  "lage": "ingen halka på 4 vägavsnitt till och från Årjäng, vägbanan −0,6 °C vid Årjäng. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/askersund/": {
   "lage": "ingen halka på 4 vägavsnitt till och från Askersund. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
   "andrad": "2026-11-09T22:30:00+00:00"
  },
  "https://halkvakt.se/ort/degerfors/": {
-  "lage": "ingen halka på 2 vägavsnitt till och från Degerfors. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-09T22:30:00+00:00"
+  "lage": "halka eller vinterväglag på 2 av 2 vägavsnitt till och från Degerfors. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/hallsberg/": {
-  "lage": "ingen halka på 3 vägavsnitt inom 10 km från Hallsberg. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-09T22:30:00+00:00"
+  "lage": "halka eller vinterväglag på 2 av 3 vägavsnitt inom 10 km från Hallsberg. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/hallefors/": {
-  "lage": "halka eller vinterväglag på 1 av 4 vägavsnitt inom 10 km från Hällefors, vägbanan −0,1 °C vid Stensta. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 1 av 4 vägavsnitt inom 10 km från Hällefors, vägbanan −0,4 °C vid Stensta. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/karlskoga/": {
-  "lage": "ingen halka på 3 vägavsnitt till och från Karlskoga. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-09T22:30:00+00:00"
+  "lage": "halka eller vinterväglag på 1 av 3 vägavsnitt till och från Karlskoga. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/kumla/": {
-  "lage": "ingen halka på 6 vägavsnitt inom 10 km från Kumla. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-09T22:30:00+00:00"
+  "lage": "halka eller vinterväglag på 3 av 6 vägavsnitt inom 10 km från Kumla. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/laxa/": {
-  "lage": "ingen halka på 4 vägavsnitt till och från Laxå. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-09T22:30:00+00:00"
+  "lage": "halka eller vinterväglag på 3 av 4 vägavsnitt till och från Laxå. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/lekeberg/": {
-  "lage": "ingen halka på 3 vägavsnitt inom 10 km från Lekeberg. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-09T22:30:00+00:00"
+  "lage": "halka eller vinterväglag på 3 av 3 vägavsnitt inom 10 km från Lekeberg. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/lindesberg/": {
-  "lage": "ingen halka på 3 vägavsnitt till och från Lindesberg. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-11T08:00:01+00:00"
+  "lage": "ingen halka på 3 vägavsnitt till och från Lindesberg, vägbanan 0,0 °C vid Hellabacken. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/ljusnarsberg/": {
   "lage": "ingen halka på 4 vägavsnitt till och från Ljusnarsberg, vägbanan 0,0 °C vid Basttjärn. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
   "andrad": "2026-11-12T17:00:02+00:00"
  },
  "https://halkvakt.se/ort/nora/": {
-  "lage": "ingen halka på 3 vägavsnitt inom 10 km från Nora, vägbanan 0,0 °C vid Lohällen. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T16:30:01+00:00"
+  "lage": "ingen halka på 3 vägavsnitt inom 10 km från Nora, vägbanan −0,2 °C vid Lohällen. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/arboga/": {
   "lage": "ingen halka på 3 vägavsnitt till och från Arboga. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
@@ -1080,68 +1080,68 @@
   "andrad": "2026-11-12T01:30:01+00:00"
  },
  "https://halkvakt.se/ort/gagnef/": {
-  "lage": "halka eller vinterväglag på 3 av 3 vägavsnitt till och från Gagnef, vägbanan −0,1 °C vid Fänforsen. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 3 av 3 vägavsnitt till och från Gagnef, vägbanan −0,2 °C vid Fänforsen. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/hedemora/": {
   "lage": "halka eller vinterväglag på 4 av 4 vägavsnitt till och från Hedemora. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
   "andrad": "2026-11-12T01:30:01+00:00"
  },
  "https://halkvakt.se/ort/leksand/": {
-  "lage": "halka eller vinterväglag på 1 av 1 vägavsnitt inom 10 km från Leksand, vägbanan −0,3 °C vid Mårtanberg. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T16:30:01+00:00"
+  "lage": "halka eller vinterväglag på 1 av 1 vägavsnitt inom 10 km från Leksand, vägbanan −0,4 °C vid Mårtanberg. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/ludvika/": {
-  "lage": "halka eller vinterväglag på 3 av 4 vägavsnitt till och från Ludvika, vägbanan 0,0 °C vid Basttjärn. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 1 av 4 vägavsnitt till och från Ludvika, vägbanan 0,0 °C vid Basttjärn. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/malung-salen/": {
-  "lage": "halka eller vinterväglag på 4 av 4 vägavsnitt till och från Malung-Sälen, vägbanan −0,6 °C vid Lisskogsåsen. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 4 av 4 vägavsnitt till och från Malung-Sälen, vägbanan −0,7 °C vid Lisskogsåsen. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/orsa/": {
   "lage": "halka eller vinterväglag på 2 av 2 vägavsnitt till och från Orsa, vägbanan 0,0 °C vid Garsås. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
   "andrad": "2026-11-12T16:30:01+00:00"
  },
  "https://halkvakt.se/ort/rattvik/": {
-  "lage": "halka eller vinterväglag på 3 av 3 vägavsnitt till och från Rättvik, vägbanan −0,3 °C vid Mårtanberg. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T16:30:01+00:00"
+  "lage": "halka eller vinterväglag på 3 av 3 vägavsnitt till och från Rättvik, vägbanan −0,4 °C vid Mårtanberg. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/smedjebacken/": {
   "lage": "ingen halka på 1 vägavsnitt inom 10 km från Smedjebacken, vägbanan 0,0 °C vid Basttjärn. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
   "andrad": "2026-11-12T17:00:02+00:00"
  },
  "https://halkvakt.se/ort/sater/": {
-  "lage": "halka eller vinterväglag på 2 av 2 vägavsnitt inom 10 km från Säter, vägbanan −3,3 °C vid Ryggen. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 2 av 2 vägavsnitt inom 10 km från Säter, vägbanan −3,4 °C vid Ryggen. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/vansbro/": {
-  "lage": "halka eller vinterväglag på 4 av 4 vägavsnitt till och från Vansbro, vägbanan −0,1 °C vid Fänforsen. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T16:30:01+00:00"
+  "lage": "halka eller vinterväglag på 4 av 4 vägavsnitt till och från Vansbro, vägbanan −0,2 °C vid Fänforsen. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/bollnas/": {
   "lage": "halka eller vinterväglag på 4 av 4 vägavsnitt till och från Bollnäs, vägbanan −0,3 °C vid Simeå. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
   "andrad": "2026-11-12T16:30:01+00:00"
  },
  "https://halkvakt.se/ort/hofors/": {
-  "lage": "halka eller vinterväglag på 1 av 3 vägavsnitt inom 10 km från Hofors, vägbanan −3,3 °C vid Ryggen. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 1 av 3 vägavsnitt inom 10 km från Hofors, vägbanan −3,4 °C vid Ryggen. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/ljusdal/": {
-  "lage": "halka eller vinterväglag på 4 av 4 vägavsnitt till och från Ljusdal, vägbanan −0,2 °C vid Snäre. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 4 av 4 vägavsnitt till och från Ljusdal, vägbanan −0,2 °C vid Edevågen. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/nordanstig/": {
-  "lage": "halka eller vinterväglag på 1 av 2 vägavsnitt till och från Nordanstig, vägbanan −0,3 °C vid Furuberg. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T16:00:01+00:00"
+  "lage": "halka eller vinterväglag på 1 av 2 vägavsnitt till och från Nordanstig, vägbanan −0,7 °C vid Furuberg. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/ockelbo/": {
   "lage": "inget väglag rapporterat inom 10 km från Ockelbo. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
   "andrad": "2026-11-11T02:30:01+00:00"
  },
  "https://halkvakt.se/ort/ovanaker/": {
-  "lage": "inget väglag rapporterat inom 10 km från Ovanåker, vägbanan 0,0 °C vid Alfta. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "inget väglag rapporterat inom 10 km från Ovanåker. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/sandviken/": {
   "lage": "ingen halka på 1 vägavsnitt inom 10 km från Sandviken. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
@@ -1152,20 +1152,20 @@
   "andrad": "2026-11-12T08:00:01+00:00"
  },
  "https://halkvakt.se/ort/kramfors/": {
-  "lage": "halka eller vinterväglag på 2 av 2 vägavsnitt inom 10 km från Kramfors, vägbanan −0,5 °C vid Gammbodarna. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 2 av 2 vägavsnitt inom 10 km från Kramfors, vägbanan −0,6 °C vid Gammbodarna. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/timra/": {
-  "lage": "halka eller vinterväglag på 2 av 2 vägavsnitt inom 10 km från Timrå. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 2 av 2 vägavsnitt inom 10 km från Timrå, vägbanan 0,0 °C vid Kävstabron. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/ange/": {
   "lage": "halka eller vinterväglag på 3 av 3 vägavsnitt till och från Ånge, vägbanan −1,7 °C vid Lillkrog. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
   "andrad": "2026-11-12T17:00:02+00:00"
  },
  "https://halkvakt.se/ort/berg/": {
-  "lage": "halka eller vinterväglag på 1 av 1 vägavsnitt inom 10 km från Berg, vägbanan −1,6 °C vid Brånan. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 1 av 1 vägavsnitt inom 10 km från Berg, vägbanan −1,5 °C vid Brånan. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/bracke/": {
   "lage": "halka eller vinterväglag på 2 av 2 vägavsnitt inom 10 km från Bräcke, vägbanan −1,7 °C vid Lillkrog. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
@@ -1176,20 +1176,20 @@
   "andrad": "2026-11-11T03:30:20+00:00"
  },
  "https://halkvakt.se/ort/krokom/": {
-  "lage": "halka eller vinterväglag på 2 av 2 vägavsnitt till och från Krokom, vägbanan −1,2 °C vid Torvalla. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T16:30:01+00:00"
+  "lage": "halka eller vinterväglag på 2 av 2 vägavsnitt till och från Krokom, vägbanan −1,1 °C vid Torvalla. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/ragunda/": {
-  "lage": "halka eller vinterväglag på 1 av 1 vägavsnitt inom 10 km från Ragunda, vägbanan −1,3 °C vid Fors 2. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 1 av 1 vägavsnitt inom 10 km från Ragunda, vägbanan −1,2 °C vid Fors 2. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/stromsund/": {
   "lage": "halka eller vinterväglag på 1 av 1 vägavsnitt inom 10 km från Strömsund, vägbanan −1,0 °C vid Lövberga. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
   "andrad": "2026-11-12T17:00:02+00:00"
  },
  "https://halkvakt.se/ort/are/": {
-  "lage": "halka eller vinterväglag på 2 av 2 vägavsnitt till och från Åre, vägbanan −0,7 °C vid Mattmar. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 2 av 2 vägavsnitt till och från Åre, vägbanan −0,8 °C vid Mattmar. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/bjurholm/": {
   "lage": "halka eller vinterväglag på 2 av 2 vägavsnitt inom 10 km från Bjurholm, vägbanan −1,6 °C vid Bjurholm. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
@@ -1204,24 +1204,24 @@
   "andrad": "2026-11-12T16:30:01+00:00"
  },
  "https://halkvakt.se/ort/nordmaling/": {
-  "lage": "halka eller vinterväglag på 2 av 2 vägavsnitt inom 10 km från Nordmaling, vägbanan −1,4 °C vid Nyåker. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T16:30:01+00:00"
+  "lage": "halka eller vinterväglag på 2 av 2 vägavsnitt inom 10 km från Nordmaling, vägbanan −1,3 °C vid Nyåker. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/norsjo/": {
-  "lage": "halka eller vinterväglag på 2 av 2 vägavsnitt inom 10 km från Norsjö, vägbanan −4,2 °C vid Rentjärn. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T16:30:01+00:00"
+  "lage": "halka eller vinterväglag på 2 av 2 vägavsnitt inom 10 km från Norsjö, vägbanan −4,1 °C vid Bjurträsk. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/robertsfors/": {
   "lage": "halka eller vinterväglag på 1 av 1 vägavsnitt inom 10 km från Robertsfors, vägbanan −0,2 °C vid Ånäset. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
   "andrad": "2026-11-12T13:30:05+00:00"
  },
  "https://halkvakt.se/ort/sorsele/": {
-  "lage": "halka eller vinterväglag på 3 av 3 vägavsnitt till och från Sorsele, vägbanan −4,2 °C vid Giltjaur. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 3 av 3 vägavsnitt till och från Sorsele, vägbanan −4,6 °C vid Giltjaur. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/storuman/": {
-  "lage": "halka eller vinterväglag på 4 av 4 vägavsnitt till och från Storuman, vägbanan −3,9 °C vid Gunnarn. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T16:00:01+00:00"
+  "lage": "halka eller vinterväglag på 4 av 4 vägavsnitt till och från Storuman, vägbanan −4,1 °C vid Norrheden. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/vindeln/": {
   "lage": "halka eller vinterväglag på 2 av 2 vägavsnitt till och från Vindeln, vägbanan −2,6 °C vid Hjuken/Hällnäs. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
@@ -1232,16 +1232,16 @@
   "andrad": "2026-11-12T17:00:02+00:00"
  },
  "https://halkvakt.se/ort/asele/": {
-  "lage": "halka eller vinterväglag på 5 av 5 vägavsnitt till och från Åsele, vägbanan −3,1 °C vid Älgsjö. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 5 av 5 vägavsnitt till och från Åsele, vägbanan −3,0 °C vid Älgsjö. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/arjeplog/": {
-  "lage": "halka eller vinterväglag på 2 av 2 vägavsnitt till och från Arjeplog, vägbanan −6,0 °C vid Allejaur. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T16:30:01+00:00"
+  "lage": "halka eller vinterväglag på 2 av 2 vägavsnitt till och från Arjeplog, vägbanan −5,9 °C vid Allejaur. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/arvidsjaur/": {
-  "lage": "halka eller vinterväglag på 5 av 5 vägavsnitt till och från Arvidsjaur, vägbanan −7,2 °C vid Rönnberg. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 5 av 5 vägavsnitt till och från Arvidsjaur, vägbanan −7,3 °C vid Rönnberg. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/boden/": {
   "lage": "halka eller vinterväglag på 5 av 5 vägavsnitt till och från Boden, vägbanan −7,9 °C vid Niemisel. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
@@ -1252,8 +1252,8 @@
   "andrad": "2026-11-12T17:00:02+00:00"
  },
  "https://halkvakt.se/ort/haparanda/": {
-  "lage": "ingen halka på 2 vägavsnitt till och från Haparanda, vägbanan −7,2 °C vid Salmis. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "ingen halka på 2 vägavsnitt till och från Haparanda, vägbanan −7,1 °C vid Salmis. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/jokkmokk/": {
   "lage": "halka eller vinterväglag på 3 av 3 vägavsnitt till och från Jokkmokk, vägbanan −6,1 °C vid Vajmat. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
@@ -1264,16 +1264,16 @@
   "andrad": "2026-11-12T16:30:01+00:00"
  },
  "https://halkvakt.se/ort/pajala/": {
-  "lage": "ingen halka på 4 vägavsnitt till och från Pajala, vägbanan −10,3 °C vid Aareavaara. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "ingen halka på 4 vägavsnitt till och från Pajala, vägbanan −10,4 °C vid Aareavaara. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/alvsbyn/": {
-  "lage": "halka eller vinterväglag på 4 av 4 vägavsnitt till och från Älvsbyn, vägbanan −6,8 °C vid Riddarhällan. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T16:30:01+00:00"
+  "lage": "halka eller vinterväglag på 4 av 4 vägavsnitt till och från Älvsbyn, vägbanan −6,6 °C vid Riddarhällan. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/overkalix/": {
-  "lage": "halka eller vinterväglag på 2 av 2 vägavsnitt till och från Överkalix, vägbanan −9,7 °C vid Lansån. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
-  "andrad": "2026-11-12T17:00:02+00:00"
+  "lage": "halka eller vinterväglag på 2 av 2 vägavsnitt till och från Överkalix, vägbanan −9,5 °C vid Lansån. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
+  "andrad": "2026-11-12T17:30:02+00:00"
  },
  "https://halkvakt.se/ort/overtornea/": {
   "lage": "halka eller vinterväglag på 3 av 3 vägavsnitt till och från Övertorneå, vägbanan −10,3 °C vid Övertorneå. Trafikverkets väglag, vägtemperatur och olyckor, uppdaterat var 30:e minut.",
