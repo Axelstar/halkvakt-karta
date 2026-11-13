@@ -79,7 +79,7 @@
       var a = knappar[i];
       if (a.closest(".apppar") || a.querySelector("svg")) continue;
       var text = a.textContent;
-      var g = /play\.google\.com/.test(a.href) || /Android/.test(text) ? "android" : /iPhone/.test(text) ? "ios" : "";
+      var g = a.getAttribute("data-plattform") || (/play\.google\.com/.test(a.href) || /Android/.test(text) ? "android" : /iPhone/.test(text) ? "ios" : "");
       if (g) { a.insertAdjacentHTML("afterbegin", ikon(g)); a.classList.add("butik"); continue; }
       var kod = (a.href.match(/[?&]ct=([^&]+)/) || [])[1] || "knapp";
       var playUrl = PLAY + "&referrer=" + encodeURIComponent("utm_source=halkvakt.se&utm_content=" + kod);
