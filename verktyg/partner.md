@@ -29,7 +29,7 @@ Raderna ligger i redaktionslistan, samlingen `partner`
 
 - Varnar med rösten för halka, frysrisk, olyckor, vilt och fartkameror, innan föraren är där.
 - Bygger på Trafikverkets öppna data. Gratis, utan konto och utan reklam.
-- Finns för iPhone. Android kommer i vinter.
+- Finns för iPhone och Android.
 - "Din position lämnar inte telefonen av sig själv." Ordagrant, aldrig omskrivet.
 - Rutan: läget i länet just nu, uppdateras var 30:e minut, med partnerns namn och länk.
 
