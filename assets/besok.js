@@ -51,8 +51,8 @@
 
 /* 13/11: appknapparna. Halkvakt finns för iPhone och Android, och alla sidor laddar den här filen.
    Regeln: det är alltid två knappar, en till App Store och en till Google Play.
-   Varje allmän knapp ("Hämta appen", "Få varningar i appen") byts mot ett par (.apppar). Besökarens
-   egen butik står först och är gul (Android: Google Play, annars App Store), den andra är neutral.
+   Varje allmän knapp ("Hämta appen", "Få varningar i appen") byts mot ett par (.apppar). Båda är gula
+   (varumärkesguiden: gult = knapp som gör något). Besökarens egen butik står först (Android: Google Play).
    Knappar som redan gäller en butik ("Ladda ner för iPhone/Android") får bara butikens ikon.
    Utsidan ser stilen i assets/hv.css (.apppar). Utan skript står App Store-knappen kvar som förut. */
 (function () {
@@ -68,7 +68,7 @@
     }
     function knapp(g, href, gul) {
       var a = document.createElement("a");
-      a.className = "knapp" + (gul ? "" : " neutral");
+      a.className = "knapp";
       a.href = href;
       a.innerHTML = ikon(g) + '<span class="butik-namn">' + (g === "ios" ? "App Store" : "Google Play") + "</span>";
       a.setAttribute("aria-label", "Hämta Halkvakt i " + (g === "ios" ? "App Store för iPhone" : "Google Play för Android"));

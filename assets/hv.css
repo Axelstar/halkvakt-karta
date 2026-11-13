@@ -165,7 +165,7 @@ p { margin: 0; }
 .apppar .knapp svg, .knapp.butik svg { width: 17px; height: 17px; flex: none; display: block; }
 .apppar .knapp.neutral, .knapp.butik.neutral { color: var(--text); }
 .ladda .apppar { justify-self: start; }
-.ladda .apppar .knapp { width: auto; }
+.ladda .apppar .knapp { width: auto; justify-self: stretch; }
 .topp .apppar { gap: 6px; flex-wrap: nowrap; }
 @media (max-width: 440px) {
   .topp .apppar .knapp { width: 40px; min-height: 40px; padding: 0; }
