@@ -14,7 +14,8 @@
    "exempel_stracka": "Sundsvall Trafikplats Skönsmon–Gnarp",
    "montage": "egen",
    "kommentar": "Förslaget till Allehanda (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
-   "koncern": "Bonnier News Local"
+   "koncern": "Bonnier News Local",
+   "artikel": "https://www.allehanda.se/ornskoldsvik/flera-varningar-for-kraftigt-snofall/"
   },
   {
    "slug": "angermanland",
@@ -29,7 +30,8 @@
    "exempel_stracka": "Sundsvall Trafikplats Skönsmon–Gnarp",
    "montage": "egen",
    "kommentar": "Förslaget till Tidningen Ångermanland (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
-   "koncern": "Bonnier News Local"
+   "koncern": "Bonnier News Local",
+   "artikel": "https://www.tidningenangermanland.se/kramfors/johanna-och-stefan-koade-hela-natten-vaken-i-28-timmar/"
   },
   {
    "slug": "arbetarbladet",
@@ -44,7 +46,8 @@
    "exempel_stracka": "Gävle–Hyttön",
    "montage": "egen",
    "kommentar": "Förslaget till Arbetarbladet (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
-   "koncern": "Bonnier News Local"
+   "koncern": "Bonnier News Local",
+   "artikel": "https://www.arbetarbladet.se/sandviken/larm-om-utslapp-av-olja-i-sandviken/"
   },
   {
    "slug": "dalademokraten",
@@ -59,7 +62,8 @@
    "exempel_stracka": "Falun–Borlänge",
    "montage": "egen",
    "kommentar": "Förslaget till Dala-Demokraten (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
-   "koncern": "Bonnier News Local"
+   "koncern": "Bonnier News Local",
+   "artikel": "https://www.dalademokraten.se/articles/5d385248-71b1-415d-a097-356d5f331740"
   },
   {
    "slug": "dt",
@@ -88,7 +92,8 @@
    "lasarort": "Strängnäs",
    "exempel_stracka": "Nyköping–Kolmården",
    "montage": "egen",
-   "kommentar": "Förslaget till Eskilstuna-Kuriren (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
+   "kommentar": "Förslaget till Eskilstuna-Kuriren (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
+   "artikel": "https://www.ekuriren.se/nyheter/eskilstuna/artikel/snofall-och-sorjigt-vaglag-i-eskilstuna/r35kg6ej"
   },
   {
    "slug": "eposten",
@@ -102,7 +107,8 @@
    "lasarort": "Bålsta",
    "exempel_stracka": "Björklinge–Uppsala",
    "montage": "egen",
-   "kommentar": "Förslaget till Enköpings-Posten (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
+   "kommentar": "Förslaget till Enköpings-Posten (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
+   "artikel": "https://www.eposten.se/nyheter/enkoping/artikel/forsta-snon-i-enkoping-men-mildare-vader-vantar/lqpwdk8r"
   },
   {
    "slug": "folkbladet",
@@ -131,7 +137,8 @@
    "exempel_stracka": "Gävle–Hyttön",
    "montage": "egen",
    "kommentar": "Förslaget till GD (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
-   "koncern": "Bonnier News Local"
+   "koncern": "Bonnier News Local",
+   "artikel": "https://www.gd.se/naringsliv/efter-bristerna-klartecken-for-gavle-hamn/"
   },
   {
    "slug": "haparandabladet",
@@ -160,7 +167,8 @@
    "exempel_stracka": "Gevsjön–Järpen",
    "montage": "egen",
    "kommentar": "Förslaget till Tidningen Härjedalen (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
-   "koncern": "Bonnier News Local"
+   "koncern": "Bonnier News Local",
+   "artikel": "https://www.tidningenharjedalen.se/sveg/sista-dagen-i-ratten-nu-vantar-dom-i-svegsmordet/"
   },
   {
    "slug": "jamtlandstidning",
@@ -188,7 +196,8 @@
    "lasarort": "Boden",
    "exempel_stracka": "Töre–Luleå",
    "montage": "egen",
-   "kommentar": "Förslaget till Kuriren (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
+   "kommentar": "Förslaget till Kuriren (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
+   "artikel": "https://www.kuriren.nu/nyheter/norrbotten/artikel/live-singelolycka-pa-e4-i-snoovadret-folj-utvecklingen/rex29n0l"
   },
   {
    "slug": "ltz",
@@ -203,7 +212,8 @@
    "exempel_stracka": "Gevsjön–Järpen",
    "montage": "egen",
    "kommentar": "Förslaget till LT (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
-   "koncern": "Bonnier News Local"
+   "koncern": "Bonnier News Local",
+   "artikel": "https://www.ltz.se/ostersund/lansstyrelsen-redo-vid-handelse-av-ett-extra-val-men-det-kommer-kosta/"
   },
   {
    "slug": "na",
@@ -218,7 +228,8 @@
    "exempel_stracka": "Trafikplats Adolfsberg–Länsgräns Västmanland/Örebro län",
    "montage": "egen",
    "kommentar": "Förslaget till NA (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
-   "koncern": "Bonnier News Local"
+   "koncern": "Bonnier News Local",
+   "artikel": "https://www.na.se/orebro-lan/nu-sno-sen-to/"
   },
   {
    "slug": "norran",
@@ -232,7 +243,8 @@
    "lasarort": "Burträsk",
    "exempel_stracka": "Umeå–Husum",
    "montage": "egen",
-   "kommentar": "Förslaget till Norran (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
+   "kommentar": "Förslaget till Norran (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
+   "artikel": "https://www.norran.se/nyheter/skelleftea/artikel/butik-restaurang-och-tandlakare-i-konkurs/jo53dqyl"
   },
   {
    "slug": "nsd",
@@ -246,7 +258,8 @@
    "lasarort": "Piteå",
    "exempel_stracka": "Töre–Luleå",
    "montage": "egen",
-   "kommentar": "Förslaget till NSD (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
+   "kommentar": "Förslaget till NSD (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
+   "artikel": "https://www.nsd.se/nyheter/norrbotten/artikel/live-singelolycka-pa-e4-i-snoovadret-folj-utvecklingen/rex29n0l"
   },
   {
    "slug": "op",
@@ -261,7 +274,8 @@
    "exempel_stracka": "Gevsjön–Järpen",
    "montage": "egen",
    "kommentar": "Förslaget till ÖP (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
-   "koncern": "Bonnier News Local"
+   "koncern": "Bonnier News Local",
+   "artikel": "https://www.op.se/stromsund/larm-om-brand-i-byggnad-watt5/"
   },
   {
    "slug": "pt",
@@ -275,7 +289,8 @@
    "lasarort": "Älvsbyn",
    "exempel_stracka": "Töre–Luleå",
    "montage": "egen",
-   "kommentar": "Förslaget till PT (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
+   "kommentar": "Förslaget till PT (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
+   "artikel": "https://www.pt.se/nyheter/pitea/artikel/da-oppnar-backen-pa-lindbacksstadion/j82kqxqj"
   },
   {
    "slug": "sala",
@@ -290,7 +305,8 @@
    "exempel_stracka": "Västerås–Enköping",
    "montage": "egen",
    "kommentar": "Förslaget till Sala Allehanda (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
-   "koncern": "Bonnier News Local"
+   "koncern": "Bonnier News Local",
+   "artikel": "https://www.salaallehanda.com/fastighetsaffarer/lokal-trio-koper-stationshuset-efter-tre-ar-till-salu/"
   },
   {
    "slug": "sn",
@@ -304,7 +320,8 @@
    "lasarort": "Oxelösund",
    "exempel_stracka": "Nyköping–Kolmården",
    "montage": "egen",
-   "kommentar": "Förslaget till SN (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
+   "kommentar": "Förslaget till SN (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
+   "artikel": "https://www.sn.se/nyheter/inrikes/utbildning/artikel/nationellt-prov-har-lackt-pa-tiktok/j82k38yj"
   },
   {
    "slug": "st",
@@ -319,7 +336,8 @@
    "exempel_stracka": "Sundsvall Trafikplats Skönsmon–Gnarp",
    "montage": "egen",
    "kommentar": "Förslaget till ST (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
-   "koncern": "Bonnier News Local"
+   "koncern": "Bonnier News Local",
+   "artikel": "https://www.st.nu/sundsvall/stefan-holm-atalas-for-misshandel/"
   },
   {
    "slug": "unt",
@@ -333,7 +351,8 @@
    "lasarort": "Enköping",
    "exempel_stracka": "Björklinge–Uppsala",
    "montage": "egen",
-   "kommentar": "Förslaget till UNT (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
+   "kommentar": "Förslaget till UNT (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
+   "artikel": "https://www.unt.se/nyheter/gunsta/artikel/spisbrand-i-gunsta-lagenhet-raddningstjanst-pa-plats/r5pkxxqj"
   },
   {
    "slug": "vf",
@@ -347,7 +366,8 @@
    "lasarort": "Arvika",
    "exempel_stracka": "Torsby–Hejdröset (Riksgränsen Norge)",
    "montage": "egen",
-   "kommentar": "Förslaget till VF (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
+   "kommentar": "Förslaget till VF (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
+   "artikel": "https://www.vf.se/saffle/tva-bilar-har-frontalkrockat-en-i-diket/"
   },
   {
    "slug": "vk",
@@ -376,7 +396,8 @@
    "exempel_stracka": "Västerås–Enköping",
    "montage": "egen",
    "kommentar": "Förslaget till VLT (Axel 19/10): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna.",
-   "koncern": "Bonnier News Local"
+   "koncern": "Bonnier News Local",
+   "artikel": "https://www.vlt.se/vasteras/klart-har-byggs-stans-nya-hotell/"
   },
   {
    "slug": "barometern",

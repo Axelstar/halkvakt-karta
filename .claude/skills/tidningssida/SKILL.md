@@ -101,11 +101,13 @@ python3 verktyg/montage.py <slug>
 Det skriver `press/<slug>-artikel.jpg`: en neutral artikelsida med tidningens namn, rubriken "Halt på vägarna runt
 <ort> i morse" och tidningens ruta med **exempelsiffror** (halka på ungefär varannan sträcka). Sidan säger under
 bilden att siffrorna är exempel och att artikelsidan är en skiss. **Titta på bilden** innan du går vidare:
-rätt namn överst i rutan, rätt domän i adressfältet, Vägarna på datorn, Pendling på mobilen.
+rätt namn överst i rutan, rätt domän i adressfältet, Länet på datorn, Pendling på mobilen, ingen annonsörsrad.
 
-`montage: "egen"` betyder en skärmbild av en riktig artikel på tidningens sajt med rutan inlagd. Gör det bara om
-Axel ber om det: ta skärmbilderna själv (dator 1280 × 976, mobil 390 × 832) och kör
-`python3 verktyg/montage.py <slug> --dator dator.png --mobil mobil.png`.
+`montage: "egen"` betyder montaget byggt i en riktig artikel på tidningens sajt. Lägg artikelns adress i fältet
+`artikel` i posten (en vanlig nyhetsartikel, inte video, live eller annons) och kör `python3 verktyg/montage.py <slug>`:
+verktyget godkänner kakdialogen, byter rubrik, överrad och tid ("i dag"), tar bort bilder, annonsplatser och
+brödtext och lägger in ingressen och rutan. Titta på bilden: blir något fel på en sajt, välj en annan artikel.
+Egna skärmbilder går fortfarande: `--dator dator.png --mobil mobil.png` (dator 1280 × 976, mobil 390 × 832).
 
 ### 6. Bygg sidan och rutadressen
 

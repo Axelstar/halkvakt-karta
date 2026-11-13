@@ -68,9 +68,30 @@ def exempeldata(lan_slug, ort, strak=None):
 # Läggs in i en riktig artikel (--artikel): rubriken byts, tiden blir "i dag", bilder och brödtext tas bort och
 # ingressen följs av rutan. Allt annat på sidan (tidningens huvud, typsnitt, spalt) är tidningens eget.
 BYGG_IN = """(o) => {
-  const h1 = document.querySelector('h1');
+  // Artikelns rubrik: h1 i artikeln, annars den största h1:an (en del sajter har loggan som h1).
+  const alla = Array.from(document.querySelectorAll('h1')).filter(h => h.getBoundingClientRect().height > 0);
+  const h1 = document.querySelector('article h1') || alla.sort((a, b) =>
+    parseFloat(getComputedStyle(b).fontSize) - parseFloat(getComputedStyle(a).fontSize))[0];
   h1.textContent = o.rubrik;
-  const tid = document.querySelector('main time, article time, time');
+  // Överraden ovanför rubriken (artikelns egen etikett, t.ex. "Valet 2026") blir orten.
+  // Hittas på läget: den korta textraden närmast ovanför rubriken, inom 70 px.
+  const hr = h1.getBoundingClientRect();
+  const kick = Array.from(document.querySelectorAll('[class*="kicker"], [class*="Kicker"]')).filter(e => {
+    const r = e.getBoundingClientRect(); return r.height > 0 && r.bottom <= hr.top + 2 && r.bottom > hr.top - 90 && !e.closest('h1');
+  })[0] || Array.from(document.querySelectorAll('body *')).filter(e => {
+    if (e.children.length || e.closest('h1') || e.querySelector('img, svg')) return false;
+    const t = (e.textContent || '').trim(), r = e.getBoundingClientRect();
+    return t.length > 0 && t.length < 60 && r.height > 0 && r.bottom <= hr.top + 2 && r.bottom > hr.top - 70 && r.right > hr.left && r.left < hr.right;
+  }).sort((x, y) => y.getBoundingClientRect().bottom - x.getBoundingClientRect().bottom)[0];
+  if (kick) kick.textContent = o.kick;
+  // Tomma annonsplatser ("Annons") tas bort, utom om de rymmer rubriken.
+  for (const e of Array.from(document.querySelectorAll('body *'))) {
+    if (!e.isConnected || e.children.length > 2 || !/^annons$/i.test((e.textContent || '').trim())) continue;
+    let box = e;
+    while (box.parentElement && !box.parentElement.contains(h1) && box.parentElement.getBoundingClientRect().height < 700) box = box.parentElement;
+    if (!box.contains(h1)) box.remove();
+  }
+  const tid = (h1.closest('article') || document).querySelector('time') || document.querySelector('time');
   if (tid) tid.textContent = 'Publicerad i dag, kl 06.41';
   // Minsta gemensamma behållare för rubrik och tid: allt efter den i dokumentet tas bort (bild, ingress, byline, brödtext).
   let lca = h1;
@@ -99,7 +120,7 @@ BYGG_IN = """(o) => {
 
 # Godkänner kakdialogen så att den inte syns i bilden.
 GODKANN = r"""() => {
-  const re = /^(jag godkänner|godkänn( alla)?|acceptera( alla)?|tillåt alla|ok|jag förstår)$/i;
+  const re = /^(jag godkänner|godkänn( alla)?|acceptera( alla)?|tillåt alla|ok|okej|jag förstår)$/i;
   for (const d of [document, ...Array.from(document.querySelectorAll('iframe')).map(f => { try { return f.contentDocument } catch (e) { return null } })]) {
     if (!d) continue;
     for (const b of d.querySelectorAll('button, a[role=button]')) if (re.test(b.textContent.trim())) { b.click(); return true; }
@@ -130,7 +151,7 @@ iframe{width:100%;max-width:480px;height:440px;border:0;display:block;margin:0 0
 <div class="top"><div class="mast"><div class="namn">{tidning}</div><div class="knapp"></div></div>
 <div class="nav"><i style="width:60px"></i><i style="width:48px"></i><i style="width:70px"></i><i style="width:56px"></i><i style="width:64px"></i></div></div>
 <main><article><p class="kick">{kick}</p><h1>Halt på vägarna {var} i morse</h1><p class="dat">{datum}</p>
-<p class="ing">Trafikverket varnar för halka på flera vägar {var}. Här är läget just nu, sträcka för sträcka.</p>
+<p class="ing">Trafikverket rapporterar halka på flera vägar {var}. Här är läget just nu.</p>
 <iframe src="{ruta}"></iframe>
 <p>Halkan är värst på morgonen, innan solen hunnit värma vägbanan. Trafikverket uppmanar till försiktighet och god tid i trafiken.</p>
 </article><aside class="side"><i></i></aside></main></body></html>'''
@@ -235,6 +256,8 @@ def main():
               if x['slug'] == a.slug), None)
     if not t:
         raise SystemExit(f'{a.slug} finns inte i verktyg/tidningar.json. Lägg in tidningen där först.')
+    if not a.artikel and not a.dator and t.get('montage') == 'egen' and t.get('artikel'):
+        a.artikel = t['artikel']   # artikeln montaget byggs i, sparad i tidningar.json
     st = strak_ur_rutan().get(t.get('strak') or '')
     ort = st['fran'] if st else t.get('ort', '')   # utan stråk: tidningens ort om den står i tidningar.json
     lankort = next(l['kort'] for l in json.load(open(os.path.join(ROT, 'data/lan.json'), encoding='utf-8'))['lan'] if l['slug'] == t['lan'])
@@ -283,8 +306,14 @@ def main():
                     pg.wait_for_timeout(2500)
                     pg.evaluate(BYGG_IN, {'rubrik': 'Halt på vägarna ' + ('runt ' + ort if ort else 'i ' + lankort) + ' i morse',
                         'ingress': 'Trafikverket rapporterar halka på flera vägar ' + ('runt ' + ort if ort else 'i ' + lankort) + '. Här är läget just nu.',
-                        'ruta': ruta(flik)})
+                        'ruta': ruta(flik), 'kick': ort or lankort})
                     pg.wait_for_selector('iframe#halkvakt-montage', timeout=15000)
+                    pg.wait_for_timeout(1500)
+                    for f in pg.frames:   # en sen kakdialog godkänns också
+                        try:
+                            if f.evaluate(GODKANN): pg.wait_for_timeout(1000); break
+                        except Exception:
+                            pass
                     fr = next(f for f in pg.frames if 'ruta.html' in f.url)
                 else:
                     pg.goto(bas + '.montage-artikel.html', wait_until='networkidle')
