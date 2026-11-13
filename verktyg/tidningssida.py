@@ -162,7 +162,7 @@ def montage(t, v):
         raise SystemExit(f"{t['slug']}: {bild} saknas. Gör montaget först (verktyg/montage.py) eller sätt montage till \"inget\".")
     if t['montage'] == 'egen':
         alt = (f"Bildmontage: en artikel på {t['doman']}, Halt på vägarna runt {v['ort'] or v['lankort']} i morse, med {t['genitiv']} "
-               "väglagsruta efter ingressen. På datorn visar rutan fliken Vägarna, på mobilen fliken Pendling.")
+               "väglagsruta efter ingressen. På datorn visar rutan fliken Länet, på mobilen fliken Pendling.")
         not_ = ('Bildmontage med exempelsiffror: så kan rutan se ut i en artikel hos er, på dator och mobil. '
                 'Tryck på bilden för full storlek. Rutan överst på sidan är live.')
     elif t['montage'] == 'neutral':
@@ -178,7 +178,7 @@ def montage(t, v):
       <h2>Så kan det se ut en morgon med halka</h2>
     </div>
     <figure class="montage">
-      <a href="{bild}?v=1" target="_blank" rel="noopener"><img src="{bild}?v=1" width="2400" height="1638" alt="{html.escape(alt, quote=True)}" loading="lazy"></a>
+      <a href="{bild}?v=2" target="_blank" rel="noopener"><img src="{bild}?v=2" width="2400" height="1638" alt="{html.escape(alt, quote=True)}" loading="lazy"></a>
     </figure>
     <p class="not">{not_}</p>
   </div>

@@ -25,10 +25,10 @@ sys.path.insert(0, os.path.join(ROT, 'verktyg'))
 from tidningssida import strak_ur_rutan  # noqa: E402
 
 EXEMPELTID = '2026-10-19T04:30:00.000Z'   # visas som "Uppdaterad 06:30"
-DATUMRAD = '19 oktober 2026 06:41'
+DATUMRAD = 'I dag 06:41'   # inget datum: montaget ska inte se gammalt ut (Axel 13/11)
 
 
-def exempeldata(lan_slug, ort):
+def exempeldata(lan_slug, ort, strak=None):
     """Kopior av data/lan.json och data/strackor.json där tidningens län har halka på ungefär varannan sträcka."""
     lan = json.load(open(os.path.join(ROT, 'data/lan.json'), encoding='utf-8'))
     strackor = json.load(open(os.path.join(ROT, 'data/strackor.json'), encoding='utf-8'))
@@ -49,12 +49,63 @@ def exempeldata(lan_slug, ort):
                 plats = ort or v['strackor'][0]['plats'].split(' - ')[0]
                 v['kallast'] = {'yta': -1.8 if i % 2 else -2.6, 'namn': plats}
                 v['kalla'] = 2
+    # Pendlarfliken: halka på varannan del av stråken, med början på den första, så att mobilbilden visar halka överst.
+    if strak:
+        idx = {(v['vag'], s['plats']): s for v in strackor_lan for s in v['strackor']}
+        for k, (vag, plats) in enumerate(strak.get('delar', [])):
+                s = idx.get((vag, plats))
+                if s is not None and s['halt'] != (k % 2 == 0):
+                    s['halt'] = k % 2 == 0
+                    s['text'] = 'Is- och snövägbana' if s['halt'] else s.get('text', '')
+                    antal += 1 if s['halt'] else -1
     for l in lan['lan']:
         if l['slug'] == lan_slug:
             forsta = next((x for v in strackor_lan for x in [v.get('kallast')] if x), None)
             l.update(halt=min(antal, l['vagavsnitt']), kalla=6, olyckor=1,
                      kallast={'yta': -2.6, 'namn': ort or (forsta['namn'] if forsta else l['kort'])})
     return lan, strackor
+
+# Läggs in i en riktig artikel (--artikel): rubriken byts, tiden blir "i dag", bilder och brödtext tas bort och
+# ingressen följs av rutan. Allt annat på sidan (tidningens huvud, typsnitt, spalt) är tidningens eget.
+BYGG_IN = """(o) => {
+  const h1 = document.querySelector('h1');
+  h1.textContent = o.rubrik;
+  const tid = document.querySelector('main time, article time, time');
+  if (tid) tid.textContent = 'Publicerad i dag, kl 06.41';
+  // Minsta gemensamma behållare för rubrik och tid: allt efter den i dokumentet tas bort (bild, ingress, byline, brödtext).
+  let lca = h1;
+  if (tid) { while (!lca.contains(tid)) lca = lca.parentElement; }
+  // Det barn till behållaren som har tiden (eller rubriken): allt efter det tas bort, rutan läggs direkt efter.
+  let ank = tid || h1;
+  if (ank !== lca) { while (ank.parentElement !== lca) ank = ank.parentElement; } else { ank = h1; }
+  lca.querySelectorAll('figure, picture, img, video, iframe').forEach(e => e.remove());
+  for (let n = ank; n && n !== document.body; n = n.parentElement) {
+    let x = n.nextElementSibling; while (x) { const y = x.nextElementSibling; if (x.tagName !== 'SCRIPT') x.remove(); x = y; }
+  }
+  const blk = document.createElement('div');
+  blk.style.cssText = 'margin:20px 0 600px;max-width:720px';
+  const p = document.createElement('p');
+  p.textContent = o.ingress;
+  p.style.cssText = 'font-weight:700;font-size:19px;line-height:1.45;margin:0 0 24px;font-family:inherit';
+  const f = document.createElement('iframe');
+  f.id = 'halkvakt-montage'; f.src = o.ruta;
+  f.style.cssText = 'width:100%;max-width:480px;height:440px;border:0;display:block';
+  blk.append(p, f); ank.after(blk);
+  blk.style.boxSizing = 'border-box';
+  const dx = Math.round(h1.getBoundingClientRect().left - blk.getBoundingClientRect().left);
+  if (dx > 0) { blk.style.paddingLeft = dx + 'px'; blk.style.paddingRight = dx + 'px'; }
+  window.scrollTo(0, 0);
+}"""
+
+# Godkänner kakdialogen så att den inte syns i bilden.
+GODKANN = r"""() => {
+  const re = /^(jag godkänner|godkänn( alla)?|acceptera( alla)?|tillåt alla|ok|jag förstår)$/i;
+  for (const d of [document, ...Array.from(document.querySelectorAll('iframe')).map(f => { try { return f.contentDocument } catch (e) { return null } })]) {
+    if (!d) continue;
+    for (const b of d.querySelectorAll('button, a[role=button]')) if (re.test(b.textContent.trim())) { b.click(); return true; }
+  }
+  return false;
+}"""
 
 
 ARTIKEL = '''<!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -176,6 +227,7 @@ def main():
     ap.add_argument('slug')
     ap.add_argument('--dator'); ap.add_argument('--mobil'); ap.add_argument('--ut')
     ap.add_argument('--vader', action='store_true', help='rutan bredvid väderprognosen: press/<slug>-vader.jpg')
+    ap.add_argument('--artikel', help='en riktig artikel på tidningens sajt: rubrik, ingress och rutan läggs in i den (montage "egen")')
     a = ap.parse_args()
     from playwright.sync_api import sync_playwright
 
@@ -186,7 +238,7 @@ def main():
     st = strak_ur_rutan().get(t.get('strak') or '')
     ort = st['fran'] if st else t.get('ort', '')   # utan stråk: tidningens ort om den står i tidningar.json
     lankort = next(l['kort'] for l in json.load(open(os.path.join(ROT, 'data/lan.json'), encoding='utf-8'))['lan'] if l['slug'] == t['lan'])
-    lan_d, str_d = exempeldata(t['lan'], ort)
+    lan_d, str_d = exempeldata(t['lan'], ort, st)
     ut = a.ut or os.path.join(ROT, 'press', f"{a.slug}-{'vader' if a.vader else 'artikel'}.jpg")
     if a.vader and not ort:
         raise SystemExit('Vädersidan behöver en ort: tidningen saknar stråk.')
@@ -200,7 +252,7 @@ def main():
     def ruta(flik):
         q = [('lan', t['lan']), ('tema', 'ljus')] + ([('strak', t['strak'])] if st else []) + [
             ('namn', t['namn']), ('lank', t['lank']), ('lanktext', 'Mer trafik på ' + t['doman']),
-            ('sponsor', 'Er annonsör här'), ('flik', flik)]
+            ('flik', flik)]   # ingen annonsörsrad i montaget (Axel 13/11)
         return bas + 'ruta.html?' + urllib.parse.urlencode(q)
 
     with sync_playwright() as p:
@@ -220,8 +272,23 @@ def main():
             open(sida, 'w', encoding='utf-8').write(text)
             try:
                 pg = ctx.new_page()
-                pg.goto(bas + '.montage-artikel.html', wait_until='networkidle')
-                fr = pg.frames[1]
+                if a.artikel and not a.vader:
+                    pg.goto(a.artikel, wait_until='domcontentloaded', timeout=60000)
+                    pg.wait_for_timeout(4000)
+                    for f in pg.frames:
+                        try:
+                            if f.evaluate(GODKANN): break
+                        except Exception:
+                            pass
+                    pg.wait_for_timeout(2500)
+                    pg.evaluate(BYGG_IN, {'rubrik': 'Halt på vägarna ' + ('runt ' + ort if ort else 'i ' + lankort) + ' i morse',
+                        'ingress': 'Trafikverket rapporterar halka på flera vägar ' + ('runt ' + ort if ort else 'i ' + lankort) + '. Här är läget just nu.',
+                        'ruta': ruta(flik)})
+                    pg.wait_for_selector('iframe#halkvakt-montage', timeout=15000)
+                    fr = next(f for f in pg.frames if 'ruta.html' in f.url)
+                else:
+                    pg.goto(bas + '.montage-artikel.html', wait_until='networkidle')
+                    fr = pg.frames[1]
                 fr.wait_for_function("document.getElementById('tid').textContent.indexOf('06:30') >= 0", timeout=15000)
                 pg.wait_for_timeout(1200)
                 pg.screenshot(path=fil)
@@ -231,7 +298,7 @@ def main():
 
         dator, mobil = a.dator, a.mobil
         if not dator:
-            dator = os.path.join(tmp, 'dator.png'); skott(1280, 1100, 2, 'lan' if a.vader else 'vagar', dator)
+            dator = os.path.join(tmp, 'dator.png'); skott(1280, 1100, 2, 'lan', dator)   # Länet som hos Jämtlands Tidning (Axel 13/11)
         if not mobil:
             mobil = os.path.join(tmp, 'mobil.png'); skott(390, 832, 3, 'pendling' if st else 'lan', mobil)
 
