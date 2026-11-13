@@ -158,3 +158,20 @@ p { margin: 0; }
 .fot .wrap { grid-template-columns: auto minmax(0, 1fr); }
 .fot nav[aria-label="Sidfot"] { grid-column: 1 / -1; }
 .fot .lanrad a { font: 400 13px var(--sans); letter-spacing: 0; text-transform: none; }
+
+/* Appknapparna: alltid två, App Store och Google Play (byggs av assets/besok.js). */
+.apppar { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.apppar .knapp, .knapp.butik { gap: 9px; }
+.apppar .knapp svg, .knapp.butik svg { width: 17px; height: 17px; flex: none; display: block; }
+.apppar .knapp.neutral, .knapp.butik.neutral { color: var(--text); }
+.ladda .apppar { justify-self: start; }
+.ladda .apppar .knapp { width: auto; }
+.topp .apppar { gap: 6px; flex-wrap: nowrap; }
+@media (max-width: 440px) {
+  .topp .apppar .knapp { width: 40px; min-height: 40px; padding: 0; }
+  .topp .apppar .butik-namn { display: none; }
+}
+@media (max-width: 520px) {
+  .ladda .apppar { display: grid; grid-template-columns: 1fr 1fr; width: 100%; }
+  .ladda .apppar .knapp { padding: 10px 12px; font-size: 14px; gap: 7px; }
+}

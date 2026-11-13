@@ -50,43 +50,50 @@
 })();
 
 /* 13/11: appknapparna. Halkvakt finns för iPhone och Android, och alla sidor laddar den här filen.
-   Varje .knapp som går till App Store eller Google Play får sin butiks ikon (iPhone/Android).
-   De allmänna knapparna ("Hämta appen", "Få varningar i appen") får båda ikonerna och går dit
-   besökaren kan installera: Android-telefon till Google Play, iPhone till App Store, dator till
-   startsidans Appen-del (båda knapparna och QR-koden). Utan skript går knappen till App Store som förut. */
+   Regeln: det är alltid två knappar, en till App Store och en till Google Play.
+   Varje allmän knapp ("Hämta appen", "Få varningar i appen") byts mot ett par (.apppar). Besökarens
+   egen butik står först och är gul (Android: Google Play, annars App Store), den andra är neutral.
+   Knappar som redan gäller en butik ("Ladda ner för iPhone/Android") får bara butikens ikon.
+   Utsidan ser stilen i assets/hv.css (.apppar). Utan skript står App Store-knappen kvar som förut. */
 (function () {
   try {
     var PLAY = "https://play.google.com/store/apps/details?id=se.halkvakt.app";
-    var ua = navigator.userAgent;
-    var android = /Android/i.test(ua);
-    var ios = /iPhone|iPad|iPod/i.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    var android = /Android/i.test(navigator.userAgent);
     var P = {
       ios: "M16.4 1.4c0 1.1-.4 2.2-1.1 3-.8.9-2 1.5-3.1 1.4-.1-1.1.4-2.3 1.1-3 .8-.8 2.1-1.4 3.1-1.4zM20.5 17.2c-.6 1.2-.8 1.8-1.6 2.9-1 1.5-2.4 3.4-4.2 3.4-1.6 0-2-1-4.1-1s-2.6 1-4.1 1c-1.8 0-3.1-1.7-4.1-3.3C-.3 16-.6 11.1 1.1 8.4c1.2-1.9 3.1-3 4.9-3 1.8 0 3 1 4.5 1s2.4-1 4.5-1c1.6 0 3.3.9 4.5 2.4-4 2.2-3.3 7.8 1 9.4z",
-      android: "M17.6 9.5l1.8-3.2c.2-.3 0-.7-.3-.9-.3-.1-.6 0-.8.3l-1.9 3.2a11.4 11.4 0 0 0-8.9 0L5.6 5.7c-.2-.3-.5-.4-.8-.2-.3.2-.4.5-.2.8l1.8 3.2A10.8 10.8 0 0 0 1 18h22a10.8 10.8 0 0 0-5.4-8.5zM7 15.3a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6zm10 0a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6z"
+      android: "M3.6 1.3c-.2.2-.3.6-.3 1v19.4c0 .4.1.8.3 1l.1.1L14.6 12v-.2L3.7 1.2l-.1.1zM18.2 15.6l-3.6-3.6v-.2l3.6-3.6h.1l4.3 2.4c1.2.7 1.2 1.8 0 2.5l-4.3 2.4h-.1zM18.3 15.6L14.6 12 3.6 22.9c.4.4 1.1.5 1.8.1l12.9-7.4M18.3 8.4L5.4 1c-.7-.4-1.4-.4-1.8.1L14.6 12l3.7-3.6z"
     };
     function ikon(g) {
-      return '<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true" style="flex:none;display:block">'
-        + '<path d="' + P[g] + '"/></svg>';
+      return '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="' + P[g] + '"/></svg>';
     }
-    function play(kod) {
-      return PLAY + "&referrer=" + encodeURIComponent("utm_source=halkvakt.se&utm_content=" + (kod || "knapp"));
+    function knapp(g, href, gul) {
+      var a = document.createElement("a");
+      a.className = "knapp" + (gul ? "" : " neutral");
+      a.href = href;
+      a.innerHTML = ikon(g) + '<span class="butik-namn">' + (g === "ios" ? "App Store" : "Google Play") + "</span>";
+      a.setAttribute("aria-label", "Hämta Halkvakt i " + (g === "ios" ? "App Store för iPhone" : "Google Play för Android"));
+      return a;
     }
     var knappar = document.querySelectorAll('a.knapp[href*="apps.apple.com"], a.knapp[href*="play.google.com"]');
     for (var i = 0; i < knappar.length; i++) {
       var a = knappar[i];
-      if (a.querySelector(".appikoner")) continue;
+      if (a.closest(".apppar") || a.querySelector("svg")) continue;
       var text = a.textContent;
-      var g = a.getAttribute("data-plattform")
-        || (/play\.google\.com/.test(a.href) || /Android/.test(text) ? "android" : /iPhone/.test(text) ? "ios" : "");
-      var span = document.createElement("span");
-      span.className = "appikoner";
-      span.style.cssText = "display:inline-flex;align-items:center;gap:5px";
-      span.innerHTML = g ? ikon(g) : ikon("ios") + ikon("android");
-      a.insertBefore(span, a.firstChild);
-      if (g) continue;
-      var kod = (a.href.match(/[?&]ct=([^&]+)/) || [])[1];
-      if (android) a.href = play(kod);
-      else if (!ios) a.href = "/#appen";
+      var g = /play\.google\.com/.test(a.href) || /Android/.test(text) ? "android" : /iPhone/.test(text) ? "ios" : "";
+      if (g) { a.insertAdjacentHTML("afterbegin", ikon(g)); a.classList.add("butik"); continue; }
+      var kod = (a.href.match(/[?&]ct=([^&]+)/) || [])[1] || "knapp";
+      var playUrl = PLAY + "&referrer=" + encodeURIComponent("utm_source=halkvakt.se&utm_content=" + kod);
+      var par = document.createElement("span");
+      par.className = "apppar";
+      var ios = knapp("ios", a.href, !android), and = knapp("android", playUrl, android);
+      if (android) { par.appendChild(and); par.appendChild(ios); } else { par.appendChild(ios); par.appendChild(and); }
+      a.parentNode.replaceChild(par, a);
+    }
+    // Tills sidmotorn skriver det själv: rutan bredvid knapparna ska inte säga bara iPhone.
+    var rutor = document.querySelectorAll(".ladda p");
+    for (var j = 0; j < rutor.length; j++) {
+      if (/Gratis för iPhone(?! och Android)/.test(rutor[j].textContent))
+        rutor[j].innerHTML = rutor[j].innerHTML.replace(/Gratis för iPhone(?! och Android)/, "Gratis för iPhone och Android");
     }
   } catch (e) {}
 })();
