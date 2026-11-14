@@ -455,7 +455,7 @@
 
     // Tratten, enkel: fyra steg, en stapel var.
     var steg = [
-      ["Gick igenom introduktionen", "räknas bara på iPhone", summa(ar("onboarding_klar"))],
+      ["Gick igenom introduktionen", "", summa(ar("onboarding_klar"))],
       ["Gav appen platsen Alltid", "då startar vakten själv i bilen", summa(ar("behorighet", "alltid"))],
       ["Startade vakten första gången", "", summa(ar("forsta_starten"))],
       ["Fick sin första varning", "", summa(ar("forsta_varningen"))]
@@ -463,6 +463,7 @@
     var smax = Math.max(1, Math.max.apply(null, steg.map(function (s) { return s[2].n; })));
     $("app-tratt").innerHTML = steg.map(function (s) {
       return '<tr><td class="namn">' + s[0] + (s[1] ? ' <span class="meta">' + s[1] + "</span>" : "") +
+        '<br><span class="meta">iPhone ' + fmt(s[2].ios) + " · Android " + fmt(s[2].and) + "</span>" +
         '<div class="bar g" style="width:' + (100 * s[2].n / smax) + '%"></div></td><td class="n">' + fmt(s[2].n) + "</td></tr>";
     }).join("");
 
@@ -492,7 +493,7 @@
 
     // --- Detaljerna ---
     tabell("app-tal", [
-      ["onboarding_klar", "", "Introduktionen klar", "bara iPhone"],
+      ["onboarding_klar", "", "Introduktionen klar", "Android från 0.4.0"],
       ["behorighet", "nar", "Behörighet: När appen används", ""],
       ["behorighet", "alltid", "Behörighet: Alltid", "vakten kan starta själv"],
       ["behorighet", "nekad", "Behörighet: nekad", ""],
