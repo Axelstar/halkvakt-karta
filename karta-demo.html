@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Demo: kartfliken i rutan · Halkvakt</title>
+<!-- Demosida för kartfliken i tidningsrutan (Axel och Bengt 14/11). Fliken finns bara med &karta=1, så ingen ruta som ligger
+     ute hos en tidning är ändrad. Första ramen läses av verktyg/rutor.py och ger adressen halkvakt.se/ruta/karta-demo/. -->
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+  :root { color-scheme: dark; --mark: #080B0D; --panel: #0F1518; --kant: #1E282D; --text: #E9EFF2; --text2: #A9B5BB; --dampad: #8FA0A9; --gul: #FFC94A;
+    --sans: "Instrument Sans", "Helvetica Neue", Arial, sans-serif; --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--mark); color: var(--text); font: 400 16px/1.5 var(--sans); }
+  main { max-width: 980px; margin: 0 auto; padding: 40px 24px 80px; display: grid; gap: 28px; }
+  .etikett { font: 500 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dampad); margin: 0; }
+  h1 { margin: 6px 0 10px; font: 600 32px/1.15 var(--sans); letter-spacing: -.025em; }
+  p { margin: 0; color: var(--text2); max-width: 62ch; }
+  .val { display: flex; flex-wrap: wrap; gap: 12px; align-items: end; }
+  label { display: grid; gap: 6px; font: 500 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dampad); }
+  select { appearance: none; background: var(--panel); color: var(--text); border: 1px solid var(--kant); border-radius: 12px; padding: 10px 14px; font: 500 15px var(--sans); min-width: 180px; }
+  select:focus-visible { outline: 2px solid var(--gul); outline-offset: 2px; }
+  .ramar { display: flex; flex-wrap: wrap; gap: 32px; align-items: start; }
+  figure { margin: 0; display: grid; gap: 10px; }
+  figcaption { font: 500 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dampad); }
+  iframe { display: block; border: 0; border-radius: 16px; max-width: 100%; }
+  .dator iframe { width: 480px; height: 440px; }
+  .mobil iframe { width: 354px; height: 440px; }
+  .kort iframe { width: 354px; height: 340px; }
+  ul { margin: 0; padding-left: 18px; color: var(--text2); display: grid; gap: 6px; max-width: 62ch; }
+  code { font: 500 13px var(--mono); color: var(--text); background: var(--panel); border: 1px solid var(--kant); border-radius: 6px; padding: 1px 6px; word-break: break-all; }
+  a { color: var(--text); }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="etikett">Demo · inte ute hos någon tidning</p>
+    <h1>Kartfliken i rutan</h1>
+    <p>En fjärde flik, Karta, som en tidning kan välja till. Länet ritas som en stillbild med de hala sträckorna gula och Prognos streckad, som på kartan på halkvakt.se. Ett tryck på kartan öppnar den riktiga kartan i en ny flik.</p>
+  </header>
+  <div class="val">
+    <label>Län<select id="lan"></select></label>
+    <label>Tema<select id="tema"><option value="ljus">Ljust</option><option value="mork">Mörkt</option></select></label>
+  </div>
+  <div class="ramar">
+    <figure class="dator"><figcaption>I en artikel på datorn · 480 × 440</figcaption>
+      <iframe src="ruta.html?lan=jamtland&amp;strak=ostersund&amp;tema=ljus&amp;namn=Demotidningen&amp;klick=1&amp;karta=1&amp;flik=karta" title="Rutan med kartflik, dator" loading="eager"></iframe></figure>
+    <figure class="mobil"><figcaption>På mobilen · 354 × 440</figcaption>
+      <iframe data-ram src="ruta.html?lan=jamtland&amp;strak=ostersund&amp;tema=ljus&amp;namn=Demotidningen&amp;klick=1&amp;karta=1&amp;flik=karta" title="Rutan med kartflik, mobil" loading="eager"></iframe></figure>
+    <figure class="kort"><figcaption>På mobilen, låg ram · 354 × 340</figcaption>
+      <iframe data-ram src="ruta.html?lan=jamtland&amp;strak=ostersund&amp;tema=ljus&amp;namn=Demotidningen&amp;klick=1&amp;karta=1&amp;flik=karta" title="Rutan med kartflik, låg ram" loading="lazy"></iframe></figure>
+  </div>
+  <ul>
+    <li>Fliken slås på med <code>&amp;karta=1</code> i rutans adress. Utan den är rutan som förut.</li>
+    <li>Kartan hämtas först när någon öppnar fliken, så rutan laddar lika snabbt som i dag.</li>
+    <li>Rutan som egen länk: <a href="ruta/karta-demo/">halkvakt.se/ruta/karta-demo/</a></li>
+  </ul>
+</main>
+<script>
+(function () {
+  // Pendlarstråken som finns per län (nycklar i STRAK i ruta.html). Län utan stråk får tre flikar: Länet, Vägarna, Karta.
+  var STRAK = { varmland: 'varmland', gavleborg: 'gavle', vastmanland: 'vasteras', orebro: 'orebro', dalarna: 'falun', sodermanland: 'eskilstuna', uppsala: 'uppsala',
+    norrbotten: 'lulea', vasterbotten: 'umea', jamtland: 'ostersund', vasternorrland: 'sundsvall', kalmar: 'kalmar', kronoberg: 'vaxjo', blekinge: 'karlskrona',
+    skane: 'kristianstad', 'vastra-gotaland': 'boras' };
+  var lan = document.getElementById('lan'), tema = document.getElementById('tema'), q = new URLSearchParams(location.search);
+  function visa() {
+    var s = STRAK[lan.value], u = 'ruta.html?lan=' + lan.value + (s ? '&strak=' + s : '') + '&tema=' + tema.value + '&namn=Demotidningen&klick=1&karta=1&flik=karta';
+    [].forEach.call(document.querySelectorAll('iframe'), function (f) { f.src = u; });
+    history.replaceState(null, '', 'karta-demo.html?lan=' + lan.value + (tema.value === 'mork' ? '&tema=mork' : ''));
+  }
+  fetch('data/lan.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (d) {
+    d.lan.slice().sort(function (a, b) { return a.kort.localeCompare(b.kort, 'sv'); }).forEach(function (l) {
+      var o = document.createElement('option'); o.value = l.slug; o.textContent = l.kort + (l.halt ? ' · halka på ' + l.halt : ''); lan.appendChild(o);
+    });
+    lan.value = q.get('lan') || 'jamtland'; if (!lan.value) lan.value = 'jamtland';
+    if (q.get('tema') === 'mork') tema.value = 'mork';
+    if (lan.value !== 'jamtland' || tema.value !== 'ljus') visa();
+    lan.onchange = tema.onchange = visa;
+  });
+})();
+</script>
+</body>
+</html>

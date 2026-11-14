@@ -67,6 +67,39 @@
   li.klick:hover::before { opacity: 1; }
   li.klick:hover::after { color: var(--text); transform: translate(3px, -50%); }
   li.klick:focus-within::before { opacity: 1; outline: 2px solid var(--gul); }
+  /* Kartfliken (Axel och Bengt 14/11), bara med &karta=1: länet som en stillbild, de hala sträckorna gula som på halkvakt.se/karta.html.
+     Ingen karta att dra i: i en ruta på 480 × 440 fångar en dragbar karta sidans skroll på mobilen. Ett tryck öppnar den riktiga kartan. */
+  :root { --k-yta: #141C20; --k-grans: #5E6C74; --k-vag: #43525A; --k-halt: #FFC94A; --k-halt-kant: #0F1518; --k-prognos: #FF8F6B; }
+  html[data-tema="ljus"] { --k-yta: #F1F4F5; --k-grans: #9AA7AE; --k-vag: #B4C0C6; --k-halt: #FFC233; --k-halt-kant: #8A5A00; --k-prognos: #E0562B; }
+  .vy.kartvy { display: flex; flex-direction: column; gap: 8px; overflow: hidden; padding: 12px 18px 10px; }
+  .kartvy h1 { font-size: 15px; }
+  .karta { position: relative; flex: 1; min-height: 0; display: block; color: inherit; text-decoration: none; border-radius: 10px; }
+  .karta:focus-visible { outline: 2px solid var(--gul); outline-offset: 2px; }
+  .karta svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .karta .lansyta { fill: var(--k-yta); stroke: var(--k-grans); stroke-width: 1.2; stroke-dasharray: .1 3.2; stroke-linecap: round; stroke-linejoin: round; }
+  .karta .vagnat { fill: none; stroke: var(--k-vag); stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
+  .karta .halt-kant { fill: none; stroke: var(--k-halt-kant); stroke-width: 5.6; stroke-linecap: round; stroke-linejoin: round; }
+  .karta .halt { fill: none; stroke: var(--k-halt); stroke-width: 3.6; stroke-linecap: round; stroke-linejoin: round; }
+  .karta .prognos { fill: none; stroke: var(--k-prognos); stroke-width: 3; stroke-dasharray: 5 3.5; }
+  .karta .ort circle { fill: var(--text); stroke: var(--k-yta); stroke-width: 1.5; }
+  .karta .ort text { font: 600 11px var(--sans); fill: var(--text); stroke: var(--k-yta); stroke-width: 3.5; stroke-linejoin: round; paint-order: stroke; }
+  .kartfot { display: flex; justify-content: space-between; align-items: center; gap: 6px 12px; flex-wrap: wrap; }
+  .oppna { padding: 4px 10px; border-radius: 999px; border: 1px solid var(--kant); text-decoration: none; margin-left: auto;
+    font: 600 11px var(--mono); letter-spacing: .06em; color: var(--text); white-space: nowrap; transition: border-color .15s; }
+  .oppna:hover, .karta:hover ~ .kartfot .oppna { border-color: var(--gul); }
+  .oppna:focus-visible { outline: 2px solid var(--gul); outline-offset: 2px; }
+  /* Smal ruta (mobilen): fyra flikar ska rymmas på en rad, och kartan får rubrikens plats. Rubriken läses fortfarande upp. */
+  @media (max-width: 400px) {
+    .flikar.fyra button { padding: 6px 10px; }
+    .kartvy h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  }
+  .karta .vantar { position: absolute; inset: 0; display: grid; place-items: center; font: 400 13px var(--sans); color: var(--text2); background: var(--k-yta); border-radius: 10px; }
+  .forklaring { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 0; font: 500 12px var(--sans); color: var(--text2); }
+  .forklaring span { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+  .forklaring i { width: 18px; height: 4px; border-radius: 2px; background: var(--k-vag); flex: none; }
+  .forklaring i.h { background: var(--k-halt); box-shadow: 0 0 0 1px var(--k-halt-kant); }
+  .forklaring i.p { background: repeating-linear-gradient(90deg, var(--k-prognos) 0 5px, transparent 5px 8px); }
+  .forklaring b { color: var(--text); font-weight: 600; }
 </style>
 </head>
 <body>
@@ -78,6 +111,7 @@
       <button role="tab" id="f-lan" aria-controls="v-lan" aria-selected="true">Länet</button>
       <button role="tab" id="f-vagar" aria-controls="v-vagar" aria-selected="false">Vägarna</button>
       <button role="tab" id="f-pendling" aria-controls="v-pendling" aria-selected="false">Pendling</button>
+      <button role="tab" id="f-karta" aria-controls="v-karta" aria-selected="false" hidden>Karta</button>
     </div>
   </div>
   <div class="spar" id="spar">
@@ -100,6 +134,11 @@
       <h1 id="pendling-rubrik">Pendlarvägarna just nu</h1>
       <ul id="pendling-lista"></ul>
       <p id="pendling-text"></p>
+    </section>
+    <section class="vy kartvy" role="tabpanel" id="v-karta" aria-labelledby="f-karta">
+      <h1 id="karta-rubrik">Halkan på kartan just nu</h1>
+      <a class="karta" id="karta-lank" href="https://halkvakt.se/karta.html" target="_blank" rel="noopener"><span class="vantar" id="karta-vantar">Kartan hämtas</span></a>
+      <div class="kartfot"><p class="forklaring" id="karta-forklaring"></p><a class="oppna" id="karta-oppna" href="https://halkvakt.se/karta.html" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">Öppna kartan ›</a></div>
     </section>
   </div>
   <div class="fot"><a id="lank" href="https://halkvakt.se/lan/" target="_blank" rel="noopener">Läget i alla län</a><span class="hoger"><span class="prickar" id="prickar" aria-hidden="true"></span><button class="nasta" id="nasta" type="button"></button></span><span id="kalla">Källa: Halkvakt / Trafikverkets öppna data</span></div>
@@ -388,6 +427,9 @@
   // Flikarna och svepet: spåret rullar i sidled med snäpp, flikarna och prickarna följer.
   var vyer = ['lan', 'vagar', 'pendling'];
   if (!PEND) { $('f-pendling').hidden = true; $('v-pendling').remove(); vyer.pop(); }
+  // Kartfliken (Axel och Bengt 14/11): bara med &karta=1, sist bland flikarna, så rutor som redan ligger ute hos tidningar är oförändrade.
+  var KARTA = q.get('karta') === '1';
+  if (KARTA) { $('f-karta').hidden = false; vyer.push('karta'); if (vyer.length > 3) $('flikar').classList.add('fyra'); } else { $('f-karta').remove(); $('v-karta').remove(); }
   var spar = $('spar'), prickar = $('prickar');
   vyer.forEach(function () { prickar.appendChild(el('i')); });
   function markera(i) {
@@ -396,6 +438,7 @@
     var n = (i + 1) % vyer.length;
     $('nasta').textContent = (n ? '' : '← ') + $('f-' + vyer[n]).textContent + (n ? ' →' : '');
     $('nasta').onclick = function () { ga(n); };
+    if (vyer[i] === 'karta') hamtaKarta();
   }
   // Rulla till vyns egen kant, inte i × bredden: vid zoom och bråkdelsbredder hamnade Pendling några pixlar fel (Axel 23/10).
   function ga(i, mjukt) { var v = $('v-' + vyer[i]); spar.scrollTo({ left: v ? v.offsetLeft - spar.offsetLeft : i * spar.clientWidth, behavior: mjukt === false ? 'instant' : 'smooth' }); markera(i); }
@@ -443,6 +486,7 @@
     if (egenLank) { $('lank').href = egenLank; $('lank').target = '_top'; $('lank').textContent = (q.get('lanktext') || 'Mer om trafiken').slice(0, 40); }
     else { $('lank').target = '_blank'; }   // halkvakt.se i ny flik: läsaren ska aldrig lämna tidningens artikel för oss
     $('tid').textContent = 'Uppdaterad ' + tid(d.generated_at);
+    K.lan = l;
   }
 
   function visaVagar(d) {
@@ -485,6 +529,74 @@
     $('pendling-text').textContent = mHalt ? 'Trafikverket rapporterar halka på ' + mHalt + ' av ' + m + ' stråk.' : 'Trafikverket rapporterar ingen halka på stråken just nu.';
   }
 
+  // Kartan hämtas först när fliken visas: väglagets geometri för hela landet är tung, och de flesta läsare stannar på första fliken.
+  var K = { lan: null, d: null, hamtad: 0, pagar: false };
+  function hamtaKarta(tvinga) {
+    if (!KARTA || K.pagar || (!tvinga && K.d && Date.now() - K.hamtad < 5 * 60 * 1000)) return;
+    K.pagar = true;
+    var json = function (u, tom) { return fetch(u, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).catch(function (e) { if (tom === undefined) throw e; return tom; }); };
+    var inga = { features: [] };
+    Promise.all([json('assets/lan.geojson'), json('data/vaglag.geojson'), json('data/kandidat.geojson', inga), json('data/meta.json', null), json('assets/ruta-orter.json', {})])
+      .then(function (r) { K.d = { lan: r[0], vaglag: r[1], kandidat: r[2], meta: r[3], orter: r[4] }; K.hamtad = Date.now(); K.pagar = false; ritaKarta(); })
+      .catch(function () { K.pagar = false; if (!K.d) $('karta-vantar').textContent = 'Kartan kunde inte hämtas. Öppna den på halkvakt.se.'; });
+  }
+  var SVG = 'http://www.w3.org/2000/svg';
+  function sv(tag, attr, text) { var e = document.createElementNS(SVG, tag); for (var k in attr) e.setAttribute(k, attr[k]); if (text != null) e.textContent = text; return e; }
+  function ritaKarta() {
+    var d = K.d, lank = $('karta-lank'); if (!d || !lank) return;
+    var omr = d.lan.features.filter(function (f) { return f.properties.slug === lanSlug; })[0]; if (!omr) return;
+    var kod = omr.properties.kod, w = lank.clientWidth, h = lank.clientHeight; if (!w || !h) return;
+    var ringar = omr.geometry.type === 'MultiPolygon' ? [].concat.apply([], omr.geometry.coordinates) : omr.geometry.coordinates;
+    var x0 = 180, x1 = -180, y0 = 90, y1 = -90;
+    ringar.forEach(function (r) { r.forEach(function (c) { if (c[0] < x0) x0 = c[0]; if (c[0] > x1) x1 = c[0]; if (c[1] < y0) y0 = c[1]; if (c[1] > y1) y1 = c[1]; }); });
+    // Rak projektion med longituden hoptryckt efter länets mittbredd: räcker för ett län, och norr är uppåt.
+    var kx = Math.cos((y0 + y1) / 2 * Math.PI / 180), bw = (x1 - x0) * kx, bh = y1 - y0, marg = 8;
+    var s = Math.min((w - 2 * marg) / bw, (h - 2 * marg) / bh), ox = (w - bw * s) / 2, oy = (h - bh * s) / 2;
+    var P = function (c) { return [(c[0] - x0) * kx * s + ox, (y1 - c[1]) * s + oy]; };
+    var bana = function (linjer, slut) { return linjer.map(function (l) { return 'M' + l.map(function (c) { var p = P(c); return p[0].toFixed(1) + ' ' + p[1].toFixed(1); }).join('L') + (slut ? 'Z' : ''); }).join(''); };
+    var linjer = function (f) { return f.geometry.type === 'MultiLineString' ? f.geometry.coordinates : [f.geometry.coordinates]; };
+    var svg = sv('svg', { viewBox: '0 0 ' + w + ' ' + h, role: 'img' });
+    svg.appendChild(sv('path', { 'class': 'lansyta', d: bana(ringar, true), 'fill-rule': 'evenodd' }));
+    var egna = d.vaglag.features.filter(function (f) { return f.properties.lan === kod && f.geometry; }), iLanet = {};
+    egna.forEach(function (f) { iLanet[f.properties.segment_id] = true; });
+    var hala = egna.filter(function (f) { return f.properties.code > 1; });   // samma regel som kartan: allt utom Normalt är gult
+    var samla = function (lista) { return [].concat.apply([], lista.map(linjer)); };
+    svg.appendChild(sv('path', { 'class': 'vagnat', d: bana(samla(egna)) }));
+    // Prognos (DECISIONS #819): visas av sig själv, streckad, och tom när brytaren är av (#578). Modellerat, inte uppmätt.
+    var prognos = d.meta && d.meta.kandidat && d.meta.kandidat.pa === false ? [] : d.kandidat.features.filter(function (f) { return iLanet[f.properties.segment_id] && f.geometry; });
+    if (hala.length) { svg.appendChild(sv('path', { 'class': 'halt-kant', d: bana(samla(hala)) })); svg.appendChild(sv('path', { 'class': 'halt', d: bana(samla(hala)) })); }
+    if (prognos.length) svg.appendChild(sv('path', { 'class': 'prognos', d: bana(samla(prognos)) }));
+    // Orterna: störst först, och en ort hoppas över om namnet skulle hamna på ett annat eller utanför bilden.
+    var tagna = [];
+    (d.orter[lanSlug] || []).forEach(function (o) {
+      var p = P([o[1], o[2]]), bredd = o[0].length * 6.4 + 4, vanster = p[0] + 7 + bredd > w - 2;
+      var ruta = { x: vanster ? p[0] - 7 - bredd : p[0] - 4, y: p[1] - 9, w: bredd + 11, h: 18 };
+      if (ruta.x < 0 || ruta.y < 0 || ruta.y + ruta.h > h) return;
+      if (tagna.some(function (t) { return ruta.x < t.x + t.w && t.x < ruta.x + ruta.w && ruta.y < t.y + t.h && t.y < ruta.y + ruta.h; })) return;
+      tagna.push(ruta);
+      var g = sv('g', { 'class': 'ort' });
+      g.appendChild(sv('circle', { cx: p[0].toFixed(1), cy: p[1].toFixed(1), r: 3 }));
+      g.appendChild(sv('text', { x: (p[0] + (vanster ? -7 : 7)).toFixed(1), y: (p[1] + 4).toFixed(1), 'text-anchor': vanster ? 'end' : 'start' }, o[0]));
+      svg.appendChild(g);
+    });
+    var l = K.lan, kort = l ? l.kort : omr.properties.namn;
+    var summa = hala.length ? 'Halka på ' + hala.length + ' av ' + egna.length + ' vägavsnitt' : 'Ingen halka rapporterad';
+    svg.appendChild(sv('title', {}, 'Karta över ' + kort + '. ' + summa + '.'));
+    var gammal = lank.querySelector('svg'); if (gammal) gammal.remove();
+    var v = $('karta-vantar'); if (v) v.remove();
+    lank.insertBefore(svg, lank.firstChild);
+    $('karta-rubrik').textContent = 'Halkan i ' + kort + ' på kartan just nu';
+    lank.href = BAS + 'karta.html?lan=' + lanSlug + '&utm_source=ruta&utm_medium=' + encodeURIComponent(q.get('namn') || 'halkvakt');
+    $('karta-oppna').href = lank.href;
+    lank.setAttribute('aria-label', 'Öppna kartan över ' + kort + ' på halkvakt.se. ' + summa + '.');
+    var f = $('karta-forklaring'); f.textContent = '';
+    var post = function (cls, fet, text) { var sp = el('span'); sp.appendChild(el('i', cls)); if (fet) sp.appendChild(el('b', '', fet)); if (text) sp.appendChild(document.createTextNode(text)); f.appendChild(sp); };
+    if (hala.length) post('h', 'Halka', ' på ' + hala.length + ' av ' + egna.length + ' vägavsnitt');
+    else post('', 'Ingen halka rapporterad', ' på länets ' + egna.length + ' vägavsnitt');
+    if (prognos.length) post('p', '', 'Prognos');
+  }
+  if (KARTA) addEventListener('resize', function () { clearTimeout(ritaKarta.t); ritaKarta.t = setTimeout(ritaKarta, 120); });
+
   var visat = false;
   function hamta() {
     var json = function (u) { return fetch(u, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }); };
@@ -492,6 +604,7 @@
       if (visat) return; $('tid').textContent = 'Läget kunde inte hämtas'; $('lan-text').textContent = 'Se läget direkt på halkvakt.se. Uppdateras var 30:e minut.';
     });
     json('data/strackor.json').then(visaVagar).catch(function () {});
+    if (K.d) hamtaKarta(true);   // kartan följer samma takt som listorna när den väl har visats
   }
   hamta();
   setInterval(function () { if (!document.hidden) hamta(); }, 5 * 60 * 1000);
