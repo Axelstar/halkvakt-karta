@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[13.193686712,56.243974158]},"properties":{"land":"SE","typ":"Olycka","msg":"Vägen avstängd. Singelolycka med personbil i höjd med Eket. Ingen prognos för när vägen beräknas öppna.","allvar":"Mycket stor påverkan","road":"E4","start":"2026-11-14T06:07:00.000Z"}}]}
