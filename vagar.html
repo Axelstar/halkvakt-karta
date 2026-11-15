@@ -70,12 +70,34 @@
   var $ = function (id) { return document.getElementById(id); };
   var minus = function (n) { return n.toFixed(1).replace('.', ',').replace('-', '−'); };
   var tid = function (iso) { try { return new Date(iso).toLocaleTimeString('sv-SE', { timeZone: 'Europe/Stockholm', hour: '2-digit', minute: '2-digit' }); } catch (e) { return ''; } };
-  var kortVag = function (v) { var m = /^Väg (\d+)$/.exec(v); return m ? (Number(m[1]) < 100 ? 'Rv' : 'Väg ') + m[1] : v.replace(/^E /, 'E'); };
+  // Vägbeteckningen (Halkvakt kort #660, Bengt 15/11): E4 och väg 40, med stor bokstav bara först (forst). Tar Trafikverkets alla
+  // former ("E 4", "E4", "E 4.25", "Väg 40", "40", "Rv40", "riksväg 40", "Götaälvbron väg 570"); ett gatunamn står som det står.
+  // Nycklarna i STRAK jämförs mot datan med Trafikverkets egen form ("E 18") och ändras inte; bara det som visas går hit.
+  function vagNamn(v, forst) {
+    var s = String(v == null ? '' : v).trim(), m = /^E\s*(\d+)(?:\.\d+)?(?![\d.])/i.exec(s);
+    if (m) return 'E' + m[1];
+    m = /^(?:(?:riks|läns)?väg|rv|lv)?\s*(\d+)(?:\.\d+)?$/i.exec(s) || /(?:^|\s)väg\s+(\d+)(?!\d)/i.exec(s);
+    return m ? (forst ? 'Väg ' : 'väg ') + m[1] : s;
+  }
+  var kortVag = function (v) { return vagNamn(v, true); };
+  var plats = function (p) { return String(p || '').replace(/^\.\d+\s+/, '').replace(/ - /g, '–'); };
   var stor = function (v) { var m = /^(E|Väg)\s*(\d+)/.exec(v.vag); return m && (m[1] === 'E' || Number(m[2]) < 100); };
+  // Samma väg en gång (kort #660): Trafikverket skriver ibland både "E 18" och "E18" i samma län. Bara listan slås ihop;
+  // pendlingens hitta() läser datan som den står.
+  var enGang = function (vagar) {
+    var ut = [], per = {};
+    vagar.forEach(function (v) {
+      var k = vagNamn(v.vag, true), x = per[k];
+      if (!x) { x = per[k] = { vag: v.vag, strackor: [], kallast: null }; ut.push(x); }
+      x.strackor = x.strackor.concat(v.strackor);
+      if (v.kallast && (!x.kallast || v.kallast.yta < x.kallast.yta)) x.kallast = v.kallast;
+    });
+    return ut;
+  };
   function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
   function chips(strackor) {
     var d = el('div', 'strackor');
-    strackor.forEach(function (s) { d.appendChild(el('span', s.halt ? 'halt' : '', s.plats.replace(/ - /g, '–'))); });
+    strackor.forEach(function (s) { d.appendChild(el('span', s.halt ? 'halt' : '', plats(s.plats))); });
     return d;
   }
 
@@ -101,9 +123,10 @@
         var halt = delar.filter(function (d) { return d.halt; }).length;
         antal++; if (halt) antalHalt++;
         var vagar = [];
-        s.delar.forEach(function (d) { var k = kortVag(d[0]); if (vagar.indexOf(k) < 0) vagar.push(k); });
+        s.delar.forEach(function (d) { var k = vagNamn(d[0]); if (vagar.indexOf(k) < 0) vagar.push(k); });
         var li = el('li');
-        li.appendChild(el('span', 'vag', vagar.join('/')));
+        // Stor bokstav bara på den första vägen (E18/väg 61, Väg 136/väg 137; kort #660).
+        li.appendChild(el('span', 'vag', vagar.map(function (x, i) { return i ? x : x.charAt(0).toUpperCase() + x.slice(1); }).join('/')));
         li.appendChild(el('span', 'lage' + (halt ? ' halt' : ''), p.fran + '–' + s.till + ': ' + (halt ? 'halka på ' + halt + ' av ' + delar.length + (delar.length === 1 ? ' sträcka' : ' sträckor') : 'ingen halka rapporterad')));
         if (halt) li.appendChild(chips(delar.filter(function (d) { return d.halt; })));
         lista.appendChild(li);
@@ -113,7 +136,7 @@
         : 'Trafikverket rapporterar ingen halka på stråken just nu.';
     } else {
       $('rubrik').textContent = lan.kort + 's stora vägar just nu';
-      lan.vagar.filter(stor).forEach(function (v) {
+      enGang(lan.vagar).filter(stor).forEach(function (v) {
         var halt = v.strackor.filter(function (s) { return s.halt; }).length;
         antal++; if (halt) antalHalt++;
         var li = el('li');

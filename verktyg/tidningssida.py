@@ -57,6 +57,19 @@ def vagnummer(v):
     return v
 
 
+def vagtext(n):
+    """Vägbeteckningen i löptext (Halkvakt kort #660, Bengt 15/11): E4, och väg 83 för varje annat nummer, aldrig ett blankt tal."""
+    return n if n.startswith('E') else 'väg ' + n
+
+
+def vagar_rubrik(vagar):
+    """'E4, E14 och riksvägarna': E-vägarna och sist riksvägarna när länet har andra stora vägar, utan dubbelt 'och'."""
+    e_vagar = [n for n, _ in vagar if n.startswith('E')]
+    delar = e_vagar + (['riksvägarna'] if len(e_vagar) < len(vagar) else [])
+    r = lista(delar)
+    return r[:1].upper() + r[1:]
+
+
 def stora_vagar(lan_slug):
     lan = next(l for l in json.loads(las('data/strackor.json'))['lan'] if l['slug'] == lan_slug)
     vagar = []
@@ -94,7 +107,6 @@ def fyll(t, mall, lanen, straken):
         if not any(t['lasarort'] in m for m in st['till']):
             print(f"  obs {t['slug']}: lasarort '{t['lasarort']}' är inget av stråkens mål ({', '.join(st['till'])}). Kontrollera att den ligger på ett av dem.")
     vagar = stora_vagar(t['lan'])
-    e_vagar = [n for n, _ in vagar if n.startswith('E')]
     v = {
         'slug': t['slug'], 'fullnamn': t['fullnamn'], 'namn': t['namn'], 'genitiv': t['genitiv'],
         'doman': t['doman'], 'lank': t['lank'], 'lan': t['lan'],
@@ -102,9 +114,9 @@ def fyll(t, mall, lanen, straken):
         'lankort': lanen[t['lan']]['kort'],
         'langsta_ord': str(max(len(w.strip(',')) for w in ('Väglaget i ' + lanen[t['lan']]['kort'] + ', live hos ' + t['namn']).split())),
         'vagavsnitt': str(lanen[t['lan']]['vagavsnitt']),
-        'vagar_rubrik': (lista(e_vagar) if len(e_vagar) < 3 else ', '.join(e_vagar[:-1]) + ' och ' + e_vagar[-1]) + ' och riksvägarna',
+        'vagar_rubrik': vagar_rubrik(vagar),
         'antal_strackor': str(sum(n for _, n in vagar)),
-        'vagar_lista': lista(n for n, _ in vagar),
+        'vagar_lista': lista(vagtext(n) for n, _ in vagar),
         'namn_q': t['namn'].replace(' ', '%20'),
         'lanktext_q': urllib.parse.quote('Mer trafik på ' + t['doman']),
     }
