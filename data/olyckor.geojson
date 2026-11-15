@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[16.549116839,57.773509287]},"properties":{"land":"SE","typ":"Olycka","msg":"Singelolycka väster om Västervik.","allvar":"Liten påverkan","road":"E22","start":"2026-11-15T20:00:00.000Z"}}]}
