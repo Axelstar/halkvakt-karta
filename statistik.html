@@ -481,7 +481,7 @@
     $("app-dagar-text").textContent = "En stapel är antalet telefoner där vakten gick det dygnet." + (hogst ? " Flest: " + fmt(perDag[hogst]) + " den " + kortDag(hogst).toLowerCase() + "." : "");
 
     // Varningar, kort: per fara.
-    var FARA = { accident: "Olycka", slippery_segment: "Halka", icing_point: "Frysrisk", wildlife: "Vilt", camera: "Fartkamera", kandidat: "Prognos" };
+    var FARA = { accident: "Olycka", slippery_segment: "Halka", icing_point: "Frysrisk", wildlife: "Vilt", camera: "Fartkamera", kandidat: "Prognos", smavag: "Småvägar" };
     var varn = Object.keys(FARA).map(function (k) { return { namn: FARA[k], visningar: summa(function (r) { return r.handelse === "varning" && r.varde.split(":")[0] === k; }).n }; })
       .sort(function (x, y) { return y.visningar - x.visningar; });
     var varnSumma = varn.reduce(function (s, v) { return s + v.visningar; }, 0);
