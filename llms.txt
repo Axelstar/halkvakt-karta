@@ -8,7 +8,7 @@
 
 - [Alla län](https://halkvakt.se/lan/): halka, stationer under noll och olyckor i alla 21 län
 - [Ett län](https://halkvakt.se/lan/varmland/): samma sak för ett län; byt `varmland` mot länets namn utan prickar, t.ex. `skane`, `vastra-gotaland`, `norrbotten`
-- [En väg](https://halkvakt.se/vag/e18/): E4, E6, E18, E20, E22 och riksväg 40 sträcka för sträcka
+- [En väg](https://halkvakt.se/vag/e18/): E4, E6, E18, E20, E22 och väg 40 sträcka för sträcka
 - [Livekartan](https://halkvakt.se/karta.html)
 
 ## Data som JSON

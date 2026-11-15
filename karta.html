@@ -171,6 +171,14 @@ const $ = s => document.querySelector(s);
 const toppHojd = () => document.documentElement.style.setProperty('--topph', Math.round(document.querySelector('.topp').getBoundingClientRect().height) + 'px');
 toppHojd(); new ResizeObserver(toppHojd).observe(document.querySelector('.topp'));
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+// Vägbeteckningen (Halkvakt kort #660, Bengt 15/11): E4 och väg 40, med stor bokstav bara först (forst). Tar Trafikverkets alla
+// former ("E 4", "E4", "E 4.25", "Väg 40", "40", "Rv40", "riksväg 40", "Götaälvbron väg 570"); ett gatunamn står som det står.
+function vagNamn(v, forst) {
+  var s = String(v == null ? '' : v).trim(), m = /^E\s*(\d+)(?:\.\d+)?(?![\d.])/i.exec(s);
+  if (m) return 'E' + m[1];
+  m = /^(?:(?:riks|läns)?väg|rv|lv)?\s*(\d+)(?:\.\d+)?$/i.exec(s) || /(?:^|\s)väg\s+(\d+)(?!\d)/i.exec(s);
+  return m ? (forst ? 'Väg ' : 'väg ') + m[1] : s;
+}
 const fmtTid = iso => new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Stockholm', hour: '2-digit', minute: '2-digit' }).format(new Date(iso));
 const grad = v => v == null ? '–' : (v < 0 ? '−' : '') + Math.abs(Number(v)).toFixed(1).replace('.', ',') + ' °C';
 const LAN = { stockholm: [1, 'Stockholms län'], uppsala: [3, 'Uppsala län'], sodermanland: [4, 'Södermanland'], ostergotland: [5, 'Östergötland'],
@@ -391,16 +399,16 @@ map.on('load', async () => {
   const vaglagKlick = e => { if (under(e, ['kandidat-traff', 'vader', 'vader-ovr', 'olyckor', 'kameror'])) return;
     const p = (e.features.find(f => f.properties.code > 1) ?? e.features[0]).properties; let info = [];
     try { info = JSON.parse(p.info || '[]'); } catch {}
-    pop(e, `<h3>${esc(p.road ?? 'Vägsträcka')}</h3><div><b>${esc(p.text)}</b></div><div class="k">${esc(info.join(', '))}</div>`); };
+    pop(e, `<h3>${esc(vagNamn(p.road, true) || 'Vägsträcka')}</h3><div><b>${esc(p.text)}</b></div><div class="k">${esc(info.join(', '))}</div>`); };
   map.on('click', 'vaglag-traff', vaglagKlick);
   map.on('click', 'vaglag', e => { if (!under(e, ['vaglag-traff'])) vaglagKlick(e); });
   map.on('click', 'olyckor', e => { const p = e.features[0].properties;
-    pop(e, `<h3>${esc(p.typ)}${p.road ? ' · ' + esc(p.road) : ''}</h3><div>${esc(p.msg)}</div><div class="k">${esc(p.allvar ?? '')}</div>`); });
+    pop(e, `<h3>${esc(p.typ)}${vagNamn(p.road) ? ' · ' + esc(vagNamn(p.road)) : ''}</h3><div>${esc(p.msg)}</div><div class="k">${esc(p.allvar ?? '')}</div>`); });
   map.on('click', 'kandidat-traff', e => { if (under(e, ['vader', 'vader-ovr', 'olyckor', 'kameror'])) return; const p = e.features[0].properties;
     pop(e, `<h3>Prognos</h3><div><b>Halka framöver</b></div><div>Modellerat, inte uppmätt</div>
       <div class="k">Vägytan beräknad ur MET Nordic och vägväderstationerna runt omkring.</div>`); });
   map.on('click', 'kameror', e => { const p = e.features[0].properties;
-    pop(e, `<h3>Fartkamera</h3><div>${esc(p.name)}</div><div class="k">${esc(p.road ?? '')}</div>`); });
+    pop(e, `<h3>Fartkamera</h3><div>${esc(p.name)}</div><div class="k">${esc(vagNamn(p.road, true))}</div>`); });
   map.on('click', 'lan-fyll', e => { if (INBADDAD || under(e, ['vaglag', 'vaglag-traff', 'kandidat-traff', 'vader', 'vader-ovr', 'olyckor', 'kameror'])) return;
     const slug = e.features[0].properties.slug; if (!lanVal || lanVal.slug !== slug) visaLan(lanAv(slug), true); });
   for (const id of ['vaglag', 'kandidat']) {

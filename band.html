@@ -51,7 +51,16 @@
   var lanktext = (q.get('lanktext') || (namn ? 'Boka däckbyte hos ' + namn : '')).slice(0, 48);
   var rulle = document.getElementById('rulle');
   function minus(n) { return (n < 0 ? '−' : n > 0 ? '+' : '') + Math.abs(n).toFixed(1).replace('.', ','); }
-  function vag(v) { return v.replace(/^E (\d+)/, 'E$1').replace(/^Väg (\d+)/, 'väg $1'); }
+  // Vägbeteckningen (Halkvakt kort #660, Bengt 15/11): E4 och väg 40, med stor bokstav bara först (forst). Tar Trafikverkets alla
+  // former ("E 4", "E4", "E 4.25", "Väg 40", "40", "Rv40", "riksväg 40", "Götaälvbron väg 570"); ett gatunamn står som det står.
+  function vagNamn(v, forst) {
+    var s = String(v == null ? '' : v).trim(), m = /^E\s*(\d+)(?:\.\d+)?(?![\d.])/i.exec(s);
+    if (m) return 'E' + m[1];
+    m = /^(?:(?:riks|läns)?väg|rv|lv)?\s*(\d+)(?:\.\d+)?$/i.exec(s) || /(?:^|\s)väg\s+(\d+)(?!\d)/i.exec(s);
+    return m ? (forst ? 'Väg ' : 'väg ') + m[1] : s;
+  }
+  // Vägen står först i posten, i fetstil: "Väg 63 Filipstad–Kristinehamn: halka".
+  function vag(v) { return vagNamn(v, true); }
   function post(text, typ, fet) {
     var s = document.createElement('span'); s.className = 'post' + (typ ? ' ' + typ : '');
     if (typ === 'halt') { var p = document.createElement('i'); p.className = 'p'; s.appendChild(p); }
@@ -77,7 +86,7 @@
     var s = (str && str.lan || []).filter(function (x) { return x.slug === lanSlug; })[0];
     if (s) {
       var halka = [];
-      s.vagar.forEach(function (v) { v.strackor.forEach(function (k) { if (k.halt) halka.push([vag(v.vag), k.plats.replace(/ - /g, '–')]); }); });
+      s.vagar.forEach(function (v) { v.strackor.forEach(function (k) { if (k.halt) halka.push([vag(v.vag), String(k.plats || '').replace(/^\.\d+\s+/, '').replace(/ - /g, '–')]); }); });
       // Vägar genom verkstadens egen ort först (&ort=Karlstad): det är dem kunderna kör hem på.
       if (ort) halka.sort(function (a, b) { return (b[1].indexOf(ort) >= 0) - (a[1].indexOf(ort) >= 0); });
       halka.slice(0, 6).forEach(function (h) { poster.push(post(h[1] + ': halka', 'halt', h[0])); });

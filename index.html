@@ -407,7 +407,7 @@
         <a class="panel vagkort" href="vag/e18/"><b class="nr">E18</b><span>Värmland–Kapellskär</span><em id="v-e18">2 av 20 hala</em></a>
         <a class="panel vagkort" href="vag/e20/"><b class="nr">E20</b><span>Malmö–Stockholm</span><em id="v-e20">1 av 19 hala</em></a>
         <a class="panel vagkort" href="vag/e22/"><b class="nr">E22</b><span>Trelleborg–Norrköping</span><em id="v-e22">0 av 19 hala</em></a>
-        <a class="panel vagkort" href="vag/rv40/"><b class="nr">Riksväg 40</b><span>Göteborg–Västervik</span><em id="v-rv40">1 av 12 hala</em></a>
+        <a class="panel vagkort" href="vag/rv40/"><b class="nr">Väg 40</b><span>Göteborg–Västervik</span><em id="v-rv40">1 av 12 hala</em></a>
       </div>
     </div>
   </section>
@@ -537,15 +537,20 @@
     const href = a.getAttribute('href'), typ = STAD[href] ? 'Stad' : href.startsWith('ort/') ? 'Ort' : href.startsWith('lan/') ? 'Län' : href.startsWith('vag/') ? 'Väg' : 'Sida';
     // data-alias (9/11): kommunens centralort när den heter något annat, så att Åkersberga hittar Österåker.
     const alias = a.dataset.alias || '';
-    return { namn: a.textContent.trim(), alias, href, typ, n: norm(a.textContent), na: norm(alias), rang: { Stad: 0, Ort: 1, 'Län': 2, 'Väg': 3, Sida: 4 }[typ] };
+    // nv (kort #660): vägens nyckel ur adressen, "e4" eller "vag 40", så att sökningen hittar vägen hur den än skrivs.
+    const vm = /^vag\/(e|rv)(\d+)\/$/.exec(href), nv = vm ? (vm[1] === 'e' ? 'e' + vm[2] : 'vag ' + vm[2]) : '';
+    return { namn: a.textContent.trim(), alias, href, typ, n: norm(a.textContent), na: norm(alias), nv, rang: { Stad: 0, Ort: 1, 'Län': 2, 'Väg': 3, Sida: 4 }[typ] };
   }).filter((x, i, a) => a.findIndex(y => y.href === x.href) === i);
   const passar = (t, n) => t && (t.startsWith(n) || t.split(/[\s–-]+/).some(w => w.startsWith(n)));
+  // Frågan som vägnyckel: "E 4", "e4" blir "e4"; "väg 40", "rv40", "riksväg 40", "40" blir "vag 40" (kort #660).
+  const vagFraga = n => { let m = /^e\s*(\d+)$/.exec(n); if (m) return 'e' + m[1];
+    m = /^(?:riksvag|lansvag|vag|rv|lv)?\s*(\d+)$/.exec(n); return m ? 'vag ' + m[1] : ''; };
   const q = document.getElementById('q'), ul = document.getElementById('forslag');
   let traffar = [], vald = -1;
-  const sok = t => { const n = norm(t); if (!n) return [];
-    return sidor.filter(x => passar(x.n, n) || passar(x.na, n))
+  const sok = t => { const n = norm(t), nv = vagFraga(n); if (!n) return [];
+    return sidor.filter(x => passar(x.n, n) || passar(x.na, n) || (nv && x.nv.startsWith(nv)))
       .sort((a, b) => (b.n.startsWith(n) - a.n.startsWith(n)) || a.rang - b.rang || a.namn.localeCompare(b.namn, 'sv')).slice(0, 7)
-      .map(x => passar(x.n, n) ? x : { ...x, namn: x.namn + ' (' + x.alias + ')' }); };
+      .map(x => passar(x.n, n) || !passar(x.na, n) ? x : { ...x, namn: x.namn + ' (' + x.alias + ')' }); };
   const visaForslag = () => {
     traffar = sok(q.value); vald = traffar.length ? 0 : -1; ul.innerHTML = '';
     if (!q.value.trim()) { ul.hidden = true; q.setAttribute('aria-expanded', 'false'); return; }
