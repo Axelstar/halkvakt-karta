@@ -1,1 +1,1 @@
-{"schema":1,"generated_at":"2026-11-15T17:05:01.168Z","segments":[],"weather":[{"id":"DK:06060","lon":9.1139,"lat":56.2934,"yta":2.7,"fukt":false}],"deviations":[],"smhi":[],"wildlife":[],"djur":[]}
+{"schema":1,"generated_at":"2026-11-15T17:35:01.523Z","segments":[],"weather":[],"deviations":[{"id":"DK:96d79d15-b1c3-4ad3-8e5b-e95b0dbed19a_315742.1","lon":12.332713,"lat":55.633312,"typ":"Olycka","road":null,"sev":null,"slut":null}],"smhi":[],"wildlife":[],"djur":[]}
