@@ -119,6 +119,8 @@ def fyll(t, mall, lanen, straken):
         'vagar_lista': lista(vagtext(n) for n, _ in vagar),
         'namn_q': t['namn'].replace(' ', '%20'),
         'lanktext_q': urllib.parse.quote('Mer trafik på ' + t['doman']),
+        # klass=1 (PT 16/11): rutan skriver "halka eller vinterväglag" och Trafikverkets klassning per sträcka. Bara där fältet står.
+        'klass_param': '&amp;klass=1' if t.get('klass') else '',
     }
     if st:
         v.update({
@@ -139,7 +141,7 @@ def fyll(t, mall, lanen, straken):
     # Bonnier News Locals tidningar lägger in rutan med en länk (deras verktyg tar inte iframe-kod, NWT 23/10);
     # alla andra får koden först, som Jämtlands Tidning använder på sin startsida (Axel 10/11).
     LANK = '      <div class="kod">\n        <button type="button" id="kopiera-lank">Kopiera</button>\n<pre id="lanken">https://halkvakt.se/ruta/{{slug}}/</pre>\n      </div>\n'
-    KOD = '      <div class="kod">\n        <button type="button" id="kopiera">Kopiera</button>\n<pre id="koden"><span class="k">&lt;iframe</span> src="https://halkvakt.se/ruta.html?lan={{lan}}&amp;tema=ljus{{strak_param}}&amp;namn={{namn_q}}&amp;lank={{lank}}&amp;klick=1"\n  width="100%" height="440"\n  style="border:0;max-width:480px"\n  title="Väglaget i {{lankort}} just nu" loading="lazy"<span class="k">&gt;&lt;/iframe&gt;</span>\n<span class="k">&lt;p</span> style="margin:6px 0 0;font:13px sans-serif"<span class="k">&gt;&lt;a</span> href="https://halkvakt.se/lan/{{lan}}/"<span class="k">&gt;</span>Halka och väglag i {{lankort}} just nu<span class="k">&lt;/a&gt;</span> · Halkvakt<span class="k">&lt;/p&gt;</span></pre>\n      </div>\n'
+    KOD = '      <div class="kod">\n        <button type="button" id="kopiera">Kopiera</button>\n<pre id="koden"><span class="k">&lt;iframe</span> src="https://halkvakt.se/ruta.html?lan={{lan}}&amp;tema=ljus{{strak_param}}&amp;namn={{namn_q}}&amp;lank={{lank}}&amp;klick=1{{klass_param}}"\n  width="100%" height="440"\n  style="border:0;max-width:480px"\n  title="Väglaget i {{lankort}} just nu" loading="lazy"<span class="k">&gt;&lt;/iframe&gt;</span>\n<span class="k">&lt;p</span> style="margin:6px 0 0;font:13px sans-serif"<span class="k">&gt;&lt;a</span> href="https://halkvakt.se/lan/{{lan}}/"<span class="k">&gt;</span>Halka och väglag i {{lankort}} just nu<span class="k">&lt;/a&gt;</span> · Halkvakt<span class="k">&lt;/p&gt;</span></pre>\n      </div>\n'
     if t.get('koncern') == 'Bonnier News Local':
         v['teknik_rader'] = ('        <li><span><b>En egen adress till er ruta:</b> <code>halkvakt.se/ruta/' + t['slug'] + '</code>. Klistra in den där ert verktyg tar en länk, i artikel, liveblogg eller temasida.</span></li>\n'
                              '        <li><span><b>Eller en rad iframe-kod</b>, där ni kan bädda in kod.</span></li>\n')
