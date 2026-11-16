@@ -20,10 +20,10 @@ BAS = 'https://halkvakt.se/'
 
 # Tidningar som inte har en egen förslagssida (de delar halsingland.html).
 EXTRA = {
-    'ht': dict(lan='gavleborg', strak='halsingland', namn='HT', lank='https://www.ht.se/', lanktext='Mer trafik på ht.se', klick='1'),
-    'ljusnan': dict(lan='gavleborg', strak='ljusnan', namn='Ljusnan', lank='https://www.ljusnan.se/', lanktext='Mer trafik på ljusnan.se', klick='1'),
-    'soderhamnskuriren': dict(lan='gavleborg', strak='soderhamn', namn='Söderhamns-Kuriren', lank='https://www.soderhamnskuriren.se/', lanktext='Mer trafik på soderhamnskuriren.se', klick='1'),
-    'ljusdalsposten': dict(lan='gavleborg', strak='ljusdal', namn='Ljusdals-Posten', lank='https://www.ljusdalsposten.se/', lanktext='Mer trafik på ljusdalsposten.se', klick='1'),
+    'ht': dict(lan='gavleborg', strak='halsingland', namn='HT', lank='https://www.ht.se/', lanktext='Mer trafik på ht.se', klick='1', klass='1'),
+    'ljusnan': dict(lan='gavleborg', strak='ljusnan', namn='Ljusnan', lank='https://www.ljusnan.se/', lanktext='Mer trafik på ljusnan.se', klick='1', klass='1'),
+    'soderhamnskuriren': dict(lan='gavleborg', strak='soderhamn', namn='Söderhamns-Kuriren', lank='https://www.soderhamnskuriren.se/', lanktext='Mer trafik på soderhamnskuriren.se', klick='1', klass='1'),
+    'ljusdalsposten': dict(lan='gavleborg', strak='ljusdal', namn='Ljusdals-Posten', lank='https://www.ljusdalsposten.se/', lanktext='Mer trafik på ljusdalsposten.se', klick='1', klass='1'),
     # Jämtlands Tidning med pendlarflik (Axel 10/11): en ny adress bredvid /ruta/jamtlandstidning/, som ligger
     # ute på deras sajt och inte får ändras. Stråken från Östersund tills chefredaktören sagt vilka han vill ha.
     'jamtlandstidning-pendling': dict(lan='jamtland', strak='ostersund', namn='Jämtlands Tidning', lank='https://www.jamtlandstidning.se/', lanktext='Mer trafik på jamtlandstidning.se', klick='1', rubrik='0'),
@@ -36,7 +36,8 @@ LAST = {}
 TILLAGG = {'jamtlandstidning': dict(klick='1', rubrik='0')}
 ORDNING = ['lan', 'strak', 'tema', 'namn', 'lank', 'lanktext', 'klick', 'rubrik', 'karta', 'klass']   # klick=1: klickbara rader (Axel 10/11), alla tidningar från 10/11
 # karta=1: kartfliken (Axel och Bengt 14/11), bara på karta-demo.html tills en tidning har sagt ja.
-# klass=1: "halka eller vinterväglag" och Trafikverkets klassning under varje sträcka (PT 16/11), bara där fältet klass står i tidningar.json.
+# klass=1: "halka eller vinterväglag" och Trafikverkets klassning under varje sträcka (PT 16/11). Alla tidningar utom Jämtlands Tidning
+# från 16/11 (Axel); deras två adresser väntar på besked.
 # Rutan eller widgeten: sidan som skalet bäddar in, dess version, höjd, tillval som går vidare och beskrivning.
 SORT = {
     'ruta': dict(sida='ruta.html', v='6', hojd=440, tillval=['flik', 'tema', 'sponsor', 'sponsorlank'],

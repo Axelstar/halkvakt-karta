@@ -119,8 +119,9 @@ def fyll(t, mall, lanen, straken):
         'vagar_lista': lista(vagtext(n) for n, _ in vagar),
         'namn_q': t['namn'].replace(' ', '%20'),
         'lanktext_q': urllib.parse.quote('Mer trafik på ' + t['doman']),
-        # klass=1 (PT 16/11): rutan skriver "halka eller vinterväglag" och Trafikverkets klassning per sträcka. Bara där fältet står.
-        'klass_param': '&amp;klass=1' if t.get('klass') else '',
+        # klass=1 (PT 16/11, alla tidningar samma dag, Axel): rutan skriver "halka eller vinterväglag" och Trafikverkets klassning
+        # per sträcka. Av bara där posten har "klass": "0" (Jämtlands Tidning: rutan ligger på deras startsida och väntar på besked).
+        'klass_param': '' if t.get('klass') == '0' else '&amp;klass=1',
     }
     if st:
         v.update({
