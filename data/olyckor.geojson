@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[17.930518474,59.392505028]},"properties":{"land":"SE","typ":"Olycka","msg":"Lastbil och personbil står i höger körfält. Skyddsbil och räddningstjänst på plats.","allvar":"Mycket stor påverkan","road":"E18","start":"2026-11-17T09:38:00.000Z"}}]}
