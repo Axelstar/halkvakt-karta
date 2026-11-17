@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Demo: ny halkrisk och vinterväglag i rutan · Halkvakt</title>
+<!-- Demosida för ny halkrisk och vinterväglag i tidningsrutan (Halkvakt DECISIONS #897, kort #668 steg R4). De två raderna finns
+     bara med &ny=1, så ingen ruta som ligger ute hos en tidning är ändrad. Sidan visar rutan som den är i dag bredvid förslaget,
+     med samma data. När Bengt och Axel har godkänt förhandsvisningen blir förslaget standard (steg R7). -->
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+  :root { color-scheme: dark; --mark: #080B0D; --panel: #0F1518; --kant: #1E282D; --text: #E9EFF2; --text2: #A9B5BB; --dampad: #8FA0A9; --gul: #FFC94A;
+    --sans: "Instrument Sans", "Helvetica Neue", Arial, sans-serif; --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--mark); color: var(--text); font: 400 16px/1.5 var(--sans); }
+  main { max-width: 1060px; margin: 0 auto; padding: 40px 24px 80px; display: grid; gap: 28px; }
+  .etikett { font: 500 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dampad); margin: 0; }
+  h1 { margin: 6px 0 10px; font: 600 32px/1.15 var(--sans); letter-spacing: -.025em; }
+  p { margin: 0; color: var(--text2); max-width: 62ch; }
+  .val { display: flex; flex-wrap: wrap; gap: 12px; align-items: end; }
+  label { display: grid; gap: 6px; font: 500 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dampad); }
+  select { appearance: none; background: var(--panel); color: var(--text); border: 1px solid var(--kant); border-radius: 12px; padding: 10px 14px; font: 500 15px var(--sans); min-width: 180px; }
+  select:focus-visible { outline: 2px solid var(--gul); outline-offset: 2px; }
+  .ramar { display: flex; flex-wrap: wrap; gap: 32px; align-items: start; }
+  figure { margin: 0; display: grid; gap: 10px; }
+  figcaption { font: 500 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dampad); }
+  figcaption b { color: var(--gul); font-weight: 500; }
+  iframe { display: block; border: 0; border-radius: 16px; max-width: 100%; }
+  .dator iframe { width: 480px; height: 480px; }
+  .mobil iframe { width: 354px; height: 480px; }
+  ul { margin: 0; padding-left: 18px; color: var(--text2); display: grid; gap: 6px; max-width: 62ch; }
+  code { font: 500 13px var(--mono); color: var(--text); background: var(--panel); border: 1px solid var(--kant); border-radius: 6px; padding: 1px 6px; word-break: break-all; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="etikett">Demo · inte ute hos någon tidning</p>
+    <h1>Ny halkrisk och vinterväglag i rutan</h1>
+    <p>I dag säger rutan <i>Halka</i> både om en sträcka som blev hal i natt och om en som varit hal i två veckor. Förslaget delar raden i två: <i>Ny halkrisk</i> för sträckor som blivit hala det senaste dygnet, och <i>Vinterväglag</i> för dem som varit hala längre än så. Gult står bara på det nya.</p>
+  </header>
+  <div class="val">
+    <label>Län<select id="lan"></select></label>
+    <label>Flik<select id="flik"><option value="lan">Länet</option><option value="vagar">Vägarna</option></select></label>
+    <label>Tema<select id="tema"><option value="ljus">Ljust</option><option value="mork">Mörkt</option></select></label>
+  </div>
+  <div class="ramar">
+    <figure class="dator"><figcaption>I dag · 480 × 480</figcaption>
+      <iframe data-ny="0" src="ruta.html?lan=norrbotten&amp;tema=ljus&amp;namn=Demotidningen" title="Rutan som den är i dag" loading="eager"></iframe></figure>
+    <figure class="dator"><figcaption><b>Förslaget</b> · 480 × 480</figcaption>
+      <iframe data-ny="1" src="ruta.html?lan=norrbotten&amp;tema=ljus&amp;namn=Demotidningen&amp;ny=1" title="Rutan med ny halkrisk och vinterväglag" loading="eager"></iframe></figure>
+    <figure class="mobil"><figcaption><b>Förslaget</b> på mobilen · 354 × 480</figcaption>
+      <iframe data-ny="1" src="ruta.html?lan=norrbotten&amp;tema=ljus&amp;namn=Demotidningen&amp;ny=1" title="Rutan med ny halkrisk och vinterväglag, mobil" loading="lazy"></iframe></figure>
+  </div>
+  <ul>
+    <li>De två raderna slås på med <code>&amp;ny=1</code> i rutans adress. Utan den är rutan som förut.</li>
+    <li>En sträcka räknas som ny i ett dygn från att den blev hal, eller från att Trafikverket höjde klassen till Mycket besvärligt.</li>
+    <li>Raderna Under noll och Kallast är inte längre gula: temperaturen är en upplysning, inte en fara i sig.</li>
+    <li>På fliken Vägarna säger varje hal sträcka sedan när, och visar Trafikverkets egen varning, orsak och åtgärd där de finns.</li>
+    <li>Vad som räknas som halt är detsamma som förut. Samma sträckor delas i två.</li>
+    <li>Går tiden inte att läsa visar rutan raden Halka som i dag.</li>
+  </ul>
+</main>
+<script>
+(function () {
+  var lan = document.getElementById('lan'), flik = document.getElementById('flik'), tema = document.getElementById('tema'), q = new URLSearchParams(location.search);
+  function visa() {
+    var u = 'ruta.html?lan=' + lan.value + '&tema=' + tema.value + '&namn=Demotidningen' + (flik.value === 'vagar' ? '&flik=vagar' : '');
+    [].forEach.call(document.querySelectorAll('iframe'), function (f) { f.src = u + (f.getAttribute('data-ny') === '1' ? '&ny=1' : ''); });
+    history.replaceState(null, '', 'ny-halkrisk-demo.html?lan=' + lan.value + (flik.value === 'vagar' ? '&flik=vagar' : '') + (tema.value === 'mork' ? '&tema=mork' : ''));
+  }
+  fetch('data/lan.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (d) {
+    d.lan.slice().sort(function (a, b) { return a.kort.localeCompare(b.kort, 'sv'); }).forEach(function (l) {
+      var o = document.createElement('option'); o.value = l.slug;
+      o.textContent = l.kort + (typeof l.ny === 'number' && l.halt ? ' · ' + l.ny + ' nya, ' + (l.halt - l.ny) + ' vinterväglag' : l.halt ? ' · halka på ' + l.halt : '');
+      lan.appendChild(o);
+    });
+    lan.value = q.get('lan') || 'norrbotten'; if (!lan.value) lan.value = 'norrbotten';
+    if (q.get('flik') === 'vagar') flik.value = 'vagar';
+    if (q.get('tema') === 'mork') tema.value = 'mork';
+    if (lan.value !== 'norrbotten' || flik.value !== 'lan' || tema.value !== 'ljus') visa();
+    lan.onchange = flik.onchange = tema.onchange = visa;
+  });
+})();
+</script>
+</body>
+</html>
