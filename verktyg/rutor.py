@@ -125,7 +125,6 @@ def sida(slug, t, kort):
     if (u.href !== f.src) f.src = u.href;
   }})();
 </script>
-<script src="/assets/ruta-besok.js" data-sida="/ruta/{slug}/"></script>
 </body>
 </html>
 ''', json.dumps({
