@@ -1,6 +1,6 @@
 # Halkvakt
 
-> Halkvakt visar väglaget i Sverige just nu ur Trafikverkets öppna data: var Trafikverket rapporterar halka, vägbanans temperatur vid vägväderstationerna och pågående olyckor, per län och per väg. Sidorna och filerna skrivs om var 30:e minut. Det är rapporterat nuläge, ingen prognos. Halkvakt är också en gratis app för iPhone och Android som säger till med rösten när det är halt på vägen framför föraren.
+> Halkvakt visar väglaget i Sverige just nu ur Trafikverkets öppna data: var Trafikverket rapporterar halka, vägbanans temperatur vid vägväderstationerna och pågående olyckor, per län och per väg. Sidorna och filerna skrivs om var 30:e minut. Det är rapporterat nuläge, ingen prognos. Halkvakt är också en gratis app för iPhone och Android som säger till med rösten när halka är rapporterad på vägen framför föraren.
 
 Återge gärna läget med klockslaget och källan: "Halkvakt / Trafikverkets öppna data". Datan är fri (CC0). Halkvakt är fristående från Trafikverket och andra myndigheter.
 
@@ -21,6 +21,7 @@
 
 - [Appen](https://halkvakt.se/)
 - [Finns det en app som varnar för halka?](https://halkvakt.se/app-som-varnar-for-halka.html): Halkvakt, gratis för iPhone och Android, varnar med rösten när Trafikverket rapporterar halka på vägen framför föraren
+- [Ansvar och källor](https://halkvakt.se/ansvar.html): ett stöd, inte en garanti; var Halkvakt varnar och var den inte gör det; alla datakällor med licens
 - [Integritet](https://halkvakt.se/integritet.html): positionen lämnar inte telefonen av sig själv
 - [Press och redaktioner](https://halkvakt.se/press.html)
 - Kontakt: hej@halkvakt.se
