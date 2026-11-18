@@ -708,7 +708,7 @@
     var post = function (cls, fet, text) { var sp = el('span'); sp.appendChild(el('i', cls)); if (fet) sp.appendChild(el('b', '', fet)); if (text) sp.appendChild(document.createTextNode(text)); f.appendChild(sp); };
     if (hala.length) post('h', 'Halka', ' på ' + hala.length + ' av ' + egna.length + ' vägavsnitt');
     else post('', 'Ingen halka rapporterad', ' på länets ' + egna.length + ' vägavsnitt');
-    if (prognos.length) post('p', '', 'Prognos');
+    if (prognos.length) post('p', '', 'Prognos ur data från MET Norway');   // CC BY 4.0: källan där prognosen syns (DECISIONS #898)
   }
   if (KARTA) addEventListener('resize', function () { clearTimeout(ritaKarta.t); ritaKarta.t = setTimeout(ritaKarta, 120); });
 
