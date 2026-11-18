@@ -132,7 +132,7 @@ def fyll(t, mall, lanen, straken):
             'antal_vyer': 'Tre',
             'pendling_kort': (f'<div class="kort"><small>Pendling</small><h3>Från {st["fran"]}</h3><p>'
                               f'{TAL.get(len(st["till"]), str(len(st["till"])))} stråk som läsarna kör varje dag: till '
-                              f'{lista(st["till"])}. Rutan visar vilken del som har halka.</p></div>'),
+                              f'{lista(st["till"])}. Rutan visar vilken del som har ny halkrisk eller vinterväglag.</p></div>'),
             'pendling_rad': '<tr><td><code>&amp;flik=pendling</code></td><td>Öppnar på pendlarvägarna</td></tr>',
         })
     else:
