@@ -16,8 +16,10 @@
 <link rel="stylesheet" href="assets/hv.css?v=20261027">
 <!-- Inbäddat läge (?lan=<slug>&inbaddad=1, 31/10): länssidan öppnar samma karta på plats, utan topp och panel, låst till länet. -->
 <script>if (new URLSearchParams(location.search).get('inbaddad') === '1') document.documentElement.classList.add('inbaddad');</script>
-<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-<link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
+<!-- Kartbiblioteket på egen server (Halkvakt DECISIONS #900, fråga 21): MapLibre GL JS 4.7.1, BSD-3, licensen i samma mapp. Filerna är
+     byte-lika från unpkg.com och cdn.jsdelivr.net (sha256 js be9633c4…, css 576b085f…), hämtade 18/11 2026. -->
+<script src="assets/maplibre-gl-4.7.1/maplibre-gl.js"></script>
+<link href="assets/maplibre-gl-4.7.1/maplibre-gl.css" rel="stylesheet">
 <style>
   html, body { height: 100%; }
   body { overflow: hidden; }
