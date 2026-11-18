@@ -37,9 +37,9 @@
 <body>
 <main>
   <header>
-    <p class="etikett">Demo · inte ute hos någon tidning</p>
+    <p class="etikett">Före och efter · standard hos alla tidningar</p>
     <h1>Ny halkrisk och vinterväglag i rutan</h1>
-    <p>I dag säger rutan <i>Halka</i> både om en sträcka som blev hal i natt och om en som varit hal i två veckor. Förslaget delar raden i två: <i>Ny halkrisk</i> för sträckor som blivit hala det senaste dygnet, och <i>Vinterväglag</i> för dem som varit hala längre än så. Gult står bara på det nya.</p>
+    <p>Förut sade rutan <i>Halka</i> både om en sträcka som blev hal i natt och om en som varit hal i två veckor. Nu delar rutan raden i två: <i>Ny halkrisk</i> för sträckor som blivit hala det senaste dygnet, och <i>Vinterväglag</i> för dem som varit hala längre än så. Gult står bara på det nya.</p>
   </header>
   <div class="val">
     <label>Län<select id="lan"></select></label>
@@ -47,15 +47,15 @@
     <label>Tema<select id="tema"><option value="ljus">Ljust</option><option value="mork">Mörkt</option></select></label>
   </div>
   <div class="ramar">
-    <figure class="dator"><figcaption>I dag · 480 × 480</figcaption>
-      <iframe data-ny="0" src="ruta.html?lan=norrbotten&amp;tema=ljus&amp;namn=Demotidningen" title="Rutan som den är i dag" loading="eager"></iframe></figure>
-    <figure class="dator"><figcaption><b>Förslaget</b> · 480 × 480</figcaption>
+    <figure class="dator"><figcaption>Förut · 480 × 480</figcaption>
+      <iframe data-ny="0" src="ruta.html?lan=norrbotten&amp;tema=ljus&amp;namn=Demotidningen&amp;ny=0" title="Rutan som den var förut" loading="eager"></iframe></figure>
+    <figure class="dator"><figcaption><b>Nu</b> · 480 × 480</figcaption>
       <iframe data-ny="1" src="ruta.html?lan=norrbotten&amp;tema=ljus&amp;namn=Demotidningen&amp;ny=1" title="Rutan med ny halkrisk och vinterväglag" loading="eager"></iframe></figure>
-    <figure class="mobil"><figcaption><b>Förslaget</b> på mobilen · 354 × 480</figcaption>
+    <figure class="mobil"><figcaption><b>Nu</b> på mobilen · 354 × 480</figcaption>
       <iframe data-ny="1" src="ruta.html?lan=norrbotten&amp;tema=ljus&amp;namn=Demotidningen&amp;ny=1" title="Rutan med ny halkrisk och vinterväglag, mobil" loading="lazy"></iframe></figure>
   </div>
   <ul>
-    <li>De två raderna slås på med <code>&amp;ny=1</code> i rutans adress. Utan den är rutan som förut.</li>
+    <li>De två raderna är standard. Med <code>&amp;ny=0</code> i rutans adress visar den raden Halka som förut.</li>
     <li>En sträcka räknas som ny i ett dygn från att den blev hal, eller från att Trafikverket höjde klassen till Mycket besvärligt.</li>
     <li>Raderna Under noll och Kallast är inte längre gula: temperaturen är en upplysning, inte en fara i sig.</li>
     <li>På fliken Vägarna säger varje hal sträcka sedan när, och visar Trafikverkets egen varning, orsak och åtgärd där de finns.</li>
@@ -68,7 +68,7 @@
   var lan = document.getElementById('lan'), flik = document.getElementById('flik'), tema = document.getElementById('tema'), q = new URLSearchParams(location.search);
   function visa() {
     var u = 'ruta.html?lan=' + lan.value + '&tema=' + tema.value + '&namn=Demotidningen' + (flik.value === 'vagar' ? '&flik=vagar' : '');
-    [].forEach.call(document.querySelectorAll('iframe'), function (f) { f.src = u + (f.getAttribute('data-ny') === '1' ? '&ny=1' : ''); });
+    [].forEach.call(document.querySelectorAll('iframe'), function (f) { f.src = u + (f.getAttribute('data-ny') === '1' ? '' : '&ny=0'); });
     history.replaceState(null, '', 'ny-halkrisk-demo.html?lan=' + lan.value + (flik.value === 'vagar' ? '&flik=vagar' : '') + (tema.value === 'mork' ? '&tema=mork' : ''));
   }
   fetch('data/lan.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (d) {
