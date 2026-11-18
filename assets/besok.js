@@ -3,19 +3,12 @@
    Servern räknar en anonym dagsbesökare (hash med dagligt salt som slängs, IP:n sparas aldrig).
 
    28/10: klick på App Store- och Play-länkar räknas som "appklick".
-   Våra egna enheter: öppna valfri sida med ?oss=1 en gång (?oss=0 tar bort). Det sparar en markering
-   i den här webbläsaren, bara hos oss, och våra visningar räknas sedan som "oss" och hålls utanför siffrorna.
-   statistik.html sätter samma markering när nyckeln skrivs in. */
+   18/11 (Halkvakt DECISIONS #900, dataskyddet): skriptet läser och skriver ingenting i besökarens webbläsare. Markeringen
+   för våra egna enheter (?oss=1) är borttagen, så våra egna besök räknas med. */
 (function () {
   try {
     if (location.hostname !== "halkvakt.se" || navigator.webdriver) return;
     var q = new URLSearchParams(location.search);
-    var oss = false;
-    try {
-      if (q.get("oss") === "1") localStorage.setItem("hv-oss", "1");
-      if (q.get("oss") === "0") localStorage.removeItem("hv-oss");
-      oss = localStorage.getItem("hv-oss") === "1";
-    } catch (e) {}
     var ref = "";
     if (document.referrer) {
       var h = new URL(document.referrer).hostname;
@@ -31,7 +24,6 @@
       }
     }
     var bas = { p: location.pathname, r: ref, k: kod, m: mobil };
-    if (oss) bas.o = 1;
     skicka(bas);
 
     // Klick till App Store eller Play (även länkar som läggs in senare på sidan).
@@ -42,7 +34,6 @@
         var g = /apps\.apple\.com/.test(a.href) ? "ios" : /play\.google\.com/.test(a.href) ? "android" : "";
         if (!g) return;
         var o = { p: location.pathname, r: ref, k: kod, m: mobil, t: "k", g: g };
-        if (oss) o.o = 1;
         skicka(o);
       } catch (x) {}
     }, true);
