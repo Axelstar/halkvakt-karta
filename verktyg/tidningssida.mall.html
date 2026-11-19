@@ -106,7 +106,7 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
       <p class="lead" style="font-size:17px">Rutan bredvid är den riktiga, med dagens siffror. Svep i sidled eller tryck på flikarna.</p>
 {{jt_rad}}    </div>
     <div class="live">
-      <iframe src="ruta.html?v=5&amp;lan={{lan}}&amp;tema=ljus{{strak_param}}&amp;namn={{namn_q}}&amp;lank={{lank}}&amp;lanktext={{lanktext_q}}&amp;klick=1{{klass_param}}" title="Väglaget i {{lankort}} just nu" loading="eager"></iframe>
+      <iframe src="ruta.html?v=5&amp;lan={{lan}}&amp;tema=ljus{{strak_param}}&amp;namn={{namn_q}}&amp;lank={{lank}}&amp;lanktext={{lanktext_q}}&amp;klick=1{{klass_param}}{{hand_param}}" title="Väglaget i {{lankort}} just nu" loading="eager"></iframe>
       <p class="not">Live från Trafikverkets öppna data</p>
     </div>
   </div>
@@ -136,7 +136,7 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
     <div class="tre">
       <div class="kort"><small>Länet</small><h3>Läget i en blick</h3><p>Hur många av länets {{vagavsnitt}} vägavsnitt som har ny halkrisk, alltså har blivit hala det senaste dygnet, och hur många som har vinterväglag, hur många vägväderstationer som visar vägbana under noll, och var det är kallast just nu.</p></div>
       <div class="kort"><small>Vägarna</small><h3>{{vagar_rubrik}}</h3><p>De {{antal_strackor}} sträckorna på {{vagar_lista}}, med ny halkrisk och vinterväglag markerade sträcka för sträcka, och sedan när, med Trafikverkets egna namn, till exempel {{exempel_stracka}}.</p></div>
-      {{pendling_kort}}
+      {{pendling_kort}}{{hand_kort}}
     </div>
   </div>
 </section>
@@ -158,7 +158,7 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
           <thead><tr><th>Lägg till</th><th>Vad det gör</th></tr></thead>
           <tbody>
             <tr><td><code>&amp;flik=vagar</code></td><td>Öppnar på de stora vägarna</td></tr>
-            {{pendling_rad}}
+            {{pendling_rad}}{{hand_rad}}
             <tr><td><code>&amp;tema=auto</code></td><td>Följer läsarens ljusa eller mörka läge</td></tr>
             <tr><td><code>&amp;namn={{namn_q}}</code></td><td>Rutan heter {{namn}} · Väglaget, utan Halkvakts märke</td></tr>
             <tr><td><code>&amp;lank=…</code></td><td>Länken i foten går till er egen sida</td></tr>
@@ -182,7 +182,7 @@ footer{padding-block:40px 64px;border-top:1px solid var(--kant);color:var(--damp
       </ul>
     </div>
     <div class="live">
-      <iframe src="ruta.html?v=5&amp;lan={{lan}}&amp;tema=ljus{{strak_param}}&amp;namn={{namn_q}}&amp;lank={{lank}}&amp;lanktext={{lanktext_q}}&amp;klick=1{{klass_param}}&amp;sponsor=Er%20annons%C3%B6r%20h%C3%A4r" title="{{genitiv}} väglagsruta med sponsorrad" loading="lazy"></iframe>
+      <iframe src="ruta.html?v=5&amp;lan={{lan}}&amp;tema=ljus{{strak_param}}&amp;namn={{namn_q}}&amp;lank={{lank}}&amp;lanktext={{lanktext_q}}&amp;klick=1{{klass_param}}{{hand_param}}&amp;sponsor=Er%20annons%C3%B6r%20h%C3%A4r" title="{{genitiv}} väglagsruta med sponsorrad" loading="lazy"></iframe>
       <p class="not">Live, med sponsorraden ifylld som exempel.</p>
     </div>
   </div>

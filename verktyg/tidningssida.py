@@ -122,6 +122,10 @@ def fyll(t, mall, lanen, straken):
         # klass=1 (PT 16/11, alla tidningar samma dag, Axel): rutan skriver "halka eller vinterväglag" och Trafikverkets klassning
         # per sträcka. Av bara där posten har "klass": "0" (Jämtlands Tidning: rutan ligger på deras startsida och väntar på besked).
         'klass_param': '' if t.get('klass') == '0' else '&amp;klass=1',
+        # hand=1 (Axel 19/11): fliken Händelser, vägarbeten, olyckor och hinder nära tidningens ort. Bara där posten har "hand": "1".
+        # Mitten är stråkets ort (mitt i STRAK i ruta.html); en tidning utan stråk anger "mitt": "lon,lat,Ort" i posten.
+        'hand_param': ('&amp;hand=1' + ('&amp;mitt=' + urllib.parse.quote(t['mitt'], safe=',') if t.get('mitt') else '')) if t.get('hand') == '1' else '',
+        'hand_kort': '', 'hand_rad': '',
     }
     if st:
         v.update({
@@ -138,11 +142,19 @@ def fyll(t, mall, lanen, straken):
     else:
         v.update({'ort': '', 'strak_param': '', 'lead_vagar': f"i {v['lankort']} och på länets stora vägar",
                   'lasarfraga': 'på vägen', 'antal_vyer': 'Två', 'pendling_kort': '', 'pendling_rad': ''})
+    if t.get('hand') == '1':
+        hand_ort = st['fran'] if st else (t.get('mitt') or '').split(',', 2)[-1]
+        if not hand_ort or (not st and len((t.get('mitt') or '').split(',')) < 3):
+            raise SystemExit(f"{t['slug']}: hand=1 utan stråk kräver \"mitt\": \"lon,lat,Ort\" i posten")
+        v['antal_vyer'] = TAL[{'Två': 3, 'Tre': 4}[v['antal_vyer']]]
+        v['hand_kort'] = (f'\n      <div class="kort"><small>Händelser</small><h3>Runt {hand_ort}</h3><p>Olyckor, hinder, avstängningar och '
+                          f'vägarbeten inom 30 km från {hand_ort}, med Trafikverkets egna ord. Det som stoppar trafiken står först.</p></div>')
+        v['hand_rad'] = '\n            <tr><td><code>&amp;flik=hand</code></td><td>Öppnar på händelserna</td></tr>'
     v['montage'] = montage(t, v)
     # Bonnier News Locals tidningar lägger in rutan med en länk (deras verktyg tar inte iframe-kod, NWT 23/10);
     # alla andra får koden först, som Jämtlands Tidning använder på sin startsida (Axel 10/11).
     LANK = '      <div class="kod">\n        <button type="button" id="kopiera-lank">Kopiera</button>\n<pre id="lanken">https://halkvakt.se/ruta/{{slug}}/</pre>\n      </div>\n'
-    KOD = '      <div class="kod">\n        <button type="button" id="kopiera">Kopiera</button>\n<pre id="koden"><span class="k">&lt;iframe</span> src="https://halkvakt.se/ruta.html?lan={{lan}}&amp;tema=ljus{{strak_param}}&amp;namn={{namn_q}}&amp;lank={{lank}}&amp;klick=1{{klass_param}}"\n  width="100%" height="440"\n  style="border:0;max-width:480px"\n  title="Väglaget i {{lankort}} just nu" loading="lazy"<span class="k">&gt;&lt;/iframe&gt;</span>\n<span class="k">&lt;p</span> style="margin:6px 0 0;font:13px sans-serif"<span class="k">&gt;&lt;a</span> href="https://halkvakt.se/lan/{{lan}}/"<span class="k">&gt;</span>Halka och väglag i {{lankort}} just nu<span class="k">&lt;/a&gt;</span> · Halkvakt<span class="k">&lt;/p&gt;</span></pre>\n      </div>\n'
+    KOD = '      <div class="kod">\n        <button type="button" id="kopiera">Kopiera</button>\n<pre id="koden"><span class="k">&lt;iframe</span> src="https://halkvakt.se/ruta.html?lan={{lan}}&amp;tema=ljus{{strak_param}}&amp;namn={{namn_q}}&amp;lank={{lank}}&amp;klick=1{{klass_param}}{{hand_param}}"\n  width="100%" height="440"\n  style="border:0;max-width:480px"\n  title="Väglaget i {{lankort}} just nu" loading="lazy"<span class="k">&gt;&lt;/iframe&gt;</span>\n<span class="k">&lt;p</span> style="margin:6px 0 0;font:13px sans-serif"<span class="k">&gt;&lt;a</span> href="https://halkvakt.se/lan/{{lan}}/"<span class="k">&gt;</span>Halka och väglag i {{lankort}} just nu<span class="k">&lt;/a&gt;</span> · Halkvakt<span class="k">&lt;/p&gt;</span></pre>\n      </div>\n'
     if t.get('koncern') == 'Bonnier News Local':
         v['teknik_rader'] = ('        <li><span><b>En egen adress till er ruta:</b> <code>halkvakt.se/ruta/' + t['slug'] + '</code>. Klistra in den där ert verktyg tar en länk, i artikel, liveblogg eller temasida.</span></li>\n'
                              '        <li><span><b>Eller en rad iframe-kod</b>, där ni kan bädda in kod.</span></li>\n')

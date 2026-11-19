@@ -34,8 +34,9 @@ HOPPA = {'halsingland'}   # sidor som täcks av EXTRA
 # ville samtidigt ha klickbara rader där. Pendlarfliken väntar tills han har gett förslag.
 LAST = {}
 TILLAGG = {'jamtlandstidning': dict(klick='1', rubrik='0')}
-ORDNING = ['lan', 'strak', 'tema', 'namn', 'lank', 'lanktext', 'klick', 'rubrik', 'karta', 'klass']   # klick=1: klickbara rader (Axel 10/11), alla tidningar från 10/11
+ORDNING = ['lan', 'strak', 'tema', 'namn', 'lank', 'lanktext', 'klick', 'rubrik', 'karta', 'klass', 'hand', 'mitt']   # klick=1: klickbara rader (Axel 10/11), alla tidningar från 10/11
 # karta=1: kartfliken (Axel och Bengt 14/11), bara på karta-demo.html tills en tidning har sagt ja.
+# hand=1 och mitt: fliken Händelser och dess mitt (Axel 19/11), bara de tidningar som har "hand": "1" i tidningar.json.
 # klass=1: "halka eller vinterväglag" och Trafikverkets klassning under varje sträcka (PT 16/11). Alla tidningar utom Jämtlands Tidning
 # från 16/11 (Axel); deras två adresser väntar på besked.
 # Rutan eller widgeten: sidan som skalet bäddar in, dess version, höjd, tillval som går vidare och beskrivning.
