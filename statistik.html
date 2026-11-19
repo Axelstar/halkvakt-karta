@@ -24,6 +24,26 @@
   .val button { white-space:nowrap; }
   @media (max-width:520px) { .val button { padding:8px 9px; } .val .meta { display:none; } }
   .val button[aria-pressed="true"] { border-color:var(--gul); color:var(--gul); }
+  .val { flex-wrap:wrap; }
+  /* Egna datum (19/11) */
+  .datum { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin:-6px 0 16px; }
+  .datum[hidden] { display:none; }
+  .datum label { font:12px var(--mono); color:var(--dampad); display:flex; align-items:center; gap:6px; }
+  .datum input { background:var(--panel); color:var(--text); border:1px solid var(--kant); border-radius:6px; padding:8px 10px; font:14px var(--mono); min-height:40px; color-scheme:dark; }
+  /* Jämförelsen med perioden innan */
+  .d { font:12px var(--mono); white-space:nowrap; margin-right:4px; }
+  .d.upp { color:var(--gron); } .d.ner { color:#FF8A7A; } .d.lika { color:var(--dampad); }
+  .tal small.j { margin-top:6px; min-height:16px; }
+  .tal small span { display:inline; text-transform:none; letter-spacing:0; }
+  .tal small.j:empty { display:none; }
+  .jamfor { font-size:13px; color:var(--text2); margin:10px 2px 0; }
+  /* Dygn för dygn */
+  .dygn th { font:600 11px var(--mono); color:var(--dampad); text-transform:uppercase; letter-spacing:.06em; text-align:right; padding:0 0 8px 8px; vertical-align:bottom; }
+  .dygn th:first-child, .dygn td:first-child { text-align:left; padding-left:0; }
+  .dygn td { font-family:var(--mono); text-align:right; padding-left:8px; white-space:nowrap; }
+  .dygn tr.summa td { font-weight:600; color:var(--gul); border-top:0; }
+  .dygn td.noll { color:var(--dampad2); }
+  @media (max-width:520px) { .dygn td { font-size:12.5px; padding-left:4px; } .dygn th { font-size:10px; letter-spacing:0; padding-left:4px; } }
 
   .ruta { background:var(--panel); border:1px solid var(--kant); border-radius:14px; padding:16px 18px; }
   .ruta + .ruta, .grid + .ruta, .ruta + .grid, .grid + .grid, details + .ruta, .ruta + details { margin-top:10px; }
@@ -118,9 +138,13 @@
       </div>
       <div class="val" role="group" aria-label="Period">
         <span class="meta">PERIOD</span>
-        <button data-d="1">1 dygn</button><button data-d="7">7 dygn</button><button data-d="30" aria-pressed="true">30 dygn</button><button data-d="90">90 dygn</button>
+        <button data-p="idag">I dag</button><button data-p="igar">I går</button><button data-p="7">7 dygn</button><button data-p="30" aria-pressed="true">30 dygn</button><button data-p="90">90 dygn</button><button data-p="egen">Datum</button>
       </div>
     </header>
+    <div class="datum" id="datum" hidden>
+      <label>Från <input type="date" id="d-fran"></label>
+      <label>Till <input type="date" id="d-till"></label>
+    </div>
 
     <!-- 1 · Det viktigaste, i klartext -->
     <div class="ruta korthet">
@@ -131,10 +155,11 @@
     <!-- 2 · Fyra tal -->
     <div class="tal">
       <div class="ruta"><span>Besökare i dag</span><b id="t-idag">–</b><small id="s-idag">på halkvakt.se</small></div>
-      <div class="ruta"><span id="t-perlabel">Besök in</span><b id="t-in">–</b><small>kom till sajten utifrån, t.ex. från Google eller ett mejl</small></div>
-      <div class="ruta"><span>Klick till appen</span><b id="t-app">–</b><small id="s-app">App Store och Play</small></div>
-      <div class="ruta"><span id="t-forare-rubrik">Förare per dygn</span><b id="t-forare">–</b><small id="s-forare">som hade vakten igång, snitt senaste 7 dygnen</small></div>
+      <div class="ruta"><span id="t-perlabel">Besök in</span><b id="t-in">–</b><small>kom till sajten utifrån, t.ex. från Google eller ett mejl</small><small class="j" id="j-in"></small></div>
+      <div class="ruta"><span>Klick till appen</span><b id="t-app">–</b><small id="s-app">App Store och Play</small><small class="j" id="j-app"></small></div>
+      <div class="ruta"><span id="t-forare-rubrik">Förare per dygn</span><b id="t-forare">–</b><small id="s-forare">som hade vakten igång, snitt senaste 7 dygnen</small><small class="j" id="j-forare"></small></div>
     </div>
+    <p class="jamfor" id="jamfor"></p>
 
     <!-- 3 · Flikarna -->
     <nav class="flikar" role="tablist" aria-label="Område">
@@ -142,6 +167,7 @@
       <button role="tab" data-flik="appen">Appen</button>
       <button role="tab" data-flik="annonser">Annonser</button>
       <button role="tab" data-flik="tidningar">Tidningar</button>
+      <button role="tab" data-flik="dygn">Dygn</button>
     </nav>
 
     <!-- SAJTEN -->
@@ -182,6 +208,10 @@
     <!-- APPEN -->
     <section class="flik" id="flik-appen" role="tabpanel" hidden>
       <p class="ingress">Appen räknar anonymt: ett ord per händelse och en rad per dygn, inget om vem. Talen gäller vald period.</p>
+      <div class="val appval" role="group" aria-label="Telefon" style="margin:0 0 12px">
+        <span class="meta">VISA</span>
+        <button data-app="" aria-pressed="true">Alla</button><button data-app="ios">iPhone</button><button data-app="android">Android</button>
+      </div>
 
       <div class="ruta">
         <h2>Från nedladdad till i bruk</h2>
@@ -251,6 +281,16 @@
       </div>
     </section>
 
+    <!-- DYGN -->
+    <section class="flik" id="flik-dygn" role="tabpanel" hidden>
+      <p class="ingress">Vald period, ett dygn per rad med det senaste överst.</p>
+      <div class="ruta">
+        <h2>Dygn för dygn</h2>
+        <table id="dygn" class="dygn"></table>
+        <p class="forklaring" id="dygn-text"></p>
+      </div>
+    </section>
+
   </div>
 </div>
 
@@ -264,7 +304,9 @@
     ["lp", "Ljusdals-Posten", "https://halkvakt.se/halsingland?r=lp"],
     ["nwt", "NWT", "https://halkvakt.se/nwt?r=nwt"]
   ];
-  var dagar = 30, nyckel = "";
+  // Perioden (19/11): val är knappen som är vald, fran och till de svenska dygn som visas. appval är telefonfiltret på appens tal.
+  var val = "30", fran = "", till = "", nyckel = "", appval = "", senast = null;
+  var FORSTA_DYGNET = "2026-10-20", BESOKARE_FRAN = "2026-10-28";
   function hamtaNyckel() {
     var h = decodeURIComponent(location.hash.slice(1));
     if (h) { try { localStorage.setItem("hv-besok", h); } catch (e) {} history.replaceState(null, "", location.pathname); return h; }
@@ -276,6 +318,31 @@
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
   var tomRad = function (txt) { return '<tr><td class="tom">' + (txt || "Inget ännu.") + "</td></tr>"; };
 
+  var dstr = function (t) { return t.toLocaleDateString("sv-SE"); };
+  var middag = function (k) { return new Date(k + "T12:00:00"); };
+  var dagFran = function (k, n) { var t = middag(k); t.setDate(t.getDate() + n); return dstr(t); };
+  var idagStr = function () { return dstr(new Date()); };
+  var antalDygn = function () { return Math.round((middag(till) - middag(fran)) / 86400000) + 1; };
+  function satPeriod() {
+    var i = idagStr();
+    if (val === "idag") { fran = till = i; }
+    else if (val === "igar") { fran = till = dagFran(i, -1); }
+    else if (val === "egen") {
+      fran = $("d-fran").value || i; till = $("d-till").value || fran;
+      if (till < fran) { var x = fran; fran = till; till = x; }
+      if (till > i) till = i; if (fran > i) fran = i;
+      if (antalDygn() > 400) fran = dagFran(till, -399);
+    }
+    else { till = i; fran = dagFran(i, 1 - Number(val)); }
+  }
+  // Förändringen mot perioden innan, som en liten pil med procent. Tomt när det inte finns något att jämföra med.
+  function delta(nu, fore) {
+    if (!fore) return "";
+    var p = Math.round(100 * (nu - fore) / fore);
+    return '<span class="d ' + (p > 0 ? "upp" : p < 0 ? "ner" : "lika") + '">' + (p > 0 ? "▲ " : p < 0 ? "▼ " : "● ") + fmt(Math.abs(p)) + " %</span>";
+  }
+  var jamfort = function (nu, fore, visa) { return fore ? delta(nu, fore) + ' <span class="meta">mot ' + (visa || fmt)(fore) + " innan</span>" : ""; };
+
   function lista(el, rader, namn, gron) {
     if (!rader.length) { el.innerHTML = tomRad(); return; }
     var max = Math.max(1, Math.max.apply(null, rader.map(function (r) { return r.visningar; })));
@@ -286,17 +353,14 @@
 
   // Dygnsserie med tomma dygn ifyllda, så att staplarna står på en riktig tidsaxel.
   // Vid 1 dygn (de senaste 24 timmarna) visas i går och i dag, så att staplarna har något att jämföra med.
-  var periodText = function () { return dagar === 1 ? "senaste dygnet (24 timmar)" : "senaste " + dagar + " dygnen"; };
-  var periodKort = function () { return dagar === 1 ? "24 timmar" : dagar + " dygn"; };
-  function dygnsserie(per, tom) {
-    var serie = [], idag = new Date(); idag.setHours(12, 0, 0, 0);
-    for (var i = Math.max(dagar, 2) - 1; i >= 0; i--) {
-      var t = new Date(idag); t.setDate(t.getDate() - i);
-      var k = t.toLocaleDateString("sv-SE"); serie.push({ dag: k, r: per[k] || tom });
-    }
-    return serie;
-  }
   var kortDag = function (k) { var p = k.split("-"); return Number(p[2]) + " " + ["JAN", "FEB", "MAR", "APR", "MAJ", "JUN", "JUL", "AUG", "SEP", "OKT", "NOV", "DEC"][Number(p[1]) - 1]; };
+  var litenDag = function (k) { return kortDag(k).toLowerCase(); };
+  var spann = function (a, b) { return a === b ? litenDag(a) : litenDag(a) + " till " + litenDag(b); };
+  var periodText = function () { return val === "idag" ? "i dag" : val === "igar" ? "i går" : val === "egen" ? spann(fran, till) : "senaste " + antalDygn() + " dygnen"; };
+  var periodKort = function () { return val === "idag" ? "i dag" : val === "igar" ? "i går" : antalDygn() === 1 ? litenDag(fran) : antalDygn() + " dygn"; };
+  var stor = function (t) { return t.charAt(0).toUpperCase() + t.slice(1); };
+  function dygnen() { var ut = [], t = middag(fran), s = middag(till); for (; t <= s; t.setDate(t.getDate() + 1)) ut.push(dstr(t)); return ut; }
+  function dygnsserie(per, tom) { return dygnen().map(function (k) { return { dag: k, r: per[k] || tom }; }); }
 
   // Det som summeras överst. Fylls av rita, ritaAppen och ritaAds.
   var korthet = {};
@@ -307,7 +371,18 @@
   }
 
   function rita(d) {
+    senast = d;
     korthet = {};
+    // Perioden innan: bara när räknaren fanns hela den perioden, annars blir pilen missvisande.
+    var fo = d.fore || null, forst = d.forst || {};
+    var foreSajt = fo && forst.besok && fo.fran >= forst.besok ? fo : null;
+    var foreApp = fo && forst.app && fo.fran >= forst.app ? fo.appen : null;
+    $("j-in").innerHTML = foreSajt ? jamfort(d.ingangar, foreSajt.ingangar) : "";
+    $("j-app").innerHTML = foreSajt ? jamfort(d.appklick || 0, foreSajt.appklick) : "";
+    $("jamfor").textContent = !fo ? "" : (foreSajt || foreApp
+      ? "Pilarna jämför med perioden närmast innan, " + spann(fo.fran, fo.till) + "." + (foreApp ? "" : " Appens räknare fanns inte hela den perioden, så appens tal jämförs inte.")
+      : "Räknaren fanns inte hela perioden innan (" + spann(fo.fran, fo.till) + "), så ingen jämförelse visas.") +
+      (till === idagStr() ? " Dagens dygn är inte slut, så dagens tal fylls på." : "");
     $("genererad").textContent = "Uppdaterad " + new Date(d.genererad).toLocaleString("sv-SE", { dateStyle: "short", timeStyle: "short" }) + " · ingen IP sparas, inga kakor" + (d.oss ? " · " + fmt(d.oss) + " visningar från oss borträknade" : "");
 
     // Nyckeltalen
@@ -336,16 +411,16 @@
     $("ax-fran").textContent = kortDag(serie[0].dag); $("ax-till").textContent = kortDag(serie[serie.length - 1].dag);
     $("dagar-rubrik").textContent = "Besök per dygn";
     $("dagar-forklaring").hidden = false;
-    if (dagar === 1) {
-      // Senaste 24 timmarna, timme för timme, med den pågående timmen längst till höger.
+    if (antalDygn() === 1) {
+      // Ett enda dygn: timme för timme, 00 till 23.
       var ht = {}; (d.per_timme || []).forEach(function (r) { ht[r.timme] = r.visningar; });
-      var nu = new Date().getHours(), tt = [];
-      for (var q = 23; q >= 0; q--) { var hh = (nu - q + 24) % 24; tt.push({ h: hh, v: ht[hh] || 0 }); }
+      var tt = [];
+      for (var q = 0; q < 24; q++) tt.push({ h: q, v: ht[q] || 0 });
       var tmax = Math.max(1, Math.max.apply(null, tt.map(function (x) { return x.v; })));
       $("dagar").innerHTML = tt.map(function (x) { return '<div title="' + (x.h < 10 ? "0" : "") + x.h + ":00: " + x.v + ' visningar"><i style="height:' + (100 * x.v / tmax) + '%"></i></div>'; }).join("");
       var hfmt = function (x) { return (x < 10 ? "0" : "") + x + ":00"; };
       $("ax-fran").textContent = hfmt(tt[0].h); $("ax-till").textContent = hfmt(tt[23].h);
-      $("dagar-rubrik").textContent = "Sidvisningar per timme, senaste 24 timmarna";
+      $("dagar-rubrik").textContent = "Sidvisningar per timme, " + periodText();
       $("dagar-forklaring").hidden = true;
     }
 
@@ -399,19 +474,49 @@
       : "Ingen tidning har bäddat in rutan på sin sajt än.";
 
     ritaAds(d.apple_ads);
-    ritaAppen(d.appen);
+    ritaAppen(d.appen, foreApp);
+    ritaDygn(d);
     ritaKorthet();
+  }
+
+  // Dygn för dygn (19/11): sajten och appen sida vid sida, senaste dygnet överst. Appens kolumner följer telefonfiltret.
+  function ritaDygn(d) {
+    var sajt = {}; (d.per_dag || []).forEach(function (r) { sajt[r.dag] = r; });
+    var app = {}; ((d.appen && d.appen.per_dag) || []).forEach(function (r) {
+      if (appval && r.app !== appval) return;
+      var o = app[r.dag] || (app[r.dag] = {}); o[r.handelse] = (o[r.handelse] || 0) + r.antal;
+    });
+    var KOL = [["Besökare", function (k) { return (sajt[k] || {}).besokare; }], ["Klick", function (k) { return (sajt[k] || {}).appklick; }],
+      ["Intro", function (k) { return (app[k] || {}).onboarding_klar; }], ["Start", function (k) { return (app[k] || {}).forsta_starten; }],
+      ["Förare", function (k) { return (app[k] || {}).aktiv_dag; }]];
+    var dagarna = dygnen().reverse(), summor = KOL.map(function () { return 0; });
+    var rader = dagarna.map(function (k) {
+      var vd = middag(k).toLocaleDateString("sv-SE", { weekday: "short" });
+      return "<tr><td>" + vd + " " + litenDag(k) + "</td>" + KOL.map(function (c, i) {
+        var n = Number(c[1](k) || 0); summor[i] += n;
+        return '<td' + (n ? "" : ' class="noll"') + ">" + fmt(n) + "</td>";
+      }).join("") + "</tr>";
+    });
+    $("dygn").innerHTML = "<tr><th>Dygn</th>" + KOL.map(function (c) { return "<th>" + c[0] + "</th>"; }).join("") + "</tr>" +
+      (dagarna.length > 1 ? '<tr class="summa"><td>Summa</td>' + summor.map(function (n) { return "<td>" + fmt(n) + "</td>"; }).join("") + "</tr>" : "") + rader.join("");
+    $("dygn-text").textContent = "Besökare är anonyma dagsbesökare på halkvakt.se och Klick är klick vidare till App Store eller Play. Intro är telefoner som gick igenom introduktionen, Start de som startade vakten första gången och Förare de som hade vakten igång det dygnet." +
+      (appval ? " Appens tre kolumner visar bara " + (appval === "ios" ? "iPhone" : "Android") + "." : "") +
+      (fran < BESOKARE_FRAN ? " Besökare räknas från 28 okt 2026 och appen från 1 nov 2026." : fran < "2026-11-01" ? " Appen räknas från 1 nov 2026." : "");
   }
 
   // Appens räknare (DECISIONS #772, #787 i appens repo): app_raknare_stat via besok_stat.appen — rader per händelse, värde, app,
   // version och kohort ('' för 0.3.15, som inte skickar dem).
-  function ritaAppen(a) {
-    var rader = (a && a.rader) || [];
+  function ritaAppen(a, fore) {
+    var appOk = function (r) { return !appval || r.app === appval; };
+    var rader = ((a && a.rader) || []).filter(appOk);
+    var frader = ((fore && fore.rader) || []).filter(appOk);
+    var fsumma = function (pred) { var n = 0; frader.forEach(function (r) { if (pred(r)) n += r.period; }); return n; };
+    var bara = appval ? " · bara " + (appval === "ios" ? "iPhone" : "Android") : "";
     var tomt = tomRad("Inget räknat än.");
     var alla = ["app-tratt", "app-varningar-kort", "app-tal", "app-aktiva", "app-pass", "app-varningar", "app-installningar", "app-fel"];
     if (!rader.length) {
       alla.forEach(function (id) { $(id).innerHTML = tomt; });
-      $("t-forare").textContent = "–"; $("app-dagar").innerHTML = ""; $("app-dagar-text").textContent = "";
+      $("t-forare").textContent = "–"; $("app-dagar").innerHTML = ""; $("app-dagar-text").textContent = ""; $("j-forare").innerHTML = "";
       return;
     }
     var summa = function (pred) {
@@ -435,25 +540,31 @@
 
     // Tratten, enkel: fyra steg, en stapel var.
     var steg = [
-      ["Gick igenom introduktionen", "", summa(ar("onboarding_klar"))],
-      ["Gav appen platsen Alltid", "då startar vakten själv i bilen", summa(ar("behorighet", "alltid"))],
-      ["Startade vakten första gången", "", summa(ar("forsta_starten"))],
-      ["Fick sin första varning", "", summa(ar("forsta_varningen"))]
+      ["Gick igenom introduktionen", "", summa(ar("onboarding_klar")), fsumma(ar("onboarding_klar"))],
+      ["Gav appen platsen Alltid", "då startar vakten själv i bilen", summa(ar("behorighet", "alltid")), fsumma(ar("behorighet", "alltid"))],
+      ["Startade vakten första gången", "", summa(ar("forsta_starten")), fsumma(ar("forsta_starten"))],
+      ["Fick sin första varning", "", summa(ar("forsta_varningen")), fsumma(ar("forsta_varningen"))]
     ];
     var smax = Math.max(1, Math.max.apply(null, steg.map(function (s) { return s[2].n; })));
     $("app-tratt").innerHTML = steg.map(function (s) {
       return '<tr><td class="namn">' + s[0] + (s[1] ? ' <span class="meta">' + s[1] + "</span>" : "") +
-        '<br><span class="meta">iPhone ' + fmt(s[2].ios) + " · Android " + fmt(s[2].and) + "</span>" +
+        '<br><span class="meta">iPhone ' + fmt(s[2].ios) + " · Android " + fmt(s[2].and) + "</span>" + (s[3] ? " &nbsp;" + jamfort(s[2].n, s[3]) : "") +
         '<div class="bar g" style="width:' + (100 * s[2].n / smax) + '%"></div></td><td class="n">' + fmt(s[2].n) + "</td></tr>";
     }).join("");
 
     // Aktiva förare: aktiv_dag räknas en gång per telefon och dygn, så dygnets tal är dygnets aktiva förare.
-    var perDag = {}; ((a && a.per_dag) || []).forEach(function (r) { if (r.handelse === "aktiv_dag") perDag[r.dag] = (perDag[r.dag] || 0) + r.antal; });
-    var dagarna = Object.keys(perDag).sort(), sju = dagarna.slice(-7), snitt = sju.length ? sju.reduce(function (s, d) { return s + perDag[d]; }, 0) / sju.length : 0;
+    var snittAv = function (lista) {
+      var pd = {}; (lista || []).forEach(function (r) { if (r.handelse === "aktiv_dag" && appOk(r)) pd[r.dag] = (pd[r.dag] || 0) + r.antal; });
+      var k = Object.keys(pd).sort(), sista = k.slice(-7);
+      return { perDag: pd, dagarna: k, sju: sista, snitt: sista.length ? sista.reduce(function (s, d) { return s + pd[d]; }, 0) / sista.length : 0 };
+    };
+    var nu = snittAv(a && a.per_dag), innan = snittAv(fore && fore.per_dag);
+    var perDag = nu.perDag, dagarna = nu.dagarna, sju = nu.sju, snitt = nu.snitt, ettDygn = antalDygn() === 1;
     $("t-forare").textContent = sju.length ? dec(snitt) : "–";
-    // Vid 1 dygn finns bara dagens rad, så kortet visar dagens förare i stället för ett snitt.
-    $("t-forare-rubrik").textContent = dagar === 1 ? "Förare i dag" : "Förare per dygn";
-    $("s-forare").textContent = dagar === 1 ? "som har haft vakten igång i dag" : "som hade vakten igång, snitt senaste 7 dygnen";
+    $("j-forare").innerHTML = sju.length && innan.sju.length ? jamfort(snitt, innan.snitt, dec) : "";
+    // Vid ett enda dygn visar kortet det dygnets förare i stället för ett snitt.
+    $("t-forare-rubrik").textContent = ettDygn ? "Förare " + periodKort() : "Förare per dygn";
+    $("s-forare").textContent = (ettDygn ? "som hade vakten igång" : "som hade vakten igång, snitt " + (till === idagStr() ? "senaste" : "periodens sista") + " 7 dygnen") + bara;
     var serie = dygnsserie(perDag, 0), fmax = Math.max(1, Math.max.apply(null, serie.map(function (s) { return s.r; })));
     $("app-dagar").innerHTML = serie.map(function (s) { return '<div title="' + kortDag(s.dag) + ": " + s.r + ' förare"><i class="g" style="height:' + (100 * s.r / fmax) + '%"></i></div>'; }).join("");
     $("app-fran").textContent = kortDag(serie[0].dag); $("app-till").textContent = kortDag(serie[serie.length - 1].dag);
@@ -468,7 +579,7 @@
     if (varnSumma) lista($("app-varningar-kort"), varn, function (r) { return r.namn; }); else $("app-varningar-kort").innerHTML = tomRad("Inga varningar än.");
 
     var forsta = summa(ar("forsta_varningen")).n;
-    korthet.appen = (sju.length ? "Vakten var igång hos i snitt <b>" + dec(snitt) + "</b> förare per dygn senaste veckan. " : "") +
+    korthet.appen = (sju.length ? (ettDygn ? "Vakten var igång hos <b>" + dec(snitt) + "</b> förare. " : "Vakten var igång hos i snitt <b>" + dec(snitt) + "</b> förare per dygn " + (till === idagStr() ? "senaste veckan" : "periodens sista vecka") + ". ") : "") +
       "Appen sa <b>" + fmt(varnSumma) + "</b> varningar" + (forsta ? ", och " + fmt(forsta) + (forsta === 1 ? " telefon fick" : " telefoner fick") + " sin första." : ".");
 
     // --- Detaljerna ---
@@ -530,7 +641,7 @@
       return '<tr><td class="namn"><b>' + namn + '</b><br><span class="meta">' + fmt(p.visningar) + " visningar · " + fmt(p.tryck) + " tryck · " + eur(p.kostnad) +
         (p.installationer ? " · " + eur(p.kostnad / p.installationer) + " per installation" : "") + '</span></td><td class="n">' + fmt(p.installationer) + '<br><span class="meta">inst.</span></td></tr>';
     };
-    $("aa-tal").innerHTML = rad(dagar === 1 ? "Senaste 24 timmarna" : dagar + " dygn", a.period) + rad("Senaste 7 dygnen", a.sju);
+    $("aa-tal").innerHTML = rad(stor(periodText()), a.period) + rad("Senaste 7 dygnen", a.sju);
     var p = a.period;
     korthet.annonser = "Apple Ads kostade <b>" + eur(p.kostnad) + "</b> och gav <b>" + fmt(p.installationer) + "</b> " + (p.installationer === 1 ? "installation" : "installationer") +
       (p.installationer ? ", " + eur(p.kostnad / p.installationer) + " styck." : ".");
@@ -554,9 +665,11 @@
   }
 
   function ladda() {
-    fetch(API + "?dagar=" + dagar + "&nyckel=" + encodeURIComponent(nyckel), { cache: "no-store" })
-      .then(function (r) { if (r.status === 401) throw new Error("nyckel"); return r.json(); })
-      .then(function (d) { $("las").hidden = true; $("sida").hidden = false; rita(d); })
+    satPeriod();
+    var f = fran, t = till;
+    fetch(API + "?fran=" + f + "&till=" + t + "&nyckel=" + encodeURIComponent(nyckel), { cache: "no-store" })
+      .then(function (r) { if (r.status === 401) throw new Error("nyckel"); if (!r.ok) throw new Error("fel"); return r.json(); })
+      .then(function (d) { if (f !== fran || t !== till) return; $("las").hidden = true; $("sida").hidden = false; rita(d); })
       .catch(function (e) {
         if (e.message === "nyckel") { try { localStorage.removeItem("hv-besok"); } catch (x) {} $("sida").hidden = true; $("las").hidden = false; $("lasfel").textContent = nyckel ? "Fel nyckel." : ""; }
         else { $("sida").hidden = false; $("genererad").textContent = "Kunde inte hämta siffrorna just nu."; }
@@ -572,12 +685,29 @@
   document.querySelectorAll("nav.flikar button").forEach(function (b) { b.addEventListener("click", function () { visaFlik(b.dataset.flik); }); });
   try { var f = localStorage.getItem("hv-statflik"); if (f && $("flik-" + f)) visaFlik(f); } catch (e) {}
 
-  document.querySelectorAll(".val button").forEach(function (b) {
+  // Periodknapparna. Datum öppnar två datumfält, förifyllda med perioden som visades.
+  document.querySelectorAll(".val button[data-p]").forEach(function (b) {
     b.addEventListener("click", function () {
-      document.querySelectorAll(".val button").forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
-      b.setAttribute("aria-pressed", "true"); dagar = Number(b.dataset.d); ladda();
+      document.querySelectorAll(".val button[data-p]").forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
+      b.setAttribute("aria-pressed", "true");
+      if (b.dataset.p === "egen") {
+        $("d-fran").min = $("d-till").min = FORSTA_DYGNET; $("d-fran").max = $("d-till").max = idagStr();
+        if (!$("d-fran").value) $("d-fran").value = fran || idagStr();
+        if (!$("d-till").value) $("d-till").value = till || idagStr();
+      }
+      val = b.dataset.p; $("datum").hidden = val !== "egen"; ladda();
     });
   });
+  ["d-fran", "d-till"].forEach(function (id) { $(id).addEventListener("change", function () { if (val === "egen" && $("d-fran").value && $("d-till").value) ladda(); }); });
+
+  // Telefonfiltret på appens tal. Siffrorna finns redan hämtade, så sidan ritas bara om.
+  function valjApp(v) {
+    appval = v === "ios" || v === "android" ? v : "";
+    document.querySelectorAll(".appval button").forEach(function (x) { x.setAttribute("aria-pressed", x.dataset.app === appval ? "true" : "false"); });
+    try { localStorage.setItem("hv-statapp", appval); } catch (e) {}
+  }
+  document.querySelectorAll(".appval button").forEach(function (b) { b.addEventListener("click", function () { valjApp(b.dataset.app); if (senast) rita(senast); }); });
+  try { valjApp(localStorage.getItem("hv-statapp") || ""); } catch (e) {}
   $("las").addEventListener("submit", function (e) {
     e.preventDefault(); nyckel = $("nyckel").value.trim();
     try { localStorage.setItem("hv-besok", nyckel); } catch (x) {}
