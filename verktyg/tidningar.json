@@ -553,6 +553,20 @@
    "exempel_stracka": "Ulricehamn–Getared",
    "montage": "neutral",
    "kommentar": "Förslaget till Ulricehamns Tidning (Axel 25/10, Gota Media): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
+  },
+  {
+   "slug": "lysekilsposten",
+   "fullnamn": "Lysekilsposten",
+   "namn": "Lysekilsposten",
+   "genitiv": "Lysekilspostens",
+   "doman": "lysekilsposten.se",
+   "lank": "https://www.lysekilsposten.se/",
+   "lan": "vastra-gotaland",
+   "strak": "lysekil",
+   "lasarort": "Uddevalla",
+   "exempel_stracka": "Munkedal–Uddevalla",
+   "montage": "neutral",
+   "kommentar": "Förslaget till Lysekilsposten (Axel 19/11): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
   }
  ]
 }
