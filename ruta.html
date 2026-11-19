@@ -119,6 +119,7 @@
       <button role="tab" id="f-lan" aria-controls="v-lan" aria-selected="true">Länet</button>
       <button role="tab" id="f-vagar" aria-controls="v-vagar" aria-selected="false">Vägarna</button>
       <button role="tab" id="f-pendling" aria-controls="v-pendling" aria-selected="false">Pendling</button>
+      <button role="tab" id="f-hand" aria-controls="v-hand" aria-selected="false" hidden>Händelser</button>
       <button role="tab" id="f-karta" aria-controls="v-karta" aria-selected="false" hidden>Karta</button>
     </div>
   </div>
@@ -142,6 +143,11 @@
       <h1 id="pendling-rubrik">Pendlarvägarna just nu</h1>
       <ul id="pendling-lista"></ul>
       <p id="pendling-text"></p>
+    </section>
+    <section class="vy" role="tabpanel" id="v-hand" aria-labelledby="f-hand">
+      <h1 id="hand-rubrik">Händelser på vägarna just nu</h1>
+      <ul id="hand-lista"></ul>
+      <p id="hand-text">Händelserna hämtas.</p>
     </section>
     <section class="vy kartvy" role="tabpanel" id="v-karta" aria-labelledby="f-karta">
       <h1 id="karta-rubrik">Halkan på kartan just nu</h1>
@@ -406,7 +412,7 @@
       { till: 'Limmared', delar: [['Väg 157', 'Ulricehamn - Gällstad'], ['Väg 157', 'Gällstad - Limmared']] }
     ] },
     // Lysekilsposten (Axel 19/11): stråken från Lysekil.
-    lysekil: { lan: 'vastra-gotaland', fran: 'Lysekil', strak: [
+    lysekil: { lan: 'vastra-gotaland', fran: 'Lysekil', mitt: [11.435, 58.275], strak: [
       { till: 'Uddevalla', delar: [['Väg 161', 'Uddevalla - Lysekil']] },
       { till: 'Munkedal', delar: [['Väg 162', 'Gläborg - Lysekil'], ['E 6', 'Munkedal - Uddevalla']] },
       { till: 'Kungshamn', delar: [['Väg 162', 'Gläborg - Lysekil'], ['Väg 171', 'Kungshamn - Hallinden']] },
@@ -414,13 +420,13 @@
       { till: 'Stenungsund', delar: [['Väg 161', 'Uddevalla - Lysekil'], ['E 6', 'Uddevalla - Ljungskile'], ['E 6', 'Ljungskile - Jörlanda']] }
     ] },
     // Alekuriren (Axel 19/11): stråken från Älvängen. Datan har bara E 45 genom Ale, därför tre mål.
-    alvangen: { lan: 'vastra-gotaland', fran: 'Älvängen', strak: [
+    alvangen: { lan: 'vastra-gotaland', fran: 'Älvängen', mitt: [12.118, 57.958], strak: [
       { till: 'Göteborg', delar: [['E 45', 'Lödöse - Lärjemotet Göteborg'], ['E 45', 'Lärjemotet Göteborg - Gullbergsmotet Göteborg']] },
       { till: 'Lilla Edet', delar: [['E 45', 'Lödöse - Lärjemotet Göteborg'], ['E 45', 'Lilla Edet - Lödöse']] },
       { till: 'Trollhättan', delar: [['E 45', 'Lödöse - Lärjemotet Göteborg'], ['E 45', 'Lilla Edet - Lödöse'], ['E 45', 'Trolhättan - Lilla Edet']] }
     ] },
     // Lidköpingsnytt.nu (Axel 19/11): stråken från Lidköping.
-    lidkoping: { lan: 'vastra-gotaland', fran: 'Lidköping', strak: [
+    lidkoping: { lan: 'vastra-gotaland', fran: 'Lidköping', mitt: [13.157, 58.505], strak: [
       { till: 'Skara', delar: [['Väg 49', 'Skara - Lidköping']] },
       { till: 'Götene', delar: [['Väg 44', 'Götene - Lidköping']] },
       { till: 'Grästorp', delar: [['Väg 44', 'Lidköping - Grästorp']] },
@@ -429,7 +435,7 @@
       { till: 'Skövde', delar: [['Väg 49', 'Skara - Lidköping'], ['Väg 49', 'Skövde - Skara']] }
     ] },
     // Skillingaryd.nu (Axel 19/11): stråken från Skillingaryd.
-    skillingaryd: { lan: 'jonkoping', fran: 'Skillingaryd', strak: [
+    skillingaryd: { lan: 'jonkoping', fran: 'Skillingaryd', mitt: [14.093, 57.431], strak: [
       { till: 'Värnamo', delar: [['E 4', 'Skillingaryd - Värnamo']] },
       { till: 'Jönköping', delar: [['E 4', 'Stigamo - Skillingaryd'], ['E 4', 'Jönköping - Stigamo']] },
       { till: 'Hillerstorp', delar: [['Väg 152', 'Skillingaryd - Hillerstorp']] },
@@ -534,6 +540,13 @@
   // Flikarna och svepet: spåret rullar i sidled med snäpp, flikarna och prickarna följer.
   var vyer = ['lan', 'vagar', 'pendling'];
   if (!PEND) { $('f-pendling').hidden = true; $('v-pendling').remove(); vyer.pop(); }
+  // Händelsefliken (Axel 19/11): vägarbeten, avstängningar, olyckor och hinder nära tidningens ort. Bara med &hand=1, så rutor som
+  // redan ligger ute hos tidningar är oförändrade. Mitten är stråkets ort (mitt i STRAK) eller &mitt=lon,lat,Ort; utan mitt gäller länet.
+  var HAND = q.get('hand') === '1';
+  var mittP = (q.get('mitt') || '').split(',');
+  var MITT = mittP.length >= 3 && mittP[0] && mittP[1] && isFinite(+mittP[0]) && isFinite(+mittP[1]) ? { lon: +mittP[0], lat: +mittP[1], namn: mittP.slice(2).join(',') }
+    : PEND && PEND.mitt ? { lon: PEND.mitt[0], lat: PEND.mitt[1], namn: PEND.fran } : null;
+  if (HAND) { $('f-hand').hidden = false; vyer.push('hand'); if (vyer.length > 3) $('flikar').classList.add('fyra'); } else { $('f-hand').remove(); $('v-hand').remove(); }
   // Kartfliken (Axel och Bengt 14/11): bara med &karta=1, sist bland flikarna, så rutor som redan ligger ute hos tidningar är oförändrade.
   var KARTA = q.get('karta') === '1';
   if (KARTA) { $('f-karta').hidden = false; vyer.push('karta'); if (vyer.length > 3) $('flikar').classList.add('fyra'); } else { $('f-karta').remove(); $('v-karta').remove(); }
@@ -546,6 +559,7 @@
     $('nasta').textContent = (n ? '' : '← ') + $('f-' + vyer[n]).textContent + (n ? ' →' : '');
     $('nasta').onclick = function () { ga(n); };
     if (vyer[i] === 'karta') hamtaKarta();
+    if (vyer[i] === 'hand') hamtaHand();
   }
   // Rulla till vyns egen kant, inte i × bredden: vid zoom och bråkdelsbredder hamnade Pendling några pixlar fel (Axel 23/10).
   function ga(i, mjukt) { var v = $('v-' + vyer[i]); spar.scrollTo({ left: v ? v.offsetLeft - spar.offsetLeft : i * spar.clientWidth, behavior: mjukt === false ? 'instant' : 'smooth' }); markera(i); }
@@ -578,6 +592,7 @@
     var l = d.lan.filter(function (x) { return x.slug === lanSlug; })[0];
     if (!l) return;
     $('lan-rubrik').textContent = 'Väglaget i ' + l.kort + ' just nu';
+    LANKORT = l.kort; if (H.d) ritaHand();
     var rad = function (id, text, varm) { $(id).textContent = text; $(id).className = 'lage' + (varm ? ' halt' : ''); };
     // Ny halkrisk och vinterväglag (#897): raden Halka blir två, gult står bara på det nya, och Under noll och Kallast är neutrala.
     // Gäller bara när lan.json bär talet ny; annars ritas raden Halka som förut.
@@ -675,6 +690,71 @@
       : mHalt ? 'Trafikverket rapporterar ' + halka + ' på ' + mHalt + ' av ' + m + ' stråk.' : 'Trafikverket rapporterar ' + ingenKort + ' på stråken just nu.';
   }
 
+  // Händelserna (Axel 19/11): vägarbeten, hinder och omledningar ur data/handelser.json, som verktyg/handelser.py skriver en gång i
+  // timmen ur appens rapportfil (samma urval och sammanslagning som appens Favoriter, Halkvakt DECISIONS #617), och olyckorna ur
+  // data/olyckor.geojson, som skrivs var tionde minut. Allt hämtas från halkvakt.se, som resten av rutan. Händelsefilen gäller hela
+  // landet och hämtas därför först när fliken visas, som kartan. Texten är Trafikverkets egen.
+  var HAND_KM = 30, HAND_RADER = 5, HAND_GAMMAL_MIN = 150;
+  // Trafikverkets SeverityCode är 1, 2, 4 och 5 i praktiken; 3 har aldrig förekommit (Halkvakt CLAUDE.md).
+  var PAVERKAN = { 5: 'Mycket stor påverkan', 4: 'Stor påverkan', 2: 'Liten påverkan', 1: 'Ingen påverkan' };
+  var H = { d: null, olyckor: null, lan: null, hamtad: 0, pagar: false }, LANKORT = '';
+  function hamtaHand(tvinga) {
+    if (!HAND || H.pagar || (!tvinga && H.d && Date.now() - H.hamtad < 5 * 60 * 1000)) return;
+    H.pagar = true;
+    var json = function (u, tom) { return fetch(u, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).catch(function (e) { if (tom === undefined) throw e; return tom; }); };
+    Promise.all([json('data/handelser.json'), json('data/olyckor.geojson', { features: [] }), MITT || H.lan ? null : json('assets/lan.geojson')])
+      .then(function (r) { H.d = r[0]; H.olyckor = r[1]; if (r[2]) H.lan = r[2]; H.hamtad = Date.now(); H.pagar = false; ritaHand(); })
+      .catch(function () { H.pagar = false; if (!H.d) $('hand-text').textContent = 'Händelserna kunde inte hämtas. Se läget på halkvakt.se.'; });
+  }
+  function ritaHand() {
+    var d = H.d, lista = $('hand-lista'); if (!d || !d.poster || !lista) return;
+    var nu = Date.now(), var_ = MITT ? 'inom ' + HAND_KM + ' km från ' + MITT.namn : 'i ' + (LANKORT || 'länet');
+    $('hand-rubrik').textContent = 'Händelser ' + (MITT ? 'runt ' + MITT.namn : 'i ' + (LANKORT || 'länet')) + ' just nu';
+    lista.textContent = '';
+    // En fil som inte skrivits på två timmar visas inte som läget just nu.
+    if (!(nu - Date.parse(d.generated_at) < HAND_GAMMAL_MIN * 60000)) { $('hand-text').textContent = 'Händelserna kunde inte uppdateras. Se läget på halkvakt.se.'; return; }
+    var km = function (p) { var r = Math.PI / 180, x = (p[0] - MITT.lon) * r * Math.cos((p[1] + MITT.lat) / 2 * r), y = (p[1] - MITT.lat) * r; return Math.sqrt(x * x + y * y) * 6371; };
+    var omr = !MITT && H.lan ? H.lan.features.filter(function (f) { return f.properties.slug === lanSlug; })[0] : null;
+    var ringar = omr ? (omr.geometry.type === 'MultiPolygon' ? [].concat.apply([], omr.geometry.coordinates) : omr.geometry.coordinates) : [];
+    var ilan = function (p) { var inne = false; ringar.forEach(function (r) { for (var i = 0, j = r.length - 1; i < r.length; j = i++) if ((r[i][1] > p[1]) !== (r[j][1] > p[1]) && p[0] < (r[j][0] - r[i][0]) * (p[1] - r[i][1]) / (r[j][1] - r[i][1]) + r[i][0]) inne = !inne; }); return inne; };
+    var farsk = function (x, dygn) { return x.start && nu - Date.parse(x.start) < dygn * 86400000; };
+    // Överst det som stoppar trafiken nu: olyckor, färska hinder, sedan avstängningar och mycket stor påverkan, sedan veckans nya
+    // arbeten. Nio av tio vägarbeten varar över en månad (Halkvakt DECISIONS #420), så de långa står sist.
+    var rang = function (x) { return x.slag === 'olycka' ? 0 : x.slag === 'hinder' && farsk(x, 2) ? 1 : x.sev === 5 || x.rubrik === 'Avstängning' ? 2 : farsk(x, 7) ? 3 : 4; };
+    var sedda = {}, idag = new Date(nu).toLocaleDateString('sv-SE', { timeZone: 'Europe/Stockholm' });
+    // Rapportfilen kortar Trafikverkets text till 100 tecken; en kortad text får tre punkter.
+    var text = function (x) { var t = x.t || x.rubrik; return t.length >= 100 ? t.replace(/[\s,.]+\S*$/, '') + ' …' : t; };
+    // Olyckorna i samma form som händelsefilens poster. Bara Sveriges: filen bär Finlands också, för kartan.
+    var olyckor = ((H.olyckor || {}).features || []).filter(function (f) { return f.properties.land === 'SE' && f.geometry && f.geometry.type === 'Point'; })
+      .map(function (f) { var e = f.properties; return { slag: 'olycka', rubrik: e.typ || 'Olycka', t: e.msg, p: f.geometry.coordinates, vag: e.road, start: e.start, allvar: e.allvar }; });
+    var alla = olyckor.concat(d.poster).filter(function (x) {
+      if (!x.p || !(MITT ? km(x.p) <= HAND_KM : ilan(x.p))) return false;
+      if (x.slut && x.slut !== 'tv' && x.slut < idag) return false;   // slutade i går eller tidigare; filen bär dagen, inte klockslaget
+      // Samma händelse en gång: samma väg, samma text och samma plats på en kilometer när. Olyckan står före sin avstängning.
+      var k = [x.vag, x.t || x.rubrik, x.p[0].toFixed(2), x.p[1].toFixed(2)].join('|'); if (sedda[k]) return false; sedda[k] = 1; return true;
+    }).sort(function (a, b) { return rang(a) - rang(b) || (b.sev || 0) - (a.sev || 0) || (Date.parse(b.start) || 0) - (Date.parse(a.start) || 0); });
+    var datum = function (iso) {
+      var t = new Date(iso); if (!iso || isNaN(t)) return '';
+      if (iso.length > 10 && nu - t < 2 * 86400000) return nar(iso);
+      return t.toLocaleDateString('sv-SE', { timeZone: 'Europe/Stockholm', day: 'numeric', month: 'long' }) + (t.getFullYear() !== new Date(nu).getFullYear() ? ' ' + t.getFullYear() : '');
+    };
+    alla.slice(0, HAND_RADER).forEach(function (x) {
+      var li = el('li'), varm = rang(x) < 3, k = el('div', 'klassning'), r = el('span');
+      li.appendChild(el('span', 'vag', x.vag ? kortVag(x.vag) : ''));
+      li.appendChild(el('span', 'lage' + (varm ? ' halt' : ''), text(x)));
+      r.appendChild(el('b', varm ? '' : 'staende', x.rubrik));
+      r.appendChild(document.createTextNode([x.allvar || PAVERKAN[x.sev], x.korfalt ? (x.korfalt === 1 ? 'ett körfält avstängt' : x.korfalt + ' körfält avstängda') : '', x.grans ? x.grans + ' km/h' : ''].filter(Boolean).join(', ')));
+      var tider = [x.start ? 'sedan ' + datum(x.start) : '', x.slut === 'tv' ? 'tills vidare' : x.slut ? 'till ' + datum(x.slut) : ''].filter(Boolean).join(', ');
+      if (tider) r.appendChild(el('small', '', 'Trafikverket: ' + tider + '.'));
+      k.appendChild(r); li.appendChild(k);
+      klickbar(li, BAS + 'lan/' + lanSlug + '/', x.t || x.rubrik);
+      lista.appendChild(li);
+    });
+    var n = alla.length;
+    $('hand-text').textContent = !n ? 'Trafikverket rapporterar inga olyckor, hinder eller vägarbeten ' + var_ + ' just nu.'
+      : 'Trafikverket rapporterar ' + n + (n === 1 ? ' händelse ' : ' händelser ') + var_ + '.' + (n > HAND_RADER ? ' Olyckor, avstängningar och nya arbeten visas först.' : '');
+  }
+
   // Kartan hämtas först när fliken visas: väglagets geometri för hela landet är tung, och de flesta läsare stannar på första fliken.
   var K = { lan: null, d: null, hamtad: 0, pagar: false };
   function hamtaKarta(tvinga) {
@@ -751,6 +831,7 @@
     });
     json('data/strackor.json').then(visaVagar).catch(function () {});
     if (K.d) hamtaKarta(true);   // kartan följer samma takt som listorna när den väl har visats
+    if (H.d) hamtaHand(true);
   }
   hamta();
   setInterval(function () { if (!document.hidden) hamta(); }, 5 * 60 * 1000);

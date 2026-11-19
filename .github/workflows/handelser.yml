@@ -1,0 +1,35 @@
+# Händelserna till rutans flik Händelser (Axel 19/11): verktyg/handelser.py skriver data/handelser.json en gång i timmen.
+# Repot är publikt, så körningarna kostar inga Actions-minuter. Sajtens data skrivs annars av Halkvakts funktion publicera
+# på minuterna 00, 05, 10, 20, 30, 35, 40 och 50, utan omförsök: steget nedan väntar därför ut de minuterna före sin push.
+name: handelser
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: handelser
+  cancel-in-progress: false
+jobs:
+  handelser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 verktyg/handelser.py
+      - name: Skriv filen till main
+        run: |
+          git add data/handelser.json
+          if git diff --cached --quiet; then echo "inget nytt"; exit 0; fi
+          git config user.name "Halkvakt händelser"
+          git config user.email "hej@halkvakt.se"
+          git commit -q -m "data: händelser $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          for forsok in 1 2 3; do
+            # Inte på eller strax före publiceras minuter (var femte): vänta till minut 1 till 3 i femminutersfönstret.
+            while m=$(( 10#$(date -u +%M) % 5 )); [ "$m" -eq 0 ] || [ "$m" -eq 4 ]; do sleep 20; done
+            git pull -q --rebase --autostash origin main && git push -q origin HEAD:main && exit 0
+            git status --porcelain
+            sleep 15
+          done
+          echo "pushen gick inte igenom på tre försök"; exit 1
