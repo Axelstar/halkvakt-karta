@@ -160,7 +160,7 @@ klar att länka till och att den bör in i redaktionslistan.
 Mallen följer redan reglerna. Skriver du ny text någonstans gäller samma sak:
 
 - **Inga påhittade tal.** Antal vägavsnitt, vägar och sträckor räknas ur `data/`. Montaget är märkt som exempel.
-- **Positionsmeningen:** "ingen position lämnar telefonen automatiskt". Aldrig "Positionen lämnar aldrig telefonen".
+- **Positionsmeningen:** "förarens position skickas aldrig till Halkvakt av sig själv" (Halkvakt DECISIONS #900). Aldrig "lämnar telefonen": kartan i iPhone-appen kommer från Apple.
 - **Inga långa tankstreck (—)**, inga utropstecken. Kort streck (–) bara mellan orter: Sundsvall–Gnarp.
 - Sidorna är `noindex` och ligger inte i `sitemap.xml`. Lägg inte in dem där.
 - Rutan lovar tidningarna inga kakor och ingen spårning. Lägg inte till något sådant i `ruta.html`, `widget.html` eller `ruta/`.

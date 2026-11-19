@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Integritetspolicy · Halkvakt</title>
-<meta name="description" content="Halkvakts integritetspolicy. Din position lämnar inte telefonen av sig själv. Vad appen och halkvakt.se samlar in, behörigheterna och datakällorna.">
+<meta name="description" content="Halkvakts integritetspolicy. Din position skickas aldrig till Halkvakt av sig själv. Vem som ansvarar, vad appen och halkvakt.se skickar och sparar, till vem, varför och hur länge, och dina rättigheter.">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="canonical" href="https://halkvakt.se/integritet.html">
 <meta property="og:title" content="Integritetspolicy · Halkvakt">
-<meta property="og:description" content="Halkvakts integritetspolicy. Din position lämnar inte telefonen av sig själv. Vad appen och halkvakt.se samlar in, behörigheterna och datakällorna.">
+<meta property="og:description" content="Halkvakts integritetspolicy. Din position skickas aldrig till Halkvakt av sig själv. Vem som ansvarar, vad appen och halkvakt.se skickar och sparar, till vem, varför och hur länge, och dina rättigheter.">
 <meta property="og:image" content="https://halkvakt.se/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="apple-itunes-app" content="app-id=6806939784">
@@ -33,58 +33,61 @@
 <main class="wrap">
 <div class="dok">
 <h1>Integritetspolicy</h1>
-<div class="datum">GÄLLER FRÅN 2026-11-14 · FÖREGÅENDE VERSION 2026-11-04</div>
+<div class="datum">GÄLLER FRÅN 2026-11-19 · FÖREGÅENDE VERSION 2026-11-14</div>
 
-<div class="lofte"><b>Kärnlöftet:</b> ingen position lämnar telefonen av sig själv. All jämförelse mellan var du är och vad som finns på vägen sker i appen. Det som skickas är betatestets facitsvar, bara om du själv slår på det och trycker, och en anonym räkning av hur appen används — ett ord i taget, aldrig var du är eller vem du är. I iPhone-appen kommer kartan och adressökningen från Apple, som då får veta vilket område kartan visar och, när du söker en adress, var du är och vart du ska. Halkvakt får aldrig veta det.</div>
+<div class="lofte"><b>Kort sagt:</b> din position skickas aldrig till Halkvakt av sig själv. Jämförelsen mellan var du är och vad som finns på vägen sker i din telefon. Halkvakt har inga konton, ingen inloggning, ingen reklam och inga analys- eller spårningsverktyg från andra. Det Halkvakt tar emot är en anonym räkning av hur appen används och, bara om du själv slår på det och trycker, betatestets facitsvar. I iPhone-appen kommer kartan och adressökningen från Apple, som då får veta ungefär vilket område kartan visar och, när du söker, var du är och vart du ska.</div>
 
-<h2>Vad vi samlar in</h2>
-<p><b>Nästan ingenting.</b> Halkvakt har inga konton, ingen inloggning, ingen annonsering och inga analys- eller spårningsverktyg från tredje part. Appen skickar aldrig din position, dina resor eller något annat om dig av sig själv.</p>
-<p><b>En anonym räkning.</b> Appen räknar hur den används, i sex delar: hur många som går igenom introduktionen och vilka behörigheter som väljs (plats och notiser), hur många dagar vakten är på, hur varje vaktpass startade (själv, med knappen eller med Siri och Genvägar), ungefär hur länge det pågick (under 3, 3 till 15, 15 till 45 eller över 45 minuter) och hur det slutade, vilka varningar som sägs och ungefär hur långt bort faran var, vilka inställningar som ändras och vad som går fel (positionen försvann, väglagsdatan var gammal, en hämtning misslyckades). Det som skickas är ett ord per händelse, till exempel <i>behörighet: alltid</i>, om appen är för Android eller iPhone, appens version och om telefonen fick appen före eller efter att räkningen började. Servern lägger ihop det till en rad per dag och händelse. Inget id, ingen IP-adress, inget klockslag, ingen sträcka och ingen position skickas eller sparas, så talen kan inte kopplas till dig. De säger hur många, aldrig vem. Räkningen är alltid på, skickas bara när appen är öppen eller bilen står stilla, och används bara för att se om appen fungerar och går att komma igång med.</p>
-<p><b>Undantaget: betatestets facitsvar.</b> Slår du på <i>Betatest</i> i inställningarna kan du svara <i>Stämde</i> eller <i>Stämde inte</i> på en varning. Varje svar kräver ett tryck. Då skickas:</p>
+<h2>Vem som ansvarar</h2>
+<p>Halkvakt ges ut av Lagerlöf Labs HB, org.nr 969805-2694, som ägs av Axel och Bengt Lagerlöf. Lagerlöf Labs HB är personuppgiftsansvarigt för det som beskrivs här. Frågor om integritet: <a href="mailto:hej@halkvakt.se">hej@halkvakt.se</a>. Axel svarar.</p>
+
+<h2>I appen</h2>
+<h3>Vägdatan</h3>
+<p>Appen hämtar ett paket med aktuella vägfaror: halka, frysrisk, olyckor, djur på vägen och fartkameror. Inget om dig skickas med. Din IP-adress följer med anropet, som vid all internettrafik, och syns i leverantörernas egna loggar (Supabase och Cloudflare, i reserv GitHub). Vi läser inte loggarna och kopplar dem aldrig till någon. Varför: att appen ska kunna varna. Rättslig grund: berättigat intresse.</p>
+<h3>Räkningen av hur appen används</h3>
+<p>Appen räknar hur den används, i sex delar: hur många som går igenom introduktionen och vilka behörigheter som väljs, hur många dagar vakten är på, hur varje vaktpass startade, ungefär hur länge det pågick och hur det slutade, vilka varningar som sägs och ungefär hur långt bort faran var, vilka inställningar som ändras och vad som går fel. Det som skickas är ett ord per händelse, till exempel <i>behörighet: alltid</i>, om appen är för Android eller iPhone, appens version och om telefonen fick appen före eller efter att räkningen började. Servern (Supabase) lägger ihop det till en rad per dag och händelse. Inget id, inget klockslag, ingen sträcka och ingen position skickas eller sparas, så talen kan inte kopplas till dig. Varför: att se om appen fungerar och går att komma igång med. Rättslig grund: berättigat intresse. I nästa version frågar appen om lov innan den räknar.</p>
+<h3>Betatestets facitsvar och <i>Appen missade</i></h3>
+<p>Slår du på Betatest i inställningarna kan du svara <i>Stämde</i> eller <i>Stämde inte</i> på en varning, och efter resan markera att appen missade något. Varje svar kräver ett tryck. Då skickas till Supabase:</p>
 <ul>
-  <li>varningens id, till exempel en viss mätstation eller vägsträcka, och klockslaget då rösten talade. <b>Det säger ungefär var du var och när.</b></li>
-  <li>ditt svar, om appen är för Android eller iPhone, och appens version.</li>
-  <li>när du markerat att appen missade något och sedan valt vad det var: klockslaget, närmaste mätstation (och vägsträcka inom 2 km) och ditt val. <b>Det säger också ungefär var du var och när.</b></li>
+<li>varningens id, till exempel en viss mätstation eller vägsträcka, och klockslaget då rösten talade, ditt svar, om appen är för Android eller iPhone och appens version. Det säger ungefär var du var och när;</li>
+<li>vid en miss: klockslaget, närmaste mätstation (och vägsträcka inom 2 km) och vad du valde att det var. Det säger också ungefär var du var och när.</li>
 </ul>
-<p>Inget annat följer med: ingen exakt position, ingen resa, inget konto, inget enhets-id och ingen IP-adress sparas med svaret. Svaren kan därför inte kopplas till dig, och vi kan inte heller plocka fram just dina — alltså inte heller radera just dina på begäran. Du bestämmer ändå: slår du av <i>Betatest</i> slutar appen skicka direkt, och det som sparats i telefonen försvinner när du avinstallerar appen. De används bara för att ta reda på om varningarna stämmer och göra dem bättre. De säljs aldrig och delas inte med någon. Brytaren är av tills du slår på den.</p>
-
-<h2>Kartan och Planera en resa i iPhone-appen</h2>
-<p>Från version 0.4.1 visar iPhone-appens startsida en karta med farorna omkring dig, och under <i>Planera en resa</i> kan du söka en adress och se läget längs vägen dit. Kartan, adressökningen och vägen dit kommer från Apple, inte från oss.</p>
+<p>Ingen exakt position, ingen resa, inget konto, inget enhets-id och ingen IP-adress sparas med svaret. Varför: att pröva om varningarna stämmer och göra dem bättre. Rättslig grund: samtycke. Brytaren Betatest är av från början, och du återkallar samtycket genom att slå av den. Hur länge: till en månad efter vinterns slutrapport i april 2027. Sedan raderas svaren eller görs om till summor. Svaren säljs aldrig och delas inte med någon.</p>
+<h3>Kartan och Planera en resa (iPhone)</h3>
+<p>Kartan på startsidan och kartorna i Planera en resa kommer från Apple. När kartan visas hämtar telefonen kartbilder för området omkring dig, utan att du trycker på något, och Apple får då veta ungefär vilket område det är. Söker du en adress får Apple det du skriver, var du är och vart du ska, för att räkna ut vägen. Det sker bara när du själv söker. Halkvakt får inget av det: vilka faror som ligger längs vägen räknas ut i telefonen. Varför: att visa farorna omkring dig och längs resan. Rättslig grund: berättigat intresse. Hur Apple hanterar uppgifterna står i Apples integritetspolicy.</p>
+<p>Trycker du på <i>Öppna i Kartor</i> eller <i>Google Maps</i> vid en planerad resa öppnas resans mål i den appen, som då får veta vart du ska. Android-appen har inte kartan och sökningen än.</p>
+<h3>I telefonen</h3>
 <ul>
-  <li><b>Kartan:</b> när den visas hämtar telefonen kartbilder från Apple för området omkring dig. Det sker utan att du trycker på något, och Apple får då veta ungefär vilket område det är.</li>
-  <li><b>Sökningen:</b> när du söker en adress får Apple det du skriver, var du är och vart du ska, för att kunna räkna ut vägen. Det sker bara när du själv söker.</li>
-  <li><b>Halkvakt får ingenting av det.</b> Vilka faror som ligger längs vägen räknas ut i telefonen. En sökt resa sparas inte. Väljer du en avresetid ligger resan kvar i telefonen till sex timmar efter avresan, utanför säkerhetskopian, och påminnelsen skapas av telefonen själv.</li>
-  <li><b>Öppna i Kartor eller Google Maps:</b> trycker du på en av länkarna vid en planerad resa öppnas resans mål i den appen, som då får veta vart du ska. Det sker bara när du trycker.</li>
-  <li>Hur Apple hanterar uppgifterna står i Apples integritetspolicy. Android-appen har inte kartan och sökningen än.</li>
+<li>Varningshistoriken, facitsvaren och missarna sparas i telefonen. I dag följer de med telefonens säkerhetskopia, och på Android också bilens Bluetooth-adress när du flyttar till en ny telefon. Från nästa version gör de inte det.</li>
+<li>Slår du på <i>Erbjud att spara resor</i> under Favoriter sparas vägarna du väljer bara i telefonen. Sparade resor och en planerad resa ligger aldrig i en säkerhetskopia. En planerad resa ligger kvar till sex timmar efter avresan.</li>
+<li>Det mesta försvinner när du avinstallerar appen. Det som redan ligger i en säkerhetskopia finns kvar där tills kopian byts ut.</li>
 </ul>
-
-<h2>Hur appen fungerar</h2>
+<h3>Behörigheter appen ber om</h3>
 <ul>
-  <li>Appen <b>hämtar</b> ett paket med aktuella vägfaror (halka, frysrisk, olyckor, djur på vägen, fartkameror). Hämtningen är anonym: inget om dig eller din plats skickas med.</li>
-  <li>Jämförelsen mellan din position och farorna görs helt <b>i din telefon</b>. Varningen läses upp med telefonens egen röst.</li>
-  <li>Varningshistoriken och dina facitsvar sparas <b>i telefonen</b> och försvinner om du avinstallerar appen.</li>
-  <li>Slår du på <b>Erbjud att spara resor</b> under Favoriter sparas vägarna du väljer, bara <b>i telefonen</b> och aldrig i en säkerhetskopia. Du tar bort dem där, och de försvinner när du avinstallerar appen.</li>
-</ul>
-
-<h2>Behörigheter appen ber om</h2>
-<ul>
-  <li><b>Plats, även i bakgrunden:</b> för att veta vad som finns på vägen framför dig medan du kör med släckt skärm. Används bara i telefonen.</li>
-  <li><b>Notiser:</b> för varningen på skärmen och frågan efter resan.</li>
-  <li><b>Bara Android: fysisk aktivitet och Bluetooth</b>, så att vakten kan starta av sig själv när du börjar köra eller när bilen kopplas.</li>
+<li>Plats, även i bakgrunden: för att veta vad som finns på vägen framför dig medan du kör med släckt skärm. Positionen används i telefonen.</li>
+<li>Notiser: för varningen på skärmen och frågan efter resan.</li>
+<li>Bara Android: fysisk aktivitet och Bluetooth, så att vakten kan starta av sig själv när du börjar köra eller när bilen kopplas.</li>
 </ul>
 
-<h2>Webbplatsen halkvakt.se</h2>
-<p>Webbplatsen räknar sina besök med en egen räknare, utan kakor och utan verktyg från tredje part. För varje sidvisning sparas bara vilken sida det var, från vilken webbplats besökaren kom (till exempel google.com eller facebook.com), en eventuell kampanjkod i länken och om det var en mobil eller en dator. Klickar du på länken till App Store eller Google Play räknas klicket på samma sätt. Väglagsrutan som tidningar bäddar in räknar sina visningar och på vilken sajt den visas, också på samma sätt.</p>
-<p>För att veta om tio sidvisningar är tio personer eller en räknar servern fram ett anonymt id för dygnet: en kontrollsumma av IP-adressen och webbläsarens namn tillsammans med ett slumptal som byts ut och raderas varje natt. Bara kontrollsumman sparas. IP-adressen sparas aldrig, och eftersom slumptalet är borta dagen efter kan id:t inte kopplas till dig, till en IP-adress eller till dina besök andra dagar. Siffrorna används bara för att se hur många som hittar hit och varifrån.</p>
+<h2>På halkvakt.se</h2>
+<p><b>Besöksräknaren.</b> För varje sidvisning sparas vilken sida det var, från vilken webbplats besökaren kom (till exempel google.com), en eventuell kampanjkod i länken, om det var en mobil eller en dator och klockslaget. Klick på länken till App Store eller Google Play räknas på samma sätt. För att skilja tio sidvisningar från tio personer bildar servern ett id för dygnet av IP-adressen, webbläsarens namn och ett slumptal som raderas nästa dygn. IP-adressen sparas aldrig, och inga kakor används. Under dygnet hänger en besökares sidvisningar ihop; dagen efter går id:t inte att koppla till någon. Sajten läser och skriver ingenting i din webbläsare. Varför: att se hur många som hittar hit och varifrån. Rättslig grund: berättigat intresse. Hur länge: 13 månader, så att en säsong kan jämföras med året före.</p>
+<p><b>Väglagsrutan</b> som tidningar bäddar in hämtar allt från halkvakt.se och skickar inget om läsaren.</p>
+<p><b>Livekartan</b> hämtar kartbilder från OpenFreeMap, som då ser din IP-adress. Kartbiblioteket och typsnitten ligger på halkvakt.se. <b>Några tidningssidor</b> visar tabeller från Datawrapper, som då ser din IP-adress.</p>
+<p><b>Mejlar du oss</b> hanteras mejlet av Zoho. Vi sparar det så länge ärendet kräver.</p>
 
-<h2>Teknisk nödvändighet</h2>
-<p>När appen hämtar vägdata, skickar ett facitsvar eller ett ord till räkningen sker vanlig internettrafik. Din IP-adress passerar då, som vid all webbtrafik, våra leverantörers standardloggar (GitHub Pages och Supabase). Vi läser inte, sparar inte och kopplar aldrig sådana loggar till någon person.</p>
+<h2>Halkvakt på Facebook och Instagram</h2>
+<p>Meta och Lagerlöf Labs HB ansvarar gemensamt för den statistik Meta tar fram om besök på Halkvakts sidor där. Metas integritetspolicy och villkor för sidstatistik gäller.</p>
+
+<h2>Leverantörer och överföringar</h2>
+<p>Supabase lagrar databasen i Stockholm. Supabase, Cloudflare, GitHub, Apple, Google, Meta och Zoho är, eller ägs av, bolag utanför EU, de flesta i USA. Överföringar dit sker med stöd av EU–USA-ramverket för dataskydd eller EU-kommissionens standardavtalsklausuler, beroende på leverantör.</p>
+
+<h2>Dina rättigheter</h2>
+<p>Du har rätt att få veta vilka uppgifter vi har om dig och att få dem rättade, raderade eller begränsade, och att invända mot det vi gör med stöd av berättigat intresse. Det du samtyckt till kan du återkalla, genom att slå av Betatest. Det mesta vi har går inte att koppla till en person, och då kan vi inte heller hitta just dina uppgifter. Mejla <a href="mailto:hej@halkvakt.se">hej@halkvakt.se</a>. Är du inte nöjd kan du klaga hos Integritetsskyddsmyndigheten, IMY (<a href="https://www.imy.se/" rel="noopener">imy.se</a>).</p>
 
 <h2>Datakällor</h2>
-<p>Vägdatat kommer från Trafikverkets öppna data (CC0) och vädret från bland andra SMHI och MET Norway; alla källor står under <a href="ansvar.html">Ansvar och källor</a>. Det är data om vägar och väder, aldrig om dig.</p>
+<p>Vägdatan kommer från Trafikverkets öppna data och vädret från bland andra SMHI och MET Norway. Alla källor står under <a href="ansvar.html">Ansvar och källor</a>. Det är data om vägar och väder, aldrig om dig.</p>
 
-<h2>Vem som står bakom &amp; kontakt</h2>
-<p>Halkvakt ges ut av Axel Lagerlöf, Malmö, under namnet Lagerlöf Labs. Frågor om integritet eller appen: <a href="mailto:hej@halkvakt.se">hej@halkvakt.se</a>. Ändras policyn uppdateras den här sidan och datumet ovan.</p>
+<h2>Ändringar</h2>
+<p>Ändras policyn uppdateras den här sidan och datumet ovan.</p>
 </div>
 </main>
 <footer class="fot">
