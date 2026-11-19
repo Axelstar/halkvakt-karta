@@ -412,6 +412,29 @@
       { till: 'Kungshamn', delar: [['Väg 162', 'Gläborg - Lysekil'], ['Väg 171', 'Kungshamn - Hallinden']] },
       { till: 'Tanumshede', delar: [['Väg 162', 'Gläborg - Lysekil'], ['E 6', 'Rabbalshede - Munkedal'], ['E 6', 'Tanumshede - Rabbalshede']] },
       { till: 'Stenungsund', delar: [['Väg 161', 'Uddevalla - Lysekil'], ['E 6', 'Uddevalla - Ljungskile'], ['E 6', 'Ljungskile - Jörlanda']] }
+    ] },
+    // Alekuriren (Axel 19/11): stråken från Älvängen. Datan har bara E 45 genom Ale, därför tre mål.
+    alvangen: { lan: 'vastra-gotaland', fran: 'Älvängen', strak: [
+      { till: 'Göteborg', delar: [['E 45', 'Lödöse - Lärjemotet Göteborg'], ['E 45', 'Lärjemotet Göteborg - Gullbergsmotet Göteborg']] },
+      { till: 'Lilla Edet', delar: [['E 45', 'Lödöse - Lärjemotet Göteborg'], ['E 45', 'Lilla Edet - Lödöse']] },
+      { till: 'Trollhättan', delar: [['E 45', 'Lödöse - Lärjemotet Göteborg'], ['E 45', 'Lilla Edet - Lödöse'], ['E 45', 'Trolhättan - Lilla Edet']] }
+    ] },
+    // Lidköpingsnytt.nu (Axel 19/11): stråken från Lidköping.
+    lidkoping: { lan: 'vastra-gotaland', fran: 'Lidköping', strak: [
+      { till: 'Skara', delar: [['Väg 49', 'Skara - Lidköping']] },
+      { till: 'Götene', delar: [['Väg 44', 'Götene - Lidköping']] },
+      { till: 'Grästorp', delar: [['Väg 44', 'Lidköping - Grästorp']] },
+      { till: 'Trollhättan', delar: [['Väg 44', 'Lidköping - Grästorp'], ['Väg 44', 'Grästorp - Trollhättan']] },
+      { till: 'Vara', delar: [['Väg 187', 'Lidköping - Long'], ['Väg 187', 'Long - Vara']] },
+      { till: 'Skövde', delar: [['Väg 49', 'Skara - Lidköping'], ['Väg 49', 'Skövde - Skara']] }
+    ] },
+    // Skillingaryd.nu (Axel 19/11): stråken från Skillingaryd.
+    skillingaryd: { lan: 'jonkoping', fran: 'Skillingaryd', strak: [
+      { till: 'Värnamo', delar: [['E 4', 'Skillingaryd - Värnamo']] },
+      { till: 'Jönköping', delar: [['E 4', 'Stigamo - Skillingaryd'], ['E 4', 'Jönköping - Stigamo']] },
+      { till: 'Hillerstorp', delar: [['Väg 152', 'Skillingaryd - Hillerstorp']] },
+      { till: 'Gnosjö', delar: [['Väg 152', 'Skillingaryd - Hillerstorp'], ['Väg 151', 'Hestra - Hillerstorp']] },
+      { till: 'Vrigstad', delar: [['E 4', 'Stigamo - Skillingaryd'], ['Väg 30', 'Stigamo - Vrigstad']] }
     ] }
   };
   // Klickbara rader (Axel 10/11): bara med &klick=1, så rutor som redan ligger ute hos tidningar är oförändrade.

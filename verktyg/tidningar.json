@@ -567,6 +567,62 @@
    "exempel_stracka": "Munkedal–Uddevalla",
    "montage": "neutral",
    "kommentar": "Förslaget till Lysekilsposten (Axel 19/11): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
+  },
+  {
+   "slug": "alekuriren",
+   "fullnamn": "Alekuriren",
+   "namn": "Alekuriren",
+   "genitiv": "Alekurirens",
+   "doman": "alekuriren.se",
+   "lank": "https://www.alekuriren.se/",
+   "lan": "vastra-gotaland",
+   "strak": "alvangen",
+   "lasarort": "Göteborg",
+   "exempel_stracka": "Lödöse–Lärjemotet Göteborg",
+   "montage": "neutral",
+   "kommentar": "Förslaget till Alekuriren (Axel 19/11): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
+  },
+  {
+   "slug": "markbladet",
+   "fullnamn": "Markbladet",
+   "namn": "Markbladet",
+   "genitiv": "Markbladets",
+   "doman": "markbladet.se",
+   "lank": "https://www.markbladet.se/",
+   "lan": "vastra-gotaland",
+   "strak": "",
+   "lasarort": "",
+   "exempel_stracka": "Borås–Kinna",
+   "montage": "neutral",
+   "kommentar": "Förslaget till Markbladet (Axel 19/11): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
+  },
+  {
+   "slug": "lidkopingsnytt",
+   "fullnamn": "Lidköpingsnytt.nu",
+   "namn": "Lidköpingsnytt",
+   "genitiv": "Lidköpingsnytts",
+   "doman": "lidkopingsnytt.nu",
+   "lank": "https://www.lidkopingsnytt.nu/",
+   "lan": "vastra-gotaland",
+   "strak": "lidkoping",
+   "lasarort": "Skara",
+   "exempel_stracka": "Götene–Skara",
+   "montage": "neutral",
+   "kommentar": "Förslaget till Lidköpingsnytt.nu (Axel 19/11): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
+  },
+  {
+   "slug": "skillingaryd",
+   "fullnamn": "Skillingaryd.nu",
+   "namn": "Skillingaryd.nu",
+   "genitiv": "Skillingaryd.nus",
+   "doman": "skillingaryd.nu",
+   "lank": "https://www.skillingaryd.nu/",
+   "lan": "jonkoping",
+   "strak": "skillingaryd",
+   "lasarort": "Värnamo",
+   "exempel_stracka": "Skillingaryd–Värnamo",
+   "montage": "neutral",
+   "kommentar": "Förslaget till Skillingaryd.nu (Axel 19/11): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
   }
  ]
 }
