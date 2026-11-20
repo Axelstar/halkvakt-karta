@@ -33,9 +33,9 @@
 <main class="wrap">
 <div class="dok">
 <h1>Integritetspolicy</h1>
-<div class="datum">GÄLLER FRÅN 2026-11-19 · FÖREGÅENDE VERSION 2026-11-14</div>
+<div class="datum">GÄLLER FRÅN 2026-11-20 · FÖREGÅENDE VERSION 2026-11-19</div>
 
-<div class="lofte"><b>Kort sagt:</b> din position skickas aldrig till Halkvakt av sig själv. Jämförelsen mellan var du är och vad som finns på vägen sker i din telefon. Halkvakt har inga konton, ingen inloggning, ingen reklam och inga analys- eller spårningsverktyg från andra. Det Halkvakt tar emot är en anonym räkning av hur appen används och, bara om du själv slår på det och trycker, betatestets facitsvar. I iPhone-appen kommer kartan och adressökningen från Apple, som då får veta ungefär vilket område kartan visar och, när du söker, var du är och vart du ska.</div>
+<div class="lofte"><b>Kort sagt:</b> din position skickas aldrig till Halkvakt av sig själv. Jämförelsen mellan var du är och vad som finns på vägen sker i din telefon. Halkvakt har inga konton, ingen inloggning, ingen reklam och inga analys- eller spårningsverktyg från andra. Det Halkvakt tar emot är en anonym räkning av hur appen används och, bara om du själv slår på det och trycker, betatestets facitsvar. I iPhone-appen kommer kartan och adressökningen från Apple, som då får veta ungefär vilket område kartan visar och, när du söker, var du är och vart du ska. I testversionen för iPhone kan du välja att dela vilken kommun du är i.</div>
 
 <h2>Vem som ansvarar</h2>
 <p>Halkvakt ges ut av Lagerlöf Labs HB, org.nr 969805-2694, som ägs av Axel och Bengt Lagerlöf. Lagerlöf Labs HB är personuppgiftsansvarigt för det som beskrivs här. Frågor om integritet: <a href="mailto:hej@halkvakt.se">hej@halkvakt.se</a>. Axel svarar.</p>
@@ -52,6 +52,9 @@
 <li>vid en miss: klockslaget, närmaste mätstation (och vägsträcka inom 2 km) och vad du valde att det var. Det säger också ungefär var du var och när.</li>
 </ul>
 <p>Ingen exakt position, ingen resa, inget konto, inget enhets-id och ingen IP-adress sparas med svaret. Varför: att pröva om varningarna stämmer och göra dem bättre. Rättslig grund: samtycke. Brytaren Betatest är av från början, och du återkallar samtycket genom att slå av den. Hur länge: till en månad efter vinterns slutrapport i april 2027. Sedan raderas svaren eller görs om till summor. Svaren säljs aldrig och delas inte med någon.</p>
+<h3>Platsdelningen i testversionen (iPhone)</h3>
+<p>I testversionen av iPhone-appen (TestFlight, från 0.4.1 bygge 59) frågar appen om den får dela vilken kommun telefonen är i. Appen i App Store och Android-appen frågar inte och skickar inget av det här. Säger du ja skickas till Supabase: ett slumpat nummer som appen skapar, att appen är för iPhone, koden för kommunen telefonen senast var i och ditt val om erbjudanden. Kommunen räknas ut i telefonen. Din exakta position, dina resor och ditt namn skickas inte, och ingen IP-adress sparas med raden. Vi sparar en rad per telefon och skriver över den, så det finns ingen historik.</p>
+<p>Varför: att kunna skicka en notis när det är halt där du är, och att se hur många som använder Halkvakt i varje län, som sammanräknade tal som aldrig visas för färre än tio telefoner. Notiserna är inte påslagna än. Har du också valt erbjudanden kan vi senare skicka erbjudanden från företag som betalar Halkvakt. De får aldrig veta vem du är eller var du är. Rättslig grund: samtycke. Säger du nej fungerar appen som förut. Du tar tillbaka samtycket och raderar raden med <i>Radera min data</i> under Inställningar, Integritet. Hur länge: tills du raderar raden. Annars tas den bort när telefonen inte har hört av sig på 30 dagar.</p>
 <h3>Kartan och Planera en resa (iPhone)</h3>
 <p>Kartan på startsidan och kartorna i Planera en resa kommer från Apple. När kartan visas hämtar telefonen kartbilder för området omkring dig, utan att du trycker på något, och Apple får då veta ungefär vilket område det är. Söker du en adress får Apple det du skriver, var du är och vart du ska, för att räkna ut vägen. Det sker bara när du själv söker. Halkvakt får inget av det: vilka faror som ligger längs vägen räknas ut i telefonen. Varför: att visa farorna omkring dig och längs resan. Rättslig grund: berättigat intresse. Hur Apple hanterar uppgifterna står i Apples integritetspolicy.</p>
 <p>Trycker du på <i>Öppna i Kartor</i> eller <i>Google Maps</i> vid en planerad resa öppnas resans mål i den appen, som då får veta vart du ska. Android-appen har inte kartan och sökningen än.</p>
@@ -90,7 +93,7 @@
 </ul>
 
 <h2>Dina rättigheter</h2>
-<p>Du har rätt att få veta vilka uppgifter vi har om dig och att få dem rättade, raderade eller begränsade, och att invända mot det vi gör med stöd av berättigat intresse. Det du samtyckt till kan du återkalla, genom att slå av Betatest. Det mesta vi har går inte att koppla till en person, och då kan vi inte heller hitta just dina uppgifter. Mejla <a href="mailto:hej@halkvakt.se">hej@halkvakt.se</a>. Är du inte nöjd kan du klaga hos Integritetsskyddsmyndigheten, IMY (<a href="https://www.imy.se/" rel="noopener">imy.se</a>).</p>
+<p>Du har rätt att få veta vilka uppgifter vi har om dig och att få dem rättade, raderade eller begränsade, och att invända mot det vi gör med stöd av berättigat intresse. Det du samtyckt till kan du återkalla: betatestet genom att slå av Betatest, och platsdelningen i testversionen med <i>Radera min data</i>. Det mesta vi har går inte att koppla till en person, och då kan vi inte heller hitta just dina uppgifter. Mejla <a href="mailto:hej@halkvakt.se">hej@halkvakt.se</a>. Är du inte nöjd kan du klaga hos Integritetsskyddsmyndigheten, IMY (<a href="https://www.imy.se/" rel="noopener">imy.se</a>).</p>
 
 <h2>Datakällor</h2>
 <p>Vägdatan kommer från Trafikverkets öppna data och vädret från bland andra SMHI och MET Norway. Alla källor står under <a href="ansvar.html">Ansvar och källor</a>. Det är data om vägar och väder, aldrig om dig.</p>
