@@ -227,7 +227,7 @@ function kanter() {
   return { top: Math.round(st.bottom) + 16, bottom: nere, left: 20, right: 20 };
 }
 // En knapp kan styra flera lager (vägvädret ligger i två: de kalla stationerna och resten).
-const lagerAv = id => [id, id + '-ovr', id + '-traff', id + '-lys'].filter(l => map.getLayer(l));
+const lagerAv = id => [id, id + '-ovr', id + '-traff', id + '-lys', id + '-stad'].filter(l => map.getLayer(l));
 const forstaText = () => (map.getStyle().layers.find(x => x.type === 'symbol') || {}).id;
 map.on('load', async () => {
   const d = {};
@@ -257,6 +257,13 @@ map.on('load', async () => {
   map.addSource('kandidat', { type: 'geojson', data: d.kandidat });
   map.addLayer({ id: 'kandidat', type: 'line', source: 'kandidat', layout: { visibility: 'visible', 'line-cap': 'round' },
     paint: { 'line-width': 4, 'line-color': '#FF8F6B', 'line-dasharray': [1.4, 1], 'line-opacity': .95 } }, forstaText());
+  // Storstädernas punkter (Halkvakt DECISIONS #804, #926; Bengt 20/11: "Jag tycker att kartan ska rita punkterna"): stadens gator har
+  // ingen sträcka i Trafikverkets väglag, så varje varnande punkt ritas där den står, i Prognos-färgen, och följer Prognos-knappen.
+  map.addLayer({ id: 'kandidat-stad', type: 'circle', source: 'kandidat', filter: ['==', ['geometry-type'], 'Point'],
+    layout: { visibility: 'visible' },
+    paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 5, 1.6, 9, 3.5, 13, 6], 'circle-color': '#FF8F6B',
+             'circle-stroke-width': ['interpolate', ['linear'], ['zoom'], 7, 0, 10, 1], 'circle-stroke-color': '#080B0D',
+             'circle-opacity': .95 } }, forstaText());
   // Träffytorna (Axel 2/11): de hala sträckorna och Prognos är 4 px breda och svåra att träffa utzoomat. En osynlig, 20 px bred kopia
   // tar klicket, och en svag glöd under linjen visar vilken sträcka pekaren är nära. De grå sträckorna får ingen träffyta, så att
   // länet fortfarande går att välja mellan vägarna.
@@ -400,7 +407,7 @@ map.on('load', async () => {
       <div class="k">Mätt ${fmtTid(p.t)}</div>`); });
   // Kandidaten (#579) ligger ovanpå väglagslinjen: där den syns går dess ruta före väglagets, och punkterna går före båda (16/10: en station på en väg gav två rutor).
   const under = (e, lager) => map.queryRenderedFeatures(e.point, { layers: lager.filter(l => map.getLayer(l)) }).length > 0;
-  const vaglagKlick = e => { if (under(e, ['kandidat-traff', 'vader', 'vader-ovr', 'olyckor', 'kameror'])) return;
+  const vaglagKlick = e => { if (under(e, ['kandidat-traff', 'kandidat-stad', 'vader', 'vader-ovr', 'olyckor', 'kameror'])) return;
     const p = (e.features.find(f => f.properties.code > 1) ?? e.features[0]).properties; let info = [];
     try { info = JSON.parse(p.info || '[]'); } catch {}
     pop(e, `<h3>${esc(vagNamn(p.road, true) || 'Vägsträcka')}</h3><div><b>${esc(p.text)}</b></div><div class="k">${esc(info.join(', '))}</div>`); };
@@ -408,18 +415,21 @@ map.on('load', async () => {
   map.on('click', 'vaglag', e => { if (!under(e, ['vaglag-traff'])) vaglagKlick(e); });
   map.on('click', 'olyckor', e => { const p = e.features[0].properties;
     pop(e, `<h3>${esc(p.typ)}${vagNamn(p.road) ? ' · ' + esc(vagNamn(p.road)) : ''}</h3><div>${esc(p.msg)}</div><div class="k">${esc(p.allvar ?? '')}</div>`); });
-  map.on('click', 'kandidat-traff', e => { if (under(e, ['vader', 'vader-ovr', 'olyckor', 'kameror'])) return; const p = e.features[0].properties;
+  map.on('click', 'kandidat-traff', e => { if (under(e, ['kandidat-stad', 'vader', 'vader-ovr', 'olyckor', 'kameror'])) return; const p = e.features[0].properties;
     pop(e, `<h3>Prognos</h3><div><b>Halka framöver</b></div><div>Modellerat, inte uppmätt</div>
       <div class="k">Vägytan beräknad ur MET Nordic och vägväderstationerna runt omkring.</div>`); });
+  map.on('click', 'kandidat-stad', e => { if (under(e, ['vader', 'vader-ovr', 'olyckor', 'kameror'])) return;
+    pop(e, `<h3>Prognos · stadens gata</h3><div><b>Halka framöver</b></div><div>Modellerat, inte uppmätt</div>
+      <div class="k">Frysrisken beräknad ur väderdata, och fukten ur nederbördsradarn. Trafikverkets väglag finns inte för stadens gator.</div>`); });
   map.on('click', 'kameror', e => { const p = e.features[0].properties;
     pop(e, `<h3>Fartkamera</h3><div>${esc(p.name)}</div><div class="k">${esc(vagNamn(p.road, true))}</div>`); });
-  map.on('click', 'lan-fyll', e => { if (INBADDAD || under(e, ['vaglag', 'vaglag-traff', 'kandidat-traff', 'vader', 'vader-ovr', 'olyckor', 'kameror'])) return;
+  map.on('click', 'lan-fyll', e => { if (INBADDAD || under(e, ['vaglag', 'vaglag-traff', 'kandidat-traff', 'kandidat-stad', 'vader', 'vader-ovr', 'olyckor', 'kameror'])) return;
     const slug = e.features[0].properties.slug; if (!lanVal || lanVal.slug !== slug) visaLan(lanAv(slug), true); });
   for (const id of ['vaglag', 'kandidat']) {
     map.on('mousemove', id + '-traff', e => map.setFilter(id + '-lys', ['==', ['get', 'segment_id'], e.features[0].properties.segment_id]));
     map.on('mouseleave', id + '-traff', () => map.setFilter(id + '-lys', ingen));
   }
-  for (const l of ['vader', 'vader-ovr', 'vaglag', 'vaglag-traff', 'kandidat-traff', 'olyckor', 'kameror']) {
+  for (const l of ['vader', 'vader-ovr', 'vaglag', 'vaglag-traff', 'kandidat-traff', 'kandidat-stad', 'olyckor', 'kameror']) {
     map.on('mouseenter', l, () => map.getCanvas().style.cursor = 'pointer');
     map.on('mouseleave', l, () => map.getCanvas().style.cursor = '');
   }

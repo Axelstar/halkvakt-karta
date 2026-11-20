@@ -734,6 +734,10 @@
       linjer.forEach(l => { c.beginPath(); l.forEach((p, i) => { const [x, y] = xy(p); i ? c.lineTo(x, y) : c.moveTo(x, y); }); c.stroke(); });
     });
     c.setLineDash([]);
+    // Storstädernas punkter (Halkvakt DECISIONS #926): stadens gator har ingen sträcka, så punkten ritas där den står.
+    c.fillStyle = '#FF8F6B';
+    (prognos || []).forEach(f => { if (f.geometry && f.geometry.type === 'Point') { const [x, y] = xy(f.geometry.coordinates);
+      c.beginPath(); c.arc(x, y, 1.6, 0, Math.PI * 2); c.fill(); } });
     // Stationer under noll
     c.shadowColor = 'rgba(233,239,242,.5)'; c.shadowBlur = 6; c.fillStyle = '#E9EFF2';
     stat.forEach(f => { if (f.properties.yta < 0) { const [x, y] = xy(f.geometry.coordinates); c.beginPath(); c.arc(x, y, 2.2, 0, Math.PI * 2); c.fill(); } });
