@@ -621,7 +621,7 @@
   const grad = v => (v < 0 ? '−' : '') + Math.abs(v).toFixed(1).replace('.', ',') + ' °C';
   const ren = n => n.replace(/^\d+\s*/, '').replace(/\s+(Fjärryta|Yta|Vägyta)$/i, '').trim();
   // Samma halkregel som motorn och länssidorna (publish/lanssidor.ts, arHalt): kod ≥ 2 eller ett halkord.
-  const HALKORD = /(?<![a-zåäö])(is|halka|halkrisk|halkig|halt|mycket besvärligt)/i, STAM = /(snö|frost)/i;
+  const HALKORD = /(?<![a-zåäö])(is|halka|halkrisk|halkig|halt|mycket besvärligt|modd)/i, STAM = /(snö|frost)/i;
   const arHalt = (code, info) => (code != null && code >= 2) || (info || []).some(i => HALKORD.test(i) || STAM.test(i));
   // En givare som visar −49 °C när luften är +1 är trasig. Den får inte stå i rubriken.
   const rimlig = p => p.yta != null && p.yta > -40 && p.yta < 60 && (p.luft == null || Math.abs(p.yta - p.luft) < 15);
