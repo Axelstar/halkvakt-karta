@@ -566,7 +566,6 @@
    "lasarort": "Uddevalla",
    "exempel_stracka": "Munkedal–Uddevalla",
    "montage": "neutral",
-   "hand": "1",
    "kommentar": "Förslaget till Lysekilsposten (Axel 19/11): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
   },
   {
@@ -581,7 +580,6 @@
    "lasarort": "Göteborg",
    "exempel_stracka": "Lödöse–Lärjemotet Göteborg",
    "montage": "neutral",
-   "hand": "1",
    "kommentar": "Förslaget till Alekuriren (Axel 19/11): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
   },
   {
@@ -596,8 +594,6 @@
    "lasarort": "",
    "exempel_stracka": "Borås–Kinna",
    "montage": "neutral",
-   "hand": "1",
-   "mitt": "12.695,57.507,Kinna",
    "kommentar": "Förslaget till Markbladet (Axel 19/11): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
   },
   {
@@ -612,7 +608,6 @@
    "lasarort": "Skara",
    "exempel_stracka": "Götene–Skara",
    "montage": "neutral",
-   "hand": "1",
    "kommentar": "Förslaget till Lidköpingsnytt.nu (Axel 19/11): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
   },
   {
@@ -627,7 +622,6 @@
    "lasarort": "Värnamo",
    "exempel_stracka": "Skillingaryd–Värnamo",
    "montage": "neutral",
-   "hand": "1",
    "kommentar": "Förslaget till Skillingaryd.nu (Axel 19/11): samma upplägg som de andra tidningssidorna, byggd av generatorn för tidningssidorna."
   }
  ]
