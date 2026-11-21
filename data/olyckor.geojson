@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[13.353482457,55.807241179]},"properties":{"land":"SE","typ":"Olycka","msg":"Trafikolycka flera fordon söder om Eslöv. ","allvar":"Stor påverkan","road":"Väg 1268","start":"2026-11-21T18:26:00.000Z"}}]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[18.320670795,57.246056113]},"properties":{"land":"SE","typ":"Olycka","msg":"Flerbilsolycka","allvar":"Stor påverkan","road":"Väg 531","start":"2026-11-21T19:20:00.000Z"}}]}
