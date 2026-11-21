@@ -257,8 +257,9 @@ map.on('load', async () => {
   map.addSource('kandidat', { type: 'geojson', data: d.kandidat });
   map.addLayer({ id: 'kandidat', type: 'line', source: 'kandidat', layout: { visibility: 'visible', 'line-cap': 'round' },
     paint: { 'line-width': 4, 'line-color': '#FF8F6B', 'line-dasharray': [1.4, 1], 'line-opacity': .95 } }, forstaText());
-  // Storstädernas punkter (Halkvakt DECISIONS #804, #926; Bengt 20/11: "Jag tycker att kartan ska rita punkterna"): stadens gator har
-  // ingen sträcka i Trafikverkets väglag, så varje varnande punkt ritas där den står, i Prognos-färgen, och följer Prognos-knappen.
+  // Storstädernas punkter (Halkvakt DECISIONS #804, #926, #935; Bengt 21/11: "Bygg linjer"): stadens gator har ingen sträcka i
+  // Trafikverkets väglag, så varje varnande punkt får en bit längs sin väg eller gata (stadsgata), ritad av lagret kandidat ovan med
+  // properties.stad. En punkt utan linje ritas här, som en prick där den står, i Prognos-färgen, och följer Prognos-knappen.
   map.addLayer({ id: 'kandidat-stad', type: 'circle', source: 'kandidat', filter: ['==', ['geometry-type'], 'Point'],
     layout: { visibility: 'visible' },
     paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 5, 1.6, 9, 3.5, 13, 6], 'circle-color': '#FF8F6B',
@@ -415,12 +416,14 @@ map.on('load', async () => {
   map.on('click', 'vaglag', e => { if (!under(e, ['vaglag-traff'])) vaglagKlick(e); });
   map.on('click', 'olyckor', e => { const p = e.features[0].properties;
     pop(e, `<h3>${esc(p.typ)}${vagNamn(p.road) ? ' · ' + esc(vagNamn(p.road)) : ''}</h3><div>${esc(p.msg)}</div><div class="k">${esc(p.allvar ?? '')}</div>`); });
+  // Stadens ruta (DECISIONS #935): samma text för en stadsbit (linje med properties.stad) och för en prick.
+  const stadRuta = e => pop(e, `<h3>Prognos · stadens gata</h3><div><b>Halka framöver</b></div><div>Modellerat, inte uppmätt</div>
+      <div class="k">Frysrisken beräknad ur väderdata, och fukten ur nederbördsradarn. Trafikverkets väglag finns inte för stadens gator.</div>`);
   map.on('click', 'kandidat-traff', e => { if (under(e, ['kandidat-stad', 'vader', 'vader-ovr', 'olyckor', 'kameror'])) return; const p = e.features[0].properties;
+    if (p.stad) return stadRuta(e);
     pop(e, `<h3>Prognos</h3><div><b>Halka framöver</b></div><div>Modellerat, inte uppmätt</div>
       <div class="k">Vägytan beräknad ur MET Nordic och vägväderstationerna runt omkring.</div>`); });
-  map.on('click', 'kandidat-stad', e => { if (under(e, ['vader', 'vader-ovr', 'olyckor', 'kameror'])) return;
-    pop(e, `<h3>Prognos · stadens gata</h3><div><b>Halka framöver</b></div><div>Modellerat, inte uppmätt</div>
-      <div class="k">Frysrisken beräknad ur väderdata, och fukten ur nederbördsradarn. Trafikverkets väglag finns inte för stadens gator.</div>`); });
+  map.on('click', 'kandidat-stad', e => { if (under(e, ['vader', 'vader-ovr', 'olyckor', 'kameror'])) return; stadRuta(e); });
   map.on('click', 'kameror', e => { const p = e.features[0].properties;
     pop(e, `<h3>Fartkamera</h3><div>${esc(p.name)}</div><div class="k">${esc(vagNamn(p.road, true))}</div>`); });
   map.on('click', 'lan-fyll', e => { if (INBADDAD || under(e, ['vaglag', 'vaglag-traff', 'kandidat-traff', 'kandidat-stad', 'vader', 'vader-ovr', 'olyckor', 'kameror'])) return;
