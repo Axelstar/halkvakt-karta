@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[13.001881002,55.564753572]},"properties":{"land":"SE","typ":"Olycka","msg":"Singelolycka med personbil i trafikplats Lindeborg. ","allvar":"Liten påverkan","road":null,"start":"2026-11-22T07:00:00.000Z"}}]}
