@@ -321,6 +321,16 @@
       { till: 'Kårböle', delar: [['Väg 84', 'Sveg - Kårböle']] },
       { till: 'Åsarna', delar: [['E 45', 'Ytterhogdal - Sveg'], ['E 45', 'Åsarna - Ytterhogdal']] }
     ] },
+    // Åre (Axel 22/11, förslaget till Åre Destination): vägarna till Åre för den som ska resa dit, inte pendlarstråk från en ort.
+    // &strak=are, bara med &lan=jamtland. flik: flikens namn i stället för Pendling. forst: rutan öppnar på stråken om inget &flik= anges.
+    // Bara sträckorna i Jämtland: E14 från Sundsvall börjar därför i Bräcke, E45 söderifrån i Sveg och norrifrån i Dorotea.
+    are: { lan: 'jamtland', fran: 'Åre', flik: 'Till Åre', forst: true, rubrik: 'Vägarna till Åre just nu', mitt: [13.081, 63.399], strak: [
+      { fran: 'Östersund', till: 'Åre', delar: [['E 14', 'Krokom - Brunflo'], ['E 14', 'Järpen - Krokom'], ['E 14', 'Gevsjön - Järpen']] },
+      { fran: 'Bräcke', till: 'Åre', delar: [['E 14', 'Brunflo - Bräcke'], ['E 14', 'Krokom - Brunflo'], ['E 14', 'Järpen - Krokom'], ['E 14', 'Gevsjön - Järpen']] },
+      { fran: 'Sveg', till: 'Åre', delar: [['E 45', 'Ytterhogdal - Sveg'], ['E 45', 'Åsarna - Ytterhogdal'], ['E 45', 'Brunflo - Åsarna'], ['E 14', 'Krokom - Brunflo'], ['E 14', 'Järpen - Krokom'], ['E 14', 'Gevsjön - Järpen']] },
+      { fran: 'Dorotea', till: 'Åre', delar: [['E 45', 'Dorotea - Hallviken'], ['E 45', 'Hallviken - Östersund'], ['E 14', 'Järpen - Krokom'], ['E 14', 'Gevsjön - Järpen']] },
+      { fran: 'Storlien', till: 'Åre', delar: [['E 14', 'Storlien Norska gränsen - Gevsjön'], ['E 14', 'Gevsjön - Järpen']] }
+    ] },
     sundsvall: { lan: 'vasternorrland', fran: 'Sundsvall', strak: [
       { till: 'Härnösand', delar: [['E 4', 'Härnösand - Sundsvall']] },
       { till: 'Gnarp', delar: [['E 4', 'Sundsvall Trafikplats Skönsmon - Gnarp']] },
@@ -540,6 +550,7 @@
   // Flikarna och svepet: spåret rullar i sidled med snäpp, flikarna och prickarna följer.
   var vyer = ['lan', 'vagar', 'pendling'];
   if (!PEND) { $('f-pendling').hidden = true; $('v-pendling').remove(); vyer.pop(); }
+  if (PEND && PEND.flik) $('f-pendling').textContent = PEND.flik;   // stråk som inte är pendling (Åre 22/11): fliken heter som stråken
   // Händelsefliken (Axel 19/11): vägarbeten, avstängningar, olyckor och hinder nära tidningens ort. Bara med &hand=1, så rutor som
   // redan ligger ute hos tidningar är oförändrade. Mitten är stråkets ort (mitt i STRAK) eller &mitt=lon,lat,Ort; utan mitt gäller länet.
   var HAND = q.get('hand') === '1';
@@ -570,7 +581,7 @@
   });
   var rull;
   spar.addEventListener('scroll', function () { clearTimeout(rull); rull = setTimeout(function () { markera(Math.round(spar.scrollLeft / spar.clientWidth)); }, 60); });
-  var start = vyer.indexOf(q.get('flik')); if (start < 0) start = 0;
+  var start = vyer.indexOf(q.get('flik') || (PEND && PEND.forst ? 'pendling' : '')); if (start < 0) start = 0;
   requestAnimationFrame(function () { ga(start, false); });
   addEventListener('load', function () { ga(start, false); });
   addEventListener('resize', function () { ga(Math.round(spar.scrollLeft / spar.clientWidth), false); });
