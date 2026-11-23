@@ -381,7 +381,7 @@
           <canvas id="karta" aria-hidden="true"></canvas>
           <div class="forklaring">
             <span><i style="background:var(--gul)"></i>Halka rapporterad · <b id="k-halka">315</b> sträckor</span>
-            <span><i style="background:#E9EFF2"></i>Vägbana under noll · <b id="k-kalla">731</b></span>
+            <span><i style="background:rgba(233,239,242,.55);width:5px;height:5px"></i>Vägbana under noll · <b id="k-kalla">731</b></span>
             <span><i style="background:#FF8F6B;border-radius:1px;height:3px;width:12px;vertical-align:3px"></i>Prognos · halka framöver, modellerad</span>
             <span><i style="background:#34424A"></i>Över noll · <b id="k-varma">67</b></span>
           </div>
@@ -716,10 +716,13 @@
     };
     ['NO', 'FI', 'DK'].forEach(k => land(norden && norden[k], '#121A1E', '#1E282D'));
     land(norden && norden.SE, '#162024', '#34424A');
-    // Stationer över noll
     // Stationer över noll: små och svaga, de är bakgrund. Halkan och kylan ska synas först.
     c.fillStyle = '#34424A';
     stat.forEach(f => { if (f.properties.yta >= 0) { const [x, y] = xy(f.geometry.coordinates); c.beginPath(); c.arc(x, y, 1.2, 0, Math.PI * 2); c.fill(); } });
+    // Stationer under noll: små, halvgenomskinliga och under sträckorna (Axel 24/11). En kall natt är nästan alla
+    // stationer under noll, och då ska de läsas som en bakgrund av kyla, inte skymma halkan och prognosen.
+    c.fillStyle = 'rgba(233,239,242,.55)';
+    stat.forEach(f => { if (f.properties.yta < 0) { const [x, y] = xy(f.geometry.coordinates); c.beginPath(); c.arc(x, y, 1.3, 0, Math.PI * 2); c.fill(); } });
     // Hala sträckor
     c.strokeStyle = '#FFC94A'; c.lineWidth = 2.4; c.lineCap = 'round'; c.lineJoin = 'round';
     c.shadowColor = 'rgba(255,201,74,.6)'; c.shadowBlur = 8;
@@ -738,10 +741,6 @@
     c.fillStyle = '#FF8F6B';
     (prognos || []).forEach(f => { if (f.geometry && f.geometry.type === 'Point') { const [x, y] = xy(f.geometry.coordinates);
       c.beginPath(); c.arc(x, y, 1.6, 0, Math.PI * 2); c.fill(); } });
-    // Stationer under noll
-    c.shadowColor = 'rgba(233,239,242,.5)'; c.shadowBlur = 6; c.fillStyle = '#E9EFF2';
-    stat.forEach(f => { if (f.properties.yta < 0) { const [x, y] = xy(f.geometry.coordinates); c.beginPath(); c.arc(x, y, 2.2, 0, Math.PI * 2); c.fill(); } });
-    c.shadowBlur = 0;
   }
 })();
 </script>
