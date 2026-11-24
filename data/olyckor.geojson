@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[29.857320474,62.535513438]},"properties":{"land":"FI","typ":"Olycka","msg":"Tie 6, Joensuu. Ensitiedote liikenneonnettomuudesta.  · Onnettomuus","allvar":null,"road":null,"start":"2026-11-24T05:04:00.000Z"}}]}
