@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[15.276308532,58.740094996]},"properties":{"land":"SE","typ":"Olycka","msg":"Singelolycka med personbil.","allvar":null,"road":"Väg 1101","start":"2026-11-25T04:47:00.000Z"}}]}
