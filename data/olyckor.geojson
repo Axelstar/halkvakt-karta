@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[25.659590922,64.954988549]},"properties":{"land":"FI","typ":"Olycka","msg":"Tie 22, Oulu. Liikennetiedote onnettomuudesta.  · Onnettomuus · Liikenne saattaa ruuhkautua","allvar":null,"road":null,"start":"2026-11-26T11:35:00.000Z"}}]}
