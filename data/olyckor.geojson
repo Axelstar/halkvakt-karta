@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[24.810054616,64.70342192]},"properties":{"land":"FI","typ":"Olycka","msg":"Tie 8, Siikajoki, Raahe. Liikennetiedote onnettomuudesta. Tilanne muuttunut.  · Onnettomuus · Tie on suljettu liikenteeltä","allvar":null,"road":null,"start":"2026-11-26T22:45:00.000Z"}}]}
