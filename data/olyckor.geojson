@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[17.466946422,59.188658404]},"properties":{"land":"SE","typ":"Olycka","msg":"Singelolycka med personbil i höjd med avfarten. Räddningstjänst på plats.","allvar":"Liten påverkan","road":"E20","start":"2026-11-27T23:02:00.000Z"}}]}
