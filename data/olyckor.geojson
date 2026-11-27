@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[15.232354297,58.357784384]},"properties":{"land":"SE","typ":"Olycka","msg":"Vägen avstängd. Trafikolycka med lastbil i höjd med Mantorp. I nuläget finns ingen prognos på när vägen kan öppna igen.","allvar":"Mycket stor påverkan","road":"E4","start":"2026-11-27T04:15:00.000Z"}}]}
