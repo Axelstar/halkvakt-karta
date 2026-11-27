@@ -416,9 +416,14 @@ map.on('load', async () => {
   map.on('click', 'vaglag', e => { if (!under(e, ['vaglag-traff'])) vaglagKlick(e); });
   map.on('click', 'olyckor', e => { const p = e.features[0].properties;
     pop(e, `<h3>${esc(p.typ)}${vagNamn(p.road) ? ' · ' + esc(vagNamn(p.road)) : ''}</h3><div>${esc(p.msg)}</div><div class="k">${esc(p.allvar ?? '')}</div>`); });
-  // Stadens ruta (DECISIONS #935): samma text för en stadsbit (linje med properties.stad) och för en prick.
-  const stadRuta = e => pop(e, `<h3>Prognos · stadens gata</h3><div><b>Halka framöver</b></div><div>Modellerat, inte uppmätt</div>
-      <div class="k">Frysrisken beräknad ur väderdata, och fukten ur nederbördsradarn. Trafikverkets väglag finns inte för stadens gator.</div>`);
+  // Storstädernas ruta (DECISIONS #935): samma text för en bit (linje med properties.stad) och för en prick. Lagret står först i
+  // segment_id (Halkvakt sql/089, DECISIONS #804): bara C är kommunala gator i Stockholms stad. B är statliga vägar utan Trafikverkets
+  // väglag runt Stockholm, Göteborg och Malmö, också ute på landet (27/11 i Eslövs och Höörs kommuner), och heter därför mindre väg
+  // (Bengt 27/11: stadens gata stämde inte på den skånska slätten).
+  const stadRuta = e => { const gata = String(e.features[0].properties.segment_id).startsWith('C-');
+    pop(e, `<h3>Prognos · ${gata ? 'stadens gata' : 'mindre väg'}</h3><div><b>Halka framöver</b></div><div>Modellerat, inte uppmätt</div>
+      <div class="k">Frysrisken beräknad ur väderdata, och fukten ur nederbördsradarn. ${gata ? 'Trafikverkets väglag finns inte för stadens gator.'
+        : 'Trafikverket rapporterar inte väglaget på den här vägen.'}</div>`); };
   map.on('click', 'kandidat-traff', e => { if (under(e, ['kandidat-stad', 'vader', 'vader-ovr', 'olyckor', 'kameror'])) return; const p = e.features[0].properties;
     if (p.stad) return stadRuta(e);
     pop(e, `<h3>Prognos</h3><div><b>Halka framöver</b></div><div>Modellerat, inte uppmätt</div>
