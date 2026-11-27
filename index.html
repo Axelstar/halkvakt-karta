@@ -335,9 +335,9 @@
 <main>
   <section class="hero sok">
     <div class="wrap">
-      <p class="etikett"><span class="ljus" aria-hidden="true"></span><span id="h-tid">Just nu · fredag 27 nov · 13:00</span></p>
+      <p class="etikett"><span class="ljus" aria-hidden="true"></span><span id="h-tid">Just nu · fredag 27 nov · 13:30</span></p>
       <h1 class="jatte">Är det halt där du ska köra?</h1>
-      <p class="nu-mening" id="l-mening">Fredag 27 november kl. 13:00 rapporterar Trafikverket halka eller vinterväglag på 231 vägavsnitt i 14 län. Vägbanan är under noll vid 623 av 798 stationer, kallast −18,4 °C vid Gevsjön.</p>
+      <p class="nu-mening" id="l-mening">Fredag 27 november kl. 13:30 rapporterar Trafikverket halka eller vinterväglag på 219 vägavsnitt i 13 län. Vägbanan är under noll vid 618 av 798 stationer, kallast −18,2 °C vid Gevsjön.</p>
       <div class="sokruta">
         <form action="sok/" method="get" role="search" id="sok">
           <svg class="lupp" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
@@ -365,25 +365,25 @@
 
   <section class="sektion landet" id="lage">
     <div class="wrap">
-      <div class="rubrikrad"><h2>Läget län för län</h2><p class="etikett"><span class="ljus" aria-hidden="true"></span><span id="t-tid">Hela landet · 13:00</span></p></div>
+      <div class="rubrikrad"><h2>Läget län för län</h2><p class="etikett"><span class="ljus" aria-hidden="true"></span><span id="t-tid">Hela landet · 13:30</span></p></div>
       <div class="panel tal tal-rad">
         <dl class="kvitto">
-            <div><dt>Halka rapporterad</dt><dd class="stort"><b id="t-halka">231</b><span>sträckor</span></dd></div>
-            <div><dt>Vägbana under noll</dt><dd class="stort"><b id="t-kalla">623</b><span id="t-av">av 798 stationer</span></dd></div>
-            <div><dt>Kallaste station</dt><dd class="stort"><b id="t-kallast">−18,4 °C</b><span id="t-plats">vid Gevsjön</span></dd></div>
+            <div><dt>Halka rapporterad</dt><dd class="stort"><b id="t-halka">219</b><span>sträckor</span></dd></div>
+            <div><dt>Vägbana under noll</dt><dd class="stort"><b id="t-kalla">618</b><span id="t-av">av 798 stationer</span></dd></div>
+            <div><dt>Kallaste station</dt><dd class="stort"><b id="t-kallast">−18,2 °C</b><span id="t-plats">vid Gevsjön</span></dd></div>
           </dl>
       </div>
       <div class="lage">
         <div class="kartruta panel">
           <a class="kartlank" href="karta.html" aria-label="Öppna livekartan"></a>
-          <div class="ovre"><p class="etikett"><span class="ljus" aria-hidden="true"></span><span id="k-tid">Livekartan · uppdaterad 13:00</span></p>
+          <div class="ovre"><p class="etikett"><span class="ljus" aria-hidden="true"></span><span id="k-tid">Livekartan · uppdaterad 13:30</span></p>
             <div class="hoger"><a class="oppna" href="karta.html"><span class="lang">ÖPPNA </span>KARTAN →</a></div></div>
           <canvas id="karta" aria-hidden="true"></canvas>
           <div class="forklaring">
-            <span><i style="background:var(--gul)"></i>Halka rapporterad · <b id="k-halka">231</b> sträckor</span>
-            <span><i style="background:rgba(233,239,242,.55);width:5px;height:5px"></i>Vägbana under noll · <b id="k-kalla">623</b></span>
+            <span><i style="background:var(--gul)"></i>Halka rapporterad · <b id="k-halka">219</b> sträckor</span>
+            <span><i style="background:rgba(233,239,242,.55);width:5px;height:5px"></i>Vägbana under noll · <b id="k-kalla">618</b></span>
             <span><i style="background:#FF8F6B;border-radius:1px;height:3px;width:12px;vertical-align:3px"></i>Prognos · halka framöver, modellerad</span>
-            <span><i style="background:#34424A"></i>Över noll · <b id="k-varma">175</b></span>
+            <span><i style="background:#34424A"></i>Över noll · <b id="k-varma">180</b></span>
           </div>
         </div>
         <div class="sidokolumn">
@@ -391,7 +391,7 @@
             <label class="dold" for="lanval">Välj län</label>
             <select id="lanval" aria-label="Välj län"><option value="">Välj län</option></select>
             <p class="etikett">Hala vägavsnitt av alla i länet</p>
-            <div class="halt-lista rader" id="halt-lista"><a class="lan-halt" href="lan/norrbotten/" title="Halka eller vinterväglag på 57 av 58 vägavsnitt"><span>Norrbotten</span><em>57 av 58</em><s><u style="width:98%"></u></s></a><a class="lan-halt" href="lan/vasterbotten/" title="Halka eller vinterväglag på 44 av 44 vägavsnitt"><span>Västerbotten</span><em>44 av 44</em><s><u style="width:100%"></u></s></a><a class="lan-halt" href="lan/dalarna/" title="Halka eller vinterväglag på 17 av 38 vägavsnitt"><span>Dalarna</span><em>17 av 38</em><s><u style="width:45%"></u></s></a><a class="lan-halt" href="lan/jamtland/" title="Halka eller vinterväglag på 17 av 17 vägavsnitt"><span>Jämtland</span><em>17 av 17</em><s><u style="width:100%"></u></s></a><a class="lan-halt" href="lan/skane/" title="Halka eller vinterväglag på 14 av 88 vägavsnitt"><span>Skåne</span><em>14 av 88</em><s><u style="width:16%"></u></s></a><a class="lan-halt" href="lan/vasternorrland/" title="Halka eller vinterväglag på 14 av 22 vägavsnitt"><span>Västernorrland</span><em>14 av 22</em><s><u style="width:64%"></u></s></a><a class="lan-halt" href="lan/gavleborg/" title="Halka eller vinterväglag på 13 av 27 vägavsnitt"><span>Gävleborg</span><em>13 av 27</em><s><u style="width:48%"></u></s></a><a class="lan-halt" href="lan/stockholm/" title="Halka eller vinterväglag på 12 av 44 vägavsnitt"><span>Stockholms län</span><em>12 av 44</em><s><u style="width:27%"></u></s></a><a class="lan-halt" href="lan/vastmanland/" title="Halka eller vinterväglag på 12 av 24 vägavsnitt"><span>Västmanland</span><em>12 av 24</em><s><u style="width:50%"></u></s></a><a class="lan-halt" href="lan/gotland/" title="Halka eller vinterväglag på 10 av 10 vägavsnitt"><span>Gotland</span><em>10 av 10</em><s><u style="width:100%"></u></s></a><a class="lan-halt" href="lan/varmland/" title="Halka eller vinterväglag på 10 av 52 vägavsnitt"><span>Värmland</span><em>10 av 52</em><s><u style="width:19%"></u></s></a><a class="lan-halt" href="lan/vastra-gotaland/" title="Halka eller vinterväglag på 9 av 133 vägavsnitt"><span>Västra Götaland</span><em>9 av 133</em><s><u style="width:7%"></u></s></a><a class="lan-halt" href="lan/uppsala/" title="Halka eller vinterväglag på 1 av 25 vägavsnitt"><span>Uppsala län</span><em>1 av 25</em><s><u style="width:4%"></u></s></a><a class="lan-halt" href="lan/ostergotland/" title="Halka eller vinterväglag på 1 av 36 vägavsnitt"><span>Östergötland</span><em>1 av 36</em><s><u style="width:3%"></u></s></a><p class="lugnt">Ingen halka rapporterad i <a href="lan/sodermanland/">Södermanland</a>, <a href="lan/jonkoping/">Jönköpings län</a>, <a href="lan/kronoberg/">Kronoberg</a>, <a href="lan/kalmar/">Kalmar län</a>, <a href="lan/blekinge/">Blekinge</a>, <a href="lan/halland/">Halland</a> och <a href="lan/orebro/">Örebro län</a>.</p><a class="lank-mono" href="lan/">Alla 21 län →</a></div>
+            <div class="halt-lista rader" id="halt-lista"><a class="lan-halt" href="lan/norrbotten/" title="Halka eller vinterväglag på 57 av 58 vägavsnitt"><span>Norrbotten</span><em>57 av 58</em><s><u style="width:98%"></u></s></a><a class="lan-halt" href="lan/vasterbotten/" title="Halka eller vinterväglag på 44 av 44 vägavsnitt"><span>Västerbotten</span><em>44 av 44</em><s><u style="width:100%"></u></s></a><a class="lan-halt" href="lan/dalarna/" title="Halka eller vinterväglag på 17 av 38 vägavsnitt"><span>Dalarna</span><em>17 av 38</em><s><u style="width:45%"></u></s></a><a class="lan-halt" href="lan/jamtland/" title="Halka eller vinterväglag på 17 av 17 vägavsnitt"><span>Jämtland</span><em>17 av 17</em><s><u style="width:100%"></u></s></a><a class="lan-halt" href="lan/skane/" title="Halka eller vinterväglag på 14 av 88 vägavsnitt"><span>Skåne</span><em>14 av 88</em><s><u style="width:16%"></u></s></a><a class="lan-halt" href="lan/vasternorrland/" title="Halka eller vinterväglag på 14 av 22 vägavsnitt"><span>Västernorrland</span><em>14 av 22</em><s><u style="width:64%"></u></s></a><a class="lan-halt" href="lan/gavleborg/" title="Halka eller vinterväglag på 13 av 27 vägavsnitt"><span>Gävleborg</span><em>13 av 27</em><s><u style="width:48%"></u></s></a><a class="lan-halt" href="lan/stockholm/" title="Halka eller vinterväglag på 12 av 44 vägavsnitt"><span>Stockholms län</span><em>12 av 44</em><s><u style="width:27%"></u></s></a><a class="lan-halt" href="lan/gotland/" title="Halka eller vinterväglag på 10 av 10 vägavsnitt"><span>Gotland</span><em>10 av 10</em><s><u style="width:100%"></u></s></a><a class="lan-halt" href="lan/varmland/" title="Halka eller vinterväglag på 10 av 52 vägavsnitt"><span>Värmland</span><em>10 av 52</em><s><u style="width:19%"></u></s></a><a class="lan-halt" href="lan/vastra-gotaland/" title="Halka eller vinterväglag på 9 av 133 vägavsnitt"><span>Västra Götaland</span><em>9 av 133</em><s><u style="width:7%"></u></s></a><a class="lan-halt" href="lan/uppsala/" title="Halka eller vinterväglag på 1 av 25 vägavsnitt"><span>Uppsala län</span><em>1 av 25</em><s><u style="width:4%"></u></s></a><a class="lan-halt" href="lan/ostergotland/" title="Halka eller vinterväglag på 1 av 36 vägavsnitt"><span>Östergötland</span><em>1 av 36</em><s><u style="width:3%"></u></s></a><p class="lugnt">Ingen halka rapporterad i <a href="lan/sodermanland/">Södermanland</a>, <a href="lan/jonkoping/">Jönköpings län</a>, <a href="lan/kronoberg/">Kronoberg</a>, <a href="lan/kalmar/">Kalmar län</a>, <a href="lan/blekinge/">Blekinge</a>, <a href="lan/halland/">Halland</a>, <a href="lan/orebro/">Örebro län</a> och <a href="lan/vastmanland/">Västmanland</a>.</p><a class="lank-mono" href="lan/">Alla 21 län →</a></div>
           </div>
         </div>
       </div>
